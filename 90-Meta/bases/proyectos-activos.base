@@ -1,0 +1,42 @@
+{
+  "filters": {
+    "and": [
+      {
+        "filter": {
+          "type": "property",
+          "property": "tipo",
+          "operator": "is",
+          "value": "proyecto"
+        }
+      },
+      {
+        "filter": {
+          "type": "property",
+          "property": "estado",
+          "operator": "is",
+          "value": "activo"
+        }
+      }
+    ]
+  },
+  "order": [
+    {
+      "property": "id",
+      "direction": "asc"
+    }
+  ],
+  "views": [
+    {
+      "id": "activos",
+      "type": "table",
+      "name": "Proyectos activos",
+      "columns": [
+        { "id": "id", "width": 60 },
+        { "id": "nombre", "width": 280 },
+        { "id": "fase", "width": 120 },
+        { "id": "fecha-objetivo", "width": 120 },
+        { "id": "colaboradores", "width": 180 }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "filters": {
+    "and": [
+      {
+        "filter": {
+          "type": "property",
+          "property": "estado",
+          "operator": "is",
+          "value": "sin-procesar"
+        }
+      },
+      {
+        "filter": {
+          "type": "folder",
+          "folder": "00-Inbox"
+        }
+      }
+    ]
+  },
+  "order": [
+    {
+      "property": "prioridad",
+      "direction": "asc"
+    },
+    {
+      "property": "fecha",
+      "direction": "asc"
+    }
+  ],
+  "views": [
+    {
+      "id": "pendientes",
+      "type": "table",
+      "name": "Pendientes",
+      "columns": [
+        { "id": "file.name", "width": 260 },
+        { "id": "origen", "width": 100 },
+        { "id": "proyecto", "width": 140 },
+        { "id": "prioridad", "width": 90 },
+        { "id": "fecha", "width": 110 },
+        { "id": "resumen-breve", "width": 300 }
+      ]
+    }
+  ]
+}
