@@ -1,0 +1,16 @@
+# Obsidian workspace local (no sincronizar estado de UI)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos temporales
+*.tmp
+*.swp
+*~
+
+# Carpetas de sistema
+__pycache__/
+*.pyc
