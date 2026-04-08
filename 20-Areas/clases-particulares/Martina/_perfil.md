@@ -14,15 +14,15 @@ tags:
 
 ## Información general
 
-- **Nivel escolar:**
-- **Materias:**
-- **Frecuencia de sesiones:**
+- **Nivel escolar:** 2do Medio
+- **Materias:** Matemáticas, Biología, Física y Química
+- **Frecuencia de sesiones:** 1 por semana
 - **Contacto:**
 
 ## Fortalezas
-
+Muy aplicada y generalmente rápida para entender. Buena concentración.
 ## Áreas a reforzar
-
+Manejo de lenguaje científico/matemático básico y aplicado.
 ## Material utilizado
 
 ## Historial de sesiones
