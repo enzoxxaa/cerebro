@@ -1,0 +1,644 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{hyperref}
+
+\geometry{margin=2cm, top=2.5cm, bottom=2.5cm}
+
+% ─── Colores ───
+\definecolor{azulprincipal}{HTML}{2980B9}
+\definecolor{azuloscuro}{HTML}{1A5276}
+\definecolor{verdequimica}{HTML}{1ABC9C}
+\definecolor{verdeclaro}{HTML}{D5F5E3}
+\definecolor{naranja}{HTML}{E67E22}
+\definecolor{rojo}{HTML}{E74C3C}
+\definecolor{amarillorecuerda}{HTML}{FFF3CD}
+\definecolor{amarilloborde}{HTML}{FFC107}
+\definecolor{grisfondo}{HTML}{F5F5F5}
+
+% ─── Cajas ───
+\tcbset{
+  recuerda/.style={
+    colback=amarillorecuerda, colframe=amarilloborde,
+    fonttitle=\bfseries, title={\color{black} RECUERDA},
+    boxrule=1pt, arc=2mm, left=5pt, right=5pt
+  },
+  propiedad/.style={
+    colback=verdeclaro!50, colframe=verdequimica!80!black,
+    fonttitle=\bfseries, boxrule=0.8pt, arc=2mm, left=5pt, right=5pt
+  },
+  formula/.style={
+    colback=grisfondo, colframe=azulprincipal,
+    boxrule=0.8pt, arc=2mm, left=5pt, right=5pt
+  },
+  definicion/.style={
+    colback=blue!5, colframe=azulprincipal,
+    fonttitle=\bfseries, boxrule=0.8pt, arc=2mm, left=5pt, right=5pt
+  }
+}
+
+% ─── Encabezados ───
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\small\color{gray} Guía de Soluciones Químicas --- 2° Medio}
+\fancyfoot[C]{\small\color{gray} Página \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ─── Títulos ───
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{white}}
+  {}{0em}
+  {\colorbox{azulprincipal}{\parbox{\dimexpr\textwidth-2\fboxsep}{~SECCIÓN \thesection: #1}}}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{azulprincipal}}
+  {\thesubsection}{0.5em}{}
+
+% ─── Niveles de dificultad ───
+\newcommand{\nivelbasico}{%
+  \par\smallskip\colorbox{green!60!black}{\color{white}\small\bfseries~NIVEL BÁSICO~}\par\smallskip}
+\newcommand{\nivelintermedio}{%
+  \par\smallskip\colorbox{naranja}{\color{white}\small\bfseries~NIVEL INTERMEDIO~}\par\smallskip}
+\newcommand{\nivelavanzado}{%
+  \par\smallskip\colorbox{rojo}{\color{white}\small\bfseries~NIVEL AVANZADO~}\par\smallskip}
+
+% ─── Líneas de respuesta ───
+\newcommand{\lineasrespuesta}[1]{%
+  \par\vspace{2mm}%
+  \foreach \i in {1,...,#1}{\noindent\rule{\textwidth}{0.3pt}\par\vspace{5mm}}%
+  \vspace{2mm}%
+}
+
+\begin{document}
+
+% ════════════════════════
+% PORTADA
+% ════════════════════════
+\thispagestyle{empty}
+\vspace*{3cm}
+\begin{center}
+  {\Huge\bfseries\color{azulprincipal} GUÍA DE TRABAJO}\\[8pt]
+  {\LARGE\bfseries\color{azuloscuro} Soluciones Químicas}\\[15pt]
+  {\color{azulprincipal}\rule{8cm}{2pt}}\\[15pt]
+  {\Large Unidad 1 \textbar{} 2° Medio --- Química}\\[8pt]
+  {\large Alumna: Martina}\\[25pt]
+  {\itshape\color{gray}
+  Esta guía cubre los conceptos fundamentales de soluciones químicas:\\
+  componentes, clasificación, solubilidad, unidades de concentración\\
+  y reacciones en solución. Progresa sección por sección.}
+\end{center}
+
+\vspace{2cm}
+\noindent\textbf{Contenidos:}
+\begin{enumerate}[leftmargin=2cm]
+  \item Clasificación de la materia y concepto de solución
+  \item Componentes y formación de soluciones
+  \item Clasificación de las soluciones químicas
+  \item Solubilidad y factores que la afectan
+  \item Unidades físicas de concentración (\% m/m, \% V/V, \% m/V)
+  \item Unidades químicas de concentración (M, m, X)
+  \item Reacciones en solución y problemas de aplicación
+\end{enumerate}
+\newpage
+
+% ════════════════════════
+% SECCIÓN 1
+% ════════════════════════
+\section{CLASIFICACIÓN DE LA MATERIA Y SOLUCIONES}
+
+\begin{tcolorbox}[recuerda]
+La materia se clasifica en:
+\begin{itemize}[nosep]
+  \item \textbf{Sustancias puras:} composición definida y constante.
+    \begin{itemize}[nosep]
+      \item \textit{Elementos:} un solo tipo de átomo (ej: O\textsubscript{2}, Fe, Cu).
+      \item \textit{Compuestos:} dos o más tipos de átomos (ej: H\textsubscript{2}O, NaCl).
+    \end{itemize}
+  \item \textbf{Mezclas:} combinación de dos o más sustancias sin reacción química.
+    \begin{itemize}[nosep]
+      \item \textit{Heterogéneas:} se distinguen los componentes (ej: agua + aceite).
+      \item \textit{Homogéneas (soluciones):} NO se distinguen los componentes (ej: agua salada).
+    \end{itemize}
+\end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[definicion, title=Solución química]
+Una \textbf{solución química} es una \textbf{mezcla homogénea} formada por dos o más componentes que no pueden distinguirse a simple vista. Sus componentes principales son:
+\begin{itemize}[nosep]
+  \item \textbf{Soluto:} componente en \textbf{menor} proporción. Es la sustancia que se disuelve.
+  \item \textbf{Disolvente (solvente):} componente en \textbf{mayor} proporción. Es la sustancia que disuelve al soluto y define el estado de agregación de la solución.
+\end{itemize}
+\end{tcolorbox}
+
+\subsection{Formación de soluciones: interacciones intermoleculares}
+
+Para que una solución se forme, debe existir interacción entre soluto y disolvente. La regla general es: \textbf{``lo semejante disuelve a lo semejante''} (sustancias polares disuelven polares; apolares disuelven apolares).
+
+\begin{tcolorbox}[propiedad, title=Tipos de interacciones intermoleculares]
+\begin{itemize}[nosep]
+  \item \textbf{Fuerzas de Van der Waals:} las más débiles. Presentes entre moléculas apolares.
+  \item \textbf{Puentes de hidrógeno:} entre moléculas con H unido a N, O o F. Más fuertes.
+  \item \textbf{Ion-dipolo:} entre un ion y una molécula polar. Ej: NaCl en agua.
+\end{itemize}
+\end{tcolorbox}
+
+\subsection{Ejercicios --- Sección 1}
+
+\nivelbasico
+
+\begin{enumerate}
+  \item Clasifica las siguientes sustancias como elemento, compuesto, mezcla homogénea o mezcla heterogénea:
+
+  \begin{tabular}{|l|c|}
+    \hline
+    \textbf{Sustancia} & \textbf{Clasificación} \\
+    \hline
+    Agua destilada (H\textsubscript{2}O) & \\
+    \hline
+    Aire & \\
+    \hline
+    Bronce (Cu + Sn) & \\
+    \hline
+    Ensalada de frutas & \\
+    \hline
+    Hierro (Fe) & \\
+    \hline
+    Vinagre (ác. acético en agua) & \\
+    \hline
+  \end{tabular}
+  \lineasrespuesta{2}
+
+  \item En una solución de agua con sal:
+  \begin{enumerate}[label=\alph*)]
+    \item ¿Cuál es el soluto? ¿Cuál es el disolvente?
+    \item ¿Qué tipo de interacción intermolecular permite la disolución?
+    \item ¿Podrías disolver sal (NaCl, iónico) en aceite (apolar)? Justifica.
+  \end{enumerate}
+  \lineasrespuesta{4}
+\end{enumerate}
+
+% ════════════════════════
+% SECCIÓN 2
+% ════════════════════════
+\newpage
+\section{CLASIFICACIÓN DE LAS SOLUCIONES QUÍMICAS}
+
+Las soluciones se pueden clasificar según tres criterios principales:
+
+\subsection{Según estado de agregación}
+
+\begin{center}
+\begin{tabular}{|l|l|l|}
+  \hline
+  \textbf{Tipo} & \textbf{Ejemplo} & \textbf{Componentes} \\
+  \hline
+  Sólida & Bronce & Cobre (s) + Estaño (s) \\
+  \hline
+  Líquida & Agua salada & Agua (l) + NaCl (s) \\
+  \hline
+  Gaseosa & Aire húmedo & Aire (g) + Vapor de agua (g) \\
+  \hline
+\end{tabular}
+\end{center}
+
+\subsection{Según cantidad de soluto disuelto}
+
+\begin{tcolorbox}[propiedad, title=Clasificación por cantidad de soluto]
+\begin{itemize}[nosep]
+  \item \textbf{Insaturada:} contiene \textbf{menos} soluto que el máximo posible a esa temperatura. Puede seguir disolviendo.
+  \item \textbf{Saturada:} contiene la cantidad \textbf{máxima} de soluto que se puede disolver a esa temperatura. Está en equilibrio.
+  \item \textbf{Sobresaturada:} contiene \textbf{más} soluto del que normalmente se disuelve. Es inestable; un pequeño estímulo puede provocar la cristalización del exceso.
+\end{itemize}
+\end{tcolorbox}
+
+\subsection{Según conductividad eléctrica}
+
+\begin{tcolorbox}[propiedad, title=Soluciones electrolíticas y no electrolíticas]
+\begin{itemize}[nosep]
+  \item \textbf{Electrolíticas:} conducen corriente eléctrica porque el soluto se disocia en \textbf{iones} al disolverse.
+  \begin{itemize}[nosep]
+    \item \textit{Electrolito fuerte:} se disocia completamente (ej: NaCl, HCl).
+    \item \textit{Electrolito débil:} se disocia parcialmente (ej: ácido acético, CH\textsubscript{3}COOH).
+  \end{itemize}
+  \item \textbf{No electrolíticas:} NO conducen corriente. El soluto no forma iones (ej: azúcar en agua).
+\end{itemize}
+\end{tcolorbox}
+
+\subsection{Ejercicios --- Sección 2}
+
+\nivelbasico
+
+\begin{enumerate}
+  \item Clasifica las siguientes soluciones según los tres criterios (estado, cantidad de soluto, conductividad):
+  \begin{enumerate}[label=\alph*)]
+    \item Solución de NaCl en agua que aún puede disolver más sal.
+    \item Acero (Fe + C).
+    \item Solución acuosa de glucosa (C\textsubscript{6}H\textsubscript{12}O\textsubscript{6}).
+    \item Aire atmosférico.
+  \end{enumerate}
+  \lineasrespuesta{5}
+
+  \item Explica por qué una solución de NaCl conduce electricidad pero una de azúcar no.
+  \lineasrespuesta{3}
+\end{enumerate}
+
+\nivelintermedio
+
+\begin{enumerate}[resume]
+  \item Si calientas una solución saturada de KNO\textsubscript{3} y luego la dejas enfriar lentamente, ¿qué tipo de solución obtienes? ¿Qué ocurriría si agregas un cristal de KNO\textsubscript{3}?
+  \lineasrespuesta{3}
+\end{enumerate}
+
+% ════════════════════════
+% SECCIÓN 3
+% ════════════════════════
+\newpage
+\section{SOLUBILIDAD Y FACTORES QUE LA AFECTAN}
+
+\begin{tcolorbox}[definicion, title=Solubilidad]
+La \textbf{solubilidad} es la cantidad máxima de soluto que se puede disolver en una cantidad determinada de disolvente, a una temperatura específica. Se suele expresar en g de soluto / 100 g de disolvente.
+\end{tcolorbox}
+
+\subsection{Factores que afectan la solubilidad}
+
+\begin{tcolorbox}[propiedad, title=Factor 1: Naturaleza del soluto y disolvente]
+\textbf{``Lo semejante disuelve a lo semejante'':}
+\begin{itemize}[nosep]
+  \item Solutos polares o iónicos → se disuelven en disolventes polares (agua).
+  \item Solutos apolares → se disuelven en disolventes apolares (benceno, hexano).
+\end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[propiedad, title=Factor 2: Temperatura]
+\begin{itemize}[nosep]
+  \item \textbf{Solutos sólidos:} generalmente, la solubilidad \textbf{aumenta} al aumentar la temperatura.
+  \item \textbf{Solutos gaseosos:} la solubilidad \textbf{disminuye} al aumentar la temperatura (por eso una bebida caliente pierde gas).
+\end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[propiedad, title=Factor 3: Presión (Ley de Henry)]
+Solo afecta significativamente a \textbf{solutos gaseosos}:
+\[ S_g = K_H \cdot P_g \]
+donde $S_g$ es la solubilidad del gas (mol/L), $K_H$ es la constante de Henry (mol/L$\cdot$atm) y $P_g$ es la presión del gas (atm).
+
+Al \textbf{aumentar la presión}, aumenta la solubilidad del gas.
+\end{tcolorbox}
+
+\subsection{Ejercicios --- Sección 3}
+
+\nivelbasico
+
+\begin{enumerate}
+  \item Indica si las siguientes afirmaciones son verdaderas (V) o falsas (F). Corrige las falsas.
+  \begin{enumerate}[label=\alph*)]
+    \item \_\_\_ El aceite se disuelve en agua porque ambos son líquidos.
+    \item \_\_\_ Al calentar una bebida gaseosa, pierde gas más rápido.
+    \item \_\_\_ La solubilidad de la sal de mesa aumenta si se calienta el agua.
+    \item \_\_\_ La presión no afecta la solubilidad de solutos sólidos.
+  \end{enumerate}
+  \lineasrespuesta{4}
+\end{enumerate}
+
+\nivelintermedio
+
+\begin{enumerate}[resume]
+  \item La constante de Henry para el O\textsubscript{2} en agua a 25 °C es $K_H = 1{,}3 \times 10^{-3}$ mol/(L$\cdot$atm). Si la presión parcial de O\textsubscript{2} es 0,21 atm, calcula la solubilidad del oxígeno en agua.
+  \lineasrespuesta{4}
+\end{enumerate}
+
+% ════════════════════════
+% SECCIÓN 4
+% ════════════════════════
+\newpage
+\section{UNIDADES FÍSICAS DE CONCENTRACIÓN}
+
+\begin{tcolorbox}[recuerda]
+La \textbf{concentración} es la relación entre la cantidad de soluto y la cantidad de solución (o disolvente). A mayor cantidad de soluto, mayor concentración.
+\end{tcolorbox}
+
+\subsection{Porcentaje masa-masa (\% m/m)}
+
+\begin{tcolorbox}[formula]
+\[
+\% \, m/m = \frac{m_{\text{soluto}}}{m_{\text{solución}}} \times 100
+\]
+donde $m_{\text{solución}} = m_{\text{soluto}} + m_{\text{disolvente}}$.
+
+\textbf{Interpretación:} gramos de soluto por cada 100 g de solución.
+\end{tcolorbox}
+
+\textbf{Ejemplo:} Se disuelven 20 g de sal en 180 g de agua.
+\[
+\% \, m/m = \frac{20}{20 + 180} \times 100 = \frac{20}{200} \times 100 = 10\%
+\]
+
+\subsection{Porcentaje volumen-volumen (\% V/V)}
+
+\begin{tcolorbox}[formula]
+\[
+\% \, V/V = \frac{V_{\text{soluto}}}{V_{\text{solución}}} \times 100
+\]
+\textbf{Interpretación:} mL de soluto por cada 100 mL de solución.
+
+\textbf{OJO:} Los volúmenes NO siempre son aditivos. Solo sumar si el problema lo indica.
+\end{tcolorbox}
+
+\textbf{Ejemplo:} Un vino tiene 13\% V/V de alcohol. En 750 mL de vino:
+\[
+V_{\text{alcohol}} = \frac{13 \times 750}{100} = 97{,}5 \text{ mL de alcohol}
+\]
+
+\subsection{Porcentaje masa-volumen (\% m/V)}
+
+\begin{tcolorbox}[formula]
+\[
+\% \, m/V = \frac{m_{\text{soluto (g)}}}{V_{\text{solución (mL)}}} \times 100
+\]
+\textbf{Interpretación:} gramos de soluto por cada 100 mL de solución.
+\end{tcolorbox}
+
+\textbf{Ejemplo:} El suero fisiológico es una solución de NaCl al 0,9\% m/V. Esto significa que hay 0,9 g de NaCl por cada 100 mL de solución.
+
+\subsection{Ejercicios --- Sección 4}
+
+\nivelbasico
+
+\begin{enumerate}
+  \item Se disuelven 15 g de azúcar en 85 g de agua. Calcula la concentración en \% m/m.
+  \lineasrespuesta{3}
+
+  \item Una solución tiene un 25\% V/V de etanol. ¿Cuántos mL de etanol hay en 500 mL de solución?
+  \lineasrespuesta{3}
+
+  \item Una solución de glucosa tiene una concentración de 5\% m/V. ¿Cuántos gramos de glucosa hay en 250 mL de solución?
+  \lineasrespuesta{3}
+\end{enumerate}
+
+\nivelintermedio
+
+\begin{enumerate}[resume]
+  \item Se prepara una solución disolviendo 30 g de NaOH en agua hasta obtener 200 mL de solución. La densidad de la solución es 1,15 g/mL. Calcula:
+  \begin{enumerate}[label=\alph*)]
+    \item \% m/V
+    \item \% m/m (necesitarás la densidad para obtener la masa total)
+  \end{enumerate}
+  \lineasrespuesta{5}
+
+  \item ¿Qué masa de soluto se necesita para preparar 500 mL de solución de KCl al 3\% m/V?
+  \lineasrespuesta{3}
+\end{enumerate}
+
+% ════════════════════════
+% SECCIÓN 5
+% ════════════════════════
+\newpage
+\section{UNIDADES QUÍMICAS DE CONCENTRACIÓN}
+
+\begin{tcolorbox}[recuerda]
+\textbf{Cantidad de sustancia (mol):} $\displaystyle n = \frac{m}{M}$
+
+donde $n$ = moles, $m$ = masa (g), $M$ = masa molar (g/mol).
+
+\textbf{1 mol} = $6{,}022 \times 10^{23}$ entidades elementales (número de Avogadro).
+\end{tcolorbox}
+
+\subsection{Molaridad (M)}
+
+\begin{tcolorbox}[formula]
+\[
+M = \frac{n_{\text{soluto}}}{V_{\text{solución (L)}}}
+\]
+\textbf{Unidad:} mol/L \hspace{1cm} \textbf{Interpretación:} moles de soluto por litro de solución.
+\end{tcolorbox}
+
+\textbf{Ejemplo:} Se disuelven 4 g de NaOH ($M = 40$ g/mol) en agua hasta completar 500 mL.
+\[
+n = \frac{4}{40} = 0{,}1 \text{ mol} \qquad \Rightarrow \qquad M = \frac{0{,}1}{0{,}5} = 0{,}2 \text{ M}
+\]
+
+\subsection{Molalidad (m)}
+
+\begin{tcolorbox}[formula]
+\[
+m = \frac{n_{\text{soluto}}}{m_{\text{disolvente (kg)}}}
+\]
+\textbf{Unidad:} mol/kg \hspace{1cm} \textbf{Interpretación:} moles de soluto por kg de disolvente.
+
+\textbf{OJO:} En molaridad se divide por \textit{volumen de solución}; en molalidad se divide por \textit{masa de disolvente}.
+\end{tcolorbox}
+
+\textbf{Ejemplo:} Se disuelven 5,85 g de NaCl ($M = 58{,}5$ g/mol) en 500 g de agua.
+\[
+n = \frac{5{,}85}{58{,}5} = 0{,}1 \text{ mol} \qquad \Rightarrow \qquad m = \frac{0{,}1}{0{,}5} = 0{,}2 \text{ m}
+\]
+
+\subsection{Fracción molar (X)}
+
+\begin{tcolorbox}[formula]
+\[
+X_i = \frac{n_i}{n_{\text{total}}} \qquad \text{donde } n_{\text{total}} = n_{\text{soluto}} + n_{\text{disolvente}}
+\]
+\textbf{Propiedad:} $X_{\text{soluto}} + X_{\text{disolvente}} = 1$ (adimensional, siempre $< 1$).
+\end{tcolorbox}
+
+\subsection{Ejercicios --- Sección 5}
+
+\nivelbasico
+
+\begin{enumerate}
+  \item Calcula la molaridad de una solución preparada disolviendo 11,7 g de NaCl ($M = 58{,}5$ g/mol) en agua hasta completar 250 mL de solución.
+  \lineasrespuesta{4}
+
+  \item Se disuelven 9 g de glucosa (C\textsubscript{6}H\textsubscript{12}O\textsubscript{6}, $M = 180$ g/mol) en 200 g de agua. Calcula la molalidad.
+  \lineasrespuesta{4}
+\end{enumerate}
+
+\nivelintermedio
+
+\begin{enumerate}[resume]
+  \item ¿Cuántos gramos de H\textsubscript{2}SO\textsubscript{4} ($M = 98$ g/mol) se necesitan para preparar 2 L de una solución 0,5 M?
+  \lineasrespuesta{4}
+
+  \item Se disuelven 0,2 mol de NaOH en 500 g de agua ($M_{\text{H}_2\text{O}} = 18$ g/mol). Calcula:
+  \begin{enumerate}[label=\alph*)]
+    \item La fracción molar del NaOH.
+    \item La fracción molar del agua.
+    \item Verifica que $X_{\text{NaOH}} + X_{\text{H}_2\text{O}} = 1$.
+  \end{enumerate}
+  \lineasrespuesta{6}
+\end{enumerate}
+
+\nivelavanzado
+
+\begin{enumerate}[resume]
+  \item Una solución de HCl ($M = 36{,}5$ g/mol) tiene una concentración de 12 M y una densidad de 1,18 g/mL. Calcula:
+  \begin{enumerate}[label=\alph*)]
+    \item La masa de HCl en 1 L de solución.
+    \item El \% m/m de la solución.
+    \item La molalidad de la solución.
+  \end{enumerate}
+  \lineasrespuesta{8}
+\end{enumerate}
+
+% ════════════════════════
+% SECCIÓN 6
+% ════════════════════════
+\newpage
+\section{REACCIONES EN SOLUCIÓN}
+
+\begin{tcolorbox}[propiedad, title=Tipos de reacciones en solución]
+\begin{enumerate}[nosep]
+  \item \textbf{Neutralización (ácido-base):}
+  \[ \text{Ácido} + \text{Base} \rightarrow \text{Sal} + \text{Agua} \]
+  Ej: $\text{HCl}_{(ac)} + \text{NaOH}_{(ac)} \rightarrow \text{NaCl}_{(ac)} + \text{H}_2\text{O}_{(l)}$
+
+  \item \textbf{Óxido-reducción (redox):} Transferencia de electrones.
+
+  Ej: $\text{Zn}_{(s)} + \text{CuSO}_{4(ac)} \rightarrow \text{ZnSO}_{4(ac)} + \text{Cu}_{(s)}$
+
+  (El Zn se oxida cediendo $e^-$; el Cu\textsuperscript{2+} se reduce ganando $e^-$)
+
+  \item \textbf{Precipitación:} Se forma un sólido insoluble al mezclar dos soluciones.
+
+  Ej: $\text{AgNO}_{3(ac)} + \text{NaCl}_{(ac)} \rightarrow \text{AgCl}_{(s)} \downarrow + \text{NaNO}_{3(ac)}$
+\end{enumerate}
+\end{tcolorbox}
+
+\subsection{Ejercicios --- Sección 6}
+
+\nivelbasico
+
+\begin{enumerate}
+  \item Clasifica cada reacción como neutralización, redox o precipitación:
+  \begin{enumerate}[label=\alph*)]
+    \item $\text{H}_2\text{SO}_{4(ac)} + 2\text{KOH}_{(ac)} \rightarrow \text{K}_2\text{SO}_{4(ac)} + 2\text{H}_2\text{O}_{(l)}$
+    \item $\text{Fe}_{(s)} + \text{O}_{2(g)} + \text{H}_2\text{O}_{(l)} \rightarrow \text{Fe}_2\text{O}_{3(s)}$
+    \item $\text{BaCl}_{2(ac)} + \text{Na}_2\text{SO}_{4(ac)} \rightarrow \text{BaSO}_{4(s)} \downarrow + 2\text{NaCl}_{(ac)}$
+  \end{enumerate}
+  \lineasrespuesta{3}
+\end{enumerate}
+
+\nivelintermedio
+
+\begin{enumerate}[resume]
+  \item En la reacción: $\text{Zn}_{(s)} + \text{CuSO}_{4(ac)} \rightarrow \text{ZnSO}_{4(ac)} + \text{Cu}_{(s)}$
+  \begin{enumerate}[label=\alph*)]
+    \item ¿Qué especie se oxida y cuál se reduce?
+    \item ¿Por qué decimos que hubo transferencia de electrones?
+  \end{enumerate}
+  \lineasrespuesta{4}
+\end{enumerate}
+
+% ════════════════════════
+% SECCIÓN 7
+% ════════════════════════
+\section{PROBLEMAS DE APLICACIÓN}
+
+\nivelbasico
+
+\begin{enumerate}
+  \item El suero fisiológico tiene una concentración de 0,9\% m/V de NaCl. ¿Cuántos gramos de NaCl contiene una bolsa de 500 mL de suero?
+  \lineasrespuesta{3}
+\end{enumerate}
+
+\nivelintermedio
+
+\begin{enumerate}[resume]
+  \item Se necesita preparar 250 mL de una solución de NaOH 0,5 M ($M = 40$ g/mol).
+  \begin{enumerate}[label=\alph*)]
+    \item Calcula la masa de NaOH necesaria.
+    \item Describe brevemente el procedimiento de preparación.
+  \end{enumerate}
+  \lineasrespuesta{5}
+
+  \item Una botella de vinagre indica que contiene 5\% V/V de ácido acético. Si la botella tiene 750 mL, ¿cuántos mL de ácido acético puro contiene?
+  \lineasrespuesta{3}
+\end{enumerate}
+
+\nivelavanzado
+
+\begin{enumerate}[resume]
+  \item Se mezclan 100 mL de HCl 0,3 M con 100 mL de NaOH 0,2 M.
+  \begin{enumerate}[label=\alph*)]
+    \item Escribe la ecuación de neutralización balanceada.
+    \item Calcula los moles de HCl y NaOH antes de la reacción.
+    \item ¿Cuál reactivo queda en exceso y cuántos moles sobran?
+    \item ¿Cuál es la concentración del reactivo en exceso en la solución final (vol. total = 200 mL)?
+  \end{enumerate}
+  \lineasrespuesta{8}
+
+  \item Una solución de ácido sulfúrico (H\textsubscript{2}SO\textsubscript{4}, $M = 98$ g/mol) tiene concentración 18 M y densidad 1,84 g/mL. Calcula:
+  \begin{enumerate}[label=\alph*)]
+    \item El \% m/m.
+    \item La molalidad.
+  \end{enumerate}
+  \lineasrespuesta{8}
+\end{enumerate}
+
+% ════════════════════════
+% RESPUESTAS
+% ════════════════════════
+\newpage
+\section*{\colorbox{azulprincipal}{\color{white}\parbox{\dimexpr\textwidth-2\fboxsep}{~RESPUESTAS SELECCIONADAS}}}
+\addcontentsline{toc}{section}{Respuestas seleccionadas}
+
+\small
+\textit{Intenta resolver antes de consultar.}
+
+\subsection*{Sección 1}
+\begin{itemize}[nosep]
+  \item Ej.1: H\textsubscript{2}O = compuesto; Aire = mezcla homogénea; Bronce = mezcla homogénea; Ensalada = mezcla heterogénea; Fe = elemento; Vinagre = mezcla homogénea.
+  \item Ej.2: a) Soluto: NaCl; Disolvente: agua. b) Ion-dipolo. c) No, NaCl es iónico y aceite es apolar.
+\end{itemize}
+
+\subsection*{Sección 2}
+\begin{itemize}[nosep]
+  \item Ej.1: a) Líquida, insaturada, electrolítica. b) Sólida. c) Líquida, no electrolítica. d) Gaseosa.
+  \item Ej.3: Sobresaturada; al agregar cristal se produce cristalización del exceso.
+\end{itemize}
+
+\subsection*{Sección 3}
+\begin{itemize}[nosep]
+  \item Ej.1: a) F (aceite apolar, agua polar). b) V. c) V. d) V.
+  \item Ej.2: $S_g = 1{,}3 \times 10^{-3} \times 0{,}21 = 2{,}73 \times 10^{-4}$ mol/L.
+\end{itemize}
+
+\subsection*{Sección 4}
+\begin{itemize}[nosep]
+  \item Ej.1: $\% m/m = 15/(15+85) \times 100 = 15\%$.
+  \item Ej.2: $V = 25\% \times 500/100 = 125$ mL.
+  \item Ej.3: $m = 5\% \times 250/100 = 12{,}5$ g.
+  \item Ej.4: a) $\% m/V = 30/200 \times 100 = 15\%$. b) $m_{\text{sol}} = 200 \times 1{,}15 = 230$ g; $\% m/m = 30/230 \times 100 = 13{,}04\%$.
+  \item Ej.5: $m = 3\% \times 500/100 = 15$ g.
+\end{itemize}
+
+\subsection*{Sección 5}
+\begin{itemize}[nosep]
+  \item Ej.1: $n = 11{,}7/58{,}5 = 0{,}2$ mol; $M = 0{,}2/0{,}25 = 0{,}8$ M.
+  \item Ej.2: $n = 9/180 = 0{,}05$ mol; $m = 0{,}05/0{,}2 = 0{,}25$ m.
+  \item Ej.3: $n = 0{,}5 \times 2 = 1$ mol; masa $= 1 \times 98 = 98$ g.
+  \item Ej.4: $n_{\text{H}_2\text{O}} = 500/18 = 27{,}78$ mol; $X_{\text{NaOH}} = 0{,}2/27{,}98 = 0{,}00715$; $X_{\text{H}_2\text{O}} = 0{,}99285$.
+  \item Ej.5: a) $m_{\text{HCl}} = 12 \times 36{,}5 = 438$ g. b) $m_{\text{sol}} = 1000 \times 1{,}18 = 1180$ g; $\% = 438/1180 \times 100 = 37{,}1\%$. c) $m_{\text{disv}} = 1180 - 438 = 742$ g; $m = 12/0{,}742 = 16{,}17$ m.
+\end{itemize}
+
+\subsection*{Sección 7}
+\begin{itemize}[nosep]
+  \item Ej.1: $m = 0{,}9 \times 500/100 = 4{,}5$ g.
+  \item Ej.2: a) $n = 0{,}5 \times 0{,}25 = 0{,}125$ mol; $m = 0{,}125 \times 40 = 5$ g.
+  \item Ej.3: $V = 5\% \times 750/100 = 37{,}5$ mL.
+  \item Ej.4: a) $\text{HCl} + \text{NaOH} \rightarrow \text{NaCl} + \text{H}_2\text{O}$. b) HCl: 0,03 mol; NaOH: 0,02 mol. c) Exceso HCl: 0,01 mol. d) $M = 0{,}01/0{,}2 = 0{,}05$ M.
+  \item Ej.5: a) $m_{\text{H}_2\text{SO}_4} = 18 \times 98 = 1764$ g; $m_{\text{sol}} = 1000 \times 1{,}84 = 1840$ g; $\% = 1764/1840 \times 100 = 95{,}9\%$. b) $m_{\text{disv}} = 76$ g; $m = 18/0{,}076 = 236{,}8$ m.
+\end{itemize}
+
+\end{document}

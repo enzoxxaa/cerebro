@@ -1,6 +1,8 @@
-# Obsidian workspace local (no sincronizar estado de UI)
+# Obsidian — solo versionar configuración esencial, no los plugins binarios
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json
+.obsidian/plugins/*/main.js
+.obsidian/plugins/*/styles.css
 
 # Archivos del sistema
 .DS_Store
@@ -14,3 +16,15 @@ Thumbs.db
 # Carpetas de sistema
 __pycache__/
 *.pyc
+
+# Archivos grandes / binarios (no van en git)
+*.pdf
+*.PDF
+
+# Archivos compilados de LaTeX
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.fls
+*.fdb_latexmk
