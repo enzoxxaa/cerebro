@@ -22,6 +22,9 @@ Guías `.tex` emitidas durante el primer semestre 2026 para la ruta compartida M
 | Sem | Tema | Carpeta | Estado | Notas |
 |-----|------|---------|--------|-------|
 | 16  | Logaritmos I: definición y conexión con potencias | [[semana-16_logaritmos-1/Guia_Logaritmos_1\|Guia_Logaritmos_1]] | emitida | 8 páginas · Máx + Mart · ejercicios nivel básico/intermedio/avanzado |
+| 16  | Diagnóstico nivelación Aquiles | [[semana-16_diagnostico-aquiles/Diagnostico_Aquiles\|Diagnostico_Aquiles]] | emitida | 11 páginas · Material del tutor · cajas guía post-error + hoja de registro |
+| 17  | Logaritmos II: propiedades y cambio de base | [[semana-17_logaritmos-2/Guia_Logaritmos_2\|Guia_Logaritmos_2]] | emitida | 9 páginas · Máx + Mart · 3 propiedades + cambio de base + demostraciones |
+| 17  | Operatoria entera y fraccionaria (Aquiles) | [[semana-17_operatoria-aquiles/Guia_Operatoria_Aquiles\|Guia_Operatoria_Aquiles]] | emitida | 8 páginas · Material del tutor · provisional (depende del diagnóstico) |
 
 <!-- Agregar fila al solicitar una guía nueva. Estados: borrador | emitida | revisada -->
 

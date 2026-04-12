@@ -1,0 +1,462 @@
+% ════════════════════════════════════════════════════════════════════════════
+% GUÍA — OPERATORIA ENTERA Y FRACCIONARIA · AQUILES · SEMANA 17
+% ────────────────────────────────────────────────────────────────────────────
+% MATERIAL DEL TUTOR — PROVISIONAL.
+% Se usa si el diagnóstico de la semana 16 confirma que la brecha principal
+% está en operatoria. Si la brecha está en otra parte, esta guía no se usa
+% y se reemplaza por el tema real.
+%
+% Estructura: ejercicios progresivos + cajas guía post-error (como el
+% diagnóstico). La primera parte de la sesión es devolución del diagnóstico.
+% ════════════════════════════════════════════════════════════════════════════
+
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{hyperref}
+
+\geometry{margin=2cm, top=2.5cm, bottom=2.5cm}
+
+% ─── Colores ───
+\definecolor{azulprincipal}{HTML}{2980B9}
+\definecolor{azuloscuro}{HTML}{1A5276}
+\definecolor{verdequimica}{HTML}{1ABC9C}
+\definecolor{verdeclaro}{HTML}{D5F5E3}
+\definecolor{naranja}{HTML}{E67E22}
+\definecolor{rojo}{HTML}{E74C3C}
+\definecolor{amarillorecuerda}{HTML}{FFF3CD}
+\definecolor{amarilloborde}{HTML}{FFC107}
+\definecolor{grisfondo}{HTML}{F5F5F5}
+\definecolor{tutormorado}{HTML}{8E44AD}
+\definecolor{tutorfondo}{HTML}{F4ECF7}
+
+% ─── Cajas ───
+\tcbset{
+  recuerda/.style={
+    colback=amarillorecuerda, colframe=amarilloborde,
+    fonttitle=\bfseries, title={\color{black} RECUERDA},
+    boxrule=1pt, arc=2mm, left=5pt, right=5pt
+  },
+  propiedad/.style={
+    colback=verdeclaro!50, colframe=verdequimica!80!black,
+    fonttitle=\bfseries, boxrule=0.8pt, arc=2mm, left=5pt, right=5pt
+  },
+  formula/.style={
+    colback=grisfondo, colframe=azulprincipal,
+    boxrule=0.8pt, arc=2mm, left=5pt, right=5pt
+  },
+  definicion/.style={
+    colback=blue!5, colframe=azulprincipal,
+    fonttitle=\bfseries, boxrule=0.8pt, arc=2mm, left=5pt, right=5pt
+  },
+  ejemplo/.style={
+    colback=orange!5, colframe=naranja,
+    fonttitle=\bfseries, boxrule=0.8pt, arc=2mm, left=5pt, right=5pt
+  },
+  guia-tutor/.style={
+    colback=tutorfondo, colframe=tutormorado,
+    fonttitle=\bfseries, boxrule=1pt, arc=2mm, left=5pt, right=5pt,
+    title={\color{tutormorado} GUÍA PARA EL TUTOR}
+  }
+}
+
+% ─── Encabezados ───
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\small\color{gray} Operatoria entera y fraccionaria --- Aquiles --- 2° Medio}
+\fancyfoot[C]{\small\color{gray} Página \thepage\ --- \textbf{MATERIAL DEL TUTOR (PROVISIONAL)}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ─── Títulos ───
+\newcommand{\tituloseccion}[1]{%
+  \noindent\colorbox{azulprincipal}{%
+    \makebox[\dimexpr\textwidth-2\fboxsep\relax][l]{%
+      \color{white}\normalfont\Large\bfseries\ BLOQUE \thesection: #1%
+    }%
+  }%
+}
+\titleformat{\section}
+  {}{}{0em}
+  {\tituloseccion}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{azulprincipal}}
+  {\thesubsection}{0.5em}{}
+
+% ─── Niveles ───
+\newcommand{\nivelbasico}{%
+  \par\smallskip\colorbox{green!60!black}{\color{white}\small\bfseries\ NIVEL BÁSICO\ }\par\smallskip}
+\newcommand{\nivelintermedio}{%
+  \par\smallskip\colorbox{naranja}{\color{white}\small\bfseries\ NIVEL INTERMEDIO\ }\par\smallskip}
+
+% ─── Observación ───
+\newcommand{\observacion}[1]{%
+  \par\medskip
+  \noindent\colorbox{grisfondo}{%
+    \makebox[\dimexpr\textwidth-2\fboxsep\relax][l]{%
+      \small\color{gray}\itshape\ #1%
+    }%
+  }%
+  \par\medskip
+}
+
+% ─── Líneas ───
+\newcommand{\lineasrespuesta}[1]{%
+  \par\vspace{2mm}%
+  \foreach \i in {1,...,#1}{\noindent\rule{\textwidth}{0.3pt}\par\vspace{5mm}}%
+  \vspace{2mm}%
+}
+
+\begin{document}
+
+% ════════════════════════
+% PORTADA
+% ════════════════════════
+\thispagestyle{empty}
+\vspace*{2.5cm}
+\begin{center}
+  {\Huge\bfseries\color{azulprincipal} GUÍA DE NIVELACIÓN}\\[8pt]
+  {\LARGE\bfseries\color{azuloscuro} Operatoria entera y fraccionaria}\\[15pt]
+  {\color{azulprincipal}\rule{8cm}{2pt}}\\[15pt]
+  {\Large Semana 17 \textbar{} 2° Medio \textbar{} 2026-S1}\\[8pt]
+  {\large Alumno: Aquiles}\\[25pt]
+  {\itshape\color{gray}
+  Material del tutor --- provisional.\\[4pt]
+  Usar si el diagnóstico confirma brecha en operatoria.\\[4pt]
+  Los primeros 15 min de la sesión son devolución del diagnóstico.}
+\end{center}
+
+\vspace{1cm}
+\begin{tcolorbox}[recuerda]
+\textbf{Plan de la sesión (60 min):}
+\begin{enumerate}[nosep]
+  \item \textbf{Devolución del diagnóstico (15 min):} decirle qué hizo bien, dónde está la brecha, y qué vamos a hacer esta semana. Tono positivo --- él necesita sentir que el plan es alcanzable.
+  \item \textbf{Bloque de ejercitación (35 min):} los bloques de abajo, empezando donde indique el diagnóstico.
+  \item \textbf{Cierre + tarea (10 min):} asignar solo lo que pueda hacer solo, sin frustrarse.
+\end{enumerate}
+\end{tcolorbox}
+
+\newpage
+
+% ════════════════════════════════════════════════════
+% BLOQUE 1 — ENTEROS CON SIGNO
+% ════════════════════════════════════════════════════
+\section{ENTEROS CON SIGNO}
+
+\observacion{Usar este bloque si el diagnóstico mostró brecha en la regla de signos o en sumas/restas con negativos.}
+
+\subsection{Ejercicios progresivos}
+
+\nivelbasico
+
+\textbf{Sumas y restas} (dictar o escribir en pizarra):
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=6pt]
+  \item $(-3) + 8 = $ \hfill \textit{($5$)}
+  \item $(-5) + (-4) = $ \hfill \textit{($-9$)}
+  \item $7 - 12 = $ \hfill \textit{($-5$)}
+  \item $(-6) - (-2) = $ \hfill \textit{($-4$)}
+  \item $(-1) + 9 - 3 - (-5) = $ \hfill \textit{($10$)}
+\end{enumerate}
+
+\medskip
+\textbf{Multiplicación y división:}
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=6pt,start=6]
+  \item $(-3) \cdot 7 = $ \hfill \textit{($-21$)}
+  \item $(-8) \cdot (-4) = $ \hfill \textit{($32$)}
+  \item $(-36) \div 9 = $ \hfill \textit{($-4$)}
+  \item $(-45) \div (-5) = $ \hfill \textit{($9$)}
+  \item $(-2) \cdot (-3) \cdot (-1) = $ \hfill \textit{($-6$)}
+\end{enumerate}
+
+\nivelintermedio
+
+\textbf{Operaciones combinadas} (respetar jerarquía):
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=6pt,start=11]
+  \item $3 + (-2) \cdot 5 = $ \hfill \textit{($-7$)}
+  \item $(-4)^{2} - 10 = $ \hfill \textit{($6$)}
+  \item $-4^{2} - 10 = $ \hfill \textit{($-26$)  --- ¡ojo con la diferencia!}
+  \item $12 \div (-3) + (-2) \cdot 4 = $ \hfill \textit{($-12$)}
+  \item $(-1)^{5} + (-1)^{4} = $ \hfill \textit{($0$)}
+\end{enumerate}
+
+\subsection{Guías post-error}
+
+\begin{tcolorbox}[guia-tutor, title={\color{tutormorado} RESTAR UN NEGATIVO}]
+``$(-6) - (-2)$'' se lee ``menos seis \textbf{menos} menos dos''. Los dos signos negativos seguidos se transforman en un más:
+\[
+  (-6) - (-2) = (-6) + 2 = -4
+\]
+\textbf{Truco mnemotécnico:} dos signos iguales juntos $\to$ positivo. Dos distintos $\to$ negativo.
+
+Practicar con 3 ejemplos más: $10 - (-3)$, $(-7) - (-7)$, $(-1) - (-8)$.
+\end{tcolorbox}
+
+\begin{tcolorbox}[guia-tutor, title={\color{tutormorado} DIFERENCIA ENTRE $(-4)^{2}$ y $-4^{2}$}]
+Este es uno de los errores más comunes de todo el currículo. Escribirlo en grande:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}ll@{}}
+$(-4)^{2} = (-4)\cdot(-4) = 16$ & El paréntesis incluye el signo en la base. \\
+$-4^{2} = -(4 \cdot 4) = -16$ & El signo no está en la base; el cuadrado se aplica solo al $4$. \\
+\end{tabular}
+\end{center}
+
+Si no lo ve: ``¿qué está elevado al cuadrado? ¿El $-4$ completo o solo el $4$?'' El paréntesis decide.
+\end{tcolorbox}
+
+\begin{tcolorbox}[guia-tutor, title={\color{tutormorado} PRODUCTO CON CANTIDAD IMPAR DE NEGATIVOS}]
+En $(-2) \cdot (-3) \cdot (-1)$:
+\begin{enumerate}[nosep]
+  \item Primero: $(-2) \cdot (-3) = 6$ (dos negativos $\to$ positivo).
+  \item Luego: $6 \cdot (-1) = -6$ (positivo $\times$ negativo $\to$ negativo).
+\end{enumerate}
+
+\textbf{Regla rápida:} contar los factores negativos. Si son \textbf{par} $\to$ resultado positivo. Si son \textbf{impar} $\to$ negativo. No necesita multiplicar todo para saber el signo.
+\end{tcolorbox}
+
+\newpage
+
+% ════════════════════════════════════════════════════
+% BLOQUE 2 — FRACCIONES
+% ════════════════════════════════════════════════════
+\section{FRACCIONES}
+
+\observacion{Usar este bloque si el diagnóstico mostró que las fracciones son ``dos números apilados'' y no una cantidad con significado.}
+
+\subsection{Ejercicios progresivos}
+
+\nivelbasico
+
+\textbf{Simplificar:}
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=6pt]
+  \item $\dfrac{12}{18} = $ \hfill \textit{$\left(\dfrac{2}{3}\right)$}
+  \item $\dfrac{20}{35} = $ \hfill \textit{$\left(\dfrac{4}{7}\right)$}
+  \item $\dfrac{24}{36} = $ \hfill \textit{$\left(\dfrac{2}{3}\right)$}
+\end{enumerate}
+
+\medskip
+\textbf{Sumar y restar:}
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=6pt,start=4]
+  \item $\dfrac{2}{5} + \dfrac{1}{5} = $ \hfill \textit{$\left(\dfrac{3}{5}\right)$}
+  \item $\dfrac{1}{2} + \dfrac{1}{3} = $ \hfill \textit{$\left(\dfrac{5}{6}\right)$}
+  \item $\dfrac{3}{4} - \dfrac{1}{6} = $ \hfill \textit{$\left(\dfrac{7}{12}\right)$}
+  \item $1 - \dfrac{2}{5} = $ \hfill \textit{$\left(\dfrac{3}{5}\right)$}
+\end{enumerate}
+
+\medskip
+\textbf{Multiplicar y dividir:}
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=6pt,start=8]
+  \item $\dfrac{2}{3} \cdot \dfrac{5}{4} = $ \hfill \textit{$\left(\dfrac{5}{6}\right)$}
+  \item $\dfrac{3}{7} \div \dfrac{6}{5} = $ \hfill \textit{$\left(\dfrac{5}{14}\right)$}
+\end{enumerate}
+
+\nivelintermedio
+
+\textbf{Operaciones combinadas:}
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=6pt,start=10]
+  \item $\dfrac{1}{2} + \dfrac{1}{3} \cdot \dfrac{3}{4} = $ \hfill \textit{$\left(\dfrac{3}{4}\right)$} {\small --- ¡jerarquía!}
+  \item $\dfrac{2}{3} \cdot \left(\dfrac{1}{2} + \dfrac{1}{4}\right) = $ \hfill \textit{$\left(\dfrac{1}{2}\right)$}
+\end{enumerate}
+
+\subsection{Guías post-error}
+
+\begin{tcolorbox}[guia-tutor, title={\color{tutormorado} SI NO ``VE'' QUÉ ES UNA FRACCIÓN}]
+Dibujar un círculo (o una barra) y dividirlo:
+
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+  \draw[thick] (0,0) circle (1.5cm);
+  \draw[thick] (0,0) -- (0,1.5);
+  \draw[thick] (0,0) -- (1.3,-0.75);
+  \draw[thick] (0,0) -- (-1.3,-0.75);
+  \fill[azulprincipal!30] (0,0) -- (0,1.5) arc (90:210:1.5) -- cycle;
+  \node at (3,0) {$= \dfrac{2}{3}$ de la pizza};
+\end{tikzpicture}
+\end{center}
+
+``$\dfrac{2}{3}$'' significa: dividí en \textbf{3 partes iguales} y tomé \textbf{2}. El de abajo dice \emph{en cuántas partes corté}; el de arriba dice \emph{cuántas me quedé}.
+
+Que él dibuje $\dfrac{3}{4}$ y $\dfrac{1}{5}$ para verificar que lo entiende.
+\end{tcolorbox}
+
+\begin{tcolorbox}[guia-tutor, title={\color{tutormorado} SI SUMA NUMERADORES \emph{Y} DENOMINADORES}]
+El error $\dfrac{1}{2} + \dfrac{1}{3} = \dfrac{2}{5}$ es el más frecuente de toda la secundaria.
+
+\textbf{Contraejemplo visual:} ``Si me como media pizza y luego un tercio de pizza, ¿me comí dos quintos de pizza? No --- me comí \emph{más} que media. Dos quintos es \emph{menos} que media. Algo está mal.''
+
+Procedimiento correcto:
+\[
+  \frac{1}{2} + \frac{1}{3} = \frac{1 \times 3}{2 \times 3} + \frac{1 \times 2}{3 \times 2} = \frac{3}{6} + \frac{2}{6} = \frac{5}{6}
+\]
+Lo que se amplifica es la fracción completa (arriba \textbf{y} abajo por el mismo número). El denominador no se suma: solo se iguala.
+\end{tcolorbox}
+
+\begin{tcolorbox}[guia-tutor, title={\color{tutormorado} SI NO SABE DIVIDIR FRACCIONES}]
+\textbf{Dividir fracciones = multiplicar por la inversa} (dar vuelta la segunda).
+\[
+  \frac{3}{7} \div \frac{6}{5} = \frac{3}{7} \cdot \frac{5}{6} = \frac{15}{42} = \frac{5}{14}
+\]
+
+Mnemotecnia: ``\textbf{dividir es dar vuelta y multiplicar}''. Verificar con un ejemplo entero primero: $6 \div 2 = 6 \cdot \frac{1}{2} = 3$.
+\end{tcolorbox}
+
+\begin{tcolorbox}[guia-tutor, title={\color{tutormorado} SI NO RESPETA JERARQUÍA CON FRACCIONES}]
+En $\dfrac{1}{2} + \dfrac{1}{3} \cdot \dfrac{3}{4}$:
+
+La multiplicación se hace \textbf{primero}:
+\[
+  \frac{1}{3} \cdot \frac{3}{4} = \frac{3}{12} = \frac{1}{4}
+\]
+Luego la suma:
+\[
+  \frac{1}{2} + \frac{1}{4} = \frac{2}{4} + \frac{1}{4} = \frac{3}{4}
+\]
+
+Si no lo ve: ``la multiplicación es más fuerte que la suma --- siempre va primero, igual que con enteros''.
+\end{tcolorbox}
+
+\newpage
+
+% ════════════════════════════════════════════════════
+% BLOQUE 3 — CONEXIÓN FRACCIÓN ↔ DECIMAL ↔ %
+% ════════════════════════════════════════════════════
+\section{EQUIVALENCIAS: FRACCIÓN, DECIMAL Y PORCENTAJE}
+
+\observacion{Este bloque complementa el anterior. Si las fracciones están sólidas, se puede pasar directo a la tabla de equivalencias y los ejercicios de \%.}
+
+\subsection{Tabla de referencia}
+
+\begin{tcolorbox}[formula]
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}ccc@{}}
+\toprule
+\textbf{Fracción} & \textbf{Decimal} & \textbf{Porcentaje} \\
+\midrule
+$\dfrac{1}{2}$ & $0{,}5$ & $50\%$ \\[4pt]
+$\dfrac{1}{4}$ & $0{,}25$ & $25\%$ \\[4pt]
+$\dfrac{3}{4}$ & $0{,}75$ & $75\%$ \\[4pt]
+$\dfrac{1}{5}$ & $0{,}2$ & $20\%$ \\[4pt]
+$\dfrac{1}{10}$ & $0{,}1$ & $10\%$ \\[4pt]
+$\dfrac{1}{3}$ & $0{,}\overline{3}$ & $33{,}\overline{3}\%$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{tcolorbox}
+
+\subsection{Ejercicios}
+
+\textbf{Completar la equivalencia:}
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=6pt]
+  \item $\dfrac{3}{5} = $ \rule{1.5cm}{0.4pt} $= $ \rule{1.5cm}{0.4pt}$\%$ \hfill \textit{($0{,}6$ / $60\%$)}
+  \item $0{,}4 = \dfrac{\qquad}{\qquad} = $ \rule{1.5cm}{0.4pt}$\%$ \hfill \textit{$\left(\dfrac{2}{5}\right.$ / $\left.40\%\right)$}
+  \item $75\% = \dfrac{\qquad}{\qquad} = $ \rule{1.5cm}{0.4pt} \hfill \textit{$\left(\dfrac{3}{4}\right.$ / $\left.0{,}75\right)$}
+\end{enumerate}
+
+\medskip
+\textbf{Problemas de \%:}
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=6pt,start=4]
+  \item Un pantalón cuesta $\$30\,000$ y tiene un $20\%$ de descuento. ¿Cuánto se paga? \hfill \textit{($\$24\,000$)}
+  \item En una prueba de 40 preguntas, acertaste el $70\%$. ¿Cuántas acertaste? \hfill \textit{($28$)}
+  \item Un producto subió de $\$15\,000$ a $\$18\,000$. ¿Qué porcentaje subió? \hfill \textit{($20\%$)}
+\end{enumerate}
+
+\subsection{Guías post-error}
+
+\begin{tcolorbox}[guia-tutor, title={\color{tutormorado} CÓMO CONVERTIR ENTRE LAS TRES FORMAS}]
+\textbf{Fracción $\to$ decimal:} dividir numerador entre denominador. $\frac{3}{5} = 3 \div 5 = 0{,}6$.
+
+\textbf{Decimal $\to$ porcentaje:} multiplicar por 100. $0{,}6 \times 100 = 60\%$.
+
+\textbf{Porcentaje $\to$ fracción:} poner sobre 100 y simplificar. $75\% = \frac{75}{100} = \frac{3}{4}$.
+
+El ciclo completo:
+\[
+  \text{fracción} \xrightarrow{\div} \text{decimal} \xrightarrow{\times 100} \text{porcentaje} \xrightarrow{\div 100} \text{fracción}
+\]
+\end{tcolorbox}
+
+\begin{tcolorbox}[guia-tutor, title={\color{tutormorado} SI NO PUEDE CALCULAR UN \% DE AUMENTO/DESCUENTO}]
+Dos caminos (que él elija el que le sea más cómodo):
+
+\textbf{Camino A} (calcular el \% y sumar/restar):
+\begin{itemize}[nosep]
+  \item $20\%$ de $30\,000 = 0{,}2 \times 30\,000 = 6\,000$.
+  \item Descuento: $30\,000 - 6\,000 = 24\,000$.
+\end{itemize}
+
+\textbf{Camino B} (multiplicar por el factor directo):
+\begin{itemize}[nosep]
+  \item $20\%$ de descuento $\to$ queda el $80\%$ $\to$ factor $0{,}8$.
+  \item $30\,000 \times 0{,}8 = 24\,000$.
+\end{itemize}
+
+El camino B es más eficiente, pero el A es más intuitivo. En esta etapa, que use el A. El B puede venir después.
+\end{tcolorbox}
+
+\begin{tcolorbox}[guia-tutor, title={\color{tutormorado} SI NO PUEDE CALCULAR QUÉ \% REPRESENTA UN CAMBIO}]
+De $\$15\,000$ a $\$18\,000$:
+\begin{enumerate}[nosep]
+  \item ¿Cuánto subió? $18\,000 - 15\,000 = 3\,000$.
+  \item ¿Ese $3\,000$ qué fracción es del original? $\dfrac{3\,000}{15\,000} = \dfrac{1}{5} = 0{,}2$.
+  \item Convertir a \%: $0{,}2 \times 100 = 20\%$.
+\end{enumerate}
+
+\textbf{Clave:} el porcentaje de cambio es \textbf{siempre respecto al valor original} (el de antes), no respecto al nuevo.
+\end{tcolorbox}
+
+\newpage
+
+% ════════════════════════════════════════════════════
+% HOJA DE PROGRESO
+% ════════════════════════════════════════════════════
+\section*{NOTAS DE PROGRESO --- SEMANA 17}
+\addcontentsline{toc}{section}{Notas de progreso}
+
+\begin{center}
+{\large\bfseries\color{azuloscuro} Aquiles --- Sesión del \rule{3cm}{0.4pt} de abril 2026}
+\end{center}
+
+\medskip
+
+\noindent\textbf{Devolución del diagnóstico --- ¿cómo lo tomó?}
+\lineasrespuesta{3}
+
+\medskip
+
+\noindent\textbf{Bloque trabajado hoy:} \rule{5cm}{0.4pt}
+
+\medskip
+
+\noindent\textbf{Lo que hizo bien:}
+\lineasrespuesta{2}
+
+\noindent\textbf{Lo que costó:}
+\lineasrespuesta{2}
+
+\noindent\textbf{Nivel emocional durante la sesión} (frustración / enganche / indiferencia):
+\lineasrespuesta{2}
+
+\noindent\textbf{Tarea asignada:}
+\lineasrespuesta{2}
+
+\noindent\textbf{¿Se confirma el tema de la semana 18 o hay que ajustar?}
+\lineasrespuesta{2}
+
+\begin{tcolorbox}[recuerda]
+Trasladar estas notas a la sección ``Notas para la próxima semana'' del plan semanal correspondiente en el vault.
+\end{tcolorbox}
+
+\end{document}

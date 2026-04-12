@@ -1,0 +1,537 @@
+% ════════════════════════════════════════════════════════════════════════════
+% INSTRUMENTO DIAGNÓSTICO — AQUILES · SEMANA 16 · 2026-S1
+% ────────────────────────────────────────────────────────────────────────────
+% MATERIAL DEL TUTOR — NO SE ENTREGA AL ALUMNO.
+%
+% Estructura:
+%   - 4 bloques (operatoria, fracciones/%, álgebra, ecuaciones).
+%   - Cada bloque tiene ejercicios para dictar/escribir en pizarra.
+%   - Después de cada bloque hay cajas [guia-tutor] con explicaciones
+%     listas para usar si el alumno falla.
+%   - Al final: hoja de registro para anotar observaciones.
+%
+% Compilar:  pdflatex Diagnostico_Aquiles.tex
+% ════════════════════════════════════════════════════════════════════════════
+
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{hyperref}
+
+\geometry{margin=2cm, top=2.5cm, bottom=2.5cm}
+
+% ─── Colores ───
+\definecolor{azulprincipal}{HTML}{2980B9}
+\definecolor{azuloscuro}{HTML}{1A5276}
+\definecolor{verdequimica}{HTML}{1ABC9C}
+\definecolor{verdeclaro}{HTML}{D5F5E3}
+\definecolor{naranja}{HTML}{E67E22}
+\definecolor{rojo}{HTML}{E74C3C}
+\definecolor{amarillorecuerda}{HTML}{FFF3CD}
+\definecolor{amarilloborde}{HTML}{FFC107}
+\definecolor{grisfondo}{HTML}{F5F5F5}
+\definecolor{tutormorado}{HTML}{8E44AD}
+\definecolor{tutorfondo}{HTML}{F4ECF7}
+
+% ─── Cajas ───
+\tcbset{
+  recuerda/.style={
+    colback=amarillorecuerda, colframe=amarilloborde,
+    fonttitle=\bfseries, title={\color{black} RECUERDA},
+    boxrule=1pt, arc=2mm, left=5pt, right=5pt
+  },
+  propiedad/.style={
+    colback=verdeclaro!50, colframe=verdequimica!80!black,
+    fonttitle=\bfseries, boxrule=0.8pt, arc=2mm, left=5pt, right=5pt
+  },
+  formula/.style={
+    colback=grisfondo, colframe=azulprincipal,
+    boxrule=0.8pt, arc=2mm, left=5pt, right=5pt
+  },
+  definicion/.style={
+    colback=blue!5, colframe=azulprincipal,
+    fonttitle=\bfseries, boxrule=0.8pt, arc=2mm, left=5pt, right=5pt
+  },
+  ejemplo/.style={
+    colback=orange!5, colframe=naranja,
+    fonttitle=\bfseries, boxrule=0.8pt, arc=2mm, left=5pt, right=5pt
+  },
+  guia-tutor/.style={
+    colback=tutorfondo, colframe=tutormorado,
+    fonttitle=\bfseries, boxrule=1pt, arc=2mm, left=5pt, right=5pt,
+    title={\color{tutormorado} GUÍA PARA EL TUTOR}
+  }
+}
+
+% ─── Encabezados ───
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\small\color{gray} Instrumento Diagnóstico --- Aquiles --- 2° Medio}
+\fancyfoot[C]{\small\color{gray} Página \thepage\ --- \textbf{MATERIAL DEL TUTOR}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ─── Títulos ───
+\newcommand{\tituloseccion}[1]{%
+  \noindent\colorbox{azulprincipal}{%
+    \makebox[\dimexpr\textwidth-2\fboxsep\relax][l]{%
+      \color{white}\normalfont\Large\bfseries\ BLOQUE \thesection: #1%
+    }%
+  }%
+}
+\titleformat{\section}
+  {}{}{0em}
+  {\tituloseccion}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{azulprincipal}}
+  {\thesubsection}{0.5em}{}
+
+% ─── Niveles de dificultad ───
+\newcommand{\nivelbasico}{%
+  \par\smallskip\colorbox{green!60!black}{\color{white}\small\bfseries\ NIVEL BÁSICO\ }\par\smallskip}
+\newcommand{\nivelintermedio}{%
+  \par\smallskip\colorbox{naranja}{\color{white}\small\bfseries\ NIVEL INTERMEDIO\ }\par\smallskip}
+\newcommand{\nivelavanzado}{%
+  \par\smallskip\colorbox{rojo}{\color{white}\small\bfseries\ NIVEL AVANZADO\ }\par\smallskip}
+
+% ─── Comando para la barra de observación ───
+\newcommand{\observacion}[1]{%
+  \par\medskip
+  \noindent\colorbox{grisfondo}{%
+    \makebox[\dimexpr\textwidth-2\fboxsep\relax][l]{%
+      \small\color{gray}\itshape\ #1%
+    }%
+  }%
+  \par\medskip
+}
+
+% ─── Líneas de respuesta ───
+\newcommand{\lineasrespuesta}[1]{%
+  \par\vspace{2mm}%
+  \foreach \i in {1,...,#1}{\noindent\rule{\textwidth}{0.3pt}\par\vspace{5mm}}%
+  \vspace{2mm}%
+}
+
+\begin{document}
+
+% ════════════════════════
+% PORTADA
+% ════════════════════════
+\thispagestyle{empty}
+\vspace*{2.5cm}
+\begin{center}
+  {\Huge\bfseries\color{azulprincipal} INSTRUMENTO DIAGNÓSTICO}\\[8pt]
+  {\LARGE\bfseries\color{azuloscuro} Nivelación Matemáticas --- Aquiles}\\[15pt]
+  {\color{azulprincipal}\rule{8cm}{2pt}}\\[15pt]
+  {\Large Semana 16 \textbar{} 2° Medio \textbar{} 2026-S1}\\[25pt]
+  {\itshape\color{gray}
+  Material de uso exclusivo del tutor. No se entrega al alumno.\\[4pt]
+  Los ejercicios se dictan o escriben en pizarra/hoja en blanco.\\[4pt]
+  Las cajas moradas contienen explicaciones listas para usar si el alumno falla.}
+\end{center}
+
+\vspace{1.5cm}
+\begin{tcolorbox}[recuerda]
+\textbf{Tono de la sesión:} cero juicio. El diagnóstico busca saber \emph{qué está intacto} tanto como \emph{qué falta}. No es una prueba --- es una conversación con ejercicios. Si se traba, no insistir: anotar, pasar al siguiente, y volver después con la caja guía.
+\end{tcolorbox}
+
+\vspace{0.5cm}
+\noindent\textbf{Bloques y tiempo estimado:}
+\begin{enumerate}[leftmargin=2cm]
+  \item Operatoria entera (10 min)
+  \item Fracciones y porcentajes (15 min)
+  \item Álgebra básica (15 min)
+  \item Ecuaciones lineales (15 min)
+  \item Cierre y devolución (5 min)
+\end{enumerate}
+
+\newpage
+
+% ════════════════════════════════════════════════════
+% BLOQUE 1 — OPERATORIA ENTERA
+% ════════════════════════════════════════════════════
+\section{OPERATORIA ENTERA (10 min)}
+
+\observacion{QUÉ OBSERVAR: ¿la regla de signos es confiable? ¿Duda o responde automáticamente? ¿Usa los dedos o recta numérica mental?}
+
+\subsection{Ejercicios para dictar}
+
+Pedir que los resuelva \textbf{sin calculadora}, en voz alta si es posible.
+
+\medskip
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=8pt]
+  \item $-7 + 3 = $ \hfill \textit{(Resp: $-4$)}
+  \item $-8 - 5 = $ \hfill \textit{(Resp: $-13$)}
+  \item $12 - (-4) = $ \hfill \textit{(Resp: $16$)}
+  \item $-3 + (-9) = $ \hfill \textit{(Resp: $-12$)}
+  \item $(-4) \cdot 3 = $ \hfill \textit{(Resp: $-12$)}
+  \item $(-6) \cdot (-2) = $ \hfill \textit{(Resp: $12$)}
+  \item $(-20) \div 5 = $ \hfill \textit{(Resp: $-4$)}
+  \item $(-15) \div (-3) = $ \hfill \textit{(Resp: $5$)}
+  \item $-2 + 8 - 3 + 1 = $ \hfill \textit{(Resp: $4$)}
+  \item $4 \cdot (-3) + 10 = $ \hfill \textit{(Resp: $-2$)}
+\end{enumerate}
+
+\observacion{Si falla en 1--4: brecha en suma/resta con negativos. Si falla en 5--8: regla de signos en multiplicación/división. Si falla en 9--10: jerarquía de operaciones.}
+
+\subsection{Guías post-error}
+
+\begin{tcolorbox}[guia-tutor, title={\color{tutormorado} SI FALLA EN SUMA/RESTA CON NEGATIVOS}]
+\textbf{Explicar con la recta numérica:}
+\begin{itemize}[nosep]
+  \item Dibujar una recta con el 0 en el centro, positivos a la derecha, negativos a la izquierda.
+  \item \textbf{Sumar} = avanzar a la derecha. \textbf{Restar} = avanzar a la izquierda.
+  \item $-7 + 3$: parto en $-7$, avanzo 3 pasos a la derecha $\to$ llego a $-4$.
+  \item $12 - (-4)$: ``restar un negativo es sumar''. Restar $(-4)$ = dar vuelta la dirección = sumar $4$. Parto en $12$, avanzo 4 $\to$ $16$.
+\end{itemize}
+\textbf{Regla práctica para $a - (-b)$:} dos signos negativos seguidos se convierten en $+$. Mostrar 2--3 ejemplos más hasta que lo vea.
+\end{tcolorbox}
+
+\begin{tcolorbox}[guia-tutor, title={\color{tutormorado} SI FALLA EN REGLA DE SIGNOS (MULTIPLICACIÓN/DIVISIÓN)}]
+\textbf{Tabla mnemotécnica} (escribirla en la hoja):
+\begin{center}
+\begin{tabular}{@{}ccc@{}}
+\toprule
+\textbf{Signo 1} & \textbf{Signo 2} & \textbf{Resultado} \\
+\midrule
+$+$ & $+$ & $+$ \\
+$+$ & $-$ & $-$ \\
+$-$ & $+$ & $-$ \\
+$-$ & $-$ & $+$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\textbf{Atajo:} ``signos iguales dan positivo, signos distintos dan negativo''. Verificar con 2 ejemplos numéricos que él elija. No pasar al bloque 2 hasta que esto esté firme.
+\end{tcolorbox}
+
+\begin{tcolorbox}[guia-tutor, title={\color{tutormorado} SI FALLA EN JERARQUÍA DE OPERACIONES}]
+En $4 \cdot (-3) + 10$: primero multiplico, luego sumo.
+
+\textbf{Orden:}
+\begin{enumerate}[nosep]
+  \item Paréntesis
+  \item Potencias / raíces
+  \item Multiplicación / división (de izquierda a derecha)
+  \item Suma / resta (de izquierda a derecha)
+\end{enumerate}
+Dar un ejemplo paso a paso: $4 \cdot (-3) + 10 = (-12) + 10 = -2$.\\
+Si sigue confundido: practicar 2 ejercicios más simples antes de avanzar.
+\end{tcolorbox}
+
+\newpage
+
+% ════════════════════════════════════════════════════
+% BLOQUE 2 — FRACCIONES Y %
+% ════════════════════════════════════════════════════
+\section{FRACCIONES Y PORCENTAJES (15 min)}
+
+\observacion{QUÉ OBSERVAR: ¿entiende la fracción como parte-todo o es ``dos números apilados''? ¿Sabe qué significa ``por ciento''?}
+
+\subsection{Ejercicios para dictar}
+
+\textbf{Fracciones:}
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=8pt]
+  \item Simplifica $\dfrac{18}{24}$. \hfill \textit{(Resp: $\dfrac{3}{4}$)}
+  \item Simplifica $\dfrac{15}{45}$. \hfill \textit{(Resp: $\dfrac{1}{3}$)}
+  \item $\dfrac{1}{3} + \dfrac{1}{4} = $ \hfill \textit{(Resp: $\dfrac{7}{12}$)}
+  \item $\dfrac{3}{5} - \dfrac{1}{2} = $ \hfill \textit{(Resp: $\dfrac{1}{10}$)}
+  \item $\dfrac{2}{3} \cdot \dfrac{3}{4} = $ \hfill \textit{(Resp: $\dfrac{1}{2}$)}
+\end{enumerate}
+
+\medskip
+\textbf{Porcentajes:}
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=8pt,start=6]
+  \item ¿Cuánto es el $25\%$ de $80$? \hfill \textit{(Resp: $20$)}
+  \item ¿Cuánto es el $10\%$ de $250$? \hfill \textit{(Resp: $25$)}
+  \item Si algo vale $\$120$ y sube un $10\%$, ¿cuánto queda? \hfill \textit{(Resp: $\$132$)}
+  \item Si algo vale $\$200$ y tiene un $15\%$ de descuento, ¿cuánto queda? \hfill \textit{(Resp: $\$170$)}
+\end{enumerate}
+
+\observacion{Si falla en 1--2: no maneja MCD / simplificación. Si falla en 3--4: no sabe sumar con distinto denominador. Si falla en 6--9: no tiene noción operativa de \%.}
+
+\subsection{Guías post-error}
+
+\begin{tcolorbox}[guia-tutor, title={\color{tutormorado} SI NO SABE SIMPLIFICAR}]
+\textbf{Simplificar} = dividir arriba y abajo por el mismo número, hasta que no se pueda más.
+
+$\dfrac{18}{24}$: ¿hay un número que divida a ambos? Sí: $2$. $\to \dfrac{9}{12}$. ¿Todavía? Sí: $3$. $\to \dfrac{3}{4}$.
+
+\textbf{Atajo con MCD:} el máximo común divisor de $18$ y $24$ es $6$: $\dfrac{18 \div 6}{24 \div 6} = \dfrac{3}{4}$.
+
+Si no conoce MCD: está bien ir dividiendo paso a paso. No hace falta formalizar MCD ahora; lo que importa es que entienda que arriba y abajo se dividen por lo mismo.
+\end{tcolorbox}
+
+\begin{tcolorbox}[guia-tutor, title={\color{tutormorado} SI NO SABE SUMAR FRACCIONES CON DISTINTO DENOMINADOR}]
+\textbf{Idea clave:} para sumar fracciones, necesito que ``hablen el mismo idioma'' (mismo denominador).
+
+\textbf{Paso a paso} con $\dfrac{1}{3} + \dfrac{1}{4}$:
+\begin{enumerate}[nosep]
+  \item Busco un denominador común: el menor múltiplo que comparten $3$ y $4$ es $12$.
+  \item Amplifico cada fracción:
+  \[
+    \frac{1}{3} = \frac{1 \times 4}{3 \times 4} = \frac{4}{12} \qquad\qquad \frac{1}{4} = \frac{1 \times 3}{4 \times 3} = \frac{3}{12}
+  \]
+  \item Sumo los numeradores (el denominador no se suma):
+  \[
+    \frac{4}{12} + \frac{3}{12} = \frac{7}{12}
+  \]
+\end{enumerate}
+\textbf{Error típico:} sumar $\frac{1}{3} + \frac{1}{4} = \frac{2}{7}$ (sumar numeradores \emph{y} denominadores). Si hace eso, volver al dibujo de la pizza: un tercio de pizza más un cuarto de pizza no da dos séptimos de pizza.
+\end{tcolorbox}
+
+\begin{tcolorbox}[guia-tutor, title={\color{tutormorado} SI NO ENTIENDE PORCENTAJE}]
+\textbf{``Por ciento'' = ``de cada 100''.} $25\%$ de $80$ significa: ``si tengo 100, me quedo con 25; pero tengo 80, así que lo ajusto''.
+
+\textbf{Método directo:}
+\[
+  25\% \text{ de } 80 = \frac{25}{100} \times 80 = 0{,}25 \times 80 = 20
+\]
+
+\textbf{Atajos útiles} (practicar estos mentalmente):
+\begin{itemize}[nosep]
+  \item $10\%$ de algo = correr la coma un lugar a la izquierda ($10\%$ de $250 = 25$).
+  \item $25\%$ de algo = dividir por $4$.
+  \item $50\%$ de algo = dividir por $2$.
+\end{itemize}
+
+\textbf{Aumento/descuento:}
+\begin{itemize}[nosep]
+  \item Sube $10\%$: calculo el $10\%$ y lo \textbf{sumo} al original. $120 + 12 = 132$.
+  \item Baja $15\%$: calculo el $15\%$ y lo \textbf{resto}. $200 - 30 = 170$.
+\end{itemize}
+\end{tcolorbox}
+
+\newpage
+
+% ════════════════════════════════════════════════════
+% BLOQUE 3 — ÁLGEBRA BÁSICA
+% ════════════════════════════════════════════════════
+\section{ÁLGEBRA BÁSICA (15 min)}
+
+\observacion{QUÉ OBSERVAR: ¿asocia las letras con números o le parecen algo ``ajeno''? ¿Puede traducir español $\leftrightarrow$ expresión? ¿Reduce términos semejantes?}
+
+\subsection{Ejercicios para dictar}
+
+\textbf{Traducir del español al álgebra:}
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=8pt]
+  \item ``El doble de un número.'' \hfill \textit{(Resp: $2x$)}
+  \item ``El doble de un número más 3.'' \hfill \textit{(Resp: $2x + 3$)}
+  \item ``La mitad de un número menos 7.'' \hfill \textit{(Resp: $\dfrac{x}{2} - 7$)}
+  \item ``El triple de un número, al cuadrado.'' \hfill \textit{(Resp: $(3x)^2$ o $9x^2$)}
+\end{enumerate}
+
+\medskip
+\textbf{Reducir:}
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=8pt,start=5]
+  \item $3x + 2x - x = $ \hfill \textit{(Resp: $4x$)}
+  \item $5a - 3a + 2b + b = $ \hfill \textit{(Resp: $2a + 3b$)}
+  \item $4x + 7 - 2x + 3 = $ \hfill \textit{(Resp: $2x + 10$)}
+\end{enumerate}
+
+\medskip
+\textbf{Evaluar:}
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=8pt,start=8]
+  \item Si $x = 4$, ¿cuánto vale $2x - 5$? \hfill \textit{(Resp: $3$)}
+  \item Si $x = -2$, ¿cuánto vale $x^2 + 3x$? \hfill \textit{(Resp: $-2$)}
+  \item Si $a = 3$ y $b = 5$, ¿cuánto vale $2a + b - 1$? \hfill \textit{(Resp: $10$)}
+\end{enumerate}
+
+\observacion{Si falla en 1--4: no traduce español $\to$ álgebra. Si falla en 5--7: no identifica términos semejantes. Si falla en 8--10: no sabe ``reemplazar la letra por el número''.}
+
+\subsection{Guías post-error}
+
+\begin{tcolorbox}[guia-tutor, title={\color{tutormorado} SI NO PUEDE TRADUCIR ESPAÑOL $\to$ ÁLGEBRA}]
+\textbf{La letra es un número escondido.} Escribir en la pizarra:
+
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+``un número'' & $\to\; x$ \\
+``el doble de un número'' & $\to\; 2 \cdot x = 2x$ \\
+``la mitad de un número'' & $\to\; x \div 2 = \dfrac{x}{2}$ \\
+``más 3'' & $\to\; + 3$ \\
+``menos 7'' & $\to\; - 7$ \\
+\end{tabular}
+\end{center}
+
+Practicar armando la frase al revés: ``¿qué dice $3x + 1$ en español?'' (el triple de un número más uno). Ir y volver hasta que la traducción sea natural.
+
+\textbf{Cuidado con el 4:} ``el triple de un número, al cuadrado'' es ambiguo. Verificar si interpreta $(3x)^2$ o $3x^2$. No hay una ``respuesta correcta'' sin contexto --- lo que importa es si entiende que el cuadrado afecta a lo que está dentro del paréntesis.
+\end{tcolorbox}
+
+\begin{tcolorbox}[guia-tutor, title={\color{tutormorado} SI NO IDENTIFICA TÉRMINOS SEMEJANTES}]
+\textbf{Términos semejantes} = misma parte literal (misma letra, mismo exponente).
+
+Analogía: $3x + 2x$ es como ``3 manzanas + 2 manzanas = 5 manzanas''. No puedo sumar manzanas con peras ($3x + 2y$ se queda así).
+
+En $5a - 3a + 2b + b$:
+\begin{itemize}[nosep]
+  \item Junto las $a$: $5a - 3a = 2a$.
+  \item Junto las $b$: $2b + b = 3b$. (El $b$ solo = $1b$.)
+  \item Resultado: $2a + 3b$.
+\end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[guia-tutor, title={\color{tutormorado} SI NO SABE EVALUAR}]
+\textbf{Evaluar} = reemplazar la letra por el número y calcular.
+
+Paso a paso con $x^2 + 3x$ cuando $x = -2$:
+\begin{enumerate}[nosep]
+  \item Reemplazo: $(-2)^2 + 3 \cdot (-2)$.
+  \item Calculo la potencia: $4 + 3 \cdot (-2)$.
+  \item Calculo la multiplicación: $4 + (-6)$.
+  \item Sumo: $4 - 6 = -2$.
+\end{enumerate}
+
+\textbf{Error típico:} olvidar los paréntesis al reemplazar un número negativo. $(-2)^2 = 4$, pero si escribe $-2^2$ puede calcular $-(4) = -4$. Insistir en \textbf{siempre poner paréntesis} al reemplazar.
+\end{tcolorbox}
+
+\newpage
+
+% ════════════════════════════════════════════════════
+% BLOQUE 4 — ECUACIONES LINEALES
+% ════════════════════════════════════════════════════
+\section{ECUACIONES LINEALES (15 min)}
+
+\observacion{QUÉ OBSERVAR: ¿entiende ``despeje'' como operación inversa o mueve cosas mágicamente? ¿Aplica la misma operación a ambos lados?}
+
+\subsection{Ejercicios para dictar}
+
+Ir de menor a mayor complejidad. Si se traba antes de llegar al final, anotar en qué nivel se trabó y parar.
+
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=10pt]
+  \item $x + 5 = 12$ \hfill \textit{(Resp: $x = 7$)}
+  \item $x - 3 = 10$ \hfill \textit{(Resp: $x = 13$)}
+  \item $2x = 14$ \hfill \textit{(Resp: $x = 7$)}
+  \item $3x - 4 = 11$ \hfill \textit{(Resp: $x = 5$)}
+  \item $5x + 2 = 3x + 10$ \hfill \textit{(Resp: $x = 4$)}
+  \item $2(x - 3) = 10$ \hfill \textit{(Resp: $x = 8$)}
+  \item $3(x + 1) = 2(x + 4)$ \hfill \textit{(Resp: $x = 5$)}
+\end{enumerate}
+
+\observacion{Si resuelve 1--3 bien: la mecánica básica está. Si falla en 4: no puede combinar operaciones inversas. Si falla en 5: no puede juntar las $x$ de ambos lados. Si falla en 6--7: no maneja la distributiva en ecuaciones.}
+
+\subsection{Guías post-error}
+
+\begin{tcolorbox}[guia-tutor, title={\color{tutormorado} SI NO ENTIENDE EL DESPEJE}]
+\textbf{Metáfora de la balanza:}
+\begin{itemize}[nosep]
+  \item La ecuación es una balanza en equilibrio: lo de la izquierda pesa lo mismo que lo de la derecha.
+  \item Si agrego o quito algo de un lado, \textbf{tengo que hacer lo mismo del otro} para mantener el equilibrio.
+\end{itemize}
+
+Ejemplo con $x + 5 = 12$:
+\begin{enumerate}[nosep]
+  \item Quiero dejar $x$ solo $\to$ necesito sacar el $+5$.
+  \item La operación inversa de $+5$ es $-5$.
+  \item Resto $5$ de \textbf{ambos lados}: $x + 5 - 5 = 12 - 5$.
+  \item Resultado: $x = 7$.
+  \item \textbf{Verificación:} $7 + 5 = 12$. \checkmark
+\end{enumerate}
+
+\textbf{Insistir siempre en la verificación}: que reemplace el resultado en la ecuación original. Esto le da seguridad y le permite detectar sus propios errores.
+\end{tcolorbox}
+
+\begin{tcolorbox}[guia-tutor, title={\color{tutormorado} SI NO PUEDE RESOLVER ECUACIONES DE DOS PASOS}]
+Ejemplo con $3x - 4 = 11$:
+
+\textbf{Regla del ``cebollismo'':} la $x$ está envuelta en capas. Saco las capas de afuera hacia adentro.
+\begin{enumerate}[nosep]
+  \item Capa exterior: el $-4$. Lo saco sumando $4$ a ambos lados: $3x = 15$.
+  \item Capa interior: el $\cdot 3$. Lo saco dividiendo por $3$ a ambos lados: $x = 5$.
+  \item Verifico: $3(5) - 4 = 15 - 4 = 11$. \checkmark
+\end{enumerate}
+\end{tcolorbox}
+
+\begin{tcolorbox}[guia-tutor, title={\color{tutormorado} SI NO PUEDE JUNTAR $x$ DE AMBOS LADOS}]
+Ejemplo con $5x + 2 = 3x + 10$:
+
+``Las $x$ están de los dos lados. Necesito juntarlas en uno solo.''
+\begin{enumerate}[nosep]
+  \item Resto $3x$ de ambos lados: $5x - 3x + 2 = 10$, es decir $2x + 2 = 10$.
+  \item Ahora es una ecuación de dos pasos (que ya sabe resolver).
+  \item $2x = 8 \to x = 4$.
+  \item Verifico: $5(4) + 2 = 22$ y $3(4) + 10 = 22$. \checkmark
+\end{enumerate}
+\end{tcolorbox}
+
+\begin{tcolorbox}[guia-tutor, title={\color{tutormorado} SI NO MANEJA LA DISTRIBUTIVA EN ECUACIONES}]
+Ejemplo con $2(x - 3) = 10$:
+
+\textbf{Opción A} (distributiva): $2 \cdot x - 2 \cdot 3 = 10 \;\to\; 2x - 6 = 10 \;\to\; 2x = 16 \;\to\; x = 8$.
+
+\textbf{Opción B} (dividir primero): $\dfrac{2(x-3)}{2} = \dfrac{10}{2} \;\to\; x - 3 = 5 \;\to\; x = 8$.
+
+Mostrar ambas. A veces la opción B es más intuitiva y menos propensa a error. Que elija la que le sea más cómoda.
+\end{tcolorbox}
+
+\newpage
+
+% ════════════════════════════════════════════════════
+% HOJA DE REGISTRO
+% ════════════════════════════════════════════════════
+\section*{HOJA DE REGISTRO DEL DIAGNÓSTICO}
+\addcontentsline{toc}{section}{Hoja de registro}
+
+\begin{center}
+{\large\bfseries\color{azuloscuro} Aquiles --- Diagnóstico --- \today}
+\end{center}
+
+\medskip
+
+\begin{tabular}{@{}>{\bfseries}p{3.5cm} p{1.8cm} p{2cm} p{6cm}@{}}
+\toprule
+\textbf{Bloque} & \textbf{Aciertos} & \textbf{Nivel} & \textbf{Observaciones} \\
+\midrule
+1. Operatoria    & \quad / 10 & & \rule{0pt}{1.5cm} \\[1.5cm]
+\midrule
+2. Fracciones/\% & \quad / 9  & & \rule{0pt}{1.5cm} \\[1.5cm]
+\midrule
+3. Álgebra       & \quad / 10 & & \rule{0pt}{1.5cm} \\[1.5cm]
+\midrule
+4. Ecuaciones    & \quad / 7  & & \rule{0pt}{1.5cm} \\[1.5cm]
+\bottomrule
+\end{tabular}
+
+\medskip
+\noindent\textbf{Niveles sugeridos:}\\
+\colorbox{green!60!black}{\color{white}\small\bfseries\ Sólido\ } $\geq 80\%$ sin ayuda \hfill
+\colorbox{naranja}{\color{white}\small\bfseries\ Frágil\ } 50--79\% o con ayuda \hfill
+\colorbox{rojo}{\color{white}\small\bfseries\ Brecha\ } $< 50\%$
+
+\vspace{1.5cm}
+
+\noindent\textbf{Lectura emocional:}
+\lineasrespuesta{3}
+
+\noindent{\small\itshape ¿En qué punto se frustró? ¿Ante el error conceptual o ante no saber la respuesta? ¿Intentó o se cerró? ¿Cómo reaccionó cuando se le explicó algo?}
+
+\vspace{1cm}
+
+\noindent\textbf{Primera brecha cronológica detectada:}
+\lineasrespuesta{2}
+
+\noindent{\small\itshape ¿Cuál es el tema más ``viejo'' (más atrás en la progresión) donde se rompe? Ese define el punto de partida de la semana 17.}
+
+\vspace{1cm}
+
+\noindent\textbf{Tema decidido para la semana 17:}
+\lineasrespuesta{2}
+
+\vspace{1cm}
+
+\begin{tcolorbox}[recuerda]
+\textbf{Antes de cerrar la sesión:} decirle explícitamente a Aquiles al menos 2 cosas concretas que hizo bien. La devolución positiva es parte del diagnóstico --- construye la base emocional para las 10 semanas que siguen.
+\end{tcolorbox}
+
+\end{document}

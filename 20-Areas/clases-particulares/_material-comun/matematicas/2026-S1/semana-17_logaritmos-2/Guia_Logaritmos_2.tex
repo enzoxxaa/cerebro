@@ -1,0 +1,427 @@
+% ════════════════════════════════════════════════════════════════════════════
+% GUÍA — LOGARITMOS II: PROPIEDADES Y CAMBIO DE BASE
+% Semana 17 · 2026-S1 · Máximo + Martina · 2° Medio
+% ════════════════════════════════════════════════════════════════════════════
+
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{hyperref}
+
+\geometry{margin=2cm, top=2.5cm, bottom=2.5cm}
+
+% ─── VARIABLES ───
+\newcommand{\guiaTitulo}{Logaritmos II}
+\newcommand{\guiaSubtitulo}{Propiedades y cambio de base}
+\newcommand{\guiaUnidad}{Unidad de Álgebra}
+\newcommand{\guiaCurso}{2° Medio --- Matemáticas}
+\newcommand{\guiaAlumno}{\underline{\hspace{6cm}}}
+\newcommand{\guiaSemana}{Semana 17}
+\newcommand{\guiaSemestre}{2026-S1}
+
+% ─── Colores ───
+\definecolor{azulprincipal}{HTML}{2980B9}
+\definecolor{azuloscuro}{HTML}{1A5276}
+\definecolor{verdequimica}{HTML}{1ABC9C}
+\definecolor{verdeclaro}{HTML}{D5F5E3}
+\definecolor{naranja}{HTML}{E67E22}
+\definecolor{rojo}{HTML}{E74C3C}
+\definecolor{amarillorecuerda}{HTML}{FFF3CD}
+\definecolor{amarilloborde}{HTML}{FFC107}
+\definecolor{grisfondo}{HTML}{F5F5F5}
+
+% ─── Cajas ───
+\tcbset{
+  recuerda/.style={
+    colback=amarillorecuerda, colframe=amarilloborde,
+    fonttitle=\bfseries, title={\color{black} RECUERDA},
+    boxrule=1pt, arc=2mm, left=5pt, right=5pt
+  },
+  propiedad/.style={
+    colback=verdeclaro!50, colframe=verdequimica!80!black,
+    fonttitle=\bfseries, boxrule=0.8pt, arc=2mm, left=5pt, right=5pt
+  },
+  formula/.style={
+    colback=grisfondo, colframe=azulprincipal,
+    boxrule=0.8pt, arc=2mm, left=5pt, right=5pt
+  },
+  definicion/.style={
+    colback=blue!5, colframe=azulprincipal,
+    fonttitle=\bfseries, boxrule=0.8pt, arc=2mm, left=5pt, right=5pt
+  },
+  ejemplo/.style={
+    colback=orange!5, colframe=naranja,
+    fonttitle=\bfseries, boxrule=0.8pt, arc=2mm, left=5pt, right=5pt
+  }
+}
+
+% ─── Encabezados ───
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\small\color{gray} \guiaTitulo{} --- \guiaCurso{}}
+\fancyfoot[C]{\small\color{gray} Página \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ─── Títulos ───
+\newcommand{\tituloseccion}[1]{%
+  \noindent\colorbox{azulprincipal}{%
+    \makebox[\dimexpr\textwidth-2\fboxsep\relax][l]{%
+      \color{white}\normalfont\Large\bfseries\ SECCIÓN \thesection: #1%
+    }%
+  }%
+}
+\titleformat{\section}
+  {}{}{0em}
+  {\tituloseccion}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{azulprincipal}}
+  {\thesubsection}{0.5em}{}
+
+% ─── Niveles ───
+\newcommand{\nivelbasico}{%
+  \par\smallskip\colorbox{green!60!black}{\color{white}\small\bfseries\ NIVEL BÁSICO\ }\par\smallskip}
+\newcommand{\nivelintermedio}{%
+  \par\smallskip\colorbox{naranja}{\color{white}\small\bfseries\ NIVEL INTERMEDIO\ }\par\smallskip}
+\newcommand{\nivelavanzado}{%
+  \par\smallskip\colorbox{rojo}{\color{white}\small\bfseries\ NIVEL AVANZADO\ }\par\smallskip}
+
+% ─── Líneas ───
+\newcommand{\lineasrespuesta}[1]{%
+  \par\vspace{2mm}%
+  \foreach \i in {1,...,#1}{\noindent\rule{\textwidth}{0.3pt}\par\vspace{5mm}}%
+  \vspace{2mm}%
+}
+
+\begin{document}
+
+% ════════════════════════
+% PORTADA
+% ════════════════════════
+\thispagestyle{empty}
+\vspace*{3cm}
+\begin{center}
+  {\Huge\bfseries\color{azulprincipal} GUÍA DE TRABAJO}\\[8pt]
+  {\LARGE\bfseries\color{azuloscuro} \guiaTitulo}\\[15pt]
+  {\color{azulprincipal}\rule{8cm}{2pt}}\\[15pt]
+  {\Large \guiaUnidad{} \textbar{} \guiaCurso}\\[8pt]
+  {\large Alumno/a: \guiaAlumno}\\[4pt]
+  {\large \guiaSemana{} --- \guiaSemestre}\\[25pt]
+  {\itshape\color{gray}
+  \guiaSubtitulo}
+\end{center}
+
+\vspace{2cm}
+\noindent\textbf{Contenidos:}
+\begin{enumerate}[leftmargin=2cm]
+  \item Repaso flash: definición y casos especiales de la semana 16.
+  \item Propiedad del producto (logaritmo de un producto).
+  \item Propiedad del cociente (logaritmo de un cociente).
+  \item Propiedad de la potencia (logaritmo de una potencia).
+  \item Cambio de base.
+  \item Ejercicios por nivel (básico, intermedio, avanzado).
+\end{enumerate}
+\newpage
+
+% ════════════════════════
+% SECCIÓN 1
+% ════════════════════════
+\section{REPASO FLASH DE LA SEMANA 16}
+
+\begin{tcolorbox}[recuerda]
+\textbf{Definición:} $\log_b(a) = c \;\iff\; b^{c} = a$, con $b > 0$, $b \ne 1$, $a > 0$.
+
+\medskip
+\textbf{Casos especiales:}
+\begin{itemize}[nosep]
+  \item $\log_b(1) = 0$
+  \item $\log_b(b) = 1$
+  \item $\log_b(b^{n}) = n$
+\end{itemize}
+\end{tcolorbox}
+
+\textbf{Calentamiento} (resolver mentalmente):
+\begin{enumerate}[label=\alph*),leftmargin=1cm,itemsep=4pt]
+  \item $\log_2(32) = $ \rule{2cm}{0.4pt}
+  \item $\log_3(1) = $ \rule{2cm}{0.4pt}
+  \item $\log_5(5^{7}) = $ \rule{2cm}{0.4pt}
+  \item $\log_{10}(10\,000) = $ \rule{2cm}{0.4pt}
+  \item $\log_4(4) = $ \rule{2cm}{0.4pt}
+\end{enumerate}
+
+{\small\textit{Respuestas: a) $5$ \; b) $0$ \; c) $7$ \; d) $4$ \; e) $1$.}}
+
+\newpage
+
+% ════════════════════════
+% SECCIÓN 2
+% ════════════════════════
+\section{LAS TRES PROPIEDADES OPERATORIAS}
+
+Las tres propiedades del logaritmo son \textbf{consecuencia directa} de las propiedades de las potencias. La clave es esta correspondencia:
+
+\begin{tcolorbox}[formula]
+\begin{center}
+\begin{tabular}{@{}ccc@{}}
+\textbf{Propiedad de potencias} & & \textbf{Propiedad de logaritmos} \\[4pt]
+$b^{m} \cdot b^{n} = b^{m+n}$ & $\longleftrightarrow$ & $\log_b(M \cdot N) = \log_b M + \log_b N$ \\[6pt]
+$\dfrac{b^{m}}{b^{n}} = b^{m-n}$ & $\longleftrightarrow$ & $\log_b\!\left(\dfrac{M}{N}\right) = \log_b M - \log_b N$ \\[8pt]
+$(b^{m})^{n} = b^{m \cdot n}$ & $\longleftrightarrow$ & $\log_b(M^{n}) = n \cdot \log_b M$ \\
+\end{tabular}
+\end{center}
+\end{tcolorbox}
+
+\subsection{Propiedad 1: Logaritmo de un producto}
+
+\begin{tcolorbox}[propiedad, title={Propiedad del producto}]
+\[
+  \boxed{\;\log_b(M \cdot N) = \log_b M + \log_b N\;}
+\]
+``El logaritmo de un \textbf{producto} es la \textbf{suma} de los logaritmos.''
+\end{tcolorbox}
+
+\begin{tcolorbox}[definicion, title={¿De dónde sale?}]
+Sean $\log_b M = p$ y $\log_b N = q$. Entonces $M = b^{p}$ y $N = b^{q}$.
+\[
+  M \cdot N = b^{p} \cdot b^{q} = b^{p+q}
+\]
+Tomando logaritmo en base $b$ de ambos lados:
+\[
+  \log_b(M \cdot N) = \log_b(b^{p+q}) = p + q = \log_b M + \log_b N \qquad \checkmark
+\]
+\end{tcolorbox}
+
+\begin{tcolorbox}[ejemplo, title={Ejemplo: $\log_2(8 \cdot 16)$}]
+\textbf{Método directo:} $8 \cdot 16 = 128 = 2^{7}$, así que $\log_2(128) = 7$.
+
+\textbf{Con la propiedad:} $\log_2(8 \cdot 16) = \log_2 8 + \log_2 16 = 3 + 4 = 7$. \checkmark
+\end{tcolorbox}
+
+\subsection{Propiedad 2: Logaritmo de un cociente}
+
+\begin{tcolorbox}[propiedad, title={Propiedad del cociente}]
+\[
+  \boxed{\;\log_b\!\left(\frac{M}{N}\right) = \log_b M - \log_b N\;}
+\]
+``El logaritmo de un \textbf{cociente} es la \textbf{resta} de los logaritmos.''
+\end{tcolorbox}
+
+\begin{tcolorbox}[definicion, title={¿De dónde sale?}]
+Con $M = b^{p}$ y $N = b^{q}$:
+\[
+  \frac{M}{N} = \frac{b^{p}}{b^{q}} = b^{p-q} \;\;\Longrightarrow\;\; \log_b\!\left(\frac{M}{N}\right) = p - q = \log_b M - \log_b N \qquad \checkmark
+\]
+\end{tcolorbox}
+
+\begin{tcolorbox}[ejemplo, title={Ejemplo: $\log_3\!\left(\frac{81}{9}\right)$}]
+\textbf{Directo:} $81 \div 9 = 9 = 3^{2}$, así que $\log_3(9) = 2$.
+
+\textbf{Con la propiedad:} $\log_3 81 - \log_3 9 = 4 - 2 = 2$. \checkmark
+\end{tcolorbox}
+
+\subsection{Propiedad 3: Logaritmo de una potencia}
+
+\begin{tcolorbox}[propiedad, title={Propiedad de la potencia}]
+\[
+  \boxed{\;\log_b(M^{n}) = n \cdot \log_b M\;}
+\]
+``El \textbf{exponente} del argumento \textbf{baja y multiplica}.''
+\end{tcolorbox}
+
+\begin{tcolorbox}[definicion, title={¿De dónde sale?}]
+Con $M = b^{p}$:
+\[
+  M^{n} = (b^{p})^{n} = b^{pn} \;\;\Longrightarrow\;\; \log_b(M^{n}) = pn = n \cdot \log_b M \qquad \checkmark
+\]
+\end{tcolorbox}
+
+\begin{tcolorbox}[ejemplo, title={Ejemplo: $\log_2(8^{4})$}]
+\textbf{Con la propiedad:} $\log_2(8^{4}) = 4 \cdot \log_2 8 = 4 \cdot 3 = 12$.
+
+\textbf{Verificación:} $8^{4} = (2^{3})^{4} = 2^{12}$, y $\log_2(2^{12}) = 12$. \checkmark
+\end{tcolorbox}
+
+\begin{tcolorbox}[recuerda]
+\textbf{Errores frecuentes:}
+\begin{itemize}[nosep]
+  \item $\log_b(M + N) \;\ne\; \log_b M + \log_b N$. \quad La propiedad es para \textbf{productos}, no sumas.
+  \item $\log_b(M \cdot N) \;\ne\; \log_b M \cdot \log_b N$. \quad Producto $\to$ \textbf{suma}, no producto.
+  \item $(\log_b M)^{n} \;\ne\; n \cdot \log_b M$. \quad El exponente debe estar \textbf{en el argumento}, no afuera.
+\end{itemize}
+\end{tcolorbox}
+
+\newpage
+
+% ════════════════════════
+% SECCIÓN 3
+% ════════════════════════
+\section{CAMBIO DE BASE}
+
+¿Cuánto vale $\log_2(10)$? No es un entero (porque $2^3 = 8$ y $2^4 = 16$). La calculadora solo tiene $\log_{10}$ (tecla \texttt{log}) y $\log_e$ (tecla \texttt{ln}). Necesitamos una forma de calcular un logaritmo en cualquier base usando una base que sí tengamos.
+
+\begin{tcolorbox}[propiedad, title={Fórmula de cambio de base}]
+\[
+  \boxed{\;\log_b(a) = \frac{\log_c(a)}{\log_c(b)}\;}
+\]
+Funciona para \textbf{cualquier} base $c > 0$, $c \ne 1$. En la práctica, usamos $c = 10$ o $c = e$.
+\end{tcolorbox}
+
+\begin{tcolorbox}[definicion, title={¿De dónde sale?}]
+Sea $\log_b(a) = x$. Entonces $b^{x} = a$.
+
+Tomo $\log_c$ de ambos lados:
+\[
+  \log_c(b^{x}) = \log_c(a) \;\;\Longrightarrow\;\; x \cdot \log_c(b) = \log_c(a) \;\;\Longrightarrow\;\; x = \frac{\log_c(a)}{\log_c(b)} \qquad \checkmark
+\]
+\end{tcolorbox}
+
+\begin{tcolorbox}[ejemplo, title={Ejemplo: $\log_2(10)$ con calculadora}]
+\[
+  \log_2(10) = \frac{\log_{10}(10)}{\log_{10}(2)} = \frac{1}{0{,}3010\ldots} \approx 3{,}322
+\]
+\textbf{Verificación:} $2^{3{,}322} \approx 10$. \checkmark
+
+Otra forma equivalente con $\ln$:
+\[
+  \log_2(10) = \frac{\ln(10)}{\ln(2)} = \frac{2{,}3026\ldots}{0{,}6931\ldots} \approx 3{,}322
+\]
+\end{tcolorbox}
+
+\begin{tcolorbox}[ejemplo, title={Ejemplo: $\log_5(80)$}]
+\[
+  \log_5(80) = \frac{\log(80)}{\log(5)} = \frac{1{,}9031\ldots}{0{,}6990\ldots} \approx 2{,}723
+\]
+Verificación: $5^{2} = 25$ y $5^{3} = 125$, así que un valor entre $2$ y $3$ tiene sentido. \checkmark
+\end{tcolorbox}
+
+\newpage
+
+% ════════════════════════
+% SECCIÓN 4 — EJERCICIOS
+% ════════════════════════
+\section{EJERCICIOS}
+
+\nivelbasico
+
+\textbf{(1)} Expande usando las propiedades (no calcules el valor numérico).
+\begin{enumerate}[label=\alph*),leftmargin=1cm,itemsep=6pt]
+  \item $\log_3(9 \cdot 27) = $ \rule{5cm}{0.4pt}
+  \item $\log_2\!\left(\dfrac{32}{4}\right) = $ \rule{5cm}{0.4pt}
+  \item $\log_5(25^{3}) = $ \rule{5cm}{0.4pt}
+  \item $\log_{10}(100 \cdot 1000) = $ \rule{5cm}{0.4pt}
+\end{enumerate}
+
+\medskip
+\textbf{(2)} Condensa en un solo logaritmo.
+\begin{enumerate}[label=\alph*),leftmargin=1cm,itemsep=6pt]
+  \item $\log_2 5 + \log_2 3 = $ \rule{5cm}{0.4pt}
+  \item $\log_3 12 - \log_3 4 = $ \rule{5cm}{0.4pt}
+  \item $3 \cdot \log_2 5 = $ \rule{5cm}{0.4pt}
+\end{enumerate}
+
+\medskip
+\textbf{(3)} Calcula el valor numérico final (expandir con propiedades + usar la definición).
+\begin{enumerate}[label=\alph*),leftmargin=1cm,itemsep=6pt]
+  \item $\log_2(4 \cdot 8)$
+  \lineasrespuesta{2}
+  \item $\log_3\!\left(\dfrac{81}{3}\right)$
+  \lineasrespuesta{2}
+  \item $\log_2(16^{2})$
+  \lineasrespuesta{2}
+\end{enumerate}
+
+\nivelintermedio
+
+\textbf{(4)} Expande completamente.
+\begin{enumerate}[label=\alph*),leftmargin=1cm,itemsep=6pt]
+  \item $\log_2(8x^{3})$ \hfill \textit{Pista: producto primero, potencia después.}
+  \lineasrespuesta{2}
+  \item $\log_b\!\left(\dfrac{a^{2}}{c}\right)$
+  \lineasrespuesta{2}
+  \item $\log_3\!\left(\dfrac{9x^{4}}{y^{2}}\right)$
+  \lineasrespuesta{3}
+\end{enumerate}
+
+\medskip
+\textbf{(5)} Condensa en un solo logaritmo.
+\begin{enumerate}[label=\alph*),leftmargin=1cm,itemsep=6pt]
+  \item $2\log_b x + 3\log_b y$
+  \lineasrespuesta{2}
+  \item $\log_5 a - \tfrac{1}{2}\log_5 b$
+  \lineasrespuesta{2}
+  \item $\log_2 3 + \log_2 5 - \log_2 15$
+  \lineasrespuesta{2}
+\end{enumerate}
+
+\medskip
+\textbf{(6)} Calcula con cambio de base (usa $\log_{10}$ o $\ln$; puedes usar calculadora).
+\begin{enumerate}[label=\alph*),leftmargin=1cm,itemsep=6pt]
+  \item $\log_3(20) \approx$ \rule{3cm}{0.4pt}
+  \item $\log_8(50) \approx$ \rule{3cm}{0.4pt}
+  \item $\log_2(100) \approx$ \rule{3cm}{0.4pt}
+\end{enumerate}
+
+\nivelavanzado
+
+\textbf{(7)} Demuestra la propiedad del producto sin mirar la guía. Parte de ``sean $\log_b M = p$ y $\log_b N = q$'' y llega a $\log_b(MN) = p + q$.
+\lineasrespuesta{5}
+
+\textbf{(8)} Demuestra la fórmula de cambio de base: parte de $\log_b(a) = x$ y llega a $x = \dfrac{\log_c(a)}{\log_c(b)}$.
+\lineasrespuesta{5}
+
+\textbf{(9)} Simplifica sin calculadora.
+\begin{enumerate}[label=\alph*),leftmargin=1cm,itemsep=6pt]
+  \item $\log_2 6 - \log_2 3 + \log_2 8$
+  \lineasrespuesta{3}
+  \item $\dfrac{\log_9 27}{\log_9 3}$ \hfill \textit{Pista: ¿hay un cambio de base escondido?}
+  \lineasrespuesta{3}
+  \item $\log_4 8$ \hfill \textit{Pista: escribir todo como potencias de 2.}
+  \lineasrespuesta{3}
+\end{enumerate}
+
+\newpage
+
+% ════════════════════════
+% RESPUESTAS
+% ════════════════════════
+\section*{Respuestas seleccionadas}
+\addcontentsline{toc}{section}{Respuestas seleccionadas}
+
+\begin{tcolorbox}[propiedad, title=Soluciones]
+\textbf{(1)} a) $\log_3 9 + \log_3 27 = 2 + 3 = 5$; \; b) $\log_2 32 - \log_2 4 = 5 - 2 = 3$; \; c) $3 \cdot \log_5 25 = 3 \cdot 2 = 6$; \; d) $\log 100 + \log 1000 = 2 + 3 = 5$.
+
+\medskip
+\textbf{(2)} a) $\log_2(15)$; \; b) $\log_3(3) = 1$; \; c) $\log_2(125)$.
+
+\medskip
+\textbf{(3)} a) $\log_2 4 + \log_2 8 = 2 + 3 = 5$; \; b) $\log_3 81 - \log_3 3 = 4 - 1 = 3$; \; c) $2 \cdot \log_2 16 = 2 \cdot 4 = 8$.
+
+\medskip
+\textbf{(4)} a) $\log_2 8 + 3\log_2 x = 3 + 3\log_2 x$; \; b) $2\log_b a - \log_b c$; \; c) $2 + 4\log_3 x - 2\log_3 y$.
+
+\medskip
+\textbf{(5)} a) $\log_b(x^{2}y^{3})$; \; b) $\log_5\!\left(\dfrac{a}{\sqrt{b}}\right)$; \; c) $\log_2\!\left(\dfrac{3 \cdot 5}{15}\right) = \log_2 1 = 0$.
+
+\medskip
+\textbf{(6)} a) $\approx 2{,}727$; \; b) $\approx 1{,}881$; \; c) $\approx 6{,}644$.
+
+\medskip
+\textbf{(9)} a) $\log_2\!\left(\dfrac{6 \cdot 8}{3}\right) = \log_2 16 = 4$; \; b) $\log_3 27 = 3$; \; c) $\dfrac{3}{2}$.
+\end{tcolorbox}
+
+\begin{tcolorbox}[recuerda]
+Los ejercicios 7 y 8 (demostraciones) se revisan en clase.
+\end{tcolorbox}
+
+\end{document}
