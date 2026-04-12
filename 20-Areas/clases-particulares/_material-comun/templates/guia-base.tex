@@ -1,0 +1,215 @@
+% ════════════════════════════════════════════════════════════════════════════
+% TEMPLATE MAESTRO — GUÍA DE TRABAJO (CLASES PARTICULARES — MATEMÁTICAS)
+% ────────────────────────────────────────────────────────────────────────────
+% Estética heredada de Guia_Soluciones_Quimicas.tex (Martina, Marzo 2026):
+% paleta azul/verde/naranja/rojo, tcolorbox para cajas conceptuales y niveles
+% de dificultad en verde/naranja/rojo.
+%
+% Cómo usar:
+%   1. cp guia-base.tex  ../matematicas/2026-S1/semana-NN_tema/Guia_Tema.tex
+%   2. Ajustar los \newcommand del bloque "VARIABLES" más abajo.
+%   3. Rellenar la PORTADA (contenidos) y las secciones.
+%   4. Compilar:  latexmk -pdf Guia_Tema.tex   (o  pdflatex  dos veces)
+%
+% El .pdf queda fuera de git (ver .gitignore); el .tex sí se versiona.
+% ════════════════════════════════════════════════════════════════════════════
+
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{hyperref}
+
+\geometry{margin=2cm, top=2.5cm, bottom=2.5cm}
+
+% ─── VARIABLES DE LA GUÍA ───
+% Reemplazar estos valores al crear una guía nueva.
+\newcommand{\guiaTitulo}{TÍTULO DE LA GUÍA}
+\newcommand{\guiaSubtitulo}{Subtítulo breve}
+\newcommand{\guiaUnidad}{Unidad X}
+\newcommand{\guiaCurso}{2° Medio --- Matemáticas}
+\newcommand{\guiaAlumno}{Alumno}
+\newcommand{\guiaSemana}{Semana NN}
+\newcommand{\guiaSemestre}{2026-S1}
+
+% ─── Colores ───
+\definecolor{azulprincipal}{HTML}{2980B9}
+\definecolor{azuloscuro}{HTML}{1A5276}
+\definecolor{verdequimica}{HTML}{1ABC9C}
+\definecolor{verdeclaro}{HTML}{D5F5E3}
+\definecolor{naranja}{HTML}{E67E22}
+\definecolor{rojo}{HTML}{E74C3C}
+\definecolor{amarillorecuerda}{HTML}{FFF3CD}
+\definecolor{amarilloborde}{HTML}{FFC107}
+\definecolor{grisfondo}{HTML}{F5F5F5}
+
+% ─── Cajas ───
+\tcbset{
+  recuerda/.style={
+    colback=amarillorecuerda, colframe=amarilloborde,
+    fonttitle=\bfseries, title={\color{black} RECUERDA},
+    boxrule=1pt, arc=2mm, left=5pt, right=5pt
+  },
+  propiedad/.style={
+    colback=verdeclaro!50, colframe=verdequimica!80!black,
+    fonttitle=\bfseries, boxrule=0.8pt, arc=2mm, left=5pt, right=5pt
+  },
+  formula/.style={
+    colback=grisfondo, colframe=azulprincipal,
+    boxrule=0.8pt, arc=2mm, left=5pt, right=5pt
+  },
+  definicion/.style={
+    colback=blue!5, colframe=azulprincipal,
+    fonttitle=\bfseries, boxrule=0.8pt, arc=2mm, left=5pt, right=5pt
+  },
+  ejemplo/.style={
+    colback=orange!5, colframe=naranja,
+    fonttitle=\bfseries, boxrule=0.8pt, arc=2mm, left=5pt, right=5pt
+  }
+}
+
+% ─── Encabezados ───
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\small\color{gray} \guiaTitulo{} --- \guiaCurso{}}
+\fancyfoot[C]{\small\color{gray} Página \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ─── Títulos ───
+% Helper para la barra azul de sección (evita #1 anidado dentro de \parbox,
+% que rompe en versiones recientes de titlesec).
+\newcommand{\tituloseccion}[1]{%
+  \noindent\colorbox{azulprincipal}{%
+    \makebox[\dimexpr\textwidth-2\fboxsep\relax][l]{%
+      \color{white}\normalfont\Large\bfseries~SECCIÓN \thesection: #1%
+    }%
+  }%
+}
+\titleformat{\section}
+  {}{}{0em}
+  {\tituloseccion}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{azulprincipal}}
+  {\thesubsection}{0.5em}{}
+
+% ─── Niveles de dificultad ───
+% Usamos \ (espacio forzado) en lugar de ~, porque ~ es carácter activo
+% en babel-español dentro de argumentos de comandos como \colorbox.
+\newcommand{\nivelbasico}{%
+  \par\smallskip\colorbox{green!60!black}{\color{white}\small\bfseries\ NIVEL BÁSICO\ }\par\smallskip}
+\newcommand{\nivelintermedio}{%
+  \par\smallskip\colorbox{naranja}{\color{white}\small\bfseries\ NIVEL INTERMEDIO\ }\par\smallskip}
+\newcommand{\nivelavanzado}{%
+  \par\smallskip\colorbox{rojo}{\color{white}\small\bfseries\ NIVEL AVANZADO\ }\par\smallskip}
+
+% ─── Líneas de respuesta ───
+\newcommand{\lineasrespuesta}[1]{%
+  \par\vspace{2mm}%
+  \foreach \i in {1,...,#1}{\noindent\rule{\textwidth}{0.3pt}\par\vspace{5mm}}%
+  \vspace{2mm}%
+}
+
+\begin{document}
+
+% ════════════════════════
+% PORTADA
+% ════════════════════════
+\thispagestyle{empty}
+\vspace*{3cm}
+\begin{center}
+  {\Huge\bfseries\color{azulprincipal} GUÍA DE TRABAJO}\\[8pt]
+  {\LARGE\bfseries\color{azuloscuro} \guiaTitulo}\\[15pt]
+  {\color{azulprincipal}\rule{8cm}{2pt}}\\[15pt]
+  {\Large \guiaUnidad{} \textbar{} \guiaCurso}\\[8pt]
+  {\large Alumno/a: \guiaAlumno}\\[4pt]
+  {\large \guiaSemana{} --- \guiaSemestre}\\[25pt]
+  {\itshape\color{gray}
+  \guiaSubtitulo}
+\end{center}
+
+\vspace{2cm}
+\noindent\textbf{Contenidos:}
+\begin{enumerate}[leftmargin=2cm]
+  \item Tema / subtema 1
+  \item Tema / subtema 2
+  \item Tema / subtema 3
+\end{enumerate}
+\newpage
+
+% ════════════════════════
+% SECCIÓN 1 — PLACEHOLDER
+% ════════════════════════
+\section{TÍTULO DE LA SECCIÓN}
+
+\begin{tcolorbox}[recuerda]
+Bloque de recuerdos previos / conceptos que deben estar frescos antes de partir.
+\end{tcolorbox}
+
+\begin{tcolorbox}[definicion, title=Definición clave]
+Texto de la definición.
+\end{tcolorbox}
+
+\subsection{Subtema}
+
+Desarrollo teórico breve.
+
+\begin{tcolorbox}[formula]
+\[
+  \text{fórmula aquí}
+\]
+\end{tcolorbox}
+
+\begin{tcolorbox}[ejemplo, title=Ejemplo resuelto]
+Paso a paso.
+\end{tcolorbox}
+
+\subsection*{Ejercicios}
+
+\nivelbasico
+\begin{enumerate}[leftmargin=1cm]
+  \item Ejercicio básico 1.
+  \lineasrespuesta{2}
+  \item Ejercicio básico 2.
+  \lineasrespuesta{2}
+\end{enumerate}
+
+\nivelintermedio
+\begin{enumerate}[leftmargin=1cm, resume]
+  \item Ejercicio intermedio 1.
+  \lineasrespuesta{3}
+\end{enumerate}
+
+\nivelavanzado
+\begin{enumerate}[leftmargin=1cm, resume]
+  \item Ejercicio avanzado 1.
+  \lineasrespuesta{4}
+\end{enumerate}
+
+\newpage
+
+% ════════════════════════
+% RESPUESTAS SELECCIONADAS
+% ════════════════════════
+\section*{Respuestas seleccionadas}
+\addcontentsline{toc}{section}{Respuestas seleccionadas}
+
+\begin{tcolorbox}[propiedad, title=Soluciones]
+\begin{itemize}[nosep]
+  \item Ej. 1:
+  \item Ej. 2:
+  \item Ej. 3:
+\end{itemize}
+\end{tcolorbox}
+
+\end{document}

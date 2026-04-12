@@ -2,9 +2,9 @@
 tipo: perfil-alumno
 alumno: Maximo
 estado: activo
-materia-principal: ""
-nivel: ""
-frecuencia: ""
+materia-principal: Matemáticas
+nivel: 2do medio
+frecuencia: 2 veces por semana
 tags:
   - tutoria
   - clases-particulares

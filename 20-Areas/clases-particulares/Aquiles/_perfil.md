@@ -1,6 +1,6 @@
 ---
 tipo: perfil-alumno
-alumno: Martina
+alumno: Aquiles
 estado: activo
 materia-principal: Matemáticas
 nivel: 2do medio
@@ -10,7 +10,7 @@ tags:
   - clases-particulares
 ---
 
-# Perfil — Martina
+# Perfil — Aquiles
 
 ## Información general
 
@@ -20,10 +20,16 @@ tags:
 - **Contacto:**
 
 ## Fortalezas
-Muy aplicada y generalmente rápida para entender. Buena concentración.
+
+Buen pensamiento crítico en lo conceptual.
+
 ## Áreas a reforzar
-Manejo de lenguaje científico/matemático básico y aplicado.
+
+Dificultad y frustración con lo lógico-matemático y científico. Requiere nivelación de bases (operatoria, álgebra básica, ecuaciones) antes de poder seguir el ritmo del 2° medio. La trayectoria del primer semestre 2026 está pensada como nivelación, con diagnóstico inicial en la semana 16.
+
 ## Material utilizado
+
+- Planificación semestral: [[planificacion/2026-S1/_plan-semestre-2026-S1|Plan 2026-S1]]
 
 ## Historial de sesiones
 
