@@ -1,0 +1,376 @@
+% ════════════════════════════════════════════════════════════════════════════
+% GUÍA — LOGARITMOS I: DEFINICIÓN Y CONEXIÓN CON POTENCIAS
+% Semana 16 · 2026-S1 · Máximo + Martina · 2° Medio
+% Generada a partir de ../../templates/guia-base.tex
+% ════════════════════════════════════════════════════════════════════════════
+
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{hyperref}
+
+\geometry{margin=2cm, top=2.5cm, bottom=2.5cm}
+
+% ─── VARIABLES DE LA GUÍA ───
+\newcommand{\guiaTitulo}{Logaritmos I}
+\newcommand{\guiaSubtitulo}{Definición y conexión con potencias}
+\newcommand{\guiaUnidad}{Unidad de Álgebra}
+\newcommand{\guiaCurso}{2° Medio --- Matemáticas}
+\newcommand{\guiaAlumno}{\underline{\hspace{6cm}}}
+\newcommand{\guiaSemana}{Semana 16}
+\newcommand{\guiaSemestre}{2026-S1}
+
+% ─── Colores ───
+\definecolor{azulprincipal}{HTML}{2980B9}
+\definecolor{azuloscuro}{HTML}{1A5276}
+\definecolor{verdequimica}{HTML}{1ABC9C}
+\definecolor{verdeclaro}{HTML}{D5F5E3}
+\definecolor{naranja}{HTML}{E67E22}
+\definecolor{rojo}{HTML}{E74C3C}
+\definecolor{amarillorecuerda}{HTML}{FFF3CD}
+\definecolor{amarilloborde}{HTML}{FFC107}
+\definecolor{grisfondo}{HTML}{F5F5F5}
+
+% ─── Cajas ───
+\tcbset{
+  recuerda/.style={
+    colback=amarillorecuerda, colframe=amarilloborde,
+    fonttitle=\bfseries, title={\color{black} RECUERDA},
+    boxrule=1pt, arc=2mm, left=5pt, right=5pt
+  },
+  propiedad/.style={
+    colback=verdeclaro!50, colframe=verdequimica!80!black,
+    fonttitle=\bfseries, boxrule=0.8pt, arc=2mm, left=5pt, right=5pt
+  },
+  formula/.style={
+    colback=grisfondo, colframe=azulprincipal,
+    boxrule=0.8pt, arc=2mm, left=5pt, right=5pt
+  },
+  definicion/.style={
+    colback=blue!5, colframe=azulprincipal,
+    fonttitle=\bfseries, boxrule=0.8pt, arc=2mm, left=5pt, right=5pt
+  },
+  ejemplo/.style={
+    colback=orange!5, colframe=naranja,
+    fonttitle=\bfseries, boxrule=0.8pt, arc=2mm, left=5pt, right=5pt
+  }
+}
+
+% ─── Encabezados ───
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\small\color{gray} \guiaTitulo{} --- \guiaCurso{}}
+\fancyfoot[C]{\small\color{gray} Página \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ─── Títulos ───
+\newcommand{\tituloseccion}[1]{%
+  \noindent\colorbox{azulprincipal}{%
+    \makebox[\dimexpr\textwidth-2\fboxsep\relax][l]{%
+      \color{white}\normalfont\Large\bfseries\ SECCIÓN \thesection: #1%
+    }%
+  }%
+}
+\titleformat{\section}
+  {}{}{0em}
+  {\tituloseccion}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{azulprincipal}}
+  {\thesubsection}{0.5em}{}
+
+% ─── Niveles de dificultad ───
+\newcommand{\nivelbasico}{%
+  \par\smallskip\colorbox{green!60!black}{\color{white}\small\bfseries\ NIVEL BÁSICO\ }\par\smallskip}
+\newcommand{\nivelintermedio}{%
+  \par\smallskip\colorbox{naranja}{\color{white}\small\bfseries\ NIVEL INTERMEDIO\ }\par\smallskip}
+\newcommand{\nivelavanzado}{%
+  \par\smallskip\colorbox{rojo}{\color{white}\small\bfseries\ NIVEL AVANZADO\ }\par\smallskip}
+
+% ─── Líneas de respuesta ───
+\newcommand{\lineasrespuesta}[1]{%
+  \par\vspace{2mm}%
+  \foreach \i in {1,...,#1}{\noindent\rule{\textwidth}{0.3pt}\par\vspace{5mm}}%
+  \vspace{2mm}%
+}
+
+\begin{document}
+
+% ════════════════════════
+% PORTADA
+% ════════════════════════
+\thispagestyle{empty}
+\vspace*{3cm}
+\begin{center}
+  {\Huge\bfseries\color{azulprincipal} GUÍA DE TRABAJO}\\[8pt]
+  {\LARGE\bfseries\color{azuloscuro} \guiaTitulo}\\[15pt]
+  {\color{azulprincipal}\rule{8cm}{2pt}}\\[15pt]
+  {\Large \guiaUnidad{} \textbar{} \guiaCurso}\\[8pt]
+  {\large Alumno/a: \guiaAlumno}\\[4pt]
+  {\large \guiaSemana{} --- \guiaSemestre}\\[25pt]
+  {\itshape\color{gray}
+  \guiaSubtitulo}
+\end{center}
+
+\vspace{2cm}
+\noindent\textbf{Contenidos:}
+\begin{enumerate}[leftmargin=2cm]
+  \item Motivación: la pregunta inversa de una potencia.
+  \item Definición de logaritmo y sus restricciones.
+  \item Cálculo de logaritmos simples (bases 2, 3 y 10).
+  \item Casos especiales deducidos desde la definición.
+  \item Ejercicios por nivel (básico, intermedio, avanzado).
+\end{enumerate}
+\newpage
+
+% ════════════════════════
+% SECCIÓN 1
+% ════════════════════════
+\section{MOTIVACIÓN: LA PREGUNTA INVERSA DE UNA POTENCIA}
+
+\begin{tcolorbox}[recuerda]
+\textbf{Potencia:} repetir una multiplicación.
+\[
+  2^5 = 2 \cdot 2 \cdot 2 \cdot 2 \cdot 2 = 32
+\]
+En $2^5$ llamamos a $2$ la \textbf{base} y a $5$ el \textbf{exponente}. El resultado ($32$) es el \textbf{valor de la potencia}.
+\end{tcolorbox}
+
+Si me preguntan \emph{``¿cuánto vale $2^5$?''}, respondo $32$. Eso ya lo sabes.\\[4pt]
+Pero ahora piensa al revés: \emph{``¿a qué exponente hay que elevar $2$ para obtener $32$?''}. La respuesta sigue siendo $5$, pero la \textbf{pregunta} cambió por completo. Esta nueva pregunta es la que responde el \textbf{logaritmo}.
+
+\begin{tcolorbox}[ejemplo, title=Tres preguntas del mismo tipo]
+\begin{itemize}[nosep]
+  \item ¿A qué exponente elevo $2$ para obtener $8$? $\longrightarrow$ a $3$ (porque $2^3 = 8$).
+  \item ¿A qué exponente elevo $3$ para obtener $81$? $\longrightarrow$ a $4$ (porque $3^4 = 81$).
+  \item ¿A qué exponente elevo $10$ para obtener $1000$? $\longrightarrow$ a $3$ (porque $10^3 = 1000$).
+\end{itemize}
+\end{tcolorbox}
+
+\noindent\textbf{Idea central:} el logaritmo \emph{despeja el exponente}.
+
+% ════════════════════════
+% SECCIÓN 2
+% ════════════════════════
+\section{DEFINICIÓN DE LOGARITMO}
+
+\begin{tcolorbox}[definicion, title=Definición]
+Sean $b > 0$, $b \ne 1$ y $a > 0$. El \textbf{logaritmo en base $b$ de $a$}, denotado $\log_b(a)$, es el \textbf{exponente} al que hay que elevar la base $b$ para obtener el argumento $a$.
+\[
+  \boxed{\; \log_b(a) = c \;\iff\; b^{c} = a \;}
+\]
+Esta doble flecha significa que las dos expresiones dicen lo mismo: son dos formas de escribir la misma relación entre tres números.
+\end{tcolorbox}
+
+\subsection{La traducción entre las dos formas}
+
+Toda igualdad con un logaritmo puede reescribirse como una igualdad con una potencia, y al revés. Esto es lo más importante de la semana.
+
+\begin{tcolorbox}[formula]
+\[
+  \log_b(a) = c \;\;\Longleftrightarrow\;\; b^{c} = a
+\]
+\[
+  \underbrace{b}_{\text{base}} \quad \underbrace{a}_{\text{argumento}} \quad \underbrace{c}_{\text{resultado del logaritmo } = \text{ exponente}}
+\]
+\end{tcolorbox}
+
+\begin{tcolorbox}[ejemplo, title=Traducir en ambas direcciones]
+\begin{itemize}[nosep]
+  \item $\log_2(8) = 3 \;\iff\; 2^{3} = 8$
+  \item $\log_3(81) = 4 \;\iff\; 3^{4} = 81$
+  \item $\log_{10}(1000) = 3 \;\iff\; 10^{3} = 1000$
+  \item $\log_5(25) = 2 \;\iff\; 5^{2} = 25$
+\end{itemize}
+\end{tcolorbox}
+
+\subsection{¿Por qué las restricciones?}
+
+La definición exige $b > 0$, $b \ne 1$ y $a > 0$. No son caprichos: cada una se rompe si la quitamos.
+
+\begin{tcolorbox}[propiedad, title={Por qué $b > 0$ y $b \ne 1$}]
+\begin{itemize}[nosep]
+  \item Si $b < 0$: las potencias de base negativa cambian de signo con el exponente ($(-2)^1 = -2$, $(-2)^2 = 4$, $(-2)^3 = -8$, \ldots). No hay forma de que el logaritmo devuelva un resultado único y ordenado.
+  \item Si $b = 0$: $0^c = 0$ para todo $c > 0$, así que $\log_0(a)$ no tiene sentido.
+  \item Si $b = 1$: $1^c = 1$ para \textbf{cualquier} $c$. Entonces $\log_1(1)$ tendría infinitas respuestas, y $\log_1(5)$ ninguna.
+\end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[propiedad, title={Por qué $a > 0$}]
+Porque si $b > 0$, entonces $b^c$ siempre es positivo, sin importar el signo de $c$. Nunca podrá ser cero ni negativo. Por lo tanto \textbf{el argumento de un logaritmo debe ser positivo}: expresiones como $\log_2(0)$ o $\log_2(-4)$ \textbf{no están definidas}.
+\end{tcolorbox}
+
+\newpage
+
+% ════════════════════════
+% SECCIÓN 3
+% ════════════════════════
+\section{CÁLCULO DE LOGARITMOS SIMPLES}
+
+Cuando el argumento es una potencia exacta de la base, el logaritmo se calcula \textbf{mentalmente}. La estrategia es siempre la misma: preguntarse \emph{``¿a qué exponente elevo la base para llegar al argumento?''}.
+
+\begin{tcolorbox}[ejemplo, title={Ejemplo paso a paso: $\log_2(16)$}]
+\begin{enumerate}[nosep]
+  \item Pregunta: ¿a qué exponente elevo $2$ para obtener $16$?
+  \item Pruebo: $2^1 = 2$, $2^2 = 4$, $2^3 = 8$, $2^{4} = 16$. \checkmark
+  \item Respuesta: $\log_2(16) = 4$.
+\end{enumerate}
+\end{tcolorbox}
+
+\subsection{Tabla de cálculos inmediatos}
+
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+\textbf{Logaritmo} & \textbf{Pregunta} & \textbf{Potencia equivalente} & \textbf{Resultado} \\
+\midrule
+$\log_2(8)$    & ¿$2$ a qué da $8$?     & $2^{3} = 8$      & $3$ \\
+$\log_2(32)$   & ¿$2$ a qué da $32$?    & $2^{5} = 32$     & $5$ \\
+$\log_3(9)$    & ¿$3$ a qué da $9$?     & $3^{2} = 9$      & $2$ \\
+$\log_3(27)$   & ¿$3$ a qué da $27$?    & $3^{3} = 27$     & $3$ \\
+$\log_{10}(100)$ & ¿$10$ a qué da $100$? & $10^{2} = 100$  & $2$ \\
+$\log_{10}(10000)$ & ¿$10$ a qué da $10\,000$? & $10^{4} = 10\,000$ & $4$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% ════════════════════════
+% SECCIÓN 4
+% ════════════════════════
+\section{TRES CASOS ESPECIALES}
+
+Estos tres casos \textbf{no se memorizan}: se \textbf{deducen} desde la definición. Al final de la semana deberías ser capaz de explicarlos sin mirar.
+
+\begin{tcolorbox}[propiedad, title={Caso 1: $\log_b(1) = 0$}]
+\textbf{Pregunta:} ¿a qué exponente elevo $b$ para obtener $1$?\\
+\textbf{Respuesta:} a $0$, porque \emph{cualquier} base no nula elevada a $0$ vale $1$.
+\[
+  b^{0} = 1 \;\Longrightarrow\; \log_b(1) = 0
+\]
+\end{tcolorbox}
+
+\begin{tcolorbox}[propiedad, title={Caso 2: $\log_b(b) = 1$}]
+\textbf{Pregunta:} ¿a qué exponente elevo $b$ para obtener $b$?\\
+\textbf{Respuesta:} a $1$, porque $b^{1} = b$.
+\[
+  b^{1} = b \;\Longrightarrow\; \log_b(b) = 1
+\]
+\end{tcolorbox}
+
+\begin{tcolorbox}[propiedad, title={Caso 3: $\log_b(b^{n}) = n$}]
+\textbf{Pregunta:} ¿a qué exponente elevo $b$ para obtener $b^{n}$?\\
+\textbf{Respuesta:} a $n$, porque la respuesta está \emph{literalmente escrita} en el argumento.
+\[
+  b^{n} = b^{n} \;\Longrightarrow\; \log_b(b^{n}) = n
+\]
+\textit{Este es el caso más potente: todo logaritmo ``se deja ver'' cuando el argumento ya está escrito como potencia de la base.}
+\end{tcolorbox}
+
+\newpage
+
+% ════════════════════════
+% SECCIÓN 5 — EJERCICIOS
+% ════════════════════════
+\section{EJERCICIOS}
+
+\nivelbasico
+
+\textbf{(1)} Traduce cada logaritmo a su forma de potencia equivalente (no hace falta calcular el resultado todavía).
+\begin{enumerate}[label=\alph*),leftmargin=1cm]
+  \item $\log_2(16) = c$ \hfill $\Longleftrightarrow$ \hfill \rule{4cm}{0.4pt}
+  \item $\log_3(27) = c$ \hfill $\Longleftrightarrow$ \hfill \rule{4cm}{0.4pt}
+  \item $\log_{10}(100) = c$ \hfill $\Longleftrightarrow$ \hfill \rule{4cm}{0.4pt}
+  \item $\log_5(125) = c$ \hfill $\Longleftrightarrow$ \hfill \rule{4cm}{0.4pt}
+\end{enumerate}
+
+\textbf{(2)} Calcula mentalmente.
+\begin{enumerate}[label=\alph*),leftmargin=1cm]
+  \item $\log_2(8) = $ \rule{2cm}{0.4pt}
+  \item $\log_2(64) = $ \rule{2cm}{0.4pt}
+  \item $\log_3(9) = $ \rule{2cm}{0.4pt}
+  \item $\log_3(81) = $ \rule{2cm}{0.4pt}
+  \item $\log_{10}(10) = $ \rule{2cm}{0.4pt}
+  \item $\log_{10}(1000) = $ \rule{2cm}{0.4pt}
+  \item $\log_5(25) = $ \rule{2cm}{0.4pt}
+  \item $\log_4(16) = $ \rule{2cm}{0.4pt}
+\end{enumerate}
+
+\textbf{(3)} Aplica los casos especiales.
+\begin{enumerate}[label=\alph*),leftmargin=1cm]
+  \item $\log_7(1) = $ \rule{2cm}{0.4pt}
+  \item $\log_{12}(12) = $ \rule{2cm}{0.4pt}
+  \item $\log_5(5^{4}) = $ \rule{2cm}{0.4pt}
+  \item $\log_2(2^{10}) = $ \rule{2cm}{0.4pt}
+\end{enumerate}
+
+\nivelintermedio
+
+\textbf{(4)} Encuentra el valor de $x$ (pista: traduce a potencia).
+\begin{enumerate}[label=\alph*),leftmargin=1cm]
+  \item $\log_3(x) = 4 \;\Longrightarrow\; x = $ \rule{2cm}{0.4pt}
+  \item $\log_2(x) = 6 \;\Longrightarrow\; x = $ \rule{2cm}{0.4pt}
+  \item $\log_x(49) = 2 \;\Longrightarrow\; x = $ \rule{2cm}{0.4pt}
+  \item $\log_x(1000) = 3 \;\Longrightarrow\; x = $ \rule{2cm}{0.4pt}
+\end{enumerate}
+
+\textbf{(5)} Calcula. No son inmediatos: ten que darte cuenta de que el argumento \emph{es} una potencia de la base, aunque no se vea a primera vista.
+\begin{enumerate}[label=\alph*),leftmargin=1cm]
+  \item $\log_2\!\left(\tfrac{1}{8}\right)$. \hfill \textit{Pista: $\tfrac{1}{8} = 2^{-3}$.}
+  \lineasrespuesta{2}
+  \item $\log_3\!\left(\tfrac{1}{81}\right)$.
+  \lineasrespuesta{2}
+  \item $\log_2(\sqrt{2})$. \hfill \textit{Pista: $\sqrt{2} = 2^{1/2}$.}
+  \lineasrespuesta{2}
+\end{enumerate}
+
+\nivelavanzado
+
+\textbf{(6)} Decide si cada expresión está definida. Si \textbf{no} lo está, explica por qué en una línea.
+\begin{enumerate}[label=\alph*),leftmargin=1cm]
+  \item $\log_2(-4)$
+  \lineasrespuesta{2}
+  \item $\log_1(5)$
+  \lineasrespuesta{2}
+  \item $\log_{10}(0)$
+  \lineasrespuesta{2}
+  \item $\log_{-2}(4)$
+  \lineasrespuesta{2}
+\end{enumerate}
+
+\textbf{(7)} Justifica en tus palabras (2--3 líneas) por qué $\log_b(b^{n}) = n$ para cualquier exponente $n$, incluyendo el caso $n = 0$ y $n$ negativo.
+\lineasrespuesta{4}
+
+\newpage
+
+% ════════════════════════
+% RESPUESTAS SELECCIONADAS
+% ════════════════════════
+\section*{Respuestas seleccionadas}
+\addcontentsline{toc}{section}{Respuestas seleccionadas}
+
+\begin{tcolorbox}[propiedad, title=Soluciones (básico e intermedio)]
+\begin{itemize}[nosep]
+  \item \textbf{(1)} a) $2^{c} = 16$; \; b) $3^{c} = 27$; \; c) $10^{c} = 100$; \; d) $5^{c} = 125$.
+  \item \textbf{(2)} a) $3$; \; b) $6$; \; c) $2$; \; d) $4$; \; e) $1$; \; f) $3$; \; g) $2$; \; h) $2$.
+  \item \textbf{(3)} a) $0$; \; b) $1$; \; c) $4$; \; d) $10$.
+  \item \textbf{(4)} a) $x = 81$; \; b) $x = 64$; \; c) $x = 7$; \; d) $x = 10$.
+  \item \textbf{(5)} a) $-3$; \; b) $-4$; \; c) $\tfrac{1}{2}$.
+\end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[recuerda]
+Las respuestas del \textbf{nivel avanzado} (6 y 7) se revisan en clase: la idea es que escribas tu propio razonamiento, no que copies una respuesta tipo.
+\end{tcolorbox}
+
+\end{document}

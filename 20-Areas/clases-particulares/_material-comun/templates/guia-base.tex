@@ -12,6 +12,15 @@
 %   4. Compilar:  latexmk -pdf Guia_Tema.tex   (o  pdflatex  dos veces)
 %
 % El .pdf queda fuera de git (ver .gitignore); el .tex sí se versiona.
+%
+% NOTAS IMPORTANTES (tropezones resueltos):
+%   - Si el título de un tcolorbox contiene '=' o '$...$', SIEMPRE envolver
+%     el valor en llaves: title={Caso 1: $\log_b(1) = 0$}. Sin llaves, el
+%     parser key-value se rompe con el '='.
+%   - Dentro de \colorbox, usar '\ ' en vez de '~' para espacios forzados
+%     (babel-español trata '~' como carácter activo y eso rompe el colorbox).
+%   - El \titleformat{\section} evita #1 anidado dentro de \parbox usando el
+%     helper \tituloseccion. No volver al patrón con \parbox directo.
 % ════════════════════════════════════════════════════════════════════════════
 
 \documentclass[11pt,a4paper]{article}

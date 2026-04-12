@@ -21,7 +21,7 @@ Guías `.tex` emitidas durante el primer semestre 2026 para la ruta compartida M
 
 | Sem | Tema | Carpeta | Estado | Notas |
 |-----|------|---------|--------|-------|
-|     |      |         |        |       |
+| 16  | Logaritmos I: definición y conexión con potencias | [[semana-16_logaritmos-1/Guia_Logaritmos_1\|Guia_Logaritmos_1]] | emitida | 8 páginas · Máx + Mart · ejercicios nivel básico/intermedio/avanzado |
 
 <!-- Agregar fila al solicitar una guía nueva. Estados: borrador | emitida | revisada -->
 
