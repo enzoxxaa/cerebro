@@ -45,7 +45,7 @@
 \begin{center}
     {\Large \textbf{Reunión con Dr.\ Fernando D.\ González-Nilo}}\\[2pt]
     {\small Doctorado en Bioinformática y Biología de Sistemas --- UNAB / CBIB}\\[2pt]
-    {\small Fecha: 2026-04-18 $\cdot$ Lugar: \ph{lugar} $\cdot$ Duración estimada: \ph{60 min}}
+    {\small Fecha: 2026-04-18 $\cdot$ Lugar: UNAB $\cdot$ Duración estimada: 60 min}
 \end{center}
 
 \vspace{-6pt}
@@ -56,7 +56,7 @@
 \section*{\S1.\quad Pitch personal (60 segundos)}
 
 \begin{itemize}
-    \item Soy \ph{Enzo Cevo — nombre completo}, \ph{título: Licenciado / Químico / MSc} de la \ph{Universidad de Chile — confirmar}, especializado en \textbf{dinámica molecular clásica (MD all-atom)} aplicada a sistemas blandos y biomoleculares.
+    \item Soy \textbf{Enzo Cevo}, \textbf{Licenciado en Biología} de la \textbf{Universidad de Chile}, especializado en \textbf{dinámica molecular clásica (MD all-atom)} aplicada a sistemas blandos y biomoleculares.
     \item Trabajo hoy en tres frentes complementarios: (i)~\textbf{membranas biomiméticas} (bicapas lipídicas y cristales líquidos liotrópicos con GROMACS/OPLS-aa), (ii)~\textbf{materiales fotónicos} (luminógenos AIE en matrices organizadas) y (iii)~\textbf{allostery en proteínas} (MD + MMPBSA con AMBER24 sobre una quinasa arqueal).
     \item Tengo \textbf{tres manuscritos en curso} donde soy responsable de la parte de MD y el análisis de trayectorias --- no son papers pendientes, están en escritura / revisión.
     \item Busco hacer el doctorado en bioinformática en UNAB porque quiero \textbf{escalar desde MD descriptiva hacia MD predictiva} (drug design, enhanced sampling, integración con ML) dentro de un grupo transdisciplinar con validación experimental --- exactamente lo que hace el CBIB.
@@ -73,7 +73,7 @@
     \item \textbf{Sistema:} cristal líquido liotrópico discótico (DNLLC) SDS/DeOH/KCl, 274 SDS + 80 DeOH + 15\,543 aguas; aminoácidos deuterados ALA, GLU, LEU, MET.
     \item \textbf{Mi contribución:} montaje con Packmol, MD all-atom en \textbf{GROMACS 2021.1} (OPLS-aa, TIP4P, PME, LINCS), producción NPT de \textbf{200 ns por aminoácido}; análisis en Python con MDAnalysis (perfiles de densidad parcial, RDF, desplazamiento $\Delta Z$ como indicador de orientación).
     \item \textbf{Hallazgo punch:} todos los AA se anclan vía zwitterion; ALA/GLU quedan paralelos a la interfaz ($\Delta Z=0$); LEU/MET penetran $\sim$0{,}5~nm al core hidrofóbico, lo que explica atomísticamente la caída de splittings cuadrupolares C\textsubscript{1}--C\textsubscript{4} de SDS observada en \textsuperscript{2}H-NMR.
-    \item \textbf{Estado:} \ph{en escritura / submitted — confirmar}. Placeholders pendientes: MET density + RDF final del thioether.
+    \item \textbf{Estado:} en escritura, con análisis pendientes del perfil de densidad de MET y RDF final del thioether.
 \end{itemize}
 
 \subsection*{2.2 --- AIE Luminogens en cristal líquido TTAB/DeOH (P01)}
@@ -83,13 +83,13 @@
     \item \textbf{Sistema:} luminógenos AIE donor--acceptor con núcleo thiophene-aldehyde y sustituyentes variados (TTG, TTC, TTY, TTO) embebidos en cristal líquido liotrópico TTAB/DeOH.
     \item \textbf{Mi contribución:} MD all-atom de la partición del luminógeno en la bicapa, correlación entre el sustituyente (carbazol vs.\ trifenilamina, longitud de conjugación) y la profundidad de penetración / orientación; cruce con fotofísica (QY, lifetimes, Stokes shifts).
     \item \textbf{Hallazgo punch:} el substituyente controla si el luminógeno queda en la interfaz o se hunde en el core hidrofóbico, lo que determina su rendimiento de emisión AIE bajo confinamiento.
-    \item \textbf{Estado:} \ph{fase: escritura — confirmar versión v4}.
+    \item \textbf{Estado:} escritura, versión v4.
 \end{itemize}
 
 \subsection*{2.3 --- MttPFK/GK: activación alostérica por AMP (bioinformática pura)}
 \begin{itemize}
     \item \textbf{Título:} \textit{Structural Basis for AMP-Dependent Allosteric Activation of a Bifunctional ADP-Dependent PFK/GK from Methanothermococcus thermolithotrophicus}.
-    \item \textbf{Colaboración:} \ph{grupo V.\ Guixé / UChile --- confirmar PI}. Combinación de cristalografía X (sincrotrón MANACA, LNLS Brasil; 1{,}17--1{,}54~\AA) + ensayos cinéticos + MD + mutagénesis.
+    \item \textbf{Colaboración:} grupo V.\ Guixé (UChile). Combinación de cristalografía X (sincrotrón MANACA, LNLS Brasil; 1{,}17--1{,}54~\AA) + ensayos cinéticos + MD + mutagénesis.
     \item \textbf{Mi contribución:} preparación de sistemas (Propka / PDB2PQR / tLEaP) para dos complejos (GK y PFK) con AMP alostérico; \textbf{MD en AMBER24 con ff19SB}, 5 réplicas $\times$ 400~ns por sistema; análisis \textbf{MMPBSA} (free energy binding global y por residuo); diseño in silico y simulación de mutantes Y56A, R58A.
     \item \textbf{Hallazgo punch:} AMP estabiliza una conformación \textbf{``super-cerrada''} catalíticamente competente nunca antes descrita en esta familia; los mutantes Y56A/R58A \emph{hiper-cierran} el dominio y atrapan sustrato (--40~kcal/mol vs.\ --15~WT para ADP), validando MMPBSA por residuo como herramienta predictiva para el diseño del knockout.
     \item \textbf{Por qué importa en esta conversación:} este paper es \textbf{la aplicación más bioinformática} de los tres --- allostery, MD de proteína, MMPBSA, archaea, diseño racional de mutantes. Es el puente directo con las líneas del CBIB.
@@ -104,7 +104,7 @@
     \item Director del \textbf{Doctorado en Bioinformática y Biología de Sistemas} (UNAB).
     \item Líneas: simulación molecular, bio-nanotecnología, canales iónicos, drug design, estructura y dinámica de proteínas.
     \item Enfoque metodológico del centro: ciclo iterativo \textbf{observación $\rightarrow$ modelado $\rightarrow$ simulación $\rightarrow$ validación experimental}, 9 PIs transdisciplinares.
-    \item 90+ artículos ISI, 3 patentes (\ph{verificar cifra actualizada}).
+    \item 90+ artículos ISI, 3 patentes.
     \item \textbf{Puntos de empalme directos} con mi trabajo: dinámica de proteínas (\S2.3), MD en membranas y materiales blandos (\S2.1, \S2.2), análisis de trayectorias en Python.
 \end{itemize}
 
