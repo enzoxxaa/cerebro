@@ -91,11 +91,9 @@ Al finalizar la semana, **yo (el tutor)** debo tener:
 
 ## Notas para la próxima semana
 
-<!-- Rellenar tras la sesión del 16 abr. Este bloque se convierte en el insumo para reescribir semana-17 en adelante del plan de Aquiles. -->
-
-- Bloque 1 (operatoria):
-- Bloque 2 (fracciones/%):
-- Bloque 3 (álgebra):
-- Bloque 4 (ecuaciones):
-- Lectura emocional:
-- **Tema decidido para semana 17:**
+- Bloque 1 (operatoria): Regular
+- Bloque 2 (fracciones/%): No hay manejo
+- Bloque 3 (álgebra): Su fuerte
+- Bloque 4 (ecuaciones): Fuerte
+- Lectura emocional: se ve emocionado y comprometido
+- **Tema decidido para semana 17:** operatoria + fracciones/%
