@@ -1,0 +1,511 @@
+% ════════════════════════════════════════════════════════════════════════════
+% GUÍA — RAZONES TRIGONOMÉTRICAS · MÁXIMO · SEMANA 21
+% Preparación intensiva del control del 2026-05-20 (miércoles).
+% Sesión martes 19-may pivota desde Factorización II a este tema.
+% Estilo: guía para el alumno (no material del tutor). Compacta y enfocada.
+% Generada a partir de ../../templates/guia-base.tex
+% ════════════════════════════════════════════════════════════════════════════
+
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{hyperref}
+
+\geometry{margin=2cm, top=2.5cm, bottom=2.5cm}
+
+% ─── VARIABLES ───
+\newcommand{\guiaTitulo}{Razones Trigonométricas}
+\newcommand{\guiaSubtitulo}{Preparación control · Triángulo rectángulo · SOH-CAH-TOA}
+\newcommand{\guiaUnidad}{Unidad de Geometría}
+\newcommand{\guiaCurso}{2° Medio --- Matemáticas}
+\newcommand{\guiaAlumno}{Máximo}
+\newcommand{\guiaSemana}{Semana 21}
+\newcommand{\guiaSemestre}{2026-S1}
+
+% ─── Colores ───
+\definecolor{azulprincipal}{HTML}{2980B9}
+\definecolor{azuloscuro}{HTML}{1A5276}
+\definecolor{verdequimica}{HTML}{1ABC9C}
+\definecolor{verdeclaro}{HTML}{D5F5E3}
+\definecolor{naranja}{HTML}{E67E22}
+\definecolor{rojo}{HTML}{E74C3C}
+\definecolor{amarillorecuerda}{HTML}{FFF3CD}
+\definecolor{amarilloborde}{HTML}{FFC107}
+\definecolor{grisfondo}{HTML}{F5F5F5}
+
+% ─── Cajas ───
+\tcbset{
+  recuerda/.style={
+    colback=amarillorecuerda, colframe=amarilloborde,
+    fonttitle=\bfseries, title={\color{black} RECUERDA},
+    boxrule=1pt, arc=2mm, left=5pt, right=5pt
+  },
+  propiedad/.style={
+    colback=verdeclaro!50, colframe=verdequimica!80!black,
+    fonttitle=\bfseries, boxrule=0.8pt, arc=2mm, left=5pt, right=5pt
+  },
+  formula/.style={
+    colback=grisfondo, colframe=azulprincipal,
+    boxrule=0.8pt, arc=2mm, left=5pt, right=5pt
+  },
+  definicion/.style={
+    colback=blue!5, colframe=azulprincipal,
+    fonttitle=\bfseries, boxrule=0.8pt, arc=2mm, left=5pt, right=5pt
+  },
+  ejemplo/.style={
+    colback=orange!5, colframe=naranja,
+    fonttitle=\bfseries, boxrule=0.8pt, arc=2mm, left=5pt, right=5pt
+  },
+  tip/.style={
+    colback=rojo!8, colframe=rojo,
+    fonttitle=\bfseries, boxrule=1pt, arc=2mm, left=5pt, right=5pt,
+    title={\color{rojo} TIP PARA EL CONTROL}
+  }
+}
+
+% ─── Encabezados ───
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\small\color{gray} \guiaTitulo{} --- \guiaCurso{}}
+\fancyfoot[C]{\small\color{gray} Página \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ─── Títulos ───
+\newcommand{\tituloseccion}[1]{%
+  \noindent\colorbox{azulprincipal}{%
+    \makebox[\dimexpr\textwidth-2\fboxsep\relax][l]{%
+      \color{white}\normalfont\Large\bfseries\ SECCIÓN \thesection: #1%
+    }%
+  }%
+}
+\titleformat{\section}
+  {}{}{0em}
+  {\tituloseccion}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{azulprincipal}}
+  {\thesubsection}{0.5em}{}
+
+% ─── Niveles ───
+\newcommand{\nivelbasico}{%
+  \par\smallskip\colorbox{green!60!black}{\color{white}\small\bfseries\ NIVEL BÁSICO\ }\par\smallskip}
+\newcommand{\nivelintermedio}{%
+  \par\smallskip\colorbox{naranja}{\color{white}\small\bfseries\ NIVEL INTERMEDIO\ }\par\smallskip}
+\newcommand{\nivelavanzado}{%
+  \par\smallskip\colorbox{rojo}{\color{white}\small\bfseries\ NIVEL AVANZADO\ }\par\smallskip}
+
+% ─── Líneas ───
+\newcommand{\lineasrespuesta}[1]{%
+  \par\vspace{2mm}%
+  \foreach \i in {1,...,#1}{\noindent\rule{\textwidth}{0.3pt}\par\vspace{5mm}}%
+  \vspace{2mm}%
+}
+
+\begin{document}
+
+% ════════════════════════
+% PORTADA
+% ════════════════════════
+\thispagestyle{empty}
+\vspace*{2.5cm}
+\begin{center}
+  {\Huge\bfseries\color{azulprincipal} GUÍA DE TRABAJO}\\[8pt]
+  {\LARGE\bfseries\color{azuloscuro} \guiaTitulo}\\[15pt]
+  {\color{azulprincipal}\rule{8cm}{2pt}}\\[15pt]
+  {\Large \guiaUnidad{} \textbar{} \guiaCurso}\\[8pt]
+  {\large Alumno: \guiaAlumno}\\[4pt]
+  {\large \guiaSemana{} --- \guiaSemestre}\\[25pt]
+  {\itshape\color{gray}
+  \guiaSubtitulo}
+\end{center}
+
+\vspace{1.5cm}
+\begin{tcolorbox}[recuerda, title={\color{black} PARA EL CONTROL DEL MIÉRCOLES 20-MAY}]
+Tres cosas mínimas que tienen que salir automáticas:
+\begin{enumerate}[nosep]
+  \item \textbf{Identificar} cateto opuesto, cateto adyacente e hipotenusa según el ángulo de referencia.
+  \item \textbf{SOH-CAH-TOA}: las tres razones, escritas y memorizadas.
+  \item \textbf{Tabla de ángulos notables} ($30°$, $45°$, $60°$) sin pensarlo.
+\end{enumerate}
+Si esos tres puntos están firmes, lo demás cae solo.
+\end{tcolorbox}
+
+\newpage
+
+% ════════════════════════════════════════════════════
+% SECCIÓN 1 — EL TRIÁNGULO RECTÁNGULO
+% ════════════════════════════════════════════════════
+\section{EL TRIÁNGULO RECTÁNGULO Y SUS LADOS}
+
+\begin{tcolorbox}[definicion, title=Los tres lados]
+En un triángulo rectángulo, los lados tienen nombres \textbf{relativos al ángulo que estás mirando} ($\alpha$):
+
+\begin{itemize}[nosep]
+  \item \textbf{Hipotenusa:} el lado opuesto al ángulo recto. \emph{Es siempre el más largo} y no depende de qué ángulo mires.
+  \item \textbf{Cateto opuesto a $\alpha$:} el cateto que \emph{no toca} el ángulo $\alpha$.
+  \item \textbf{Cateto adyacente a $\alpha$:} el cateto que \emph{sí toca} el ángulo $\alpha$ (pero no es la hipotenusa).
+\end{itemize}
+\end{tcolorbox}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.3]
+  \coordinate (A) at (0,0);
+  \coordinate (B) at (4,0);
+  \coordinate (C) at (4,2.5);
+  \draw[thick] (A) -- (B) -- (C) -- cycle;
+  \draw (3.7,0) rectangle (4,0.3);
+  \draw[azulprincipal] (0.8,0) arc (0:32:0.8);
+  \node[azulprincipal] at (0.55,0.18) {$\alpha$};
+  \node[below] at (2,0) {cateto adyacente a $\alpha$};
+  \node[right] at (4,1.25) {cateto opuesto a $\alpha$};
+  \node[above left] at (2,1.25) {hipotenusa};
+\end{tikzpicture}
+\end{center}
+
+\begin{tcolorbox}[tip]
+``Opuesto'' y ``adyacente'' \textbf{cambian} si miras desde el otro ángulo agudo. Antes de aplicar cualquier razón, marca con una flecha cuál es tu ángulo de referencia y \emph{después} etiqueta los lados.
+\end{tcolorbox}
+
+\subsection*{Ejercicios}
+
+\nivelbasico
+
+En cada triángulo, etiqueta los tres lados respecto al ángulo marcado:
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=8pt]
+  \item Triángulo con catetos $3$ y $4$, hipotenusa $5$. Si $\alpha$ está en el vértice opuesto al cateto de $4$: \\
+  Opuesto = \rule{1.5cm}{0.4pt} \quad Adyacente = \rule{1.5cm}{0.4pt} \quad Hipotenusa = \rule{1.5cm}{0.4pt}
+  \hfill \textit{($4$, $3$, $5$)}
+
+  \item En el mismo triángulo, ahora $\alpha$ es el otro ángulo agudo: \\
+  Opuesto = \rule{1.5cm}{0.4pt} \quad Adyacente = \rule{1.5cm}{0.4pt} \quad Hipotenusa = \rule{1.5cm}{0.4pt}
+  \hfill \textit{($3$, $4$, $5$)}
+\end{enumerate}
+
+\newpage
+
+% ════════════════════════════════════════════════════
+% SECCIÓN 2 — LAS TRES RAZONES
+% ════════════════════════════════════════════════════
+\section{LAS TRES RAZONES: SOH-CAH-TOA}
+
+\begin{tcolorbox}[formula]
+\[
+  \mathbf{sen}(\alpha) = \dfrac{\text{op}}{\text{hip}}
+  \qquad
+  \mathbf{cos}(\alpha) = \dfrac{\text{ady}}{\text{hip}}
+  \qquad
+  \mathbf{tan}(\alpha) = \dfrac{\text{op}}{\text{ady}}
+\]
+\end{tcolorbox}
+
+\begin{tcolorbox}[recuerda]
+\textbf{Mnemotecnia SOH-CAH-TOA:}
+\begin{itemize}[nosep]
+  \item \textbf{SOH:} \textbf{S}eno = \textbf{O}puesto / \textbf{H}ipotenusa.
+  \item \textbf{CAH:} \textbf{C}oseno = \textbf{A}dyacente / \textbf{H}ipotenusa.
+  \item \textbf{TOA:} \textbf{T}angente = \textbf{O}puesto / \textbf{A}dyacente.
+\end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[ejemplo, title=Ejemplo 1]
+En un triángulo rectángulo, $\alpha$ es uno de los ángulos agudos. Sus lados respecto a $\alpha$ son: op $= 3$, ady $= 4$, hip $= 5$. Calcular las tres razones.
+
+\medskip
+
+\textbf{Solución:}
+\[
+  \mathrm{sen}(\alpha) = \frac{3}{5} = 0{,}6
+  \qquad
+  \cos(\alpha) = \frac{4}{5} = 0{,}8
+  \qquad
+  \tan(\alpha) = \frac{3}{4} = 0{,}75
+\]
+\end{tcolorbox}
+
+\subsection*{Ejercicios}
+
+\nivelbasico
+
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=8pt]
+  \item Triángulo con op $= 6$, ady $= 8$, hip $= 10$.
+  Calcular $\mathrm{sen}(\alpha)$, $\cos(\alpha)$, $\tan(\alpha)$. \hfill \textit{($0{,}6$ / $0{,}8$ / $0{,}75$)}
+
+  \item Triángulo con op $= 5$, ady $= 12$, hip $= 13$.
+  Calcular las tres razones. \hfill \textit{($\frac{5}{13}$ / $\frac{12}{13}$ / $\frac{5}{12}$)}
+\end{enumerate}
+
+\nivelintermedio
+
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=8pt,start=3]
+  \item Un triángulo rectángulo tiene un cateto de $7$ y la hipotenusa $25$. Calcula primero el otro cateto (Pitágoras), luego las tres razones tomando como $\alpha$ el ángulo opuesto al cateto $7$.
+  \hfill \textit{(otro cateto $= 24$; razones $\frac{7}{25}$, $\frac{24}{25}$, $\frac{7}{24}$)}
+\end{enumerate}
+
+\begin{tcolorbox}[tip]
+Las razones de un ángulo agudo son siempre \textbf{números entre $0$ y $1$} para seno y coseno (porque cateto $<$ hipotenusa). La \textbf{tangente} sí puede ser mayor que $1$. Si te sale $\mathrm{sen}(\alpha) = 1{,}3$, te equivocaste: revisa qué pusiste arriba y qué abajo.
+\end{tcolorbox}
+
+\newpage
+
+% ════════════════════════════════════════════════════
+% SECCIÓN 3 — ÁNGULOS NOTABLES
+% ════════════════════════════════════════════════════
+\section{ÁNGULOS NOTABLES: $30°$, $45°$, $60°$}
+
+\begin{tcolorbox}[propiedad, title=Tabla de memoria]
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}c|ccc@{}}
+\toprule
+ & $\mathbf{30°}$ & $\mathbf{45°}$ & $\mathbf{60°}$ \\
+\midrule
+$\mathrm{sen}$ & $\dfrac{1}{2}$ & $\dfrac{\sqrt{2}}{2}$ & $\dfrac{\sqrt{3}}{2}$ \\
+$\cos$         & $\dfrac{\sqrt{3}}{2}$ & $\dfrac{\sqrt{2}}{2}$ & $\dfrac{1}{2}$ \\
+$\tan$         & $\dfrac{\sqrt{3}}{3}$ & $1$ & $\sqrt{3}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{tcolorbox}
+
+\subsection{De dónde salen --- verificación rápida}
+
+\textbf{Para $45°$:} un triángulo rectángulo isósceles con catetos $= 1$. Su hipotenusa por Pitágoras es $\sqrt{2}$:
+\[
+  \mathrm{sen}(45°) = \cos(45°) = \frac{1}{\sqrt{2}} = \frac{\sqrt{2}}{2}, \qquad \tan(45°) = \frac{1}{1} = 1.
+\]
+
+\textbf{Para $30°$ y $60°$:} un triángulo equilátero de lado $2$, cortado por su altura. Queda un rectángulo con hipotenusa $2$, cateto adyacente a $60°$ igual a $1$, y altura (cateto opuesto a $60°$) igual a $\sqrt{3}$.
+\[
+  \cos(60°) = \frac{1}{2}, \quad \mathrm{sen}(60°) = \frac{\sqrt{3}}{2}, \quad \tan(60°) = \frac{\sqrt{3}}{1} = \sqrt{3}.
+\]
+Y para $30°$, los catetos se invierten (porque ahora el ángulo cambió de referencia):
+\[
+  \mathrm{sen}(30°) = \frac{1}{2}, \quad \cos(30°) = \frac{\sqrt{3}}{2}, \quad \tan(30°) = \frac{1}{\sqrt{3}} = \frac{\sqrt{3}}{3}.
+\]
+
+\begin{tcolorbox}[tip]
+Truco para memorizar la primera fila (seno): $\dfrac{\sqrt{1}}{2}, \dfrac{\sqrt{2}}{2}, \dfrac{\sqrt{3}}{2}$. Los radicandos van $1, 2, 3$. El coseno es la misma fila \emph{al revés}. La tangente es siempre $\dfrac{\mathrm{sen}}{\cos}$.
+\end{tcolorbox}
+
+\subsection*{Ejercicios}
+
+\nivelbasico
+
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=6pt]
+  \item $\mathrm{sen}(30°) + \cos(60°) = $ \hfill \textit{($1$)}
+  \item $\mathrm{sen}(45°) \cdot \cos(45°) = $ \hfill \textit{($\frac{1}{2}$)}
+  \item $\tan(60°) - \tan(30°) = $ \hfill \textit{($\frac{2\sqrt{3}}{3}$)}
+  \item $\mathrm{sen}^{2}(60°) + \cos^{2}(60°) = $ \hfill \textit{($1$ --- ¡siempre da $1$!)}
+\end{enumerate}
+
+\nivelintermedio
+
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=6pt,start=5]
+  \item $2\,\mathrm{sen}(60°) \cdot \cos(30°) = $ \hfill \textit{($\frac{3}{2}$)}
+  \item $\tan(45°) + \mathrm{sen}(30°) - \cos(60°) = $ \hfill \textit{($1$)}
+\end{enumerate}
+
+\newpage
+
+% ════════════════════════════════════════════════════
+% SECCIÓN 4 — ENCONTRAR UN LADO
+% ════════════════════════════════════════════════════
+\section{ENCONTRAR UN LADO}
+
+Cuando te dan un \textbf{ángulo} y \textbf{un lado}, puedes encontrar cualquier otro lado.
+
+\begin{tcolorbox}[ejemplo, title=Ejemplo 2]
+Un triángulo rectángulo tiene un ángulo de $30°$ y la hipotenusa mide $10$. ¿Cuánto mide el cateto opuesto a $30°$?
+
+\medskip
+\textbf{Solución:}
+\begin{enumerate}[nosep]
+  \item Identificar la razón: tengo hipotenusa, quiero opuesto $\to$ \textbf{seno}.
+  \item Plantear: $\ \mathrm{sen}(30°) = \dfrac{\text{op}}{10}$.
+  \item Sustituir el valor: $\ \dfrac{1}{2} = \dfrac{\text{op}}{10}$.
+  \item Despejar: $\ \text{op} = 10 \cdot \dfrac{1}{2} = 5$.
+\end{enumerate}
+\end{tcolorbox}
+
+\begin{tcolorbox}[recuerda, title={\color{black} CÓMO ELEGIR LA RAZÓN}]
+Pregúntate dos cosas:
+\begin{enumerate}[nosep]
+  \item ¿Qué lado \textbf{conozco}?
+  \item ¿Qué lado \textbf{quiero}?
+\end{enumerate}
+La razón que conecta esos dos lados es la que usas:
+\begin{itemize}[nosep]
+  \item op y hip $\to$ seno.
+  \item ady y hip $\to$ coseno.
+  \item op y ady $\to$ tangente.
+\end{itemize}
+\end{tcolorbox}
+
+\subsection*{Ejercicios}
+
+\nivelbasico
+
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=10pt]
+  \item Triángulo rectángulo con ángulo $45°$ e hipotenusa $8$. Encuentra el cateto opuesto.
+  \lineasrespuesta{2}
+  \textit{Respuesta: $\mathrm{sen}(45°) = \frac{\text{op}}{8} \Rightarrow \text{op} = 8 \cdot \frac{\sqrt{2}}{2} = 4\sqrt{2}$.}
+
+  \item Ángulo $60°$, cateto adyacente $5$. Encuentra la hipotenusa.
+  \lineasrespuesta{2}
+  \textit{Respuesta: $\cos(60°) = \frac{5}{\text{hip}} \Rightarrow \text{hip} = \frac{5}{1/2} = 10$.}
+
+  \item Ángulo $30°$, cateto opuesto $\sqrt{3}$. Encuentra el cateto adyacente.
+  \lineasrespuesta{2}
+  \textit{Respuesta: $\tan(30°) = \frac{\sqrt{3}}{\text{ady}} \Rightarrow \text{ady} = \frac{\sqrt{3}}{\sqrt{3}/3} = 3$.}
+\end{enumerate}
+
+\nivelintermedio
+
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=10pt,start=4]
+  \item Una rampa forma un ángulo de $30°$ con el suelo. Si la rampa mide $12\,\text{m}$ de largo (esa es la hipotenusa del triángulo), ¿a qué altura llega?
+  \lineasrespuesta{3}
+  \textit{Respuesta: altura $=$ op $=$ $12 \cdot \mathrm{sen}(30°) = 12 \cdot \frac{1}{2} = 6\,\text{m}$.}
+
+  \item Una escalera de $4\,\text{m}$ se apoya contra una pared formando $60°$ con el suelo. ¿A qué distancia del muro está su base? ¿Y a qué altura toca la pared?
+  \lineasrespuesta{4}
+  \textit{Respuesta: ady $= 4 \cdot \cos(60°) = 2\,\text{m}$; op $= 4 \cdot \mathrm{sen}(60°) = 2\sqrt{3}\,\text{m}$.}
+\end{enumerate}
+
+\newpage
+
+% ════════════════════════════════════════════════════
+% SECCIÓN 5 — ENCONTRAR UN ÁNGULO
+% ════════════════════════════════════════════════════
+\section{ENCONTRAR UN ÁNGULO}
+
+Cuando te dan \textbf{dos lados} y quieres el ángulo, usas la \textbf{operación inversa}:
+
+\begin{tcolorbox}[formula]
+\[
+  \mathrm{sen}(\alpha) = x \iff \alpha = \mathrm{sen}^{-1}(x)
+  \qquad
+  \cos(\alpha) = x \iff \alpha = \cos^{-1}(x)
+  \qquad
+  \tan(\alpha) = x \iff \alpha = \tan^{-1}(x)
+\]
+\end{tcolorbox}
+
+En la calculadora aparecen como \texttt{sin$^{-1}$}, \texttt{cos$^{-1}$}, \texttt{tan$^{-1}$} (o \texttt{asin}, \texttt{acos}, \texttt{atan}). \textbf{Asegúrate de tenerla en modo grados (DEG)}, no en radianes.
+
+\begin{tcolorbox}[ejemplo, title=Ejemplo 3]
+Un triángulo rectángulo tiene op $= 5$ e hip $= 10$. ¿Cuánto mide $\alpha$?
+
+\medskip
+\textbf{Solución:}
+\[
+  \mathrm{sen}(\alpha) = \frac{5}{10} = \frac{1}{2} \implies \alpha = \mathrm{sen}^{-1}\!\left(\frac{1}{2}\right) = 30°.
+\]
+(Sale exacto porque $\frac{1}{2}$ es valor notable. En el control, los ángulos suelen ser $30°$, $45°$ o $60°$.)
+\end{tcolorbox}
+
+\subsection*{Ejercicios}
+
+\nivelbasico
+
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=10pt]
+  \item op $= \sqrt{3}$, hip $= 2$. ¿Cuánto vale $\alpha$? \hfill \textit{($\mathrm{sen}(\alpha)=\frac{\sqrt{3}}{2}\Rightarrow \alpha=60°$)}
+  \item ady $= 4$, hip $= 4\sqrt{2}$. ¿Cuánto vale $\alpha$? \hfill \textit{($\cos(\alpha)=\frac{1}{\sqrt{2}} \Rightarrow \alpha=45°$)}
+  \item op $= 1$, ady $= \sqrt{3}$. ¿Cuánto vale $\alpha$? \hfill \textit{($\tan(\alpha)=\frac{1}{\sqrt{3}}\Rightarrow \alpha=30°$)}
+\end{enumerate}
+
+\nivelintermedio
+
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=10pt,start=4]
+  \item Un poste de $6\,\text{m}$ proyecta una sombra de $6\sqrt{3}\,\text{m}$. ¿Qué ángulo forma el sol con el suelo?
+  \lineasrespuesta{3}
+  \textit{Respuesta: $\tan(\alpha) = \frac{6}{6\sqrt{3}} = \frac{1}{\sqrt{3}} \Rightarrow \alpha = 30°$.}
+\end{enumerate}
+
+\newpage
+
+% ════════════════════════════════════════════════════
+% SECCIÓN 6 — MINI-ENSAYO TIPO CONTROL
+% ════════════════════════════════════════════════════
+\section{MINI-ENSAYO TIPO CONTROL}
+
+\begin{tcolorbox}[recuerda]
+6 ejercicios que cubren los tipos más probables. Hazlos de corrido, cronometrando si puedes. Cada uno apunta a un tipo distinto de pregunta.
+\end{tcolorbox}
+
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=14pt]
+  \item \textbf{(Cálculo directo de razones.)} En un triángulo rectángulo, op $= 9$, ady $= 12$, hip $= 15$. Calcula seno, coseno y tangente de $\alpha$.
+  \lineasrespuesta{3}
+
+  \item \textbf{(Ángulos notables.)} Calcula:
+  \[
+    \mathrm{sen}^{2}(45°) + \tan(60°) \cdot \cos(30°)
+  \]
+  \lineasrespuesta{3}
+
+  \item \textbf{(Encontrar un lado.)} Un triángulo rectángulo tiene un ángulo de $60°$ e hipotenusa $14$. ¿Cuánto mide el cateto opuesto a $60°$?
+  \lineasrespuesta{3}
+
+  \item \textbf{(Aplicación --- altura.)} Desde un punto en el suelo, un edificio se ve con ángulo de elevación de $45°$. Si el punto está a $20\,\text{m}$ de la base, ¿cuánto mide el edificio?
+  \lineasrespuesta{3}
+
+  \item \textbf{(Encontrar un ángulo.)} En un triángulo rectángulo, op $= 7$ y ady $= 7$. ¿Cuánto vale $\alpha$?
+  \lineasrespuesta{3}
+
+  \item \textbf{(Combinado.)} Una rampa de acceso forma $30°$ con el suelo y se eleva $1{,}5\,\text{m}$. ¿Qué longitud tiene la rampa (hipotenusa)? ¿Y qué distancia horizontal cubre (cateto adyacente)?
+  \lineasrespuesta{4}
+\end{enumerate}
+
+\newpage
+
+% ════════════════════════════════════════════════════
+% SECCIÓN 7 — TIPS FINALES + RESPUESTAS
+% ════════════════════════════════════════════════════
+\section*{TIPS FINALES PARA EL CONTROL}
+\addcontentsline{toc}{section}{Tips finales}
+
+\begin{tcolorbox}[tip, title={\color{rojo} CHECKLIST 5 MIN ANTES DEL CONTROL}]
+\begin{enumerate}[nosep]
+  \item Calculadora en \textbf{DEG} (no RAD). Verificar antes de partir.
+  \item Recordar la tabla de notables: \textbf{sen} $\frac{1}{2}, \frac{\sqrt{2}}{2}, \frac{\sqrt{3}}{2}$ para $30°, 45°, 60°$. Coseno al revés. Tangente $= \frac{\mathrm{sen}}{\cos}$.
+  \item Dibujar el triángulo \emph{antes} de elegir la razón. Marcar el ángulo de referencia con un círculo o color.
+  \item Identificar siempre los tres lados \emph{antes} de plantear la razón. ``¿Cuál es op? ¿cuál es ady? ¿cuál es hip?''.
+  \item Si pides un ángulo y la calculadora te lo da en decimales raros, revisa si era ángulo notable (¿la razón es $0{,}5$? $\to 30°$. ¿$\approx 0{,}707$? $\to 45°$. ¿$\approx 0{,}866$? $\to 60°$).
+\end{enumerate}
+\end{tcolorbox}
+
+\begin{tcolorbox}[propiedad, title=ERRORES TÍPICOS]
+\begin{itemize}[nosep]
+  \item \textbf{Confundir opuesto con adyacente} cuando cambia el ángulo de referencia.
+  \item Poner la hipotenusa abajo cuando va arriba (en tangente). Recuerda: tan $=$ op/ady, \emph{no usa hipotenusa}.
+  \item Decir $\mathrm{sen}(30°) = \frac{\sqrt{3}}{2}$. \emph{NO}: $\mathrm{sen}(30°) = \frac{1}{2}$. Lo otro es $\cos(30°)$.
+  \item Olvidar que $\mathrm{sen}^{2}(\alpha) + \cos^{2}(\alpha) = 1$ \emph{siempre} (útil para verificar).
+  \item Trabajar en radianes por accidente.
+\end{itemize}
+\end{tcolorbox}
+
+\section*{RESPUESTAS DEL MINI-ENSAYO}
+\addcontentsline{toc}{section}{Respuestas del mini-ensayo}
+
+\begin{tcolorbox}[propiedad, title=Soluciones]
+\begin{enumerate}[nosep]
+  \item $\mathrm{sen}(\alpha) = \frac{9}{15} = \frac{3}{5}$, $\cos(\alpha) = \frac{12}{15} = \frac{4}{5}$, $\tan(\alpha) = \frac{9}{12} = \frac{3}{4}$.
+  \item $\mathrm{sen}^{2}(45°) + \tan(60°)\cos(30°) = \frac{1}{2} + \sqrt{3}\cdot\frac{\sqrt{3}}{2} = \frac{1}{2} + \frac{3}{2} = 2$.
+  \item op $= 14 \cdot \mathrm{sen}(60°) = 14 \cdot \frac{\sqrt{3}}{2} = 7\sqrt{3}$.
+  \item altura $= 20 \cdot \tan(45°) = 20 \cdot 1 = 20\,\text{m}$.
+  \item $\tan(\alpha) = \frac{7}{7} = 1 \Rightarrow \alpha = 45°$.
+  \item hipotenusa $= \frac{1{,}5}{\mathrm{sen}(30°)} = \frac{1{,}5}{0{,}5} = 3\,\text{m}$; \quad ady $= 1{,}5/\tan(30°) = 1{,}5\sqrt{3} \approx 2{,}6\,\text{m}$.
+\end{enumerate}
+\end{tcolorbox}
+
+\end{document}
