@@ -1,0 +1,591 @@
+% ════════════════════════════════════════════════════════════════════════════
+% GUÍA — REFUERZO DE RAÍCES · AQUILES · SEMANA 21
+% ────────────────────────────────────────────────────────────────────────────
+% MATERIAL DEL TUTOR.
+% Aquiles se emparejó con Máximo en sem 20 y completó la guía conjunta de
+% potencias/raíces (Plan_Clase_Potencias_Raices, marzo). Pide reforzar:
+%   - Resolución de problemas con raíces.
+%   - Simplificación con descomposición de raíces no triviales.
+%
+% Foco de la guía: BLOQUE 2 (descomposición) y BLOQUE 4 (problemas).
+% Los bloques 0, 1 y 3 son andamiaje rápido para llegar bien al foco.
+% ════════════════════════════════════════════════════════════════════════════
+
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{hyperref}
+
+\geometry{margin=2cm, top=2.5cm, bottom=2.5cm}
+
+% ─── Colores ───
+\definecolor{azulprincipal}{HTML}{2980B9}
+\definecolor{azuloscuro}{HTML}{1A5276}
+\definecolor{verdequimica}{HTML}{1ABC9C}
+\definecolor{verdeclaro}{HTML}{D5F5E3}
+\definecolor{naranja}{HTML}{E67E22}
+\definecolor{rojo}{HTML}{E74C3C}
+\definecolor{amarillorecuerda}{HTML}{FFF3CD}
+\definecolor{amarilloborde}{HTML}{FFC107}
+\definecolor{grisfondo}{HTML}{F5F5F5}
+\definecolor{tutormorado}{HTML}{8E44AD}
+\definecolor{tutorfondo}{HTML}{F4ECF7}
+
+% ─── Cajas ───
+\tcbset{
+  recuerda/.style={
+    colback=amarillorecuerda, colframe=amarilloborde,
+    fonttitle=\bfseries, title={\color{black} RECUERDA},
+    boxrule=1pt, arc=2mm, left=5pt, right=5pt
+  },
+  propiedad/.style={
+    colback=verdeclaro!50, colframe=verdequimica!80!black,
+    fonttitle=\bfseries, boxrule=0.8pt, arc=2mm, left=5pt, right=5pt
+  },
+  formula/.style={
+    colback=grisfondo, colframe=azulprincipal,
+    boxrule=0.8pt, arc=2mm, left=5pt, right=5pt
+  },
+  definicion/.style={
+    colback=blue!5, colframe=azulprincipal,
+    fonttitle=\bfseries, boxrule=0.8pt, arc=2mm, left=5pt, right=5pt
+  },
+  ejemplo/.style={
+    colback=orange!5, colframe=naranja,
+    fonttitle=\bfseries, boxrule=0.8pt, arc=2mm, left=5pt, right=5pt
+  },
+  guia-tutor/.style={
+    colback=tutorfondo, colframe=tutormorado,
+    fonttitle=\bfseries, boxrule=1pt, arc=2mm, left=5pt, right=5pt,
+    title={\color{tutormorado} GUÍA PARA EL TUTOR}
+  }
+}
+
+% ─── Encabezados ───
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\small\color{gray} Refuerzo de raíces --- Aquiles --- 2° Medio}
+\fancyfoot[C]{\small\color{gray} Página \thepage\ --- \textbf{MATERIAL DEL TUTOR}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ─── Títulos ───
+\newcommand{\tituloseccion}[1]{%
+  \noindent\colorbox{azulprincipal}{%
+    \makebox[\dimexpr\textwidth-2\fboxsep\relax][l]{%
+      \color{white}\normalfont\Large\bfseries\ BLOQUE \thesection: #1%
+    }%
+  }%
+}
+\titleformat{\section}
+  {}{}{0em}
+  {\tituloseccion}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{azulprincipal}}
+  {\thesubsection}{0.5em}{}
+
+% ─── Niveles ───
+\newcommand{\nivelbasico}{%
+  \par\smallskip\colorbox{green!60!black}{\color{white}\small\bfseries\ NIVEL BÁSICO\ }\par\smallskip}
+\newcommand{\nivelintermedio}{%
+  \par\smallskip\colorbox{naranja}{\color{white}\small\bfseries\ NIVEL INTERMEDIO\ }\par\smallskip}
+\newcommand{\nivelavanzado}{%
+  \par\smallskip\colorbox{rojo}{\color{white}\small\bfseries\ NIVEL AVANZADO\ }\par\smallskip}
+
+% ─── Observación ───
+\newcommand{\observacion}[1]{%
+  \par\medskip
+  \noindent\colorbox{grisfondo}{%
+    \makebox[\dimexpr\textwidth-2\fboxsep\relax][l]{%
+      \small\color{gray}\itshape\ #1%
+    }%
+  }%
+  \par\medskip
+}
+
+% ─── Líneas ───
+\newcommand{\lineasrespuesta}[1]{%
+  \par\vspace{2mm}%
+  \foreach \i in {1,...,#1}{\noindent\rule{\textwidth}{0.3pt}\par\vspace{5mm}}%
+  \vspace{2mm}%
+}
+
+\begin{document}
+
+% ════════════════════════
+% PORTADA
+% ════════════════════════
+\thispagestyle{empty}
+\vspace*{2.5cm}
+\begin{center}
+  {\Huge\bfseries\color{azulprincipal} GUÍA DE REFUERZO}\\[8pt]
+  {\LARGE\bfseries\color{azuloscuro} Operatoria con raíces y simplificación}\\[15pt]
+  {\color{azulprincipal}\rule{8cm}{2pt}}\\[15pt]
+  {\Large Semana 21 \textbar{} 2° Medio \textbar{} 2026-S1}\\[8pt]
+  {\large Alumno: Aquiles}\\[25pt]
+  {\itshape\color{gray}
+  Material del tutor. Construido sobre la guía de potencias y raíces\\[4pt]
+  ya completada en semana 20 (Plan\_Clase\_Potencias\_Raices, Máx · marzo).\\[4pt]
+  Foco solicitado: descomposición de raíces no triviales y problemas aplicados.}
+\end{center}
+
+\vspace{1cm}
+\begin{tcolorbox}[recuerda]
+\textbf{Plan de la sesión (75 min):}
+\begin{enumerate}[nosep]
+  \item \textbf{Devolución sem 20 (5 min):} nombrar el salto que dio (de la nivelación al ritmo de Máx). Validar la confianza, NO reforzar la idea de ``ir atrasado''.
+  \item \textbf{Bloque 1 --- Repaso express (10 min):} ping-pong de cuadrados perfectos hasta $20^2$ y de raíces exactas.
+  \item \textbf{Bloque 2 --- Descomposición (25 min, FOCO):} dos métodos para simplificar $\sqrt{n}$. Ejercicios progresivos.
+  \item \textbf{Bloque 3 --- Operatoria (20 min):} suma, resta, multiplicación y división de raíces.
+  \item \textbf{Bloque 4 --- Problemas aplicados (15 min, FOCO):} geometría + ecuaciones simples.
+\end{enumerate}
+
+\textbf{Si pierde foco:} cambiar a oral. Si gana confianza muy rápido en el bloque 2, saltar a Nivel Intermedio sin pasar por todos los básicos.
+\end{tcolorbox}
+
+\newpage
+
+% ════════════════════════════════════════════════════
+% BLOQUE 1 — REPASO EXPRESS
+% ════════════════════════════════════════════════════
+\section{REPASO EXPRESS DE RAÍCES}
+
+\observacion{Bloque corto. NO re-enseñar la raíz. Si responde fluido, pasar al Bloque 2 en menos de 10 min.}
+
+\begin{tcolorbox}[recuerda]
+La raíz es la operación \textbf{inversa} de la potencia:
+\[
+  \sqrt{a} = b \iff b^{2} = a \qquad\qquad \sqrt[n]{a} = b \iff b^{n} = a
+\]
+``$\sqrt{25}=5$ porque $5^2 = 25$''.
+\end{tcolorbox}
+
+\subsection{Cuadrados perfectos --- ping-pong oral}
+
+\begin{tcolorbox}[propiedad, title=Tabla de referencia]
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}c|cccccccccc@{}}
+\textbf{$n$} & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
+\textbf{$n^2$} & 1 & 4 & 9 & 16 & 25 & 36 & 49 & 64 & 81 & 100 \\
+\midrule
+\textbf{$n$} & 11 & 12 & 13 & 14 & 15 & 16 & 17 & 18 & 19 & 20 \\
+\textbf{$n^2$} & 121 & 144 & 169 & 196 & 225 & 256 & 289 & 324 & 361 & 400 \\
+\end{tabular}
+\end{center}
+\end{tcolorbox}
+
+\nivelbasico
+
+\textbf{Decir en voz alta} (5 segundos por respuesta):
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=4pt]
+  \item $\sqrt{49} = $ \hfill \textit{($7$)}
+  \item $\sqrt{144} = $ \hfill \textit{($12$)}
+  \item $\sqrt{225} = $ \hfill \textit{($15$)}
+  \item $\sqrt{169} = $ \hfill \textit{($13$)}
+  \item $\sqrt{400} = $ \hfill \textit{($20$)}
+  \item $\sqrt{81} \cdot \sqrt{4} = $ \hfill \textit{($18$)}
+\end{enumerate}
+
+\begin{tcolorbox}[guia-tutor, title={\color{tutormorado} SI SE TRABA EN UN CUADRADO}]
+No darle el número. Preguntar:
+\begin{itemize}[nosep]
+  \item ``¿Entre qué dos enteros está? $\sqrt{200}$ está entre $\sqrt{196}=14$ y $\sqrt{225}=15$.''
+  \item Si igual no sale: dejarlo mirar la tabla del recuadro, no es vergonzoso usarla.
+\end{itemize}
+
+\textbf{Objetivo de este bloque}: que la tabla deje de ser muletilla y pase a ser memoria. No pasa nada si todavía la necesita; lo importante es que en bloques 2--4 no se trabe en este nivel.
+\end{tcolorbox}
+
+\newpage
+
+% ════════════════════════════════════════════════════
+% BLOQUE 2 — DESCOMPOSICIÓN (FOCO)
+% ════════════════════════════════════════════════════
+\section{SIMPLIFICAR $\sqrt{n}$ POR DESCOMPOSICIÓN}
+
+\observacion{Núcleo de la guía. Aquiles pidió esto explícitamente. Tomarse los 25 min y no apurar.}
+
+\subsection{El problema}
+
+$\sqrt{72}$ \emph{no} es un entero. Pero \textbf{tampoco se queda como está}: se puede simplificar a $6\sqrt{2}$. La pregunta es: ¿cómo encuentro ese $6$ y ese $2$?
+
+\begin{tcolorbox}[propiedad, title=Propiedad clave]
+\[
+  \sqrt{a \cdot b} = \sqrt{a} \cdot \sqrt{b}
+\]
+Si dentro de la raíz hay un \textbf{cuadrado perfecto multiplicando}, ese factor \textbf{sale} como su raíz entera.
+\end{tcolorbox}
+
+\subsection{Método A --- Buscar el mayor cuadrado perfecto que divide}
+
+\begin{tcolorbox}[ejemplo, title={Ejemplo guiado: $\sqrt{72}$}]
+\textbf{Paso 1.} ¿Qué cuadrado perfecto divide a $72$?
+\begin{itemize}[nosep]
+  \item $4 \mid 72$ ($72 = 4 \cdot 18$) --- sí, pero hay uno mayor.
+  \item $9 \mid 72$ ($72 = 9 \cdot 8$) --- sí, pero hay uno mayor.
+  \item $\mathbf{36 \mid 72}$ ($72 = 36 \cdot 2$) --- \textbf{este es el mayor}.
+\end{itemize}
+
+\textbf{Paso 2.} Aplicar la propiedad:
+\[
+  \sqrt{72} = \sqrt{36 \cdot 2} = \sqrt{36} \cdot \sqrt{2} = 6\sqrt{2}.
+\]
+
+\textbf{Verificación} (importante para que él confíe en el método):
+\[
+  (6\sqrt{2})^{2} = 36 \cdot 2 = 72.\ \checkmark
+\]
+\end{tcolorbox}
+
+\begin{tcolorbox}[guia-tutor, title={\color{tutormorado} CÓMO HACERLE LLEGAR EL MÉTODO A}]
+Insistir en que la pregunta clave es: \textbf{``¿qué cuadrado perfecto divide a $n$?''}. Recorrer la tabla de cuadrados perfectos \emph{desde el mayor hacia abajo}: $400, 361, 324, \ldots, 4$. Apenas uno divida, se usa.
+
+Si elige uno chico (ej.: $\sqrt{72} = \sqrt{4 \cdot 18} = 2\sqrt{18}$) NO está mal --- está \textbf{incompleto}: $\sqrt{18}$ todavía se simplifica más. \textbf{Validarlo} y mostrarle que aplicando el método de nuevo a $\sqrt{18}$ llega al mismo $6\sqrt{2}$. Esto le enseña que el método siempre lleva al mismo destino, lo que da seguridad.
+\end{tcolorbox}
+
+\subsection{Método B --- Factorización prima (más robusto)}
+
+\begin{tcolorbox}[ejemplo, title={Ejemplo guiado: $\sqrt{72}$ con primos}]
+\textbf{Paso 1.} Descomponer $72$ en factores primos:
+\[
+  72 = 2 \cdot 2 \cdot 2 \cdot 3 \cdot 3 = 2^{3} \cdot 3^{2}.
+\]
+
+\textbf{Paso 2.} Cada \textbf{par} de primos iguales sale como un primo afuera (porque $\sqrt{p \cdot p} = p$). Lo que queda \emph{impar} se queda adentro:
+\[
+  \sqrt{72} = \sqrt{\underbrace{2 \cdot 2}_{\text{par} \to 2} \cdot 2 \cdot \underbrace{3 \cdot 3}_{\text{par} \to 3}}
+            = 2 \cdot 3 \cdot \sqrt{2} = 6\sqrt{2}.
+\]
+\end{tcolorbox}
+
+\begin{tcolorbox}[guia-tutor, title={\color{tutormorado} CUÁNDO USAR A Y CUÁNDO B}]
+\textbf{Método A} es más rápido cuando el número es chico ($\leq 200$) y se reconoce el cuadrado de inmediato. Bueno para ``cálculo mental con apoyo''.
+
+\textbf{Método B} es infalible: nunca falla, no requiere ``ver'' el cuadrado. Bueno cuando el número es grande o cuando él se traba con A. Es el que se usa con expresiones como $\sqrt{x^{5}} = x^{2}\sqrt{x}$.
+
+\textbf{Que él elija el que le acomode.} Pero asegurarse de que sepa hacer al menos uno bien, y conozca el otro como respaldo.
+\end{tcolorbox}
+
+\subsection{Ejercicios}
+
+\nivelbasico
+
+Simplificar (usar el método que prefiera, mostrando los pasos):
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=8pt]
+  \item $\sqrt{50} = $ \hfill \textit{($5\sqrt{2}$)}
+  \item $\sqrt{18} = $ \hfill \textit{($3\sqrt{2}$)}
+  \item $\sqrt{45} = $ \hfill \textit{($3\sqrt{5}$)}
+  \item $\sqrt{75} = $ \hfill \textit{($5\sqrt{3}$)}
+  \item $\sqrt{98} = $ \hfill \textit{($7\sqrt{2}$)}
+  \item $\sqrt{48} = $ \hfill \textit{($4\sqrt{3}$)}
+\end{enumerate}
+
+\nivelintermedio
+
+Números más grandes --- aquí el Método B suele ser más cómodo:
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=8pt,start=7]
+  \item $\sqrt{200} = $ \hfill \textit{($10\sqrt{2}$)}
+  \item $\sqrt{180} = $ \hfill \textit{($6\sqrt{5}$)}
+  \item $\sqrt{288} = $ \hfill \textit{($12\sqrt{2}$)}
+  \item $\sqrt{500} = $ \hfill \textit{($10\sqrt{5}$)}
+\end{enumerate}
+
+\nivelavanzado
+
+Con variables o factores compuestos:
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=8pt,start=11]
+  \item $\sqrt{12 \cdot 27} = $ \hfill \textit{($18$ --- $12 \cdot 27 = 324 = 18^2$)}
+  \item $\sqrt{x^{5}} = $ \hfill \textit{($x^{2}\sqrt{x}$, con $x \geq 0$)}
+  \item $\sqrt{48 \, a^{3}} = $ \hfill \textit{($4a\sqrt{3a}$, con $a \geq 0$)}
+\end{enumerate}
+
+\begin{tcolorbox}[guia-tutor, title={\color{tutormorado} ERROR FRECUENTE: SIMPLIFICAR A MEDIAS}]
+Si escribe $\sqrt{200} = 2\sqrt{50}$, está bien encaminado pero \textbf{incompleto}. $\sqrt{50}$ aún se simplifica.
+
+\textbf{Test de cierre}: una raíz está totalmente simplificada \emph{cuando el número de adentro ya no tiene cuadrados perfectos como factor distinto de 1}. En $\sqrt{50}$: $50 = 25 \cdot 2$ $\to$ todavía se puede.
+
+Que verifique sus respuestas con este test antes de darlas por buenas.
+\end{tcolorbox}
+
+\begin{tcolorbox}[guia-tutor, title={\color{tutormorado} ERROR FRECUENTE: DIVIDIR DENTRO DE LA RAÍZ}]
+$\sqrt{50}$ \emph{no} es $\sqrt{25} + \sqrt{25} = 10$. La propiedad funciona con \textbf{producto}, no con suma:
+\[
+  \sqrt{a \cdot b} = \sqrt{a}\,\sqrt{b} \qquad \text{pero} \qquad \sqrt{a + b} \neq \sqrt{a} + \sqrt{b}.
+\]
+Contraejemplo: $\sqrt{9 + 16} = \sqrt{25} = 5$, pero $\sqrt{9} + \sqrt{16} = 3 + 4 = 7$.
+\end{tcolorbox}
+
+\newpage
+
+% ════════════════════════════════════════════════════
+% BLOQUE 3 — OPERATORIA
+% ════════════════════════════════════════════════════
+\section{OPERATORIA CON RAÍCES}
+
+\observacion{La simplificación del Bloque 2 es el prerrequisito de todo este bloque. Si el alumno no simplifica primero, los ejercicios parecen imposibles.}
+
+\subsection{Sumar y restar raíces}
+
+\begin{tcolorbox}[propiedad, title=Regla]
+Solo se pueden sumar (o restar) raíces \textbf{con el mismo radicando}:
+\[
+  a\sqrt{c} + b\sqrt{c} = (a + b)\sqrt{c}.
+\]
+``La raíz funciona como una variable: $3x + 5x = 8x$, igual $3\sqrt{2} + 5\sqrt{2} = 8\sqrt{2}$.''
+\end{tcolorbox}
+
+\begin{tcolorbox}[ejemplo, title=Caso clave: parecen distintas pero no lo son]
+\[
+  \sqrt{12} + \sqrt{27} = ?
+\]
+\textbf{Paso 1.} Simplificar cada una:
+\begin{align*}
+  \sqrt{12} &= \sqrt{4 \cdot 3} = 2\sqrt{3}, \\
+  \sqrt{27} &= \sqrt{9 \cdot 3} = 3\sqrt{3}.
+\end{align*}
+
+\textbf{Paso 2.} Ahora sí tienen el mismo radicando:
+\[
+  \sqrt{12} + \sqrt{27} = 2\sqrt{3} + 3\sqrt{3} = 5\sqrt{3}.
+\]
+\end{tcolorbox}
+
+\subsection{Multiplicar y dividir raíces}
+
+\begin{tcolorbox}[propiedad, title=Reglas]
+\[
+  \sqrt{a} \cdot \sqrt{b} = \sqrt{a \cdot b}, \qquad
+  \frac{\sqrt{a}}{\sqrt{b}} = \sqrt{\frac{a}{b}} \quad (b \neq 0).
+\]
+Multiplicar y dividir es \emph{más fácil} que sumar: no necesita el mismo radicando.
+\end{tcolorbox}
+
+\subsection{Ejercicios}
+
+\nivelbasico
+
+Suma y resta (simplifica primero, después suma):
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=8pt]
+  \item $\sqrt{8} + \sqrt{2} = $ \hfill \textit{($3\sqrt{2}$)}
+  \item $\sqrt{50} - \sqrt{18} = $ \hfill \textit{($2\sqrt{2}$)}
+  \item $\sqrt{45} + \sqrt{20} = $ \hfill \textit{($5\sqrt{5}$)}
+  \item $\sqrt{75} - \sqrt{12} = $ \hfill \textit{($3\sqrt{3}$)}
+\end{enumerate}
+
+\medskip
+Multiplicación y división:
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=8pt,start=5]
+  \item $\sqrt{6} \cdot \sqrt{6} = $ \hfill \textit{($6$)}
+  \item $\sqrt{3} \cdot \sqrt{12} = $ \hfill \textit{($6$ --- $\sqrt{36}$)}
+  \item $\dfrac{\sqrt{50}}{\sqrt{2}} = $ \hfill \textit{($5$ --- $\sqrt{25}$)}
+\end{enumerate}
+
+\nivelintermedio
+
+Mezclas que obligan a simplificar y operar:
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=8pt,start=8]
+  \item $\sqrt{72} + \sqrt{32} - \sqrt{18} = $ \hfill \textit{($5\sqrt{2}$)}
+  \item $2\sqrt{3} \cdot 3\sqrt{12} = $ \hfill \textit{($36$ --- coeficientes: $6$; raíces: $\sqrt{36}=6$)}
+  \item $\sqrt{27} \cdot \sqrt{3} - \sqrt{12} = $ \hfill \textit{($9 - 2\sqrt{3}$)}
+  \item $\dfrac{\sqrt{200}}{\sqrt{8}} = $ \hfill \textit{($5$ --- $\sqrt{25}$)}
+\end{enumerate}
+
+\begin{tcolorbox}[guia-tutor, title={\color{tutormorado} SI SUMA RADICANDOS}]
+El error $\sqrt{8} + \sqrt{2} = \sqrt{10}$ es paralelo al $\frac{1}{2} + \frac{1}{3} = \frac{2}{5}$ que ya vimos en sem 17. Es \emph{el mismo tipo de fallo}: tratar dos cosas distintas como si fueran iguales.
+
+\textbf{Hacerle el paralelo explícito}: ``así como las fracciones distintas no se suman directo arriba y abajo, las raíces distintas tampoco se suman radicando con radicando. Hay que primero hacerlas iguales --- y eso es \emph{simplificar}.''
+\end{tcolorbox}
+
+\begin{tcolorbox}[guia-tutor, title={\color{tutormorado} MULTIPLICACIÓN CON COEFICIENTE Y RAÍZ}]
+En $2\sqrt{3} \cdot 3\sqrt{12}$, separar las dos cuentas:
+\begin{itemize}[nosep]
+  \item Coeficientes: $2 \cdot 3 = 6$.
+  \item Raíces: $\sqrt{3} \cdot \sqrt{12} = \sqrt{36} = 6$.
+  \item Resultado: $6 \cdot 6 = 36$.
+\end{itemize}
+
+\textbf{Regla mnemotécnica:} ``afuera con afuera, adentro con adentro''.
+\end{tcolorbox}
+
+\newpage
+
+% ════════════════════════════════════════════════════
+% BLOQUE 4 — PROBLEMAS APLICADOS (FOCO)
+% ════════════════════════════════════════════════════
+\section{PROBLEMAS APLICADOS}
+
+\observacion{El otro foco solicitado por Aquiles. No empezar por aquí --- llegar con el Bloque 2 sólido. Si no se alcanza, este bloque queda como tarea.}
+
+\subsection{Por qué hay raíces en los problemas reales}
+
+\begin{tcolorbox}[recuerda]
+Las raíces aparecen cada vez que se ``deshace'' un cuadrado. Casos típicos:
+\begin{itemize}[nosep]
+  \item De \textbf{área} a \textbf{lado} en un cuadrado: si $A = \ell^{2}$, entonces $\ell = \sqrt{A}$.
+  \item En el \textbf{teorema de Pitágoras}: si $a^{2} + b^{2} = c^{2}$, entonces $c = \sqrt{a^{2} + b^{2}}$.
+  \item Al \textbf{despejar} en una ecuación con $x^{2}$: si $x^{2} = k$, entonces $x = \pm\sqrt{k}$.
+\end{itemize}
+\end{tcolorbox}
+
+\subsection{Ejemplo guiado --- diagonal de un cuadrado}
+
+\begin{tcolorbox}[ejemplo, title=Diagonal de un cuadrado de lado 5]
+Un cuadrado tiene lado $5\,\text{cm}$. ¿Cuánto mide su diagonal?
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+  \draw[thick] (0,0) rectangle (2.5,2.5);
+  \draw[thick, azulprincipal] (0,0) -- (2.5,2.5);
+  \node at (1.25,-0.3) {$5$};
+  \node at (-0.3,1.25) {$5$};
+  \node at (1.6,1.0) {\color{azulprincipal}$d$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 1.} Pitágoras en el triángulo rectángulo:
+\[
+  d^{2} = 5^{2} + 5^{2} = 25 + 25 = 50.
+\]
+\textbf{Paso 2.} Despejar $d$ y simplificar:
+\[
+  d = \sqrt{50} = \sqrt{25 \cdot 2} = 5\sqrt{2}\,\text{cm}.
+\]
+
+\textbf{Validar el sentido del resultado:} $\sqrt{2} \approx 1{,}41$, entonces $d \approx 7{,}07\,\text{cm}$. Razonable: la diagonal debe ser \emph{mayor} que el lado y \emph{menor} que dos lados.
+\end{tcolorbox}
+
+\subsection{Ejercicios}
+
+\nivelbasico
+
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=10pt]
+  \item Un cuadrado tiene área $72\,\text{cm}^{2}$. ¿Cuánto mide su lado?
+  \lineasrespuesta{2}
+  \textit{Respuesta: $\ell = \sqrt{72} = 6\sqrt{2}\,\text{cm} \approx 8{,}49\,\text{cm}$.}
+
+  \item Resuelve la ecuación $x^{2} = 45$ (deja la solución simplificada).
+  \lineasrespuesta{2}
+  \textit{Respuesta: $x = \pm 3\sqrt{5}$.}
+\end{enumerate}
+
+\nivelintermedio
+
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=10pt,start=3]
+  \item Un triángulo rectángulo tiene catetos $6\,\text{cm}$ y $9\,\text{cm}$. ¿Cuánto mide la hipotenusa? (Dejar simplificada.)
+  \lineasrespuesta{3}
+  \textit{Respuesta: $c = \sqrt{36+81} = \sqrt{117} = 3\sqrt{13}\,\text{cm}$.}
+
+  \item Un rectángulo tiene lados $\sqrt{8}\,\text{cm}$ y $\sqrt{18}\,\text{cm}$. ¿Cuál es su área? ¿Y su perímetro?
+  \lineasrespuesta{4}
+  \textit{Respuesta: $A = \sqrt{144} = 12\,\text{cm}^{2}$. \quad $P = 2(\sqrt{8}+\sqrt{18}) = 2(2\sqrt{2}+3\sqrt{2}) = 10\sqrt{2}\,\text{cm}$.}
+
+  \item La diagonal de un cuadrado mide $10\,\text{cm}$. ¿Cuánto mide su lado?
+  \lineasrespuesta{3}
+  \textit{Respuesta: $d = \ell\sqrt{2}$, entonces $\ell = \dfrac{10}{\sqrt{2}} = 5\sqrt{2}\,\text{cm}$.}
+\end{enumerate}
+
+\nivelavanzado
+
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=10pt,start=6]
+  \item Un cuadrado y un círculo tienen la misma área. Si el lado del cuadrado es $4\,\text{cm}$, ¿cuál es el radio del círculo? (Deja la respuesta exacta, en términos de $\pi$ y raíces.)
+  \lineasrespuesta{4}
+  \textit{Respuesta: $16 = \pi r^{2} \Rightarrow r = \sqrt{\frac{16}{\pi}} = \frac{4}{\sqrt{\pi}}$.}
+
+  \item Tres cuadrados tienen áreas $50$, $32$ y $18\,\text{cm}^{2}$. Si se alinean sus lados sobre una recta, ¿cuánto mide el segmento total?
+  \lineasrespuesta{3}
+  \textit{Respuesta: $\sqrt{50}+\sqrt{32}+\sqrt{18} = 5\sqrt{2}+4\sqrt{2}+3\sqrt{2} = 12\sqrt{2}\,\text{cm}$.}
+\end{enumerate}
+
+\begin{tcolorbox}[guia-tutor, title={\color{tutormorado} CÓMO ACOMPAÑAR LA RESOLUCIÓN DE PROBLEMAS}]
+El cuello de botella de Aquiles con problemas \emph{no} es la operatoria --- la operatoria ya la maneja. Es el paso del enunciado a la ecuación. Por eso:
+
+\begin{enumerate}[nosep]
+  \item \textbf{No darle la fórmula de entrada.} Preguntar: ``¿qué dato te dan? ¿qué te piden?''. Que él dibuje.
+  \item \textbf{Pedirle que estime} antes de calcular: ``¿más grande que $7$ o más chico que $7$?''. Esto ancla el sentido del resultado.
+  \item \textbf{Si la respuesta sale con raíz no simplificada}, no pasarla por alto. Es la oportunidad de practicar el Bloque 2 en contexto real.
+  \item \textbf{Validar el resultado en términos del problema}, no solo en términos numéricos: ``¿tiene sentido que la diagonal mida $5\sqrt{2}$? sí, porque $\sqrt{2} \approx 1{,}4$ y la diagonal debe ser un poco más que el lado''.
+\end{enumerate}
+\end{tcolorbox}
+
+\newpage
+
+% ════════════════════════════════════════════════════
+% TAREA + HOJA DE PROGRESO
+% ════════════════════════════════════════════════════
+\section*{TAREA PARA LA CASA}
+\addcontentsline{toc}{section}{Tarea para la casa}
+
+\begin{tcolorbox}[propiedad, title=A entregar la próxima sesión]
+\textbf{A. Simplificar} (mostrar el método):
+\begin{enumerate}[label=\arabic*),nosep,leftmargin=1.2cm]
+  \item $\sqrt{108}$ \hfill \textit{($6\sqrt{3}$)}
+  \item $\sqrt{162}$ \hfill \textit{($9\sqrt{2}$)}
+  \item $\sqrt{245}$ \hfill \textit{($7\sqrt{5}$)}
+  \item $\sqrt{363}$ \hfill \textit{($11\sqrt{3}$)}
+\end{enumerate}
+
+\medskip
+\textbf{B. Operatoria}:
+\begin{enumerate}[label=\arabic*),nosep,leftmargin=1.2cm,start=5]
+  \item $\sqrt{20} + \sqrt{80} - \sqrt{45}$ \hfill \textit{($3\sqrt{5}$)}
+  \item $\sqrt{6} \cdot \sqrt{24}$ \hfill \textit{($12$)}
+\end{enumerate}
+
+\medskip
+\textbf{C. Problemas}:
+\begin{enumerate}[label=\arabic*),nosep,leftmargin=1.2cm,start=7]
+  \item Una pieza cuadrada tiene área $98\,\text{m}^{2}$. ¿Cuánto mide cada lado? Dar respuesta exacta y aproximada. \hfill \textit{($7\sqrt{2}\,\text{m} \approx 9{,}9\,\text{m}$)}
+  \item Un triángulo rectángulo tiene catetos $4$ y $8$. ¿Cuánto mide la hipotenusa? \hfill \textit{($4\sqrt{5}$)}
+  \item Resolver $2x^{2} = 50$. \hfill \textit{($x = \pm 5$)}
+\end{enumerate}
+\end{tcolorbox}
+
+\bigskip
+
+\section*{NOTAS DE PROGRESO --- SEMANA 21}
+\addcontentsline{toc}{section}{Notas de progreso}
+
+\begin{center}
+{\large\bfseries\color{azuloscuro} Aquiles --- Sesión del \rule{3cm}{0.4pt} de mayo 2026}
+\end{center}
+
+\medskip
+
+\noindent\textbf{¿Confirmó el salto de ritmo de la sem 20 o aún se sintió inseguro?}
+\lineasrespuesta{2}
+
+\noindent\textbf{Método de descomposición que adoptó (A, B o ambos):}
+\lineasrespuesta{1}
+
+\noindent\textbf{Bloque(s) que costó más:}
+\lineasrespuesta{2}
+
+\noindent\textbf{Bloque(s) que fluyó:}
+\lineasrespuesta{2}
+
+\noindent\textbf{En problemas aplicados: ¿el cuello de botella fue plantear, calcular o simplificar?}
+\lineasrespuesta{2}
+
+\noindent\textbf{Nivel emocional (frustración / enganche / indiferencia):}
+\lineasrespuesta{2}
+
+\noindent\textbf{Decisión para sem 22:} ¿se mantiene el ritmo de Máx (lenguaje algebraico) o requiere un bloque corto de cierre de raíces?
+\lineasrespuesta{2}
+
+\begin{tcolorbox}[recuerda]
+Trasladar estas notas a la sección ``Notas para la próxima semana'' de \texttt{semana-21\_raices.md} en el vault, y ajustar \texttt{semana-22\_lenguaje-algebraico.md} en consecuencia.
+\end{tcolorbox}
+
+\end{document}
