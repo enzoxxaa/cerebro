@@ -17,4 +17,4 @@ Imaginar esto en porina -> posible eje
 
 1. nanoburbuja de O2
 2. agregar pfc a posteriori
-3. 
+3.  Viernes 11 am xtb 
