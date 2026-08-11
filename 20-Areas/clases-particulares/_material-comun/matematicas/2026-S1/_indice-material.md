@@ -27,6 +27,7 @@ Guías `.tex` emitidas durante el primer semestre 2026 para la ruta compartida M
 | 17  | Operatoria entera y fraccionaria (Aquiles) | [[semana-17_operatoria-aquiles/Guia_Operatoria_Aquiles\|Guia_Operatoria_Aquiles]] | emitida | 8 páginas · Material del tutor · provisional (depende del diagnóstico) |
 | 21  | Refuerzo de raíces y simplificación (Aquiles) | [[semana-21_raices-aquiles/Guia_Refuerzo_Raices_Aquiles\|Guia_Refuerzo_Raices_Aquiles]] | emitida | ~9 páginas · Material del tutor · foco: descomposición no trivial + problemas |
 | 21  | Razones trigonométricas (Máx, prep control 20-may) | [[semana-21_razones-trigonometricas/Guia_Razones_Trigonometricas\|Guia_Razones_Trigonometricas]] | emitida | ~9 páginas · Guía para alumno · SOH-CAH-TOA, notables, despeje + mini-ensayo |
+| 24  | Repaso semestral Máximo (raíces + logaritmos + trigonometría) | [[semana-24_repaso-semestral-maximo/Guia_Repaso_Semestral_Maximo\|Guia_Repaso_Semestral_Maximo]] | emitida | 21 páginas · Guía para alumno · 3 ejes con dificultad progresiva + mini-ensayo con puntaje + soluciones completas · **prueba mejoras de template** (cajas breakable, lmodern, dificultad por ejercicio, formulario de emergencia, semáforo de autoevaluación) |
 
 <!-- Agregar fila al solicitar una guía nueva. Estados: borrador | emitida | revisada -->
 

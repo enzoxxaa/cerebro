@@ -1,0 +1,810 @@
+% ════════════════════════════════════════════════════════════════════════════
+% GUÍA — REPASO SEMESTRAL · MÁXIMO · SEMANA 24
+% ────────────────────────────────────────────────────────────────────────────
+% Repaso de los ejes con guía emitida durante 2026-S1 (excluye diagnóstico
+% y operatoria de Aquiles):
+%   EJE 1 — Raíces y simplificación   (sem 20-21, Plan_Clase_Potencias_Raices
+%                                      + Guia_Refuerzo_Raices_Aquiles)
+%   EJE 2 — Logaritmos                (sem 16-17, Guia_Logaritmos_1 y _2)
+%   EJE 3 — Razones trigonométricas   (sem 21, Guia_Razones_Trigonometricas)
+%   CIERRE — Mini-ensayo integrador con puntaje.
+%
+% Diseñada para trabajo en bloques cortos (perfil Máximo): cada eje es
+% autocontenido (~1 sesión o bloque de estudio). Soluciones completas al
+% final para trabajo autónomo entre sesiones.
+%
+% NOTA TEMPLATE: esta guía prueba mejoras sobre guia-base.tex
+% (cajas breakable, lmodern+microtype, dificultad por ejercicio con puntos
+% de color, formulario de emergencia, semáforo de autoevaluación).
+% Si funcionan, evaluar incorporarlas al template.
+% ════════════════════════════════════════════════════════════════════════════
+
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{hyperref}
+
+\geometry{margin=2cm, top=2.5cm, bottom=2.5cm}
+\hypersetup{hidelinks}
+
+% ─── Símbolo de grados (NO usar ° directo: en math mode con T1 sale mal) ───
+\newcommand{\gr}{\ensuremath{^{\circ}}}
+
+% ─── VARIABLES DE LA GUÍA ───
+\newcommand{\guiaTitulo}{Repaso Semestral}
+\newcommand{\guiaSubtitulo}{Raíces · Logaritmos · Trigonometría}
+\newcommand{\guiaCurso}{2\gr{} Medio --- Matemáticas}
+\newcommand{\guiaAlumno}{Máximo}
+\newcommand{\guiaSemana}{Semana 24}
+\newcommand{\guiaSemestre}{2026-S1}
+
+% ─── Colores (paleta del template, refinada) ───
+\definecolor{azulprincipal}{HTML}{2980B9}
+\definecolor{azuloscuro}{HTML}{1A5276}
+\definecolor{verdequimica}{HTML}{1ABC9C}
+\definecolor{verdeclaro}{HTML}{D5F5E3}
+\definecolor{naranja}{HTML}{E67E22}
+\definecolor{rojo}{HTML}{E74C3C}
+\definecolor{amarillorecuerda}{HTML}{FFF8E1}
+\definecolor{amarilloborde}{HTML}{FFC107}
+\definecolor{grisfondo}{HTML}{F7F9FA}
+\definecolor{grisborde}{HTML}{B0BEC5}
+\definecolor{verdedif}{HTML}{27AE60}
+
+% ─── Cajas (breakable: pueden cortarse entre páginas sin desbordarse) ───
+\tcbset{
+  base/.style={enhanced, breakable, arc=2mm, left=6pt, right=6pt,
+               top=5pt, bottom=5pt, boxrule=0.8pt},
+  recuerda/.style={base, colback=amarillorecuerda, colframe=amarilloborde,
+    fonttitle=\bfseries, title={\color{black} RECUERDA}},
+  propiedad/.style={base, colback=verdeclaro!50, colframe=verdequimica!80!black,
+    fonttitle=\bfseries},
+  formula/.style={base, colback=grisfondo, colframe=azulprincipal},
+  definicion/.style={base, colback=blue!5, colframe=azulprincipal,
+    fonttitle=\bfseries},
+  ejemplo/.style={base, colback=orange!5, colframe=naranja,
+    fonttitle=\bfseries},
+  alerta/.style={base, colback=rojo!6, colframe=rojo,
+    fonttitle=\bfseries, coltitle=white, title={OJO --- ERROR TÍPICO}},
+  semaforo/.style={base, colback=grisfondo, colframe=grisborde,
+    fonttitle=\bfseries, coltitle=azuloscuro, title={SEMÁFORO --- ¿CÓMO QUEDÓ ESTE EJE?}}
+}
+
+% ─── Encabezados ───
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{gray} \guiaTitulo{} --- \guiaAlumno}
+\fancyhead[R]{\small\color{gray} \guiaCurso}
+\fancyfoot[C]{\small\color{gray} Página \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ─── Títulos de sección: banda con número en círculo ───
+\newcommand{\tituloseccion}[1]{%
+  \noindent\begin{tikzpicture}
+    \node[fill=azulprincipal, text=white, font=\Large\bfseries, circle,
+          inner sep=4pt, minimum size=9mm] (n) {\thesection};
+    \node[anchor=west, font=\Large\bfseries, text=azuloscuro,
+          xshift=2mm] at (n.east) {#1};
+    \draw[azulprincipal, line width=1.2pt]
+      ([yshift=-2.5mm]n.south west) -- ([yshift=-2.5mm, xshift=\textwidth-9mm]n.south west);
+  \end{tikzpicture}%
+}
+\titleformat{\section}{}{}{0em}{\tituloseccion}
+% Versión sin número (para formulario y soluciones): banda sin círculo
+\newcommand{\seccionsinnumero}[1]{%
+  \par\bigskip
+  \noindent\begin{tikzpicture}
+    \node[anchor=west, font=\Large\bfseries, text=azuloscuro, inner xsep=0pt] (t) at (0,0) {#1};
+    \draw[azulprincipal, line width=1.2pt]
+      ([yshift=-1.5mm]t.south west) -- ++(\textwidth-1.2pt,0);
+  \end{tikzpicture}\par\medskip}
+\titlespacing*{\section}{0pt}{*3}{*2}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{azulprincipal}}
+  {\thesubsection}{0.5em}{}
+
+% ─── Dificultad por ejercicio (reemplaza los banners de nivel) ───
+\newcommand{\difB}{{\color{verdedif}$\bullet$}{\color{grisborde}$\bullet\bullet$}\hspace{0.4em}{\scriptsize\color{gray}\textsc{básico}}}
+\newcommand{\difI}{{\color{naranja}$\bullet\bullet$}{\color{grisborde}$\bullet$}\hspace{0.4em}{\scriptsize\color{gray}\textsc{intermedio}}}
+\newcommand{\difD}{{\color{rojo}$\bullet\bullet\bullet$}\hspace{0.4em}{\scriptsize\color{gray}\textsc{desafío}}}
+
+% ─── Encabezado de ejercicio con numeración global ───
+\newcounter{ejercicio}
+\newcommand{\ejercicio}[2]{% #1 = dificultad, #2 = consigna
+  \stepcounter{ejercicio}\par\medskip
+  \noindent{\bfseries\color{azuloscuro}Ejercicio \theejercicio}\hspace{0.8em}#1\par
+  \nopagebreak\smallskip\noindent #2\par\nopagebreak\smallskip}
+
+% ─── Líneas de respuesta ───
+\newcommand{\lineasrespuesta}[1]{%
+  \par\vspace{2mm}%
+  \foreach \i in {1,...,#1}{\noindent\rule{\linewidth}{0.3pt}\par\vspace{6mm}}%
+  \vspace{1mm}%
+}
+
+% ─── Casilla de autoevaluación ───
+\newcommand{\casilla}{$\square$~}
+
+\setlist[enumerate]{itemsep=4pt}
+
+\begin{document}
+
+% ════════════════════════
+% PORTADA
+% ════════════════════════
+\thispagestyle{empty}
+\vspace*{2cm}
+\begin{center}
+  {\Huge\bfseries\color{azulprincipal} GUÍA DE REPASO}\\[8pt]
+  {\LARGE\bfseries\color{azuloscuro} \guiaTitulo{} \guiaSemestre}\\[15pt]
+  {\color{azulprincipal}\rule{8cm}{2pt}}\\[15pt]
+  {\Large \guiaCurso}\\[8pt]
+  {\large Alumno: \guiaAlumno}\\[4pt]
+  {\large \guiaSemana{} --- \guiaSemestre}\\[20pt]
+  {\itshape\color{gray} \guiaSubtitulo}
+\end{center}
+
+\vspace{1cm}
+\begin{tcolorbox}[recuerda, title={\color{black} CÓMO USAR ESTA GUÍA (léelo, son 30 segundos)}]
+Esta guía \textbf{no se hace de una sentada}. Está pensada en 4 bloques:
+\begin{enumerate}[nosep]
+  \item \textbf{Eje 1 --- Raíces} (un bloque de $\sim$40 min).
+  \item \textbf{Eje 2 --- Logaritmos} (un bloque de $\sim$40 min).
+  \item \textbf{Eje 3 --- Trigonometría} (un bloque de $\sim$40 min).
+  \item \textbf{Mini-ensayo final} (45 min cronometrados, sin apuntes).
+\end{enumerate}
+Reglas del juego:
+\begin{itemize}[nosep]
+  \item Cada eje parte con un \textbf{repaso flash}: léelo aunque creas que te lo sabes.
+  \item Los ejercicios van de {\color{verdedif}$\bullet$}{\color{grisborde}$\bullet\bullet$} a {\color{rojo}$\bullet\bullet\bullet$}. Los desafíos pueden salir mal al primer intento: \emph{esa es la idea}.
+  \item Las \textbf{soluciones completas} están al final. Úsalas para corregirte, no para copiarte: intenta cada ejercicio al menos 5 minutos antes de mirar.
+  \item Al cerrar cada eje, marca el \textbf{semáforo}. Eso me dice qué repasamos juntos en la próxima sesión.
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.5cm}
+\begin{tcolorbox}[formula]
+\textbf{Mapa del semestre} (lo que cubre esta guía):
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}cll@{}}
+\toprule
+\textbf{Eje} & \textbf{Tema} & \textbf{Lo viste en\ldots} \\
+\midrule
+1 & Raíces: simplificar, operar, problemas & marzo + semana 20--21 \\
+2 & Logaritmos: definición, propiedades, cambio de base & semanas 16--17 \\
+3 & Razones trigonométricas: SOH-CAH-TOA, notables & semana 21 (control 20-may) \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{tcolorbox}
+
+\newpage
+
+% ════════════════════════
+% FORMULARIO DE EMERGENCIA
+% ════════════════════════
+\seccionsinnumero{Formulario de emergencia (una sola página)}
+
+Todo lo del semestre cabe aquí. Si en un ejercicio te quedas en blanco, vuelve a esta página, encuentra la fórmula y \emph{vuelve al ejercicio}.
+
+\begin{tcolorbox}[propiedad, title={EJE 1 --- Raíces}]
+\[
+  \sqrt{a} = b \iff b^2 = a
+  \qquad\quad
+  \sqrt{a\cdot b} = \sqrt{a}\cdot\sqrt{b}
+  \qquad\quad
+  \frac{\sqrt{a}}{\sqrt{b}} = \sqrt{\frac{a}{b}}\ \ (b\neq 0)
+\]
+\begin{itemize}[nosep]
+  \item \textbf{Simplificar:} buscar el mayor cuadrado perfecto que divide. $\sqrt{72} = \sqrt{36\cdot 2} = 6\sqrt{2}$.
+  \item \textbf{Sumar/restar:} solo con el mismo radicando. $a\sqrt{c} + b\sqrt{c} = (a+b)\sqrt{c}$. Si los radicandos son distintos, \emph{simplifica primero}.
+  \item \textbf{Pitágoras:} $a^2 + b^2 = c^2$. \quad \textbf{Despeje:} si $x^2 = k$ entonces $x = \pm\sqrt{k}$.
+\end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[propiedad, title={EJE 2 --- Logaritmos}]
+\[
+  \log_b(a) = c \iff b^{c} = a \qquad (b>0,\ b\neq 1,\ a>0)
+\]
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}ll@{}}
+Casos especiales: & $\log_b(1) = 0$ \qquad $\log_b(b) = 1$ \qquad $\log_b(b^n) = n$ \\[4pt]
+Producto: & $\log_b(M\cdot N) = \log_b M + \log_b N$ \\
+Cociente: & $\log_b\!\left(\frac{M}{N}\right) = \log_b M - \log_b N$ \\
+Potencia: & $\log_b(M^n) = n\cdot\log_b M$ \\[2pt]
+Cambio de base: & $\log_b(a) = \dfrac{\log_c(a)}{\log_c(b)}$ \quad (en la práctica, $c=10$ o $c=e$) \\
+\end{tabular}
+\end{center}
+\end{tcolorbox}
+
+\begin{tcolorbox}[propiedad, title={EJE 3 --- Razones trigonométricas}]
+\[
+  \mathrm{sen}(\alpha) = \frac{\text{op}}{\text{hip}}
+  \qquad
+  \cos(\alpha) = \frac{\text{ady}}{\text{hip}}
+  \qquad
+  \tan(\alpha) = \frac{\text{op}}{\text{ady}}
+  \qquad\quad
+  \mathrm{sen}^2(\alpha) + \cos^2(\alpha) = 1
+\]
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}c|ccc@{}}
+\toprule
+ & $\mathbf{30\gr }$ & $\mathbf{45\gr }$ & $\mathbf{60\gr }$ \\
+\midrule
+$\mathrm{sen}$ & $\dfrac{1}{2}$ & $\dfrac{\sqrt{2}}{2}$ & $\dfrac{\sqrt{3}}{2}$ \\
+$\cos$         & $\dfrac{\sqrt{3}}{2}$ & $\dfrac{\sqrt{2}}{2}$ & $\dfrac{1}{2}$ \\
+$\tan$         & $\dfrac{\sqrt{3}}{3}$ & $1$ & $\sqrt{3}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\smallskip
+Truco: la fila del seno es $\frac{\sqrt{1}}{2}, \frac{\sqrt{2}}{2}, \frac{\sqrt{3}}{2}$. El coseno es la misma fila al revés. La tangente es $\frac{\mathrm{sen}}{\cos}$.
+\end{tcolorbox}
+
+\newpage
+
+% ════════════════════════════════════════════════════
+% EJE 1 — RAÍCES
+% ════════════════════════════════════════════════════
+\section{RAÍCES Y SIMPLIFICACIÓN}
+
+\subsection*{Repaso flash}
+
+\begin{tcolorbox}[definicion, title={Las tres ideas del eje}]
+\begin{enumerate}[nosep]
+  \item \textbf{Simplificar} $\sqrt{n}$: sacar el mayor cuadrado perfecto.
+  $\sqrt{50} = \sqrt{25 \cdot 2} = 5\sqrt{2}$. Una raíz queda lista cuando adentro \emph{ya no queda} ningún cuadrado perfecto como factor.
+  \item \textbf{Operar}: sumar/restar solo con el mismo radicando (la raíz funciona como una variable: $3\sqrt{2} + 5\sqrt{2} = 8\sqrt{2}$, igual que $3x + 5x = 8x$). Multiplicar y dividir es libre: $\sqrt{a}\cdot\sqrt{b} = \sqrt{ab}$.
+  \item \textbf{Problemas}: las raíces aparecen al ``deshacer'' un cuadrado --- de área a lado, en Pitágoras, al despejar $x^2 = k$.
+\end{enumerate}
+\end{tcolorbox}
+
+\begin{tcolorbox}[alerta]
+\begin{itemize}[nosep]
+  \item $\sqrt{a+b} \neq \sqrt{a} + \sqrt{b}$. Contraejemplo: $\sqrt{9+16} = 5$, pero $3 + 4 = 7$. La propiedad funciona con \textbf{producto}, no con suma.
+  \item $\sqrt{200} = 2\sqrt{50}$ está \emph{incompleto}: $\sqrt{50}$ aún se simplifica. Respuesta final: $10\sqrt{2}$.
+  \item Al despejar $x^2 = k$, no olvides el $\pm$.
+\end{itemize}
+\end{tcolorbox}
+
+\subsection*{Ejercicios}
+
+\ejercicio{\difB}{Simplifica completamente:}
+\begin{enumerate}[label=\alph*),leftmargin=1cm]
+  \item $\sqrt{32} = $ \rule{2.5cm}{0.4pt}
+  \item $\sqrt{27} = $ \rule{2.5cm}{0.4pt}
+  \item $\sqrt{80} = $ \rule{2.5cm}{0.4pt}
+  \item $\sqrt{125} = $ \rule{2.5cm}{0.4pt}
+  \item $\sqrt{147} = $ \rule{2.5cm}{0.4pt}
+  \item $\sqrt{242} = $ \rule{2.5cm}{0.4pt}
+\end{enumerate}
+
+\ejercicio{\difB}{Opera y deja el resultado simplificado:}
+\begin{enumerate}[label=\alph*),leftmargin=1cm]
+  \item $\sqrt{18} + \sqrt{2} = $ \rule{2.5cm}{0.4pt}
+  \item $\sqrt{48} - \sqrt{12} = $ \rule{2.5cm}{0.4pt}
+  \item $\sqrt{5} \cdot \sqrt{20} = $ \rule{2.5cm}{0.4pt}
+  \item $\dfrac{\sqrt{96}}{\sqrt{6}} = $ \rule{2.5cm}{0.4pt}
+\end{enumerate}
+
+\ejercicio{\difI}{Mezclas (simplifica primero, opera después):}
+\begin{enumerate}[label=\alph*),leftmargin=1cm]
+  \item $\sqrt{8} + \sqrt{50} - \sqrt{72}$
+  \lineasrespuesta{2}
+  \item $2\sqrt{27} + \sqrt{75} - 4\sqrt{3}$
+  \lineasrespuesta{2}
+  \item $3\sqrt{2} \cdot 5\sqrt{8}$ \hfill {\small\itshape Pista: afuera con afuera, adentro con adentro.}
+  \lineasrespuesta{2}
+  \item $\left(2\sqrt{3}\right)^{2} + \sqrt{12}\cdot\sqrt{3}$
+  \lineasrespuesta{2}
+\end{enumerate}
+
+\ejercicio{\difI}{Resuelve y deja las soluciones simplificadas:}
+\begin{enumerate}[label=\alph*),leftmargin=1cm]
+  \item $x^{2} = 98$
+  \lineasrespuesta{2}
+  \item $x^{2} - 45 = 0$
+  \lineasrespuesta{2}
+  \item $2x^{2} = 144$
+  \lineasrespuesta{2}
+\end{enumerate}
+
+\ejercicio{\difI}{Problemas (dibuja antes de calcular):}
+\begin{enumerate}[label=\alph*),leftmargin=1cm]
+  \item Un cuadrado tiene área $50\ \text{cm}^2$. ¿Cuánto mide su lado? Da la respuesta exacta y la aproximada.
+  \lineasrespuesta{2}
+  \item Un triángulo rectángulo tiene catetos $5$ y $10\ \text{cm}$. ¿Cuánto mide la hipotenusa? (Simplificada.)
+  \lineasrespuesta{2}
+  \item Un rectángulo tiene lados $\sqrt{12}$ y $\sqrt{27}\ \text{cm}$. Calcula su área y su perímetro.
+  \lineasrespuesta{3}
+\end{enumerate}
+
+\ejercicio{\difD}{Desafíos:}
+\begin{enumerate}[label=\alph*),leftmargin=1cm]
+  \item Simplifica $\sqrt{2^{5}\cdot 3^{4}}$ sin calcular el número de adentro. \hfill {\small\itshape Pista: cada par de factores iguales sale como uno.}
+  \lineasrespuesta{2}
+  \item Calcula $\left(\sqrt{6} + \sqrt{2}\right)\left(\sqrt{6} - \sqrt{2}\right)$. \hfill {\small\itshape Pista: suma por su diferencia.}
+  \lineasrespuesta{2}
+  \item La diagonal de un cuadrado mide $12\ \text{cm}$. Calcula el lado (exacto y simplificado) y el área.
+  \lineasrespuesta{3}
+  \item Ordena de menor a mayor \textbf{sin calculadora}: $\;3\sqrt{5}$, $\;2\sqrt{10}$, $\;7$. Justifica.
+  \hfill {\small\itshape Pista: compara los cuadrados.}
+  \lineasrespuesta{3}
+\end{enumerate}
+
+\begin{tcolorbox}[semaforo]
+\casilla \textbf{Verde}: simplifico y opero sin mirar el formulario. \\
+\casilla \textbf{Amarillo}: me salen, pero necesito el formulario o me demoro mucho. \\
+\casilla \textbf{Rojo}: me trabé en los ejercicios \rule{2cm}{0.4pt} (anótalos para verlos en sesión).
+\end{tcolorbox}
+
+\newpage
+
+% ════════════════════════════════════════════════════
+% EJE 2 — LOGARITMOS
+% ════════════════════════════════════════════════════
+\section{LOGARITMOS}
+
+\subsection*{Repaso flash}
+
+\begin{tcolorbox}[definicion, title={La única idea que hay que recordar}]
+El logaritmo \textbf{despeja el exponente}: $\log_b(a)$ responde \emph{``¿a qué exponente elevo $b$ para obtener $a$?''}
+\[
+  \log_b(a) = c \iff b^{c} = a
+\]
+Todo lo demás (casos especiales, propiedades, cambio de base) \emph{se deduce} de esta traducción. Si te pierdes en un ejercicio, tradúcelo a potencia.
+\end{tcolorbox}
+
+\begin{tcolorbox}[ejemplo, title={Ejemplo: la traducción resuelve casi todo}]
+$\log_2\!\left(\tfrac{1}{8}\right) = ?$ \quad Pregunta: ¿$2$ a qué exponente da $\tfrac{1}{8}$? Como $\tfrac{1}{8} = 2^{-3}$, la respuesta es $-3$.
+
+\smallskip
+$\log_x(49) = 2 \Rightarrow x^2 = 49 \Rightarrow x = 7$ \ (la base debe ser positiva).
+\end{tcolorbox}
+
+\begin{tcolorbox}[alerta]
+\begin{itemize}[nosep]
+  \item $\log_b(M+N) \neq \log_b M + \log_b N$. La propiedad de la suma es para \textbf{productos}: $\log_b(M\cdot N) = \log_b M + \log_b N$.
+  \item $\log_b(M\cdot N) \neq \log_b M \cdot \log_b N$. Producto adentro $\to$ \textbf{suma} afuera.
+  \item El argumento debe ser \textbf{positivo}: $\log_2(-4)$ y $\log_2(0)$ no existen.
+\end{itemize}
+\end{tcolorbox}
+
+\subsection*{Ejercicios}
+
+\ejercicio{\difB}{Calcula mentalmente (si te trabas, traduce a potencia):}
+\begin{enumerate}[label=\alph*),leftmargin=1cm]
+  \item $\log_2(16) = $ \rule{2cm}{0.4pt}
+  \item $\log_3(243) = $ \rule{2cm}{0.4pt}
+  \item $\log_5(125) = $ \rule{2cm}{0.4pt}
+  \item $\log_{10}(100\,000) = $ \rule{2cm}{0.4pt}
+  \item $\log_7(1) = $ \rule{2cm}{0.4pt}
+  \item $\log_9(9) = $ \rule{2cm}{0.4pt}
+  \item $\log_2\!\left(\tfrac{1}{4}\right) = $ \rule{2cm}{0.4pt}
+  \item $\log_3\!\left(\tfrac{1}{27}\right) = $ \rule{2cm}{0.4pt}
+\end{enumerate}
+
+\ejercicio{\difB}{Encuentra $x$ traduciendo a potencia:}
+\begin{enumerate}[label=\alph*),leftmargin=1cm]
+  \item $\log_2(x) = 5$
+  \item $\log_x(81) = 4$
+  \item $\log_3(x) = -2$
+  \item $\log_x(125) = 3$
+\end{enumerate}
+\lineasrespuesta{3}
+
+\ejercicio{\difI}{Expande completamente usando las propiedades:}
+\begin{enumerate}[label=\alph*),leftmargin=1cm]
+  \item $\log_2\!\left(8x^{2}\right)$
+  \lineasrespuesta{2}
+  \item $\log_5\!\left(\dfrac{25}{y}\right)$
+  \lineasrespuesta{2}
+  \item $\log_3\!\left(\dfrac{27\,a^{2}}{b^{3}}\right)$
+  \lineasrespuesta{2}
+\end{enumerate}
+
+\ejercicio{\difI}{Condensa en un solo logaritmo y calcula el valor si es posible:}
+\begin{enumerate}[label=\alph*),leftmargin=1cm]
+  \item $\log_{10} 2 + \log_{10} 5$
+  \lineasrespuesta{2}
+  \item $2\log_3 6 - \log_3 4$
+  \lineasrespuesta{2}
+  \item $\tfrac{1}{2}\log_2 64$
+  \lineasrespuesta{2}
+  \item $\log_5 100 - \log_5 4$
+  \lineasrespuesta{2}
+\end{enumerate}
+
+\ejercicio{\difI}{Calcula sin calculadora (combina propiedades y definición):}
+\begin{enumerate}[label=\alph*),leftmargin=1cm]
+  \item $\log_2 6 + \log_2\!\left(\dfrac{8}{3}\right)$
+  \lineasrespuesta{2}
+  \item $\log_3 54 - \log_3 2$
+  \lineasrespuesta{2}
+  \item $\log_2\!\left(4^{6}\right)$
+  \lineasrespuesta{2}
+\end{enumerate}
+
+\ejercicio{\difI}{Cambio de base (con calculadora, 3 decimales):}
+\begin{enumerate}[label=\alph*),leftmargin=1cm]
+  \item $\log_3(50) \approx$ \rule{3cm}{0.4pt}
+  \item $\log_7(100) \approx$ \rule{3cm}{0.4pt}
+  \item $\log_2(0{,}5) = $ \rule{3cm}{0.4pt} \hfill {\small\itshape Ojo: este sale exacto, sin calculadora.}
+\end{enumerate}
+
+\ejercicio{\difD}{Desafíos:}
+\begin{enumerate}[label=\alph*),leftmargin=1cm]
+  \item $\log_4(32)$ \hfill {\small\itshape Pista: escribe el 4 y el 32 como potencias de 2.}
+  \lineasrespuesta{2}
+  \item $\log_9(27)$
+  \lineasrespuesta{2}
+  \item $\log_2\!\left(\log_2 16\right)$ \hfill {\small\itshape Pista: resuelve el de adentro primero.}
+  \lineasrespuesta{2}
+  \item Sabiendo que $\log_{10} 2 \approx 0{,}301$, calcula \textbf{sin calculadora} $\log_{10} 8$ y $\log_{10} 5$.
+  \hfill {\small\itshape Pista para el segundo: $5 = \tfrac{10}{2}$.}
+  \lineasrespuesta{3}
+  \item Resuelve la ecuación $\log_2(x) + \log_2(x-2) = 3$.
+  \hfill {\small\itshape Pista: condensa, traduce a potencia, y cae en una cuadrática.}
+  \lineasrespuesta{4}
+  \item ¿Verdadero o falso? $\log_2(a+b) = \log_2 a + \log_2 b$. Da un contraejemplo con números.
+  \lineasrespuesta{3}
+\end{enumerate}
+
+\begin{tcolorbox}[semaforo]
+\casilla \textbf{Verde}: calculo, expando y condenso sin mirar el formulario. \\
+\casilla \textbf{Amarillo}: me salen con el formulario a mano. \\
+\casilla \textbf{Rojo}: me trabé en los ejercicios \rule{2cm}{0.4pt}.
+\end{tcolorbox}
+
+\newpage
+
+% ════════════════════════════════════════════════════
+% EJE 3 — TRIGONOMETRÍA
+% ════════════════════════════════════════════════════
+\section{RAZONES TRIGONOMÉTRICAS}
+
+\subsection*{Repaso flash}
+
+\begin{tcolorbox}[definicion, title={El método de siempre (4 pasos)}]
+\begin{enumerate}[nosep]
+  \item \textbf{Dibuja} el triángulo y marca el ángulo de referencia.
+  \item \textbf{Etiqueta} los lados \emph{respecto a ese ángulo}: opuesto (no lo toca), adyacente (lo toca), hipotenusa (frente al ángulo recto, siempre la más larga).
+  \item \textbf{Elige la razón} que conecta el lado que conoces con el que buscas: op--hip $\to$ seno; ady--hip $\to$ coseno; op--ady $\to$ tangente.
+  \item \textbf{Despeja}. Si buscas un ángulo, usa la inversa ($\mathrm{sen}^{-1}$, $\cos^{-1}$, $\tan^{-1}$) con la calculadora en \textbf{DEG}.
+\end{enumerate}
+\end{tcolorbox}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+  \coordinate (A) at (0,0);
+  \coordinate (B) at (4,0);
+  \coordinate (C) at (4,2.5);
+  \draw[thick] (A) -- (B) -- (C) -- cycle;
+  \draw (3.7,0) rectangle (4,0.3);
+  \draw[azulprincipal] (0.8,0) arc (0:32:0.8);
+  \node[azulprincipal] at (0.55,0.18) {$\alpha$};
+  \node[below] at (2,0) {cateto adyacente a $\alpha$};
+  \node[right] at (4,1.25) {cateto opuesto a $\alpha$};
+  \node[above left] at (2,1.25) {hipotenusa};
+\end{tikzpicture}
+\end{center}
+
+\begin{tcolorbox}[alerta]
+\begin{itemize}[nosep]
+  \item ``Opuesto'' y ``adyacente'' \textbf{cambian} si cambias de ángulo de referencia. Etiqueta \emph{después} de marcar el ángulo.
+  \item $\mathrm{sen}(30\gr ) = \frac{1}{2}$, \emph{no} $\frac{\sqrt{3}}{2}$ (eso es $\cos(30\gr )$).
+  \item Seno y coseno de un ángulo agudo están siempre \textbf{entre 0 y 1}. Si te sale $1{,}3$, revisa qué pusiste arriba y qué abajo. La tangente sí puede pasar de 1.
+  \item Calculadora en \textbf{DEG}, no RAD.
+\end{itemize}
+\end{tcolorbox}
+
+\subsection*{Ejercicios}
+
+\ejercicio{\difB}{Calcula las tres razones de $\alpha$ en cada triángulo (deja fracciones simplificadas):}
+\begin{enumerate}[label=\alph*),leftmargin=1cm]
+  \item op $= 8$, \ ady $= 15$, \ hip $= 17$.
+  \lineasrespuesta{2}
+  \item op $= 20$, \ ady $= 21$, \ hip $= 29$.
+  \lineasrespuesta{2}
+  \item Catetos $9$ y $12$ (calcula primero la hipotenusa con Pitágoras; $\alpha$ opuesto al cateto $9$).
+  \lineasrespuesta{2}
+\end{enumerate}
+
+\ejercicio{\difB}{Ángulos notables, sin calculadora (valores exactos):}
+\begin{enumerate}[label=\alph*),leftmargin=1cm]
+  \item $\mathrm{sen}(60\gr )\cdot\cos(30\gr ) = $ \rule{2.5cm}{0.4pt}
+  \item $\tan(45\gr ) + \tan(60\gr ) = $ \rule{2.5cm}{0.4pt}
+  \item $\mathrm{sen}^{2}(45\gr ) + \cos^{2}(45\gr ) = $ \rule{2.5cm}{0.4pt}
+  \item $\mathrm{sen}(30\gr ) + \cos(60\gr ) - \tan(45\gr ) = $ \rule{2.5cm}{0.4pt}
+\end{enumerate}
+
+\ejercicio{\difI}{Encuentra el lado pedido (deja raíces simplificadas --- aquí se conecta con el Eje 1):}
+\begin{enumerate}[label=\alph*),leftmargin=1cm]
+  \item Ángulo de $30\gr $, hipotenusa $18$. Cateto opuesto $= ?$
+  \lineasrespuesta{2}
+  \item Ángulo de $45\gr $, cateto adyacente $6$. Cateto opuesto $= ?$
+  \lineasrespuesta{2}
+  \item Ángulo de $60\gr $, cateto opuesto $12$. Hipotenusa $= ?$ \hfill {\small\itshape Pista: te va a quedar una fracción con raíz; simplifícala.}
+  \lineasrespuesta{3}
+  \item Ángulo de $30\gr $, cateto opuesto $5$. Cateto adyacente $= ?$
+  \lineasrespuesta{2}
+\end{enumerate}
+
+\ejercicio{\difI}{Encuentra el ángulo (todos salen notables):}
+\begin{enumerate}[label=\alph*),leftmargin=1cm]
+  \item op $= 6$, hip $= 12$.
+  \lineasrespuesta{2}
+  \item ady $= \sqrt{2}$, hip $= 2$.
+  \lineasrespuesta{2}
+  \item op $= 9$, ady $= 3\sqrt{3}$. \hfill {\small\itshape Pista: simplifica la fracción antes de buscar el ángulo.}
+  \lineasrespuesta{2}
+\end{enumerate}
+
+\ejercicio{\difI}{Problemas aplicados (dibuja el triángulo \emph{siempre}):}
+\begin{enumerate}[label=\alph*),leftmargin=1cm]
+  \item Una escalera de $6\ \text{m}$ se apoya en una pared formando $60\gr $ con el suelo. ¿A qué altura llega y a qué distancia de la pared queda su base?
+  \lineasrespuesta{3}
+  \item Un volantín tiene $50\ \text{m}$ de hilo tenso, que forma $30\gr $ con el suelo. ¿A qué altura vuela?
+  \lineasrespuesta{2}
+  \item Un árbol de $12\ \text{m}$ proyecta una sombra de $12\sqrt{3}\ \text{m}$. ¿Con qué ángulo llega el sol al suelo?
+  \lineasrespuesta{3}
+\end{enumerate}
+
+\ejercicio{\difD}{Desafíos:}
+\begin{enumerate}[label=\alph*),leftmargin=1cm]
+  \item En un triángulo rectángulo, $\mathrm{sen}(\alpha) = \dfrac{3}{5}$. \textbf{Sin calcular} $\alpha$, encuentra $\cos(\alpha)$ y $\tan(\alpha)$.
+  \hfill {\small\itshape Pista: inventa un triángulo con op $= 3$ e hip $= 5$, y usa Pitágoras.}
+  \lineasrespuesta{3}
+  \item Desde un punto a $30\ \text{m}$ de la base de una torre, la cima se ve con un ángulo de elevación de $60\gr $. (i) ¿Cuánto mide la torre? (ii) ¿Desde qué distancia se vería con un ángulo de $30\gr $?
+  \lineasrespuesta{4}
+  \item Sin calculadora, decide cuál es mayor: $\mathrm{sen}(60\gr )$ o $\tan(30\gr )$. Justifica con los valores exactos.
+  \lineasrespuesta{3}
+  \item Una rampa debe alcanzar una altura de $2\ \text{m}$ y la norma exige que el ángulo con el suelo no supere $30\gr $. ¿Cuál es el largo \textbf{mínimo} de la rampa?
+  \hfill {\small\itshape Pista: el largo mínimo ocurre con el ángulo máximo.}
+  \lineasrespuesta{3}
+\end{enumerate}
+
+\begin{tcolorbox}[semaforo]
+\casilla \textbf{Verde}: elijo la razón correcta y despejo sin ayuda. \\
+\casilla \textbf{Amarillo}: necesito la tabla de notables o el formulario a mano. \\
+\casilla \textbf{Rojo}: me trabé en los ejercicios \rule{2cm}{0.4pt}.
+\end{tcolorbox}
+
+\newpage
+
+% ════════════════════════════════════════════════════
+% MINI-ENSAYO FINAL
+% ════════════════════════════════════════════════════
+\section{MINI-ENSAYO INTEGRADOR}
+
+\begin{tcolorbox}[recuerda, title={\color{black} REGLAS DEL MINI-ENSAYO}]
+\begin{itemize}[nosep]
+  \item \textbf{45 minutos cronometrados}, sin apuntes ni formulario (la página de emergencia se guarda).
+  \item Calculadora solo donde se indica. Puntaje total: \textbf{22 puntos} ($+4$ de bonus).
+  \item Al terminar, corrige con las soluciones y anota tu puntaje: \quad
+  $18$--$22$: listo para la prueba \;·\; $12$--$17$: repasar los ejes en amarillo \;·\; $<12$: lo vemos juntos en sesión.
+\end{itemize}
+\end{tcolorbox}
+
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=1cm,itemsep=10pt]
+  \item \textbf{(2 pts)} Simplifica completamente: $\sqrt{288}$.
+  \lineasrespuesta{2}
+
+  \item \textbf{(2 pts)} Calcula: $\sqrt{20} + \sqrt{45} - \sqrt{125}$.
+  \lineasrespuesta{2}
+
+  \item \textbf{(2 pts)} Calcula: $\log_6(36) + \log_2\!\left(\dfrac{1}{8}\right)$.
+  \lineasrespuesta{2}
+
+  \item \textbf{(3 pts)} Resuelve: $\log_5(x+3) = 2$.
+  \lineasrespuesta{2}
+
+  \item \textbf{(3 pts)} Expande completamente: $\log_2\!\left(\dfrac{16\,x^{3}}{y}\right)$.
+  \lineasrespuesta{2}
+
+  \item \textbf{(3 pts)} Un triángulo rectángulo tiene un ángulo de $60\gr $ e hipotenusa $10$. Calcula los dos catetos (valores exactos).
+  \lineasrespuesta{3}
+
+  \item \textbf{(3 pts)} Desde un mirador de $40\ \text{m}$ de altura se observa un bote con un ángulo de depresión de $45\gr $. ¿A qué distancia horizontal del mirador está el bote?
+  \lineasrespuesta{3}
+
+  \item \textbf{(4 pts)} Un cuadrado tiene área $48\ \text{cm}^2$. Calcula: (i) su lado, simplificado; (ii) su diagonal, simplificada; (iii) el ángulo que forma la diagonal con un lado.
+  \lineasrespuesta{4}
+
+  \item \textbf{(BONUS, 4 pts)} Calcula sin calculadora: $\log_2\!\left(\sqrt{32}\right) + \mathrm{sen}^{2}(45\gr )$.
+  \hfill {\small\itshape Pista: $\sqrt{32} = 32^{1/2}$, y el exponente baja multiplicando.}
+  \lineasrespuesta{3}
+\end{enumerate}
+
+\bigskip
+\begin{tcolorbox}[formula]
+\textbf{Mi puntaje:} \rule{1.5cm}{0.4pt} $/\ 22$ \ ($+$ bonus \rule{1cm}{0.4pt} $/\ 4$)
+\qquad \textbf{Tiempo usado:} \rule{1.5cm}{0.4pt} min
+\end{tcolorbox}
+
+\newpage
+
+% ════════════════════════════════════════════════════
+% SOLUCIONES
+% ════════════════════════════════════════════════════
+\seccionsinnumero{Soluciones completas}
+
+\begin{tcolorbox}[recuerda, title={\color{black} ANTES DE MIRAR}]
+Corrígete con lápiz de otro color. Si un ejercicio te salió mal, no lo borres: anota al lado \emph{dónde} estuvo el error (¿planteo, propiedad, aritmética?). Ese dato vale más que la respuesta buena.
+\end{tcolorbox}
+
+\subsection*{Eje 1 --- Raíces}
+
+\begin{tcolorbox}[propiedad, title={Ejercicios 1 y 2}]
+\textbf{1.} a) $4\sqrt{2}$; \ b) $3\sqrt{3}$; \ c) $4\sqrt{5}$; \ d) $5\sqrt{5}$; \ e) $7\sqrt{3}$ \ ($147 = 49\cdot 3$); \ f) $11\sqrt{2}$ \ ($242 = 121\cdot 2$).
+
+\smallskip
+\textbf{2.} a) $3\sqrt{2} + \sqrt{2} = 4\sqrt{2}$; \ b) $4\sqrt{3} - 2\sqrt{3} = 2\sqrt{3}$; \ c) $\sqrt{100} = 10$; \ d) $\sqrt{16} = 4$.
+\end{tcolorbox}
+
+\begin{tcolorbox}[propiedad, title={Ejercicio 3}]
+a) $2\sqrt{2} + 5\sqrt{2} - 6\sqrt{2} = \sqrt{2}$. \quad
+b) $6\sqrt{3} + 5\sqrt{3} - 4\sqrt{3} = 7\sqrt{3}$. \quad
+c) $15\cdot\sqrt{16} = 15\cdot 4 = 60$. \quad
+d) $4\cdot 3 + \sqrt{36} = 12 + 6 = 18$.
+\end{tcolorbox}
+
+\begin{tcolorbox}[propiedad, title={Ejercicios 4 y 5}]
+\textbf{4.} a) $x = \pm 7\sqrt{2}$; \ b) $x = \pm 3\sqrt{5}$; \ c) $x^2 = 72 \Rightarrow x = \pm 6\sqrt{2}$.
+
+\smallskip
+\textbf{5.} a) $\ell = \sqrt{50} = 5\sqrt{2} \approx 7{,}07\ \text{cm}$. \quad
+b) $c = \sqrt{25 + 100} = \sqrt{125} = 5\sqrt{5}\ \text{cm}$. \quad
+c) $A = \sqrt{12\cdot 27} = \sqrt{324} = 18\ \text{cm}^2$; \ $P = 2(2\sqrt{3} + 3\sqrt{3}) = 10\sqrt{3}\ \text{cm}$.
+\end{tcolorbox}
+
+\begin{tcolorbox}[propiedad, title={Ejercicio 6 (desafíos)}]
+a) $\sqrt{2^5\cdot 3^4} = 2^2\cdot 3^2\cdot\sqrt{2} = 36\sqrt{2}$ \ (dos pares de $2$ no: $2^5 = 2^2\cdot 2^2\cdot 2$, sale $2\cdot 2$; $3^4$ sale como $3^2$).
+
+\smallskip
+b) Suma por diferencia: $(\sqrt{6})^2 - (\sqrt{2})^2 = 6 - 2 = 4$.
+
+\smallskip
+c) $d = \ell\sqrt{2} \Rightarrow \ell = \dfrac{12}{\sqrt{2}} = \dfrac{12\sqrt{2}}{2} = 6\sqrt{2}\ \text{cm}$; \ $A = \ell^2 = 72\ \text{cm}^2$.
+
+\smallskip
+d) Comparo cuadrados: $(3\sqrt{5})^2 = 45$, \ $(2\sqrt{10})^2 = 40$, \ $7^2 = 49$.
+Entonces $2\sqrt{10} < 3\sqrt{5} < 7$.
+\end{tcolorbox}
+
+\subsection*{Eje 2 --- Logaritmos}
+
+\begin{tcolorbox}[propiedad, title={Ejercicios 7 y 8}]
+\textbf{7.} a) $4$; \ b) $5$; \ c) $3$; \ d) $5$; \ e) $0$; \ f) $1$; \ g) $-2$; \ h) $-3$.
+
+\smallskip
+\textbf{8.} a) $x = 2^5 = 32$; \ b) $x^4 = 81 \Rightarrow x = 3$; \ c) $x = 3^{-2} = \tfrac{1}{9}$; \ d) $x^3 = 125 \Rightarrow x = 5$.
+\end{tcolorbox}
+
+\begin{tcolorbox}[propiedad, title={Ejercicios 9 y 10}]
+\textbf{9.} a) $\log_2 8 + 2\log_2 x = 3 + 2\log_2 x$; \quad
+b) $2 - \log_5 y$; \quad
+c) $3 + 2\log_3 a - 3\log_3 b$.
+
+\smallskip
+\textbf{10.} a) $\log_{10}(10) = 1$; \quad
+b) $\log_3\!\left(\tfrac{36}{4}\right) = \log_3 9 = 2$; \quad
+c) $\log_2\!\left(64^{1/2}\right) = \log_2 8 = 3$; \quad
+d) $\log_5 25 = 2$.
+\end{tcolorbox}
+
+\begin{tcolorbox}[propiedad, title={Ejercicios 11 y 12}]
+\textbf{11.} a) $\log_2\!\left(6\cdot\tfrac{8}{3}\right) = \log_2 16 = 4$; \quad
+b) $\log_3 27 = 3$; \quad
+c) $\log_2\!\left(2^{12}\right) = 12$.
+
+\smallskip
+\textbf{12.} a) $\approx 3{,}561$; \ b) $\approx 2{,}366$; \ c) $0{,}5 = 2^{-1} \Rightarrow -1$ exacto.
+\end{tcolorbox}
+
+\begin{tcolorbox}[propiedad, title={Ejercicio 13 (desafíos)}]
+a) $\log_4 32 = \dfrac{\log_2 32}{\log_2 4} = \dfrac{5}{2}$.
+\quad b) $\log_9 27 = \dfrac{\log_3 27}{\log_3 9} = \dfrac{3}{2}$.
+\quad c) $\log_2(\log_2 16) = \log_2 4 = 2$.
+
+\smallskip
+d) $\log 8 = \log 2^3 = 3\cdot 0{,}301 = 0{,}903$; \quad
+$\log 5 = \log\tfrac{10}{2} = 1 - 0{,}301 = 0{,}699$.
+
+\smallskip
+e) $\log_2\big(x(x-2)\big) = 3 \Rightarrow x^2 - 2x = 8 \Rightarrow x^2 - 2x - 8 = 0 \Rightarrow (x-4)(x+2) = 0$.
+De ahí $x = 4$ o $x = -2$, pero $x = -2$ se \textbf{descarta} (argumento negativo). Respuesta: $x = 4$.
+
+\smallskip
+f) \textbf{Falso}. Contraejemplo: $\log_2(4+4) = \log_2 8 = 3$, pero $\log_2 4 + \log_2 4 = 2 + 2 = 4$.
+\end{tcolorbox}
+
+\subsection*{Eje 3 --- Trigonometría}
+
+\begin{tcolorbox}[propiedad, title={Ejercicios 14 y 15}]
+\textbf{14.} a) $\mathrm{sen} = \tfrac{8}{17}$, $\cos = \tfrac{15}{17}$, $\tan = \tfrac{8}{15}$. \quad
+b) $\tfrac{20}{29}$, $\tfrac{21}{29}$, $\tfrac{20}{21}$. \quad
+c) hip $= \sqrt{81+144} = 15$; \ $\mathrm{sen} = \tfrac{9}{15} = \tfrac{3}{5}$, $\cos = \tfrac{4}{5}$, $\tan = \tfrac{3}{4}$.
+
+\smallskip
+\textbf{15.} a) $\tfrac{\sqrt{3}}{2}\cdot\tfrac{\sqrt{3}}{2} = \tfrac{3}{4}$; \quad
+b) $1 + \sqrt{3}$; \quad
+c) $\tfrac{1}{2} + \tfrac{1}{2} = 1$; \quad
+d) $\tfrac{1}{2} + \tfrac{1}{2} - 1 = 0$.
+\end{tcolorbox}
+
+\begin{tcolorbox}[propiedad, title={Ejercicios 16 y 17}]
+\textbf{16.} a) op $= 18\cdot\mathrm{sen}(30\gr ) = 9$. \quad
+b) $\tan(45\gr ) = 1 \Rightarrow$ op $=$ ady $= 6$. \quad
+c) hip $= \dfrac{12}{\mathrm{sen}(60\gr )} = \dfrac{12}{\sqrt{3}/2} = \dfrac{24}{\sqrt{3}} = 8\sqrt{3}$. \quad
+d) ady $= \dfrac{5}{\tan(30\gr )} = \dfrac{5}{\sqrt{3}/3} = 5\sqrt{3}$.
+
+\smallskip
+\textbf{17.} a) $\mathrm{sen}(\alpha) = \tfrac{1}{2} \Rightarrow \alpha = 30\gr $. \quad
+b) $\cos(\alpha) = \tfrac{\sqrt{2}}{2} \Rightarrow \alpha = 45\gr $. \quad
+c) $\tan(\alpha) = \tfrac{9}{3\sqrt{3}} = \tfrac{3}{\sqrt{3}} = \sqrt{3} \Rightarrow \alpha = 60\gr $.
+\end{tcolorbox}
+
+\begin{tcolorbox}[propiedad, title={Ejercicio 18}]
+a) Altura $= 6\,\mathrm{sen}(60\gr ) = 3\sqrt{3} \approx 5{,}2\ \text{m}$; \ base $= 6\cos(60\gr ) = 3\ \text{m}$. \quad
+b) $50\cdot\mathrm{sen}(30\gr ) = 25\ \text{m}$. \quad
+c) $\tan(\alpha) = \dfrac{12}{12\sqrt{3}} = \dfrac{1}{\sqrt{3}} \Rightarrow \alpha = 30\gr $.
+\end{tcolorbox}
+
+\begin{tcolorbox}[propiedad, title={Ejercicio 19 (desafíos)}]
+a) Triángulo con op $= 3$, hip $= 5$ $\Rightarrow$ ady $= \sqrt{25-9} = 4$.
+Entonces $\cos(\alpha) = \tfrac{4}{5}$ y $\tan(\alpha) = \tfrac{3}{4}$.
+
+\smallskip
+b) (i) $h = 30\tan(60\gr ) = 30\sqrt{3} \approx 52\ \text{m}$.
+(ii) $d = \dfrac{h}{\tan(30\gr )} = 30\sqrt{3}\cdot\sqrt{3} = 90\ \text{m}$.
+
+\smallskip
+c) $\mathrm{sen}(60\gr ) = \tfrac{\sqrt{3}}{2} \approx 0{,}87$ \ y \ $\tan(30\gr ) = \tfrac{\sqrt{3}}{3} \approx 0{,}58$.
+Mayor: $\mathrm{sen}(60\gr )$. (Mismo numerador $\sqrt{3}$, denominador menor $\Rightarrow$ fracción mayor.)
+
+\smallskip
+d) hip $= \dfrac{2}{\mathrm{sen}(30\gr )} = \dfrac{2}{1/2} = 4\ \text{m}$.
+\end{tcolorbox}
+
+\subsection*{Mini-ensayo}
+
+\begin{tcolorbox}[propiedad, title={Soluciones y puntaje}]
+\begin{enumerate}[nosep,itemsep=3pt]
+  \item $\sqrt{288} = \sqrt{144\cdot 2} = 12\sqrt{2}$.
+  \item $2\sqrt{5} + 3\sqrt{5} - 5\sqrt{5} = 0$. \ (Sí: da cero. Si te dio cero y dudaste, confía en tu desarrollo.)
+  \item $2 + (-3) = -1$.
+  \item $x + 3 = 5^2 = 25 \Rightarrow x = 22$.
+  \item $\log_2 16 + 3\log_2 x - \log_2 y = 4 + 3\log_2 x - \log_2 y$.
+  \item Opuesto a $60\gr $: $10\,\mathrm{sen}(60\gr ) = 5\sqrt{3}$; \ adyacente: $10\cos(60\gr ) = 5$.
+  \item Ángulo de depresión $45\gr $ $\Rightarrow$ triángulo con $\tan(45\gr ) = \dfrac{40}{d} \Rightarrow d = 40\ \text{m}$.
+  \item (i) $\ell = \sqrt{48} = 4\sqrt{3}\ \text{cm}$. \
+  (ii) $d = \ell\sqrt{2} = 4\sqrt{6}\ \text{cm}$. \
+  (iii) $45\gr $ (la diagonal de un cuadrado siempre corta la esquina en dos ángulos iguales).
+  \item \textbf{Bonus:} $\log_2\!\left(32^{1/2}\right) = \tfrac{1}{2}\log_2 32 = \tfrac{5}{2}$; \ $\mathrm{sen}^2(45\gr ) = \left(\tfrac{\sqrt{2}}{2}\right)^{2} = \tfrac{1}{2}$.
+  Total: $\tfrac{5}{2} + \tfrac{1}{2} = 3$.
+\end{enumerate}
+\end{tcolorbox}
+
+\begin{tcolorbox}[recuerda, title={\color{black} ÚLTIMO PASO}]
+Con los tres semáforos marcados y el puntaje del mini-ensayo, trae la guía a la próxima sesión. Lo que esté en amarillo o rojo es \emph{exactamente} lo que vamos a trabajar --- ni más, ni menos. Si todo quedó verde: enhorabuena, el semestre está cerrado.
+\end{tcolorbox}
+
+\end{document}
