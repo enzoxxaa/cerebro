@@ -15,3 +15,6 @@ Interaccion molecula-molecula; molecula-gas. FAse agua-gas es donde con qm se ve
 Gas es hidrofobico, permeabiliza membrana a T4
 Imaginar esto en porina -> posible eje
 
+1. nanoburbuja de O2
+2. agregar pfc a posteriori
+3. 
