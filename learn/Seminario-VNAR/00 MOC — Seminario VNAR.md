@@ -3,7 +3,7 @@ tipo: moc
 proyecto: seminario
 fecha: 2026-08-26
 resumen: "Índice del seminario sobre Fernández-Quintero et al. 2022 (VNAR humanization, Liedl): metadinámica → clustering → MD sembrada → MSM"
-tags:
+obsidian://open?vault=SegundoCerebro&file=learn%2FSeminario-VNAR%2F20%20Paper%20%E2%80%94%20par%C3%A1metros%20exactostags:
   - seminario
   - moc
   - metadinamica

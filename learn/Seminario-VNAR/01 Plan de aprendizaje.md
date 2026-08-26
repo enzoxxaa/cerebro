@@ -2,168 +2,190 @@
 tipo: plan
 proyecto: seminario
 fecha: 2026-08-26
-resumen: "Plan de clase y mapa de dependencias para dominar la metodología de Fernández-Quintero 2022"
+version: 2
+resumen: "Plan de clase revisado tras el sondeo: puente entre la física de la simulación (que ya tiene) y la estadística del muestreo (vacía)"
 tags:
   - seminario
   - plan
 ---
 
-# 01 · Plan de aprendizaje
+# 01 · Plan de aprendizaje `v2`
 
-← [[00 MOC — Seminario VNAR]]
+← [[00 MOC — Seminario VNAR]] · datos: [[02 Sondeo — mapa de mi borde]]
 
 > [!warning] Esperando tu visto bueno
-> Este plan es el **checkpoint**. Una raíz mal puesta o un alcance equivocado es barato de arreglar ahora y caro a mitad de clase. **No empiezo las clases 2+ hasta que lo apruebes.**
-> Además el [[02 Sondeo — mapa de mi borde|sondeo]] está pendiente, así que los niveles de abajo son **conjetura**, no dato.
+> Este es el checkpoint. Una raíz mal puesta o un alcance equivocado es barato de arreglar ahora y caro a mitad de clase.
+> **v2** — reescrito con los datos reales del sondeo. La v1 era conjetura y se equivocaba en dos cosas importantes: daba por supuesto que tenías metadinámica «a nivel de sé qué hace» (está en cero) y planeaba una clase de inmunología (no hace falta).
 
 ---
 
-## 1. El enfoque, en prosa
+## 1. Lo que cambió tras el sondeo
 
-El nudo de este paper no es ninguna técnica individual. Es **una sola tensión**:
-
-> Metadinámica destruye la cinética para ganar ergodicidad. El MSM la reconstruye. ¿Por qué eso es legítimo?
-
-Si esa frase se entiende de verdad — no se memoriza, se *entiende* — la defensa y el ataque se derivan casi solos, porque **cada crítica al paper es una forma de preguntar si se cumplen las condiciones que hacen legítimo ese intercambio**. Ahí está la compresión que busco: no diez críticas suel­tas que memorizar, sino un principio del que las diez salen.
-
-Por eso **no** voy a recorrer el pipeline en su orden de ejecución (metaD → cluster → MD → MSM). Ese orden es cronológico, no lógico: te obliga a aceptar la metadinámica antes de saber qué problema resuelve, y a aceptar el MSM antes de saber qué daño hay que reparar. Es exactamente la receta para que todo se sienta arbitrario.
-
-El orden que propongo es el de **descubrimiento**:
-
-1. Establecer el problema desde verdades que aceptes sin matices → **¿por qué la MD sola no puede responder la pregunta del paper?**
-2. Dejar que la metadinámica aparezca como la solución que tú mismo habrías propuesto → rellenar los mínimos.
-3. Mostrar el **precio** que se paga (la cinética) — no como una nota al pie, sino como el punto de giro de toda la historia.
-4. Solo entonces el MSM entra, y entra como **reparación obligada**, no como una técnica más del catálogo.
-5. Los ataques al final, cada uno **anclado a la condición concreta que viola**.
-
-La ventaja de este orden para tu lab meeting: es también el mejor guion para la charla. Si presentas el pipeline como cronología, la audiencia oye cuatro herramientas. Si lo presentas como problema → solución → precio → reparación, oyen **un argumento**, y las críticas caen en su sitio.
+| | Plan v1 (conjetura) | Sondeo (dato) | Consecuencia en v2 |
+|---|---|---|---|
+| MD clásica | «probablemente sólida» | ✅ **sólida** | Se **comprime**: no se enseña, se usa como cimiento |
+| Inmunología | «nueva, hace falta Clase 0» | ✅ tiene el **marco**; la **anatomía del VNAR** no se sondéó | Clase 0 **se mantiene**, reenfocada → ver §2bis |
+| Metadinámica | «sabe qué hace» | ❌ **cero + misconcepción** | Se **duplica** y empieza por demoler M1 |
+| tICA / MSM | «más flojo» | ❌ **cero** | Se **triplica**; tICA gana clase propia |
+| Termo estadística | «funcional» | ⚠️ **misconcepción en la capa de inferencia** | Pasa a ser **el eje del curso** |
 
 ---
 
-## 2. Mapa de dependencias
+## 2. El enfoque, en prosa
 
-Este mapa **es** el orden de enseñanza. Las clases construyen sus nodos uno a uno.
+El sondeo encontró **una sola línea de fractura**: tienes firme la *física de producir una trayectoria* y firme la *pregunta biológica*, y vacío todo el centro — la *estadística de inferir algo a partir de trayectorias*. Los dos extremos sujetos, el puente ausente.
+
+Eso es una suerte enorme, porque **ese puente es exactamente la metodología de este paper**. No hay que enseñarte MD ni inmunología: hay que tender una sola cosa, y va a quedar anclada en roca por ambos lados.
+
+Así que el eje del curso no es «explicar cuatro técnicas». Es **una única pregunta, repetida en cada etapa del pipeline**:
+
+> ### ¿Qué me autoriza a leer este número como una cantidad física?
+
+Metadinámica, clustering, MD sembrada y MSM son cuatro respuestas sucesivas a esa pregunta. Y las diez críticas de [[22 Superficie de ataque]] son diez sitios donde la respuesta no se dio.
+
+Ahí está la compresión que busco: **no diez críticas que memorizar, sino un principio del que las diez salen.** Si te preguntan algo en el lab meeting que no preparamos, esa pregunta sigue funcionando.
+
+### Por qué no voy en orden cronológico
+
+El orden de ejecución (metaD → cluster → MD → MSM) es cronológico, no lógico. Te obliga a aceptar la metadinámica antes de saber qué problema resuelve, y el MSM antes de saber qué daño hay que reparar. Es la receta para que todo se sienta arbitrario — y para no poder criticarlo, porque una técnica que no sabes por qué está ahí tampoco sabes cuándo falla.
+
+El orden que propongo es el de **descubrimiento**: problema → solución → **precio** → reparación. Bonus: ese es también el mejor guion para tu charla. Presentado como cronología, la audiencia oye cuatro herramientas; presentado así, oye **un argumento**.
+
+### Las tres demoliciones
+
+Un hueco se rellena. Una creencia equivocada hay que **quitarla primero**, o lo nuevo se apila encima y no agarra. El sondeo destapó tres, y cada una tiene su momento asignado:
+
+| # | Creencia | Se demuele en |
+|---|---|---|
+| **M3** | «$-k_BT\ln P$ es la energía libre» | **Clase 1** — es el pivote de todo |
+| **M1** | «metadinámica = subir la temperatura» | **Clase 2** — antes de cualquier parámetro |
+| **M2** | «$\tau$ es el tiempo de residencia» | **Clase 5** — antes de validar nada |
+
+---
+
+## 3. Mapa de dependencias `v2`
+
+Este mapa **es** el orden de enseñanza.
 
 ```mermaid
 graph TD
-    U1["R1 · Barreras >> RT<br/>no se cruzan en 100 ns"]
-    U2["R2 · Poblacion de equilibrio<br/>= peso de Boltzmann"]
-    U3["R3 · Un sesgo aditivo cambia<br/>la dinamica, no solo la estadistica"]
+    R1["R1 · Barreras >> RT<br/>no se cruzan en 100 ns"]
+    R2["R2 · Poblacion = peso de Boltzmann"]
+    R3["R3 · Seleccion conformacional:<br/>lo que importa es la poblacion<br/>del estado competente"]
+    R4["R4 · El VNAR no tiene CDR2<br/>lo compensa con HV2 y HV4"]
 
-    U1 --> P1["N1 · MD sola da poblaciones<br/>dominadas por la estructura inicial"]
-    U2 --> P1
+    R1 --> N1["N1 · MD sola da poblaciones<br/>= estructura inicial"]
+    R2 --> N1
+    R3 --> N1
 
-    P1 --> M1["N2 · Rellenar los minimos<br/>= metadinamica"]
-    M1 --> M2["N3 · Well-tempered:<br/>el sesgo decae y converge<br/>muestrea P^(1/gamma)"]
-    M1 --> CV["N4 · Las CVs son una eleccion<br/>solo se aplana lo elegido"]
+    N1 --> M3X["PIVOTE · demoler M3<br/>F = -kT lnP solo si P<br/>es de equilibrio"]
 
-    M1 --> M3["N5 · El precio:<br/>la cinetica ya no es fisica"]
-    U3 --> M3
+    M3X --> M1X["demoler M1 · metadinamica<br/>= sesgo adaptativo acumulado"]
+    M1X --> W1["N3 · el sesgo es un molde<br/>negativo del paisaje"]
+    W1 --> W2["N4 · well-tempered:<br/>gamma, barrera residual F/gamma"]
+    M1X --> CV["N5 · las CVs son una eleccion<br/>solo se aplana lo elegido"]
+    M1X --> KIN["N6 · EL PRECIO:<br/>la cinetica ya no es fisica"]
 
-    M3 --> R1["N6 · Tirar la termodinamica<br/>quedarse con las estructuras"]
-    R1 --> R2["N7 · Sembrar MD sin sesgo<br/>desde los clusters"]
-    R2 --> MSM1["N8 · MSM: matriz de transicion<br/>cosida de trayectorias cortas"]
+    KIN --> S1["N7 · tirar la termodinamica,<br/>quedarse las estructuras"]
+    S1 --> S2["N8 · sembrar MD sin sesgo"]
 
-    MSM1 --> MSM2["N9 · pi = autovector de autovalor 1<br/>INDEPENDIENTE de las semillas"]
-    MSM1 --> MSM3["N10 · Condiciones: markovianidad,<br/>lag, equilibrio local, conectividad"]
+    S2 --> T1["N9 · tICA = lo lento,<br/>no lo amplio"]
+    T1 --> M2X["demoler M2 · tau es una<br/>perilla, no una propiedad"]
+    M2X --> K1["N10 · el MSM estima T de tau<br/>todo lo demas sale de ahi"]
+    K1 --> K2["N11 · pi = autovector<br/>INDEPENDIENTE de la siembra"]
+    K1 --> K3["N12 · condiciones de validez:<br/>markovianidad, CK, conectividad"]
 
-    MSM2 --> DEF["META a · DEFENSA"]
-    MSM3 --> DEF
+    K2 --> DEF["META a · DEFENSA"]
+    K3 --> DEF
+    M3X --> K2
 
     CV --> ATK["META b · ATAQUE"]
-    MSM3 --> ATK
-    R2 --> ATK
+    K3 --> ATK
+    S2 --> ATK
+    R4 --> ATK
 
-    style U1 fill:#1f6f3f,color:#fff
-    style U2 fill:#1f6f3f,color:#fff
-    style U3 fill:#1f6f3f,color:#fff
+    style R1 fill:#1f6f3f,color:#fff
+    style R2 fill:#1f6f3f,color:#fff
+    style R3 fill:#1f6f3f,color:#fff
+    style R4 fill:#1f6f3f,color:#fff
+    style M3X fill:#8a5a00,color:#fff
+    style M1X fill:#8a5a00,color:#fff
+    style M2X fill:#8a5a00,color:#fff
     style DEF fill:#1f4e79,color:#fff
     style ATK fill:#7a1f1f,color:#fff
 ```
 
-**Verde = raíces** (verdades incondicionales, se aceptan al pie de la letra) · **Azul/rojo = los dos objetivos**.
+🟩 **raíces** — verdades incondicionales, ya las tienes · 🟧 **demoliciones** · 🟦🟥 **los dos objetivos**
 
-> [!question] Lo primero que necesito que audites
-> Los tres nodos verdes. ¿Cada uno te resulta **obvio y sin matices**? Si alguno necesita un "bueno, depende…", está mal puesto como raíz y hay que bajar más. Es la pregunta más importante de esta nota: una raíz podrida corrompe todo lo que se cuelgue de ella.
+> [!success] Estado de las raíces tras el sondeo
+> **R1 y R2** quedaron cubiertas por tu acierto en ensembles/barostatos; **R3**, por tu acierto en selección conformacional. El curso arranca sobre terreno probado.
+> Quedan dos sin verificar, y ambas se cierran rápido al empezar:
+> - **R4** (anatomía del VNAR) — nunca se sondeó → **Clase 0**
+> - $RT \approx 2.5$ kJ/mol de cabeza — 30 segundos al abrir la Clase 1
+
+> [!info] El nodo pivote — dónde gira todo
+> **N11: $\pi$ es independiente de dónde sembraste.** Ese es el nodo que hace legítimo el pipeline entero: es la respuesta formal a la objeción «pero sembraste con un sesgo». Fíjate en el mapa que **M3 apunta directamente a N11** — la misconcepción que tienes ahora es *exactamente* lo que hace invisible el nodo que salva al paper. Por eso M3 se demuele primero.
 
 ---
 
-## 3. De qué nodo sale cada crítica
+## 4. De qué nodo sale cada crítica
 
-Esta es la tabla que convierte el mapa en munición. Cada ataque de [[22 Superficie de ataque]] no es un dato aislado: es un nodo del grafo cuya condición no se verificó.
+Esta tabla convierte el mapa en munición. Cada ataque **no es un dato suelto: es un nodo cuya condición no se verificó.**
 
-| Nodo violado | Ataque que genera | Severidad |
+| Nodo | Ataque que genera | Severidad |
 |---|---|---|
-| **N4** las CVs son una elección | **A2** — HV2 está en el MSM pero nunca se sesgó | 🔴 |
-| **N7** sembrar desde los clusters | **A1** — el muestreo está confundido con el observable | 🔴 |
-| **N9** π independiente de las semillas | **A6** — ¿la Fig. 3A es histograma crudo o está reponderada? | 🟠 |
-| **N10** condiciones del MSM | **A3** sin barras de error · **A4** lag 15 ns vs trayectorias de 100 ns | 🔴 / 🟠 |
-| **R2/R3** el modelo físico de base | **A5** AF2 · **A7** TIP3P · **A8** carga de fondo | 🟠 / 🟡 |
-| *(externo al grafo)* | **A9** higiene de citas · **A10** alternativas no discutidas | 🟡 |
+| **N5** las CVs son una elección | **A2** — HV2 está en el MSM pero nunca se sesgó | 🔴 |
+| **N8** sembrar desde clusters | **A1** — el muestreo está confundido con el observable | 🔴 |
+| **N11** $\pi$ independiente de la siembra | **A6** — ¿la Fig. 3A está reponderada o es histograma crudo? | 🟠 |
+| **N12** condiciones del MSM | **A3** sin barras de error · **A4** lag 15 ns vs trayectorias 100 ns | 🔴 / 🟠 |
+| *modelo físico de base* | **A5** AF2 · **A7** TIP3P · **A8** carga de fondo · **A11** todo vive en 10 kJ/mol | 🟠 / 🟡 |
+| *externo* | **A9** higiene de citas · **A10** alternativas no discutidas | 🟡 |
 
-> [!tip] Por qué esto importa para la charla
-> Presentar las críticas así — *"esta condición del método no se verificó"* — es infinitamente más fuerte que *"me parece que faltó un control"*. Lo primero es metodología; lo segundo es opinión.
+> [!tip] Cómo formular una crítica para que no suene a opinión
+> *«Esta condición del método no se verificó»* ≫ *«creo que faltó un control»*.
+> Lo primero es metodología y no se puede esquivar. Lo segundo es una opinión y se contesta con otra.
 
 ---
 
-## 4. Las cinco hebras y dónde cae cada clase
+## 5. Las clases
 
-```mermaid
-graph LR
-    subgraph H1["MD clasica"]
-        A1["barreras, RT, ff, solvente"]
-    end
-    subgraph H2["Termo estadistica"]
-        B1["Boltzmann, ergodicidad,<br/>balance detallado"]
-    end
-    subgraph H3["Metadinamica"]
-        C1["CVs, deposicion,<br/>well-tempered, gamma"]
-    end
-    subgraph H4["tICA / MSM"]
-        D1["lag, markovianidad,<br/>pi, PCCA+, CK test"]
-    end
-    subgraph H5["Inmuno estructural"]
-        E1["VNAR, CDR/HV,<br/>humanizacion"]
-    end
-
-    A1 --> CL1["Clase 1"]
-    B1 --> CL1
-    C1 --> CL2["Clase 2"]
-    B1 --> CL2
-    C1 --> CL3["Clase 3"]
-    D1 --> CL4["Clase 4"]
-    B1 --> CL4
-    D1 --> CL5["Clase 5"]
-    E1 --> CL0["Clase 0 opcional"]
-    CL5 --> CL6["Clase 6 · ataque"]
-    CL0 --> CL6
-```
-
-| Clase | Nodos | Hebras | Modo | Estado |
+| # | Clase | Nodos | Modo | Peso |
 |---|---|---|---|---|
-| **0** · VNAR en 10 min *(opcional)* | — | Inmuno | Expositivo | ⚪ solo si te hace falta |
-| **1** · [[10 Clase 1 — Por qué la MD sola no basta\|Por qué la MD sola no basta]] | R1, R2, N1 | MD + Termo | **Socrático** | 🟢 borrador listo |
-| **2** · Inventar la metadinámica | N2, N3 | Metad + Termo | Socrático → expositivo | ⚪ |
-| **3** · El precio: CVs y cinética | R3, N4, N5 | Metad | Expositivo | ⚪ |
-| **4** · El MSM como reparación | N6, N7, N8, N9 | MSM + Termo | Expositivo | ⚪ |
-| **5** · Las condiciones (dónde se rompe) | N10 | MSM | Socrático | ⚪ |
-| **6** · Munición: defensa y ataque | META a, b | todas | Socrático | ⚪ |
+| **0** | **El VNAR** — qué le falta, con qué lo compensa, y qué significa humanizar | R3, **R4** | Expositivo | ●○○ |
+| **1** | **El problema y el pivote** — por qué la MD sola no basta, y por qué un histograma no es una energía libre | R1, R2, N1, **demoler M3** | Socrático | ●●○ |
+| **2** | **Inventar la metadinámica** — sesgo adaptativo, molde negativo, well-tempered, $\gamma$ | **demoler M1**, N3, N4 | Socrático | ●●● |
+| **3** | **El precio** — las CVs son una elección, y la cinética muere | N5, N6, N7 | Expositivo | ●●○ |
+| **4** | **tICA** — encontrar lo lento, no lo amplio | N8, N9 | Expositivo | ●○○ |
+| **5** | **El MSM** — $T(\tau)$, y todo lo que sale de ahí | **demoler M2**, N10, N11, N12 | Expositivo → Socrático | ●●● |
+| **6** | **Munición** — defensa y ataque, derivados del mapa | META a, b | Socrático | ●●● |
 
-**Socrático** = te planteo el problema y lo intentas antes de que yo revele. **Expositivo** = lo narro yo. La clase 3 va expositiva porque "el sesgo rompe la cinética" no es algo que se deduzca en frío; la 5 va socrática porque para entonces ya tendrás todas las piezas.
+Cada clase es un `.md` con **contenido → quiz → contenido → quiz**, hasta cerrar sus nodos.
+Modo **socrático** = te planteo el problema y lo intentas antes de que yo revele. **Expositivo** = lo narro yo. Las clases 3 y 4 van expositivas porque no son deducibles en frío; la 5 gira a socrático en cuanto tengas $T(\tau)$.
+
+> [!important] §2bis · Por qué la Clase 0 de inmunología se queda
+> El sondeo confirmó que tienes el **marco conceptual** — selección conformacional, y por qué eso convierte *la población del estado competente* en la medida de interés. Eso es el techo del curso y está firme.
+>
+> Pero **nunca sondéé la anatomía del VNAR**, y ahí hay un nodo que **no es opcional**, porque de él depende el ataque más fuerte de todo el paper:
+>
+> > Un VNAR **carece de CDR2** — perdió las hebras β C′ y C′′ — y lo **compensa con HV2 y HV4**. HV2 forma un cinturón alrededor del dominio.
+>
+> Sin ese nodo, [[22 Superficie de ataque#🔴 A2 — HV2 entra en el MSM pero nunca se sesgó en la metadinámica|A2]] es una observación técnica menor: *«bueno, no sesgaron un loop»*. **Con** ese nodo, A2 se vuelve demoledor: no sesgaron el loop que **sustituye a la CDR2**, en un dominio que **solo tiene dos CDR**, y encima es el loop al que ellos mismos atribuyen la pérdida de afinidad.
+>
+> Es decir: la inmunología aquí no es contexto decorativo. Es **munición metodológica**. Por eso la Clase 0 se queda — pero corta y apuntada a eso, no a «qué es un anticuerpo».
+> Material ya escrito y verificado: [[23 Fondo — qué es un VNAR]].
+
+> [!note] La Clase 1 ya existe en borrador
+> [[10 Clase 1 — Por qué la MD sola no basta]] está escrita, pero **con el enfoque v1**: dedica mucho espacio a R1/R2, que ya tienes. Si apruebas este plan la reescribo comprimiendo esa parte y poniendo el peso en la demolición de M3, que es lo que el sondeo dice que hace falta.
 
 ---
 
-## 5. Decisiones que necesito de ti
+## 6. Lo que necesito de ti para arrancar
 
-> [!question] 1. ¿Apruebas el orden lógico en vez del cronológico?
-> Tensión primero (problema → solución → precio → reparación), no metaD → cluster → MD → MSM.
+> [!question] 1 · ¿Apruebas el eje?
+> «¿Qué me autoriza a leer este número como cantidad física?» como hilo conductor único, y orden lógico (problema → solución → precio → reparación) en vez de cronológico.
 
-> [!question] 2. ¿Retomamos el sondeo?
-> Cancelaste el primer quiz. Sin sondeo estoy adivinando tu borde y probablemente enseñaré cosas que ya sabes o daré por sentado lo que no. Serían **2–3 preguntas por hebra**, adaptándose a tus respuestas. Ver [[02 Sondeo — mapa de mi borde]] para lo que tengo preparado.
-> Alternativa: te describes tú mismo en prosa y me salto los quizzes de diagnóstico.
+> [!question] 2 · ¿Apruebas el reparto de peso?
+> Clases 2, 5 y 6 gordas; Clase 0 y 4 cortas; MD clásica fuera porque ya la tienes. Es lo que dice el sondeo, pero tú sabes cuánto tiempo tienes.
 
-> [!question] 3. ¿Cuánto peso al ataque?
-> Si el lab meeting es hostil o te van a apretar, invierto más en la clase 6 y en [[22 Superficie de ataque]]. Si es más divulgativo, cargo la 2–4.
-
-> [!question] 4. ¿Necesitas la Clase 0 de inmunología?
-> ¿Ya sabes qué es un CDR, un paratopo y qué significa humanizar? Si sí, me la salto y ganamos tiempo.
+> [!question] 3 · ¿Cuándo es el lab meeting?
+> Si es pronto, invierto el orden: **Clase 6 primero** (munición directa) y luego rellenamos los fundamentos hacia atrás. Es peor para entender, pero mejor si hay prisa.
