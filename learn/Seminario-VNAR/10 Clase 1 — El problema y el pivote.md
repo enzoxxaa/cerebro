@@ -109,3 +109,88 @@ Regla práctica: **un factor $e$ en población cuesta $2.5$ kJ/mol; un factor 10
 > **d)** $\approx -60$ kJ/mol
 >
 > *(el signo negativo significa «más estable». Responde en el terminal.)*
+
+> [!success]- Respuesta Q1 → **a) $\approx -6$ kJ/mol** ✓
+> $$\frac{P}{1-P} = \frac{0.92}{0.08} = 11.5, \qquad \ln 11.5 = 2.442$$
+> $$\Delta G = -2.494 \times 2.442 = -6.09\ \text{kJ/mol} = -2.4\,RT$$
+>
+> El estado competente de E06 es solo **6 kJ/mol** más estable que *todo el resto del espacio conformacional junto*. Un 92 % suena aplastante; en energía es modesto.
+>
+> **Ahora el cálculo completo.** Para huE06 v1.1, con $P = 0.16$:
+> $$\Delta G' = -2.494\,\ln\frac{0.16}{0.84} = -2.494 \times (-1.658) = +4.13\ \text{kJ/mol}$$
+> $$\boxed{\;\Delta\Delta G = 4.13 - (-6.09) = 10.2\ \text{kJ/mol} \approx 2.4\ \text{kcal/mol}\;}$$
+>
+> Ese es **el resultado central del paper expresado en energía**. Corta en dos direcciones y hay que manejar las dos:
+>
+> | A favor | En contra |
+> |---|---|
+> | 10 kJ/mol es una magnitud razonable para unas pocas mutaciones puntuales. El resultado es físicamente plausible. | 10 kJ/mol es **comparable a la incertidumbre de ff14SB** en energías libres conformacionales acumuladas sobre lazos de 10–15 residuos. La conclusión vive **dentro** de la barra de error del campo de fuerza. → ataque **A11** |
+>
+> **La lección transferible.** La relación $P \leftrightarrow \Delta G$ es logística: **comprime energías y expande porcentajes.**
+> $$P = \frac{1}{1+e^{\beta\Delta G}}$$
+> Un cambio de $4\,RT$ se presenta como «92 % se derrumba a 16 %». Las dos descripciones son correctas; la segunda es más dramática. Saber traducir entre ellas es lo que te deja juzgar si un efecto es grande **de verdad**.
+
+---
+
+## 2 · Por qué la MD no puede visitar lo que debería
+
+### Motivación
+
+Ya sabes *qué* hay que medir: el cociente $P_A/P_B$. La pregunta obvia es por qué no basta con correr MD y contar frames. Hay que verlo **con números**, no con «es que es lento».
+
+### 2.1 · La tasa de cruce
+
+El resultado estructural es que la tasa depende **exponencialmente** de la barrera. En teoría del estado de transición:
+
+$$
+k_{\text{TST}} \;=\; \frac{k_BT}{h}\; e^{-\beta \Delta G^{\ddagger}}
+$$
+
+con el prefactor universal a 300 K:
+
+$$
+\frac{k_BT}{h} \;=\; \frac{1.381\times10^{-23}\times 300}{6.626\times10^{-34}} \;=\; 6.25\times10^{12}\ \text{s}^{-1}
+$$
+
+TST asume tres cosas: (i) **no hay recruzamiento** de la superficie divisoria, (ii) el pozo reactivo está **equilibrado**, (iii) dinámica clásica. En disolvente, (i) falla — el solvente empuja al sistema de vuelta. Se corrige con un **coeficiente de transmisión** $\kappa \le 1$:
+
+$$
+k \;=\; \kappa\,\frac{k_BT}{h}\,e^{-\beta\Delta G^{\ddagger}}
+$$
+
+En el régimen de fricción alta, Kramers da la forma explícita del prefactor:
+
+$$
+k_{\text{Kramers}} \;=\; \frac{\sqrt{U''(x_{\min})\,\big|U''(x_{\max})\big|}}{2\pi\,\gamma}\; e^{-\beta\Delta U^{\ddagger}}, \qquad \kappa \propto \frac{1}{\gamma}
+$$
+
+> [!important] La estructura del problema, que es lo único que hay que retener
+> El prefactor varía **2–3 órdenes de magnitud** entre sistemas. El exponencial varía **dieciséis** órdenes en el rango de barreras que nos interesa.
+> Por eso **el prefactor casi da igual y la barrera lo es todo**: usar TST como cota superior es suficiente para decidir si algo se cruza o no.
+
+### 2.2 · Cuántos cruces esperas
+
+Los cruces son un proceso de Poisson de tasa $k$. En un tiempo $t$, el número esperado es
+
+$$
+\langle n \rangle \;=\; k\,t
+\qquad\text{y}\qquad
+P(\text{al menos un cruce}) \;=\; 1 - e^{-kt}
+$$
+
+Y el tiempo de espera medio es $\tau = 1/k$.
+
+---
+
+> [!question] **Q2 · R1** — Haz tú la cuenta
+> Barrera $\Delta G^{\ddagger} = 40$ kJ/mol, $T = 300$ K, trayectoria de $t = 100$ ns $= 10^{-7}$ s.
+> Usa **TST sin corregir** ($\kappa = 1$), es decir la **estimación más generosa posible**.
+>
+> $$\beta\Delta G^{\ddagger} = \frac{40000}{2494} = 16.04 \qquad e^{-16.04} = 1.08\times10^{-7}$$
+>
+> ¿Cuánto vale $\langle n \rangle = k\,t$, el número esperado de cruces?
+>
+> **a)** $\approx 7\times10^{-2}$
+> **b)** $\approx 7$
+> **c)** $\approx 7\times10^{2}$
+> **d)** $\approx 7\times10^{-5}$
