@@ -109,7 +109,7 @@ graph TD
 | Población del estado competente, **E06** | **92 %** |
 | Población del estado competente, **huE06 v1.1** | **16 %** |
 | Población del estado competente, **huE06 v1.4** | **16 %** |
-| $\Delta\Delta G$ equivalente (E06 → v1.1) | **≈ 10 kJ/mol** ≈ 2.4 kcal/mol *(cálculo mío, ver [[10 Clase 1 — Por qué la MD sola no basta#Nodo R2 · Población de equilibrio = peso de Boltzmann\|Clase 1 Q2]])* |
+| $\Delta\Delta G$ equivalente (E06 → v1.1) | **≈ 10 kJ/mol** ≈ 2.4 kcal/mol *(cálculo mío, ver [[10 Clase 1 — El problema y el pivote#Nodo R2 · Población de equilibrio = peso de Boltzmann\|Clase 1 Q2]])* |
 | Barra de error sobre esas poblaciones | **ninguna reportada** |
 
 ### Qué muestra cada figura

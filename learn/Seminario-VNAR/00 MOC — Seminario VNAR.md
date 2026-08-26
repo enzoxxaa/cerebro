@@ -25,32 +25,52 @@ obsidian://open?vault=SegundoCerebro&file=learn%2FSeminario-VNAR%2F20%20Paper%20
 
 ## Cómo está organizado esto
 
+### Proceso
+
 | Nota | Qué es | Estado |
 |---|---|---|
-| [[01 Plan de aprendizaje]] | El plan de clase + mapas de dependencias | 🟡 **esperando tu OK** |
-| [[02 Sondeo — mapa de mi borde]] | Dónde está mi borde en cada hebra | 🔴 pendiente |
-| [[10 Clase 1 — Por qué la MD sola no basta]] | Clase con quiz embebido | 🟢 borrador listo |
-| [[20 Paper — parámetros exactos]] | Todos los parámetros del pipeline, verbatim | 🟢 |
-| [[21 Defensa del pipeline]] | Munición para (a) | 🟢 |
-| [[22 Superficie de ataque]] | Munición para (b) — 10 críticas ordenadas | 🟢 |
-| [[23 Fondo — qué es un VNAR]] | Inmunología estructural mínima | 🟢 |
-| [[24 Referencias verificadas]] | Refs confirmadas contra OpenAlex / Europe PMC | 🟢 |
-| [[99 Pendientes de verificación]] | Lo que falta comprobar antes de la charla | 🟠 6 abiertos |
+| [[01 Plan de aprendizaje]] | Plan `v2` + mapa de dependencias | ✅ **aprobado** |
+| [[02 Sondeo — mapa de mi borde]] | Dónde está mi borde en cada hebra | ✅ cerrado — 7 preguntas |
+
+### Clases — contenido → quiz → contenido → quiz
+
+| Clase | Nodos | Estado |
+|---|---|---|
+| [[05 Clase 0 — El VNAR]] | `R4` | ✅ **cerrada — 4/4** |
+| [[10 Clase 1 — El problema y el pivote]] | `R1` `R2` `N1` + demoler **M3** | 🟡 borrador `v1`, a reescribir |
+| *Clase 2 — Inventar la metadinámica* | demoler **M1**, `N3` `N4` | ⚪ |
+| *Clase 3 — El precio: CVs y cinética* | `N5` `N6` `N7` | ⚪ |
+| *Clase 4 — tICA* | `N8` `N9` | ⚪ |
+| *Clase 5 — El MSM* | demoler **M2**, `N10` `N11` `N12` | ⚪ |
+| *Clase 6 — Munición* | META a, b | ⚪ |
+
+### Referencia
+
+| Nota | Qué es | Estado |
+|---|---|---|
+| [[20 Paper — parámetros exactos]] | Parámetros del pipeline, verbatim | ✅ |
+| [[99 Pendientes de verificación]] | Qué falta comprobar antes de la charla | 🟠 **8 abiertos** |
+| *21 Defensa del pipeline* | Munición para (a) | ⚪ por escribir |
+| *22 Superficie de ataque* | Munición para (b) — 11 críticas | ⚪ por escribir |
+| *24 Referencias verificadas* | Refs confirmadas vs OpenAlex / Europe PMC | ⚪ por escribir |
+
+> [!note] Sobre las notas 21, 22 y 24
+> El material está investigado y verificado pero **aún sin escribir** — se escribirán al llegar a la Clase 6, para que salgan **derivadas del mapa** y no como una lista que memorizar.
+> La antigua *23 Fondo — qué es un VNAR* quedó absorbida por [[05 Clase 0 — El VNAR]].
 
 ```mermaid
 graph LR
-    MOC["00 MOC"] --> PLAN["01 Plan"]
-    PLAN --> SON["02 Sondeo"]
-    SON --> C1["10 Clase 1"]
-    C1 --> CN["Clases 2..n"]
-    PAPER["20 Parametros"] --> DEF["21 Defensa"]
-    PAPER --> ATK["22 Ataque"]
-    VNAR["23 VNAR"] --> ATK
-    REF["24 Referencias"] --> DEF
-    REF --> ATK
-    DEF --> CN
-    ATK --> CN
+    PLAN["01 Plan v2"] --> SON["02 Sondeo"]
+    SON --> C0["05 Clase 0<br/>VNAR"]
+    C0 --> C1["10 Clase 1<br/>el pivote"]
+    C1 --> C2["Clases 2-5"]
+    C2 --> C6["Clase 6<br/>municion"]
+    PAPER["20 Parametros"] --> C6
+    C6 --> DEF["21 Defensa"]
+    C6 --> ATK["22 Ataque"]
+    C0 -.->|"A2"| ATK
     ATK --> PEND["99 Pendientes"]
+    style C0 fill:#1f6f3f,color:#fff
 ```
 
 ---

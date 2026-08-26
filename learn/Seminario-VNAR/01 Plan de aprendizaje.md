@@ -175,7 +175,7 @@ Modo **socrático** = te planteo el problema y lo intentas antes de que yo revel
 > Material ya escrito y verificado: [[23 Fondo — qué es un VNAR]].
 
 > [!note] La Clase 1 ya existe en borrador
-> [[10 Clase 1 — Por qué la MD sola no basta]] está escrita, pero **con el enfoque v1**: dedica mucho espacio a R1/R2, que ya tienes. Si apruebas este plan la reescribo comprimiendo esa parte y poniendo el peso en la demolición de M3, que es lo que el sondeo dice que hace falta.
+> [[10 Clase 1 — El problema y el pivote]] está escrita, pero **con el enfoque v1**: dedica mucho espacio a R1/R2, que ya tienes. Si apruebas este plan la reescribo comprimiendo esa parte y poniendo el peso en la demolición de M3, que es lo que el sondeo dice que hace falta.
 
 ---
 
