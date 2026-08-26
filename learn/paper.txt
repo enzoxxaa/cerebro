@@ -1,0 +1,720 @@
+                                                                                                              TYPE Original Research
+                                                                                                              PUBLISHED 02 September 2022
+                                                                                                              DOI 10.3389/fimmu.2022.953917
+
+
+
+
+                                              The inﬂuence of antibody
+OPEN ACCESS                                   humanization on shark variable
+EDITED BY
+Kathryn H. Ching,
+NextVivo, Inc., United States
+                                              domain (VNAR) binding site
+REVIEWED BY
+Carol F. Webb,
+                                              ensembles
+University of Oklahoma Health
+Sciences Center, United States
+Helen Dooley,                                 Monica L. Fernández-Quintero, Anna-Lena M. Fischer,
+University of Maryland, Baltimore,
+United States
+                                              Janik Kokot, Franz Waibl, Clarissa A. Seidler
+*CORRESPONDENCE
+                                              and Klaus R. Liedl*
+Klaus R. Liedl
+                                              Department of General, Inorganic and Theoretical Chemistry, and Center for Molecular Biosciences
+Klaus.Liedl@uibk.ac.at
+                                              Innsbruck (CMBI), University of Innsbruck, Innsbruck, Austria
+SPECIALTY SECTION
+This article was submitted to
+B Cell Biology,
+a section of the journal
+Frontiers in Immunology                       Sharks and other cartilaginous ﬁsh produce new antigen receptor (IgNAR)
+RECEIVED 26 May 2022
+                                              antibodies, as key part of their humoral immune response and are the
+ACCEPTED 15 August 2022                       phylogenetically oldest living organisms that possess an immunoglobulin
+PUBLISHED 02 September 2022                   (Ig)-based adaptive immune system. IgNAR antibodies are naturally occurring
+CITATION                                      heavy-chain-only antibodies, that recognize antigens with their single domain
+Fernández-Quintero ML, Fischer A-LM,         variable regions (VNARs). In this study, we structurally and biophysically
+Kokot J, Waibl F, Seidler CA and
+Liedl KR (2022) The inﬂuence of               elucidate the effect of antibody humanization of a previously published spiny
+antibody humanization on shark                dogﬁsh VNAR (parent E06), which binds with high afﬁnity to the human serum
+variable domain (VNAR)
+                                              albumin (HSA). We analyze different humanization variants together with the
+binding site ensembles.
+Front. Immunol. 13:953917.                    parental E06 VNAR and the human Vk1 light chain germline DPK9 antibody to
+doi: 10.3389/fimmu.2022.953917                characterize the inﬂuence of point mutations in the framework and the antigen
+COPYRIGHT                                     binding site on the speciﬁcity of VNARs as reported by Kovalenko et al. We ﬁnd
+© 2022 Fernández-Quintero, Fischer,
+                                              substantially higher ﬂexibility in the humanized variants, reﬂected in a broader
+Kokot, Waibl, Seidler and Liedl. This is an
+open-access article distributed under         conformational space and a higher conformational entropy, as well as
+the terms of the Creative Commons             population shifts of the dominant binding site ensembles in solution. A
+Attribution License (CC BY). The use,
+distribution or reproduction in other         further variant, in which some mutations are reverted, largely restores the
+forums is permitted, provided the             conformational stability and the dominant binding minimum of the parent E06.
+original author(s) and the copyright
+                                              We also identify differences in surface hydrophobicity between the human Vk1
+owner(s) are credited and that the
+original publication in this journal is       light chain germline DPK9 antibody, the parent VNAR E06 and the humanized
+cited, in accordance with accepted            variants. Additional simulations of VNAR-HSA complexes of the parent E06
+academic practice. No use,
+distribution or reproduction is
+                                              VNAR and a humanized variant reveal that the parent VNAR features a
+permitted which does not comply with          substantially stronger network of stabilizing interactions. Thus, we conclude
+these terms.                                  that a structural and dynamic understanding of the VNAR binding site upon
+                                              humanization is a key aspect in antibody humanization.
+
+                                              KEYWORDS
+
+                                              shark, VNAR, novel biotherapeutic formats, humanization, molecular dynamics
+                                              simulations, hydrophobicity
+
+
+
+
+Frontiers in Immunology                                            01                                                           frontiersin.org
+Fernández-Quintero et al.                                                                                               10.3389/ﬁmmu.2022.953917
+
+
+
+
+    GRAPHICAL ABSTRACT
+    VNAR humanization - identifying the critical residues determining the antigen binding site and consequently inﬂuencing antigen recognition.
+
+
+
+
+Introduction
+    Approximately 500 million years ago, cartilaginous ﬁsh                    4HGK) (13). VNARs are small in size, soluble, exist as
+diverged from a common ancestor with other jawed                              independent stable single-domains in solution and are known
+vertebrates and can be divided into two extant subclasses, the                for their ability to bind and recognize a variety of antigens,
+holocephalans (chimeras and ratﬁsh) and the elasmobranchs                     including buried epitopes that are not accessible by conventional
+(sharks, rays and skates) (1–3). Cartilaginous ﬁsh are the                    antibody variable domains (14–16). Due to their unique
+phylogenetically oldest group of animals having an adaptive                   biophysical properties and characteristics, which are only
+immune system, based on immunoglobulins (Ig), T-cell                          shared by camelid single-chain antibodies, VNARs have
+receptors and major histocompatibility complexes (MHC) (4–                    received increasing attention as highly versatile proteins, which
+7). However, cartilaginous ﬁsh developed unique structural and                contribute to the success to date of alternative scaffolds and
+immunological features and provide valuable insights in the                   makes them attractive novel biotherapeutic proteins (14, 15, 17,
+evolution of the immune system (4, 8). Shark antibodies have                  18). VNARs are structurally more similar to variable light chain
+evolved under challenging conditions, i.e., the high                          and variable T-cell receptor domains than to variable heavy
+concentration of the protein denaturant urea in the blood                     chain domains (19, 20). However, they contain only two
+serum and are therefore believed to be very stable (4, 9). The                complementarity determining region (CDR) loops, lacking the
+humoral immune response of sharks and their relatives                         CDR2 loop and two b-strands. Instead, they contain other CDR
+comprises three Ig isotypes, namely IgM, IgW and so-called Ig                 like regions, namely the hypervariable region 2 (HV2), and the
+new antigen receptor (IgNAR) (10). While the IgM and IgW are                  hypervariable region 4 (HV4), which reveal an elevated rate of
+conventional heavy-light chain isotypes, the third atypical                   somatic hypermutations. To compensate for the reduced size,
+isotype IgNAR is a heavy-chain-only disulﬁde-bonded                           the binding site features a long and extended CDR3 loop, which
+homodimer that does not pair with a light chain. The IgNAR                    has the highest diversity in length, sequence, and structure
+consists of two identical heavy chains, which can be subdivided               (18, 21).
+into two unpaired variable (VNAR) domains and ﬁve constant                        Another critical determinant of the structural diversity of
+domain dimers (CH1-CH5) (Figure 1) (8, 11, 12). A schematic                   VNARs is that they have further disulﬁde bonds in the CDRs
+IgNAR structure, as well as an example of a VNAR crystal                      and the framework region in addition to the canonical cysteine
+structure, is shown in Figures 1A, B (PDB accession code:                     residues (Cys23-Cys88 – Kabat nomenclature) in the
+
+
+
+
+Frontiers in Immunology                                                  02                                                            frontiersin.org
+Fernández-Quintero et al.                                                                                              10.3389/ﬁmmu.2022.953917
+
+
+
+
+                 A                    B                                   C
+
+
+
+
+   FIGURE 1
+   Structure of the parent E06 VNAR (PDB: 4HGK) with and without the antigen present. (A) Schematic representation of a new antigen receptor
+   (IgNAR). The ﬁve constant domain dimers are shown in dark grey, while the variable single-domains (VNARs) are depicted in light grey. (B)
+   Schematic and structural representation of the parent VNAR E06. The CDR1, and CDR3 loops are colored in pink and red, respectively. The FW1,
+   FW2, FW3, and FW4 are illustrated in light grey, pale green, aquamarine, and pare orange, respectively. (C) Structure of the parent E06 VNAR in
+   complex with the antigen HSA.
+
+
+
+
+framework. Based on the number and position of additional                     residues from the human DPK9, while keeping the original shark
+cysteine residues, four types of naturally occurring IgNAR                    residues for the ﬁrst four N-terminal residues, CDR1, CDR3,
+variable domains have been classiﬁed (4, 9, 12, 22, 23). Type I               HV2 and HV4 loop residues (Figure 2A). The DPK9 (Vk1) light
+VNARs, which can be found in nurse sharks, contain two                        chain was chosen for humanization, as it is one of the most stable
+cysteines in CDR3 and two more in the framework regions 2                     and well-expressed human frameworks, that shares signiﬁcant
+and 4. In contrast, type II and III VNARs have an additional                  structural homology with E06 (27). The huE06 v1.2 variant was
+cysteine pair to link CDR1 and CDR3 loops. Type III VNARs are                 generated by introducing additional mutations in the HV4 loop.
+predominantly present in neonatal shark development but have                  Additionally, mutations in the HV2 loop and in the N-terminus
+subsequently been found in adult spiny dogﬁsh sharks and                      towards DPK9 were made to obtain huE06 v1.4. The variant E06
+bamboo sharks. Structurally, these antibodies are characterized               v1.10 was obtained by restoring critical contact residues (namely
+by a conserved tryptophan residue in the CDR1 loop and limited                residues 38-40) with the antigen in FW2 (Figure 2A), which
+CDR3 loop diversity, however, the functional role of these                    resulted in improved binding properties compared to E06 v1.1.
+antibodies remains still elusive. Type IV VNARs, which are                    Additionally, two crystal structures of the parental E06 VNAR
+primarily found in dogﬁsh sharks, wobbegong, small-spotted                    and the huE06 v1.1 variant in complex with the HSA antigen
+catsharks and bamboo sharks contain only the two canonical                    were available (13). The two complex crystal structures show
+cysteine residues (9, 13, 24, 25). In this study, we investigate the          that not only CDR loops are responsible for interacting with the
+consequences and effects of antibody humanization of the spiny                antigen, but that also several framework residues are in contact
+dogﬁsh shark VNAR E06 (Figure 2). We thermodynamically                        to HSA.
+and kinetically characterize the conformational diversity and the
+respective ensembles in solution of the E06 VNAR and compare
+them with different humanization variants published by                        Results
+Kovalenko et al., and the germline light chain Vk1 antibody,
+DPK9 (13). The investigated variants have been humanized by                       Where possible, we started our simulations from crystal
+converting over 60% of non-CDR residues to those of the human                 structures. For, the other variants including the DPK9 (Vk1)
+germline and the resulting antibodies have mostly retained the                light chain variable domain, we generated models by using
+speciﬁcity and afﬁnity of the parent E06. For the ﬁrst                        “AlphaFold2” (Table 1) (13, 28). In Figure 2B, we present the
+humanization variant (huE06 v1.1), the E06 VNAR has been                      surface hydrophobicity of the parent VNAR E06 and the human
+humanized by replacing 63.5% of the framework residues (FW)                   DPK9 light chain variable domain, as assigned using the
+of the VNAR E06, i.e., FW1 (residues 6-21), FW2 (residues 38-                 hydrophobicity scale by Wimley and White (26). It shows that
+40), FW3 (residues 66-82) and FW4 (residues 99-103), with                     the DPK9 variable domain displays a hydrophobic patch at the
+
+
+
+
+Frontiers in Immunology                                                  03                                                            frontiersin.org
+Fernández-Quintero et al.                                                                                                       10.3389/ﬁmmu.2022.953917
+
+
+
+
+                    A                                                        B
+
+
+
+
+      FIGURE 2
+      Sequence alignment highlighting the differences between the VNAR variants. (A) Color-coded sequence alignment showing the introduced
+      changes upon antibody humanization. The changes in the sequences are also highlighted in the structure. The residues that are identical with
+      the DPK9 germline are colored in blue, the mutated residues in variant huE06 v1.1 are colored in green. Additional mutations of variants huE06
+      v1.2, v1.4 are depicted in yellow and purple, respectively. The huE06 v1.10 variant, restoring critical ‘RKN’ motif, is shown in orange. (B) Surface
+      hydrophobicity of the parent VNAR E06 and the human DPK9 light chain variable domain, as assigned by the Wimley and White the
+      hydrophobicity scale (26).
+
+
+
+
+center of the interface, which corresponds to the contact area                        Figure 3A shows the time-lagged independent component
+with the respective paired heavy chain. This hydrophobic patch                        analysis (tICA) plots of the CDR3, CDR1 and of the whole
+in the DPK9 interface is replaced by a more hydrophilic surface                       paratope (comprising CDR1, CDR3 and the HV2 loop). tICA is
+in the E06 VNAR.                                                                      a dimensionality-reduction technique, which detects the
+    To characterize the conformational diversity of the E06                           slowest-relaxing degrees of freedom. The free energy
+VNAR and the humanized variants in solution, we applied a                             landscapes of the paratope clearly show that the parent E06
+protocol using the enhanced sampling technique metadynamics                           VNAR is less ﬂexible than the humanized variants. This
+in combination with classical molecular dynamics (MD)                                 difference in conformational diversity is also reﬂected in the
+simulations, to overcome the limitations of conformational                            free energy surfaces of the individual CDR1 and CDR3 loops,
+sampling imposed by high energy barriers. The aggregated                              which reveal different conformational states in solution.
+simulation time for each variant is summarized in Table 1.                            Figure 3B shows histograms of the number of intradomain
+    Moreover, we wanted to characterize and quantify the                              contacts of the CDR3 and the CDR1, respectively. There is a
+conformational diversity in the different humanized variants.                         clear reduction of the number of contacts in those variants which
+                                                                                      also show higher ﬂexibility in the free energy surfaces. In
+TABLE 1 Overview of the investigated variants with the aggregated
+                                                                                      agreement with experimental afﬁnity and speciﬁcity measures
+simulation times.                                                                     determined by Kovalenko et al. (13), in which huE06 v1.10 is the
+                                                                                      closest to the parent E06 VNAR, we ﬁnd that the parent E06 and
+Variants                Starting structures          Simulation time/µs
+                                                                                      the huE06 v1.10 display the highest number of intradomain
+E06                     PDB: 4HGK                              11.9
+                                                                                      contacts per frame. Figure 3C visualizes the residue-wise
+huE06 v1.1              PDB: 4HGM                              28.2                   dihedral entropies projected onto the respective E06 VNAR
+huE06 v1.2              AlphaFold2                             17.4                   and the humanized variant structures. We ﬁnd clear
+huE06 v1.4              AlphaFold2                             43.1                   differences in the dihedral entropy of the CDR loops and the
+huE06 v1.10             AlphaFold2                             20.0                   HV2 and HV4 loops between the different variants and the
+DPK9 (Vk1)              AlphaFold2                             33.8                   parent VNAR. The huE06 v1.10 variant and the parent VNAR
+                                                                                      show the most limited ﬂexibility, while the variant huE06 v1.4
+
+
+
+
+Frontiers in Immunology                                                          04                                                             frontiersin.org
+Fernández-Quintero et al.                                                                                                10.3389/ﬁmmu.2022.953917
+
+
+
+
+                     A                                                                                          B
+
+
+
+
+                     C
+
+
+
+
+   FIGURE 3
+   Free energy landscapes of the CDR1, CDR3 and the paratope (CDR1, CDR3 and HV2 loops), intradomain contact distributions of the individual
+   CDR loops and dihedral entropies projected onto the VNAR structures as measure for ﬂexibility. (A) Free energy surfaces of the CDR1, CDR3 and
+   the paratope for the parent E06 VNAR and the different humanization variants in the same coordinate system, respectively. The available crystal
+   structures are depicted as white diamonds, while the models are illustrated as white circles. (B) Contacts per frame distributions of the CDR1
+   and CDR3 loops. (C) Residue-wise dihedral entropies mapped onto the respective structures (red – high ﬂexibility, green – low ﬂexibility).
+
+
+
+
+reveals together with the germline DPK9 variable domain and                    conformational space and a different dominant minimum in
+the huE06 v1.1 variant the highest conformational diversity. A                 solution. To reconstruct thermodynamics and kinetics of
+direct comparison of the CDR3 loop conformational spaces of                    different loop rearrangements, we built Markov-state models
+the parent, the humanized variants, and the germline DPK9                      of the paratope based on the backbone torsions of the CDR1,
+variable domain is shown in SI Figure S1. The germline CDR3                    CDR3, and HV2 (Figure 4). Figure 4 compares the parent E06
+loop reveals a high ﬂexibility, reﬂected in a broader                          with the variant huE06 v1.1 (Figures 4A, B) and with the variant
+
+
+
+
+                 A                                                              C
+
+
+
+
+                 B                                                              D
+
+
+
+
+   FIGURE 4
+   Kinetic and thermodynamic VNAR binding site ensemble characterization of the parent E06 VNAR and the humanized variants huE06 v1.1 and
+   huE06 v1.4. (A, B) Free energy landscapes with the respective state probabilities, transition timescales and macrostate representatives of the
+   parent E06 and the humanized variant huE06 v1.1 in the same coordinate system. The crystal structures are depicted as white diamonds.
+   Macrostate representatives are projected into the free energy landscape as dots, color-coded according to the structures on the right. The
+   thickness of the arrows denotes the transition timescale and the width of the surrounding circle represents the state population. (C, D) Free
+   energy surfaces with the respective state probabilities, transition timescales and macrostate representatives of the parent E06 and the
+   humanized variant huE06 v1.4 in the same coordinate system. The available crystal structure is depicted as white diamond.
+
+
+
+
+Frontiers in Immunology                                                   05                                                            frontiersin.org
+Fernández-Quintero et al.                                                                                                   10.3389/ﬁmmu.2022.953917
+
+
+
+
+huE06 v1.4 (Figures 4C, D) in the same coordinate system,                       ﬂexibility in the antigen-binding site for the huE06 v1.1,
+respectively. We ﬁnd overlaps of the conformational spaces of                   compared to the parent E06 VNAR, but we also ﬁnd
+the parent and the humanized variants; however, the variants                    substantial differences in the interaction networks. Figure 5
+and the parent differ in ﬂexibility and in their state probabilities.           shows the interaction patterns of the parent E06-HSA complex
+While the available complex X-ray structure (depicted as white                  compared with the huE06 v1.1-HSA complex. We observe a shift
+diamond) lies in the dominant minimum in solution (92%                          in the contact per frame distributions towards a lower number of
+probability) of the parent E06 VNAR, the probability of this                    contacts for the huE06 v1.1 variant (Figure 5D). This substantial
+state is substantially reduced to 16% in the huE06 v1.1 variant.                reduction in the interaction network is also visualized in the
+The difference is more drastic for the comparison of the parent                 antibody-antigen interaction ﬁngerprints and ﬂareplots
+E06 VNAR with the huE06 v1.4.                                                   (Figures 5A, C). The main differences in antibody-antigen
+    In line with the results obtained for huE06 v1.1, we observe a              interactions are also visualized in the interaction ﬁngerprint
+bigger conformational landscape and ﬁnd a substantially                         plots, which provide a clustering of interactions based on their
+reduced probability for the binding competent state of the                      contact frequencies. These ﬁndings agree with the reduced
+huE06 v1.4 (16%). As described in the methods section, we                       binding afﬁnity and speciﬁcity of the huE06 v1.1 to the HSA
+also performed simulations in complex with the antigen, as both                 compared to the parent E06 VNAR and indicate that they result
+available crystal structures were in complex with the HSA                       from missing interactions with the HV2 loop and
+antigen. We do not only ﬁnd a substantial increase of                           the framework.
+
+
+
+
+                 A                                        B
+
+
+
+
+                 C                                                                                     D
+
+
+
+
+   FIGURE 5
+   Contact analysis of the HSA antigen with the parent E06 VNAR and the huE06 v1.1. (A) Interaction ﬁngerprint visualization of the contacts
+   between antibody and antigen, depicts the differences in the contact frequencies between the parent and the humanized variant. (B) Interacting
+   residues between antibody and antigen color-coded according to their occurrence. (C) Interaction ﬂareplots between antibody (dark grey) and
+   antigen HSA (light grey). The color-coding of the lines in the ﬂareplots corresponds to the occurrence of the contacts. (D) Contacts per frame
+   distributions for the interactions of the parent and the humanized variant with the antigen. The distribution of the parent is depicted in blue, the
+   distribution of huE06 v1.1 is illustrated in green.
+
+
+
+
+Frontiers in Immunology                                                    06                                                               frontiersin.org
+Fernández-Quintero et al.                                                                                         10.3389/ﬁmmu.2022.953917
+
+
+
+
+Discussion                                                                  Figure 3 provides an overview of the CDR loop and paratope
+                                                                            conformational spaces and clearly shows that the shape of the
+    The rise of antibodies as biotherapeutic proteins has                   paratope is not solely determined by the CDR3 loop, but is
+motivated numerous studies to characterize and understand                   actually also inﬂuenced by the CDR1 and the HV2 loops.
+the antibody binding interface as a pre-requisite for rational              Compared to the parent E06 VNAR, we ﬁnd that in line with
+antibody design and engineering (29–35). Compared to                        the decrease in speciﬁcity reported by Kovalenko et al. (13), we
+conventional antibodies, small antibodies, such as nanobodies               observe an increase in ﬂexibility for all investigated humanized
+and VNARs, offer various advantages and reveal features that are            variants and the human germline DPK9 variable domain. This
+desirable for drug discovery, i.e., higher stability and solubility.        increase in ﬂexibility is reﬂected in the broader conformational
+Additionally, they can work inside cells, recognize cryptic and             landscapes and the increased residue-wise dihedral entropies.
+buried epitopes and due to their small size wend into tissues (21).         The residue-wise dihedral entropies provide an alignment-
+Furthermore, it has also been reported that VNARs can be used               independent measure for ﬂexibility and thereby facilitate the
+as blood-brain barrier (BBB) shuttles or transporter                        comparison of ﬂexibility hotspots within the different variants
+molecules (36).                                                             (47). The changes in ﬂexibility underline the challenges in
+    Thus, to design and engineer these outstanding proteins, it is          rationally designing antibodies, by revealing the presence of
+crucial to characterize the peculiar antibody binding site of               conformational substates, which are likely to have different
+VNARs structurally and dynamically and to elucidate the                     binding properties and may result in a high entropic cost
+antibody-antigen recognition mechanism. In this study, we                   upon binding (48). These observations presented in Figure 3
+thermodynamically and kinetically characterize the                          also agree with previous studies showing that afﬁnity maturation
+consequences of humanization on VNAR binding site                           of single-domain variable domains results in a decrease of
+ensembles in solution and provide a description of the                      ﬂexibility (49–52). Apart from differences in ﬂexibility, we
+fundamental factors that contribute to antigen binding.                     observe substantial shifts of the contact per frame distributions
+Engineering efforts focus on reducing undesirable                           (Figure 3B), in particular for the humanized variants huE06 v1.1,
+immunogenic responses by antibody humanization, thereby                     v1.2 and v1.4. Thus, we ﬁnd that not only the direct interactions
+increasing the identity of non-human antibodies and scaffolds               with the antigen are inﬂuenced by humanization (Figure 5), but
+to common human antibody sequences (37–41). The main                        also the intramolecular interaction network. Therefore, the
+challenge in humanizing antibodies is to maintain the full                  higher ﬂexibility of the variants can also be explained by a
+biological function, which is reﬂected in a high binding afﬁnity            weaker intramolecular interaction network. The lowest number
+and speciﬁcity to reduce the risk of adverse side-effects (42).             of contacts per frame can be found for the huE06 v1.4 variant,
+Therefore, to understand the role of the framework on the                   which lacks a charged critical hydrogen bond interaction of
+antigen binding site, it is crucial to biophysically characterize           residue K64 in the HV4 loop and residue Y29 in the CDR1 loop
+antibody paratope ensembles in solution in different stages of              and forms instead a less probable interaction between residues
+antibody humanization (38). Conformational rearrangements in                T27-Y29 in the CDR1 loop. The huE06 v1.10 variant on the
+the paratope, as well as antibody-antigen binding can occur in              other hand restores the ‘RKN’ motif located in FW2, which is
+the nano-to-millisecond timescale, which exceeds routinely                  crucial for antigen-binding and reveals therefore a highly similar
+performed simulation times by far (43, 44). To enhance the                  intramolecular interaction network compared to the parent E06
+sampling efﬁciency, we use metadynamics simulations to cover                VNAR. The Markov-state models in Figure 4 compare the
+the relevant conformational transitions and paratope                        parent E06 VNAR paratope states with the humanized
+rearrangements. Figure 2A shows the sequence alignment of                   variants huE06 v1.1 and huE06 v1.4. We ﬁnd that the binding
+the parent E06 VNAR with the investigated humanized variants                competent conformation is present in all investigated variants,
+and highlights the importance of speciﬁc framework residues for             however with reduced probability. These ﬁndings support the
+antigen recognition. Figure 1C shows the atypical binding mode              idea that the decrease in speciﬁcity is accompanied by a
+of the antigen HSA to the VNAR, as not only the CDR loops are               population shift, reﬂected in different dominant states in
+involved in binding the antigen, but also the HV2 and extensive             solution as a consequence of antibody humanization. The
+framework residues.                                                         simulations with the antigen HSA reveal that the huE06 v1.1
+    It has already been shown that framework residues can                   displays also in complex an increase in ﬂexibility compared to
+determine the binding site ensembles and consequently                       the parent E06 VNAR-HSA complex (SI Figure S2). Figure 5
+inﬂuence antibody-antigen binding (13, 37, 39, 45, 46).                     shows the interaction proﬁles and networks of the parent E06
+Additionally, Figure 2B depicts the surface hydrophobicity of               VNAR and the huE06 v1.1 variant and reveals a substantially
+the parent E06 VNAR compared to the human germline DPK9.                    reduced number of interactions for the huE06 v1.1. The higher
+We ﬁnd that the parent E06 VNAR reveals a more hydrophilic                  ﬂexibility of the huE06 v1.1 variant can be explained by the
+interface, which is believed to be responsible for the enhanced             absence of the stabilizing salt bridge interaction between residue
+stability and the favorable biophysical characteristics (17, 18).           K46 in the HV2 loop with residue E230 in the antigen and the
+
+
+
+
+Frontiers in Immunology                                                07                                                       frontiersin.org
+Fernández-Quintero et al.                                                                                          10.3389/ﬁmmu.2022.953917
+
+
+
+
+hydrogen bond interaction of residue W91 in the CDR3 loop                  in cubic water boxes of TIP3P water molecules with a minimum
+with residue T236.                                                         wall distance of 10 Å to the protein (60–62). For all simulations,
+                                                                           parameters of the AMBER force ﬁeld 14SB were used (63). The
+                                                                           VNAR variants were carefully equilibrated using a multistep
+Conclusion                                                                 equilibration protocol (64).
+
+    In this study, we structurally and functionally characterized
+the antigen-binding site of ﬁve VNARs upon antibody                        Metadynamics simulations
+humanization. We observed, in line with the ﬁndings of
+Kovalenko et al., that not solely the CDR1 and CDR3 loops                       To enhance the sampling of the conformational space, well-
+are critical for determining the shape of the antigen-binding site,        tempered metadynamics simulations (65–68) were performed in
+but that also the HV2 loop and the FW2 are critical for antigen            GROMACS (69, 70) with the PLUMED 2 implementation (71). As
+recognition. The germline DPK9 as well as the humanized                    collective variables, we used a linear combination of sine and cosine
+variants reveal a higher ﬂexibility, which is reﬂected in a                of the y torsion angles of the CDR1 and CDR3 loops calculated
+higher conformational entropy, a broader conformational                    with functions MATHEVAL and COMBINE implemented in
+space and substantial population shifts of the dominant                    PLUMED 2 (71). As discussed previously the y torsion angle
+binding site ensembles in solution. The huE06 v1.10 variant                captures conformational transitions comprehensively (72). The
+restores three critical framework residues and retains the                 decision to include the y torsion angles of these two loops is
+conformational stability and the dominant binding minimum                  based on their strong involvement in the binding to the antigen as
+of the parent. Additionally, the simulations in complex with the           evident from the X-ray structure of the complex. The simulations
+antigen reveal that the huE06 v1.1 variant shows a higher                  were performed at 300 K in an NpT ensemble using the velocity
+ﬂexibility and variability in the antigen-binding site compared            rescaling algorithm and a Parrinello-Rahman barostat (73, 74). For
+to the parent E06 VNAR. Apart from the higher conformational               the metadynamics simulations, we used a Gaussian height of
+variability, the VNAR-HSA complexes differ in the duration and             10.0 kJ/mol and a width of 0.3 radian. Gaussian deposition
+number of antibody-antigen interactions. The increase in                   occurred every 1000 steps and a biasfactor of 10 was used. 1 µs
+ﬂexibility upon antibody humanization can be explained by a                metadynamics simulations were performed for the parent E06
+lack of stabilizing interactions, due to changes in the framework.         VNAR, the humanized variants and the DPK9 human variable
+Thus, we conclude that the dynamic and structural                          domain without the antigen. As the available X-ray structures for
+characterization of VNAR binding site ensembles allows to                  the parent E06 and the huE06 v1.1 were crystallized with the
+identify the key determinants for antigen recognition and can              antigen present, we also performed 1 µs of metadynamics
+guide antibody humanization efforts.                                       simulations in complex with the antigen for these two systems.
+                                                                           The resulting trajectories were clustered in cpptraj (57, 59) by using
+                                                                           the average linkage hierarchical clustering algorithm with a distance
+Methods                                                                    cut-off criterion of 1.3 Å resulting in a large number of clusters
+                                                                           (Table 1). The cluster representatives for the parent and the
+    A previously published method characterizing the CDR loop              humanized variants both with and without the antigen present
+ensembles in solution (32, 33, 38, 50, 51, 53, 54) was used to             were equilibrated and simulated for 100 ns each using the AMBER
+investigate the conformational diversity of the paratope loops of          20 simulation package (57).
+VNAR humanization variants both with and without the antigen
+bound (13). Experimental structure information was available
+for the parent E06 VNAR and the humanized variant huE06                    Molecular dynamics simulations
+v1.1, which were crystallized with the antigen HSA. The PDB
+accession codes for the parent E06 and the huE06 v1.1 are 4HGK                 Molecular dynamics simulations were performed in an NpT
+and 4HGM, respectively. For the other investigated variants and            ensemble using pmemd.cuda (75). Bonds involving hydrogen
+the human Vk1 germline DPK9, we used AlphaFold2 to predict                 atoms were restrained by applying the SHAKE algorithm (76),
+the structures (28). The available X-ray structures and the                allowing a time step of 2 fs. Atmospheric pressure of the system
+models were used as starting structures for molecular                      was preserved by weak coupling to an external bath using the
+dynamics simulations. The starting structures for simulations              Berendsen algorithm (77). The Langevin thermostat (78, 79) was
+were prepared in MOE (Molecular Operating Environment,                     used to maintain the temperature during simulations at 300 K.
+Chemical Computing Group, version 2020.09) using the                           Based on the backbone torsion of the CDR1, CDR3 and HV2
+Protonate3D tool (55, 56). To neutralize the charges we used               loops, a time-lagged independent component analysis (tICA) was
+the uniform background charge (57, 58). Using the tleap tool of            performed using the python library PyEMMA 2 employing a lag
+the AmberTools20 (57, 59) package, the structures were soaked              time of 10 ns (80, 81). Thermodynamics and kinetics were calculated
+
+
+
+
+Frontiers in Immunology                                               08                                                           frontiersin.org
+Fernández-Quintero et al.                                                                                            10.3389/ﬁmmu.2022.953917
+
+
+
+
+from a Markov-state model (82, 83) by using PyEMMA 2, which                     Author contributions
+uses the k-means clustering algorithm (84) to deﬁne microstates and
+the PCCA+ clustering algorithm (85) to coarse-grain the microstates                 MF-Q performed research, wrote the manuscript. A-LF
+into macrostates. PCCA+ is a spectral clustering method, which                  performed research and analyzed data. JK performed research.
+discretizes the sampled conformational space based on the                       FW analyzed data and contributed in writing the manuscript. CS
+eigenvectors of the transition matrix. The sampling efﬁciency and               analyzed data. KL supervised the research. All authors
+the reliability of the Markov-state model (e.g., deﬁning optimal                contributed to writing the manuscript.
+feature mappings) has been evaluated with the Chapman-
+Kolmogorov test (86, 87), by using the variational approach for
+Markov processes (88) and by taking into account the fraction of
+states used, as the network states must be fully connected to calculate
+probabilities of transitions and the relative equilibrium probabilities.
+                                                                                Funding
+To capture and quantify the kinetically relevant loop rearrangements
+                                                                                    This work was supported by the Austrian Science Fund
+of the VNAR variants we constructed Markov-state models based on
+                                                                                (FWF) via the grants P30565, P30737 and P30402, P34518 as
+the backbone torsions of the CDR1, CDR3 and HV2 loops, deﬁned
+                                                                                well as DOC 30.
+100 microstates using the k-means clustering algorithm and applied
+a lag time of 15 ns. The images presented in this paper were created
+by using the PyMOL molecular graphics system (89).
+
+                                                                                Acknowledgments
+Dihedral entropies
+                                                                                    The computational results presented her have been achieved
+    We calculated the residue-wise dihedral entropies with the                  (in part) using the Vienna Scientiﬁc Cluster (VSC). We
+recently published X-entropy python package, which calculates                   acknowledge PRACE for awarding us access to Piz Daint at
+the entropy of a given dihedral angle distribution (47). This                   CSCS, Switzerland.
+approach uses a Gaussian kernel density estimation (KDE) with
+a plug-in bandwidth selection, which is fully implemented in
+C++ and parallelized with OpenMP. The obtained residue-wise
+dihedral entropies were projected onto the respective structures.               Conﬂict of interest
+Contacts                                                                            The authors declare that the research was conducted in the
+                                                                                absence of any commercial or ﬁnancial relationships that could
+     The GetContacts (90) tool was used to quantify the interactions            be construed as a potential conﬂict of interest.
+occurring in the simulations. To generate the contact per frame
+histograms, we chose a bin width of 2. Inspired by their visualization
+tools a new script was developed. The script includes “interaction
+ﬁngerprints” which facilitate the comparison of interactions among
+multiple systems as well as “ﬂareplots” to visualize the interaction
+                                                                                Publisher’s note
+networks of individual systems. The “interaction ﬁngerprint” plots
+                                                                                    All claims expressed in this article are solely those of the
+are based on a hierarchical clustering on the data to compare the
+                                                                                authors and do not necessarily represent those of their afﬁliated
+contact frequencies of different systems. We used as clustering
+                                                                                organizations, or those of the publisher, the editors and the
+criterion the contact frequencies and applied the cut-off 0.5. In the
+                                                                                reviewers. Any product that may be evaluated in this article, or
+ﬁngerprint plots interacting residues are connected via a line that is
+                                                                                claim that may be made by its manufacturer, is not guaranteed
+colored according to the frequency of the interaction. The script as
+                                                                                or endorsed by the publisher.
+well as a short introduction is provided on our GitHub (https://
+github.com/liedllab/GetContacts_analysis).
+
+
+
+Data availability statement                                                     Supplementary material
+    The original contributions presented in the study are                          The Supplementary Material for this article can be found
+included in the article/Supplementary Material. Further                         online at: https://www.frontiersin.org/articles/10.3389/
+inquiries can be directed to the corresponding author                           ﬁmmu.2022.953917/full#supplementary-material
+
+
+
+
+Frontiers in Immunology                                                    09                                                       frontiersin.org
+Fernández-Quintero et al.                                                                                                                    10.3389/ﬁmmu.2022.953917
+
+
+
+
+References
+  1. Dooley H, Flajnik MF. Antibody repertoire development in cartilaginous ﬁsh.              23. Streltsov VA, Varghese JN, Carmichael JA, Irving RA, Hudson PJ, Nuttall
+Dev Comp Immunol (2006) 30(1):43–56. doi: 10.1016/j.dci.2005.06.022                         SD. Structural evidence for evolution of shark ig new antigen receptor variable
+   2. Flajnik MF, Kasahara M. Origin and evolution of the adaptive immune                   domain antibodies from a cell-surface receptor. Proc Natl Acad Sci U.S.A. (2004)
+system: Genetic events and selective pressures. Nat Rev Genet (2010) 11(1):47–59.           101(34):12444. doi: 10.1073/pnas.0403509101
+doi: 10.1038/nrg2703                                                                           24. Steven J, Müller MR, Carvalho MF, Ubah OC, Kovaleva M, Donohoe G,
+   3. Cooper MD, Alder MN. The evolution of adaptive immune systems. Cell                   et al. In vitro maturation of a humanized shark VNAR domain to improve its
+(2006) 124(4):815–22. doi: 10.1016/j.cell.2006.02.001                                       biophysical properties to facilitate clinical development. Front Immunol (2017) 8.
+                                                                                            doi: 10.3389/ﬁmmu.2017.01361
+   4. Feige MJ, Gräwert MA, Marcinowski M, Hennig J, Behnke J, Ausländer D,
+et al. The structural analysis of shark IgNAR antibodies reveals evolutionary                  25. Wei L, Wang M, Xiang H, Jiang Y, Gong J, Su D, et al. Bamboo shark as a
+principles of immunoglobulins. Proc Natl Acad Sci USA (2014) 111(22):8155.                  small animal model for single domain antibody production. Front Bioengineering
+doi: 10.1073/pnas.1321502111                                                                Biotechnol (2021) 9. doi: 10.3389/fbioe.2021.792111
+   5. Flajnik MF. A cold-blooded view of adaptive immunity. Nat Rev Immunol                    26. Wimley WC, White SH. Experimentally determined hydrophobicity scale
+(2018) 18(7):438–53. doi: 10.1038/s41577-018-0003-9                                         for proteins at membrane interfaces. Nat Struct Biol (1996) 3(10):842–8.
+   6. Frommel D, Litman GW, Finstad J, Good RA. The evolution of the immune                 doi: 10.1038/nsb1096-842
+response. J Immunol (1971) 106(5):1234.                                                       27. Ewert S, Huber T, Honegger A, Plückthun A. Biophysical properties of
+   7. Criscitiello MF, Saltis M, Flajnik MF. An evolutionarily mobile antigen               human antibody variable domains. J Mol Biol (2003) 325(3):531–53. doi: 10.1016/
+receptor variable region gene: Doubly rearranging NAR-TcR genes in sharks.                  S0022-2836(02)01237-8
+Proc Natl Acad Sci U.S.A. (2006) 103(13):5036–41. doi: 10.1073/pnas.0507074103                 28. Jumper J, Evans R, Pritzel A, Green T, Figurnov M, Ronneberger O, et al.
+   8. Diaz M, Stanﬁeld RL, Greenberg AS, Flajnik MF. Structural analysis,                   Highly accurate protein structure prediction with AlphaFold. Nature (2021) 596
+selection, and ontogeny of the shark new antigen receptor (IgNAR):                          (7873):583–9. doi: 10.1038/s41586-021-03819-2
+Identiﬁcation of a new locus preferentially expressed in early development.                    29. MacCallum RM, Martin ACR, Thornton JM. Antibody-antigen
+Immunogenetics (2002) 54(7):501–12. doi: 10.1007/s00251-002-0479-z                          interactions: Contact analysis and binding site topography. J Mol Biol (1996) 262
+  9. Matz H, Dooley H. Shark IgNAR-derived binding domains as potential                     (5):732–45. doi: 10.1006/jmbi.1996.0548
+diagnostic and therapeutic agents. Dev Comp Immunol (2019) 90:100–7.                           30. Di Palma F, Tramontano A. Dynamics behind afﬁnity maturation of an
+doi: 10.1016/j.dci.2018.09.007                                                              anti-HCMV antibody family inﬂuencing antigen binding. FEBS Lett (2017) 591
+   10. Hsu E. Assembly and expression of shark ig genes. J Immunol (2016) 196               (18):2936–50. doi: 10.1002/1873-3468.12774
+(9):3517–23. doi: 10.4049/jimmunol.1600164                                                    31. Schmidt AG, Xu H, Khan AR, O’Donnell T, Khurana S, King LR, et al.
+   11. Zielonka S, Empting M, Grzeschik J, Könning D, Barelle CJ, Kolmar H.                 Preconﬁguration of the antigen-binding site during afﬁnity maturation of a broadly
+Structural insights and biomedical potential of IgNAR scaffolds from sharks. null           neutralizing inﬂuenza virus antibody. Proc Natl Acad Sci USA (2013) 110(1):264.
+(2015) 7(1):15–25. doi: 10.4161/19420862.2015.989032                                        doi: 10.1073/pnas.1218256109
+
+   12. Roux KH, Greenberg AS, Greene L, Strelets L, Avila D, McKinney EC, et al.               32. Ferná ndez-Quintero ML, Kraml J, Georges G, Liedl KR. CDR-H3 loop
+Structural analysis of the nurse shark (New) antigen receptor (NAR): Molecular              ensemble in solution – conformational selection upon antibody binding. mAbs
+convergence of NAR and unusual mammalian immunoglobulins. Proc Natl Acad                    (2019) 11:1077–88. doi: 10.1080/19420862.2019.1618676
+Sci U.S.A. (1998) 95(20):11804–9. doi: 10.1073/pnas.95.20.11804                                33. Ferná ndez-Quintero ML, Loefﬂer JR, Kraml J, Kahler U, Kamenik AS, Liedl
+   13. Kovalenko OV, Olland A, Piché -Nicholas N, Godbole A, King D, Svenson               KR. Characterizing the diversity of the CDR-H3 loop conformational ensembles in
+K, et al. Atypical antigen recognition mode of a shark immunoglobulin new antigen           relationship to antibody binding properties. Front Immunol (2019) 9:3065.
+receptor (IgNAR) variable domain characterized by humanization and structural               doi: 10.3389/ﬁmmu.2018.03065
+analysis. J Biol Chem (2013) 288(24):17408–19. doi: 10.1074/jbc.M112.435289                   34. Ferná ndez-Quintero ML, Loefﬂer JR, Waibl F, Kamenik AS, Hofer F, Liedl
+   14. English H, Hong J, Ho M. Ancient species offers contemporary therapeutics:           KR. Conformational selection of allergen-antibody complexes–surface plasticity of
+An update on shark VNAR single domain antibody sequences, phage libraries and               paratopes and epitopes. Protein Engineering Design Selection (2020) 32(11):513–23.
+potential clinical applications. Antibody Ther (2020) 3(1):1–9. doi: 10.1093/abt/           doi: 10.1093/protein/gzaa014
+tbaa001                                                                                       35. Ferná ndez-Quintero ML, Pomarici ND, Math BA, Kroell KB, Waibl F,
+   15. Barelle C, Gill DS, Charlton K. Shark novel antigen receptors–the next               Bujotzek A, et al. Antibodies exhibit multiple paratope states inﬂuencing VH–VL
+generation of biologic therapeutics? Adv Exp Med Biol (2009) 655:49–62. doi:                domain orientations. Commun Biol (2020) 3(1):589. doi: 10.1038/s42003-020-
+10.1007/978-1-4419-1132-2_6                                                                 01319-z
+
+  16. Clem LW, Leslie GA. Phylogeny of immunoglobulin structure and function.                  36. Stocki P, Szary JM, Jacobsen CL, Demydchuk M, Northall L, Moos T, et al.
+XIV. peptide map and amino acid composition studies of shark antibody light                 High efﬁciency blood-brain barrier transport using a VNAR targeting the
+chains. Dev Comp Immunol (1982) 6(2):263–9. doi: 10.1016/S0145-305X(82)                     transferrin receptor 1 (TfR1). bioRxiv (2019) 816900:1–19. doi: 10.1101/816900
+80009-8                                                                                        37. Margreitter C, Mayrhofer P, Kunert R, Oostenbrink C. Antibody
+   17. Hoey RJ, Eom H, Horn JR. Structure and development of single domain                  humanization by molecular dynamics simulations-in-Silico guided selection of
+antibodies as modules for therapeutics and diagnostics. Exp Biol Med (Maywood)              critical backmutations. J Mol Recognit (2016) 29(6):266–75. doi: 10.1002/jmr.2527
+(2019) 244(17):1568–76. doi: 10.1177/1535370219881129                                          38. Ferná ndez-Quintero ML, Heiss MC, Liedl KR. Antibody humanization–the
+  18. Chiu ML, Goulet DR, Teplyakov A, Gilliland GL. Antibody structure and                 inﬂuence of the antibody framework on the CDR-H3 loop ensemble in solution.
+function: The basis for engineering therapeutics. Antibodies (Basel) (2019) 8(4):55.        Protein Engineering Design Selection (2020) 32:gzaa004. doi: 10.1093/protein/
+doi: 10.3390/antib8040055                                                                   gzaa004
+
+   19. Flajnik M, Rumfelt L. Early and natural antibodies in non-mammalian                     39. Apgar JR, Mader M, Agostinelli R, Benard S, Bialek P, Johnson M, et al.
+vertebrates. Curr topics Microbiol Immunol (2000) 252:233–40. doi: 10.1007/978-3-           Beyond CDR-grafting: Structure-guided humanization of framework and CDR
+642-57284-5_24                                                                              regions of an anti-myostatin antibody. MAbs (2016) 8(7):1302–18. doi: 10.1080/
+                                                                                            19420862.2016.1215786
+  20. Greenberg AS, Avila D, Hughes M, Hughes A, McKinney EC, Flajnik MF. A
+new antigen receptor gene family that undergoes rearrangement and extensive                    40. Fransson J, Teplyakov A, Raghunathan G, Chi E, Cordier W, Dinh T, et al.
+somatic diversiﬁcation in sharks. Nature (1995) 374(6518):168–73. doi: 10.1038/             Human framework adaptation of a mouse anti-human IL-13 antibody. J Mol Biol
+374168a0                                                                                    (2010) 398(2):214–31. doi: 10.1016/j.jmb.2010.03.004
+
+   21. Grifﬁths K, Dolezal O, Parisi K, Angerosa J, Dogovski C, Barraclough M,                  41. Teplyakov A, Obmolova G, Malia TJ, Raghunathan G, Martinez C, Fransson
+et al. Shark variable new antigen receptor (VNAR) single domain antibody                    J, et al. Structural insights into humanization of anti-tissue factor antibody 10H10.
+fragments: Stability and diagnostic applications. Antibodies (2013) 2:(1).                  MAbs (2018) 10(2):269–77. doi: 10.1080/19420862.2017.1412026
+doi: 10.3390/antib2010066                                                                      42. Shankar G, Shores E, Wagner C, Mire-Sluis A. Scientiﬁc and regulatory
+  22. Rumfelt LL, Avila D, Diaz M, Bartl S, McKinney EC, Flajnik MF. A shark                considerations on the immunogenicity of biologics. Trends Biotechnol (2006) 24
+antibody heavy chain encoded by a nonsomatically rearranged VDJ is preferentially           (6):274–80. doi: 10.1016/j.tibtech.2006.04.001
+expressed in early development and is convergent with mammalian IgG. Proc Natl                 43. Henzler-Wildman K, Kern D. Dynamic personalities of proteins. Nature
+Acad Sci USA (2001) 98(4):1775. doi: 10.1073/pnas.98.4.1775                                 (2007) 450(7172):964–72. doi: 10.1038/nature06522
+
+
+
+
+Frontiers in Immunology                                                                10                                                                       frontiersin.org
+Fernández-Quintero et al.                                                                                                                   10.3389/ﬁmmu.2022.953917
+
+
+
+
+ 44. Kern D. From structure to mechanism: Skiing the energy landscape. Nat                     67. Barducci A, Bonomi M, Parrinello M. Linking well-tempered metadynamics
+Methods (2021) 18(5):435–6. doi: 10.1038/s41592-021-01140-4                                 simulations with experiments. Biophys J (2010) 98(9):L44–6. doi: 10.1016/
+                                                                                            j.bpj.2010.01.033
+   45. Ferná ndez-Quintero ML, Kroell KB, Hofer F, Riccabona JR, Liedl KR.
+Mutation of framework residue H71 results in different antibody paratope states               68. Biswas M, Lickert B, Stock G. Metadynamics enhanced Markov modeling of
+in solution. Front Immunol (2021) 12:630034. doi: 10.3389/ﬁmmu.2021.630034                  protein dynamics. J Phys Chem B (2018) 122:5508–14. doi: 10.1021/acs.jpcb.
+                                                                                            7b11800
+   46. Makabe K, Nakanishi T, Tsumoto K, Tanaka Y, Kondo H, Umetsu M, et al.
+Thermodynamic consequences of mutations in vernier zone residues of a                         69. Abraham MJ, Murtola T, Schulz R, Pá ll S, Smith JC, Hess B. Lindahl, e.
+humanized anti-human epidermal growth factor receptor murine antibody, 528.                 GROMACS: High performance molecular simulations through multi-level
+J Biol Chem (2008) 283(2):1156–66. doi: 10.1074/jbc.M706190200                              parallelism from laptops to supercomputers. SoftwareX (2015) 1–2:19–25.
+                                                                                            doi: 10.1016/j.softx.2015.06.001
+   47. Kraml J, Hofer F, Quoika PK, Kamenik AS, Liedl KR. X-Entropy: A
+parallelized kernel density estimator with automated bandwidth selection to                    70. Pronk S, Pá ll S, Schulz R, Larsson P, Bjelkmar P, Apostolov R, et al.
+calculate entropy. J Chem Inf Model (2021) 61(4):1533–8. doi: 10.1021/                      GROMACS 4.5: A high-throughput and highly parallel open source molecular
+acs.jcim.0c01375                                                                            simulation toolkit. Bioinformatics (2013) 29(7):845–54. doi: 10.1093/
+                                                                                            bioinformatics/btt055
+   48. Löhr T, Sormanni P, Vendruscolo M. Conformational entropy as a potential
+liability of computationally designed antibodies. Biomolecules (2022) 12:1–10.                71. Tribello GA, Bonomi M, Branduardi D, Camilloni C, Bussi G. PLUMED 2:
+doi: 10.3390/biom12050718                                                                   New feathers for an old bird. Comput Phys Commun (2014) 185(2):604–13.
+                                                                                            doi: 10.1016/j.cpc.2013.09.018
+  49. Ferná ndez-Quintero ML, Seidler CA, Quoika PK, Liedl KR. Shark antibody
+variable domains rigidify upon afﬁnity maturation–understanding the potential of              72. Ramachandran GN, Ramakrishnan C, Sasisekharan V. Stereochemistry of
+shark immunoglobulins as therapeutics. Front Mol Biosci (2021) 8:639166.                    polypeptide chain conﬁgurations. J Mol Biol (1963) 7(1):95–9. doi: 10.1016/S0022-
+doi: 10.3389/fmolb.2021.639166                                                              2836(63)80023-6
+
+  50. Ferná ndez-Quintero ML, Seidler CA, Liedl KR. T-Cell receptor variable b                73. Parrinello M, Rahman A. Polymorphic transitions in single crystals: A new
+domains rigidify during afﬁnity maturation. Sci Rep (2020) 10(1):4472.                      molecular dynamics method. J Appl Phys (1981) 52(12):7182–90. doi: 10.1063/
+doi: 10.1038/s41598-020-61433-0                                                             1.328693
+
+  51. Ferná ndez-Quintero ML, DeRose EF, Gabel SA, Mueller GA, Liedl KR.                      74. Bussi G, Donadio D, Parrinello M. Canonical sampling through velocity
+Nanobody paratope ensembles in solution characterized by MD simulations and                 rescaling. J Chem Phys (2007) 126(1):014101. doi: 10.1063/1.2408420
+NMR. Int J Mol Sci (2022) 23(10):1–12. doi: 10.3390/ijms23105419                               75. Salomon-Ferrer R, Götz AW, Poole D, Le Grand S, Walker RC. Routine
+  52. Stanﬁeld RL, Dooley H, Verdino P, Flajnik MF, Wilson IA. Maturation of                microsecond molecular dynamics simulations with AMBER on GPUs. 2. explicit
+shark single-domain (IgNAR) antibodies: Evidence for induced-ﬁt binding. J Mol              solvent particle mesh ewald. J Chem Theory Comput (2013) 9(9):3878–88.
+Biol (2007) 367(2):358–72. doi: 10.1016/j.jmb.2006.12.045                                   doi: 10.1021/ct400314y
+
+   53. Ferná ndez-Quintero ML, Heiss MC, Pomarici ND, Math BA, Liedl KR.                     76. Miyamoto S, Kollman PA. Settle: An analytical version of the SHAKE and
+Antibody CDR loops as ensembles in solution vs. canonical clusters from X-ray               RATTLE algorithm for rigid water models. J Comput Chem (1992) 13(8):952–62.
+structures. mAbs (2020) 12(1):1744328. doi: 10.1080/19420862.2020.1744328                   doi: 10.1002/jcc.540130805
+
+   54. Ferná ndez-Quintero ML, Pomarici ND, Loefﬂer JR, Seidler CA, Liedl KR. T-             77. Berendsen H, van Postma JPM, van Gunsteren W, DiNola A, Haak JR.
+Cell receptor CDR3 loop conformations in solution shift the relative va-vb domain           Molecular-dynamics with coupling to an external bath. J Chem Phys (1984) 81.
+distributions. Front Immunol (2020) 11:1440. doi: 10.3389/ﬁmmu.2020.01440                   doi: 10.1063/1.448118.
+
+  55. Labute P. Protonate3D: Assignment of ionization states and hydrogen                      78. D. Doll J, E. Myers L, Adelman S. Generalized langevin equation approach
+coordinates to macromolecular structures. Proteins (2009) 75(1):187–205.                    for Atom/Solid-surface scattering: Inelastic studies. J Chem Phys (1975) 63.
+doi: 10.1002/prot.22234                                                                     doi: 10.1063/1.431234.
+
+  56. Molecular operating environment (MOE); 1010 sherbrooke st. West, suite                   79. Adelman SA, Doll JD. Generalized langevin equation approach for Atom/
+#910. Montreal, QC, Canada: H3A 2R7 (2020).                                                 Solid-surface scattering: General formulation for classical scattering off harmonic
+                                                                                            solids. J Chem Phys (1976) 64(6):2375–88. doi: 10.1063/1.432526
+   57. Case DA, Belfon K, Ben-Shalom IY, Brozell SR, Cerutti DS, Cheatham TE,
+et al. AMBER 2020. San Francisco: University of California (2020).                             80. Scherer M, Trendelkamp-Schroer B, Paul F, Pé rez-Herná ndez G, Hoffmann
+                                                                                            M, Plattner N, et al. PyEMMA 2: A software package for estimation, validation, and
+  58. Hub JS, de Groot BL, Grubmüller H, Groenhof G. Quantifying artifacts in               analysis of Markov models. J Chem Theory Comput (2015) 11. doi: 10.1021/
+ewald simulations of inhomogeneous systems with a net charge. J Chem Theory                 acs.jctc.5b00743.
+Comput (2014) 10(1):381–90. doi: 10.1021/ct400626b
+                                                                                               81. Pé r ez-Herná n dez G, Noé F. Hierarchical time-lagged independent
+   59. Roe DR, Cheatham TE. PTRAJ and CPPTRAJ: Software for processing and                  component analysis: Computing slow modes and reaction coordinates for Large
+analysis of molecular dynamics trajectory data. J Chem Theory Comput (2013) 9               molecular systems. J Chem Theory Comput (2016) 12(12):6118–29. doi: 10.1021/
+(7):3084–95. doi: 10.1021/ct400341p                                                         acs.jctc.6b00738
+  60. Jorgensen WL, Chandrasekhar J, Madura JD, Impey RW, Klein ML.                           82. Chodera JD, Noé F. Markov State models of biomolecular conformational
+Comparison of simple potential functions for simulating liquid water. J Chem                dynamics. Curr Opin Struct Biol (2014) 25:135–44. doi: 10.1016/j.sbi.2014.04.002
+Phys (1983) 79(2):926–35. doi: 10.1063/1.445869
+                                                                                              83. Bowman GR, Pande V, Noé F. An introduction to Markov state models and
+   61. El Hage K, Hé din F, Gupta PK, Meuwly M, Karplus M. Valid molecular                 their application to long timescale molecular simulation. Springer (2014).
+dynamics simulations of human hemoglobin require a surprisingly Large box size.             doi: 10.1007/978-94-007-7606-7
+eLife (2018) 7:e35560. doi: 10.7554/eLife.35560
+                                                                                              84. Likas A, Vlassis N;J, Verbeek J. The global K-means clustering algorithm.
+   62. Gapsys V, de Groot BL. Comment on “Valid molecular dynamics                          Pattern Recognition (2003) 36(2):451–61. doi: 10.1016/S0031-3203(02)00060-2
+simulations of human hemoglobin require a surprisingly Large box size. bioRxiv
+(2019) 563064:1–10. doi: 10.1101/563064                                                        85. Röblitz S, Weber M. Fuzzy spectral clustering by PCCA+: Application to
+                                                                                            Markov state models and data classiﬁcation. Adv Data Anal Classiﬁcation (2013) 7
+   63. Maier JA, Martinez C, Kasavajhala K, Wickstrom L, Hauser KE, Simmerling              (2):147–79. doi: 10.1007/s11634-013-0134-6
+C. Ff14SB: Improving the accuracy of protein side chain and backbone parameters
+from Ff99SB. J Chem Theory Comput (2015) 11(8):3696–713. doi: 10.1021/                         86. Miroshin RN. Special solutions of the Chapman–kolmogorov equation for
+acs.jctc.5b00255                                                                            multidimensional-state Markov processes with continuous time. Mathematics
+                                                                                            (2016) 49:122–9. doi: 10.3103/S1063454116020114
+   64. Wallnoefer HG, Liedl KR, Fox T. A challenging system: Free energy
+prediction for factor xa. J Comput Chem (2011) 32(8):1743–52. doi: 10.1002/                   87. Karush J. On the Chapman-kolmogorov equation. Ann Math Statist (1961)
+jcc.21758                                                                                   32(4):1333–7. doi: 10.1214/aoms/1177704871
+
+   65. Barducci A, Bussi G, Parrinello M. Well-tempered metadynamics: A                        88. Wu H, Noé F. Variational approach for learning Markov processes from
+smoothly converging and tunable free-energy method. Phys Rev Lett (2008) 100                time series data. J Nonlinear Sci (2017) 30:23–66. doi: 10.1007/s00332-019-09567-y
+(2):20603. doi: 10.1103/PhysRevLett.100.020603                                                89. Schrodinger. The AxPyMOL molecular graphics plugin for Microsoft
+   66. Ilott AJ, Palucha S, Hodgkinson P, Wilson MR. Well-tempered metadynamics             PowerPoint, version 1.8. (2015).
+as a tool for characterizing multi-component, crystalline molecular machines. J Phys           90. Stanford University (adate). GetContacts. Available at: https://getcontacts.
+Chem B (2013) 117(40):12286–95. doi: 10.1021/jp4045995                                      github.io/.
+
+
+
+
+Frontiers in Immunology                                                                11                                                                     frontiersin.org
+
