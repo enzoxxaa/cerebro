@@ -37,7 +37,7 @@ obsidian://open?vault=SegundoCerebro&file=learn%2FSeminario-VNAR%2F20%20Paper%20
 | Clase | Nodos | Estado |
 |---|---|---|
 | [[05 Clase 0 — El VNAR]] | `R4` | ✅ **cerrada — 4/4** |
-| [[10 Clase 1 — El problema y el pivote]] | `R1` `R2` `N1` + demoler **M3** | 🟡 borrador `v1`, a reescribir |
+| [[10 Clase 1 — El problema y el pivote]] | `R1` `R2` `N1` + **M3 demolida** | ✅ **cerrada — 4/4** |
 | *Clase 2 — Inventar la metadinámica* | demoler **M1**, `N3` `N4` | ⚪ |
 | *Clase 3 — El precio: CVs y cinética* | `N5` `N6` `N7` | ⚪ |
 | *Clase 4 — tICA* | `N8` `N9` | ⚪ |

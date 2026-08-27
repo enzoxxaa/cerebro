@@ -52,7 +52,7 @@ Un hueco se rellena; una creencia equivocada hay que **demolerla primero**, o el
 |---|---|---|
 | **M1** | «metadinámica = subir la temperatura» | Sin *sesgo adaptativo* no se entiende por qué el sesgo **mide** $F$, ni por qué existe *well-tempered*, ni por qué hay que **elegir CVs** — y ahí vive el ataque A2 |
 | **M2** | «$\tau$ es el tiempo de residencia del sistema» | Si $\tau$ fuese físico **no habría nada que validar**: adiós al test de Chapman–Kolmogorov y al ataque A4 |
-| **M3** | «$-k_BT\ln P$ es la energía libre» | Es el nodo pivote: sin él, ni el MSM parece necesario ni el ataque A6 es visible |
+| ~~**M3**~~ | ~~«$-k_BT\ln P$ es la energía libre»~~ | ✅ **DEMOLIDA** en [[10 Clase 1 — El problema y el pivote]] Q4. Ahora deriva $\hat F = F - RT\ln(w_i/\pi_i)$ y de ahí que el MSM es obligatorio. |
 
 > [!important] Lectura de la hebra tICA/MSM
 > Tres preguntas, **cero aciertos**, bajando en dificultad cada vez. No se encontró suelo ni siquiera en la pregunta más básica (*¿qué estima un MSM?*). La hebra **no tiene borde que localizar: empieza en cero.**

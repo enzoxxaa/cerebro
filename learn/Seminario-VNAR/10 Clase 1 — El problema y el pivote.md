@@ -573,3 +573,71 @@ En cualquier caso: $w \ne \pi$, **por construcción y deliberadamente** — la m
 > **b)** Las profundidades relativas son correctas; la forma de cada mínimo está distorsionada
 > **c)** Todo es incorrecto por un factor que decrece al aumentar el número de frames
 > **d)** Todo es correcto salvo una constante aditiva global
+
+> [!success]- Respuesta Q4 → **a) Forma correcta, profundidades relativas incorrectas** ✓
+> Sale de **leer** la fórmula $\hat F(s) = F(s) - RT\ln(w_i/\pi_i)$:
+>
+> | El error… | Consecuencia |
+> |---|---|
+> | **no** depende de $s$ | dentro de una cuenca es constante → **la forma del pozo se conserva** |
+> | **sí** depende de $i$ | cambia entre cuencas → **las profundidades relativas se desplazan** |
+>
+> Por qué las otras tres son errores distintos e importantes:
+>
+> - **(c) «decrece con más frames»** — el error conceptual grave: confunde **sesgo sistemático** con **ruido estadístico**. Con $N\to\infty$ a proporciones $w_i$ fijas, el término no se mueve. Más simulación estrecha las barras de error **alrededor del número equivocado** — peor que inútil, porque da confianza injustificada.
+> - **(d) «una constante global»** — tentador, porque es cierto que $F$ está definida salvo constante (§1.2). Pero aquí hay **una constante distinta por cuenca**. Una global es inofensiva; $M$ distintas destruyen justo la comparación que importa.
+> - **(b)** invierte el resultado.
+
+> [!success] **M3 demolida.**
+> Ya no necesitas *creer* que hace falta un MSM. Puedes **derivar** que hace falta: es el único paso del pipeline capaz de convertir $w_i$ en $\pi_i$.
+
+---
+
+## Resumen — Clase 1
+
+### Resultados
+
+$$
+p(\mathbf{r}) = \frac{e^{-\beta U}}{Z}
+\;\longrightarrow\;
+F(s) \equiv -RT\ln p(s) + C
+\;\longrightarrow\;
+\Delta G_{AB} = -RT\ln\frac{P_A}{P_B}
+$$
+
+$$
+k = \kappa\,\frac{k_BT}{h}\,e^{-\beta\Delta G^{\ddagger}}
+\qquad
+\frac{k_{A\to B}}{k_{B\to A}} = e^{-\beta\Delta G}
+\qquad
+\boxed{\hat F(s) = F(s) - RT\ln\frac{w_i}{\pi_i}}
+$$
+
+### Números para llevarse
+
+| Cantidad | Valor |
+|---|---|
+| $RT$ a 300 K | **2.494 kJ/mol** |
+| $k_BT/h$ a 300 K | $6.25\times10^{12}\ \text{s}^{-1}$ |
+| Coste de un factor 10 en población | $RT\ln 10 = 5.7$ kJ/mol |
+| $\Delta G$ del estado competente (E06) | $-6.1$ kJ/mol |
+| **$\Delta\Delta G$ del efecto completo (E06 → v1.1)** | **10.2 kJ/mol** |
+| Barrera máxima cruzable en 100 ns | $\approx 22$ kJ/mol |
+| Barreras reales de lazos CDR | $25\text{–}45$ kJ/mol |
+| $p\Delta V$ a 1 atm | $\sim 10^{-3}\,RT$ → **despreciable** |
+
+### Nodos
+
+| Nodo | Contenido | ✓ |
+|---|---|---|
+| `R2` | poblaciones $=$ pesos de Boltzmann; PMF por marginalización | Q1 |
+| — | NpT ≡ NVT para poblaciones a 1 atm | 🅰 |
+| — | **$\Delta G$ y $\Delta G^\ddagger$ son independientes**; la barrera se cancela en el balance detallado | 🅱 |
+| `R1` | $\tau \sim e^{+\beta\Delta G^\ddagger}$; 100 ns compran ~22 kJ/mol | Q2 |
+| `N1` | MD sola ⇒ poblaciones $=$ estructura inicial | Q3 |
+| **M3** | **demolida**: el sesgo de siembra es sistemático, no estadístico | Q4 |
+
+> [!abstract] Adónde va esto — Clase 2
+> Problema perfectamente planteado: **hay que cruzar barreras de 40 kJ/mol sin esperar 150 µs por cruce, y sin que el remedio destruya las poblaciones.**
+> La Clase 2 es socrática y arranca demoliendo **M1** (*«metadinámica = subir la temperatura»*) con una sola pregunta:
+> *Si no puedes bajar la barrera cambiando la física, ni esperar a que se cruce sola… ¿qué te queda?*
