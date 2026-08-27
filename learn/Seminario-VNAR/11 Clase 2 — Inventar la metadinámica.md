@@ -403,3 +403,110 @@ $$
 > **b)** El sesgo converge, pero a un múltiplo incorrecto de $F$
 > **c)** El sesgo deja de depositarse al alcanzar la altura de la barrera más alta
 > **d)** El sesgo empuja al sistema hacia el mínimo global y lo deja atrapado ahí
+
+---
+
+## 3 bis · «El sesgo depende de $\mathbf{r}$ solo a través de la CV» — qué significa
+
+*Duda de Enzo. Es la condición estructural del método entero, así que vale la pena verla desde tres ángulos.*
+
+### Ángulo 1 · Es una composición de funciones
+
+$V$ **no es** una función del sistema. Es una función de **un solo número**. Para aplicarla a una configuración hay que hacer dos pasos:
+
+$$
+\mathbf{r} \;\xrightarrow{\;\;\xi\;\;}\; s \;\xrightarrow{\;\;V\;\;}\; \text{energía}
+$$
+
+$$
+\underbrace{\mathbf{r}}_{90\,000\ \text{números}} \;\longrightarrow\; \underbrace{s}_{1\ \text{número}} \;\longrightarrow\; \underbrace{V(s)}_{1\ \text{número}}
+$$
+
+**El cuello de botella es $s$.** Toda la información de la configuración tiene que pasar por ese único número antes de que $V$ pueda opinar. Si dos configuraciones dan el mismo $s$, $V$ **no puede distinguirlas** — le llegó exactamente la misma entrada.
+
+Compáralo con lo que **no** hacemos:
+
+| | $V(\xi(\mathbf{r}))$ — lo que se hace | $V(\mathbf{r})$ — lo que **no** se hace |
+|---|---|---|
+| Dominio | $\mathbb{R}$ (1 dimensión) | $\mathbb{R}^{3N}$ (90 000 dimensiones) |
+| ¿Distingue dos $\mathbf{r}$ con el mismo $s$? | **No puede** | Sí |
+| ¿Se puede almacenar? | Sí — una rejilla 1D | **No** — maldición de la dimensionalidad |
+| ¿Sale de la integral? | **Sí** (Paso 2) | No |
+
+### Ángulo 2 · El sesgo es constante sobre «rebanadas»
+
+La función $\xi$ **rebana** el espacio de configuraciones en hipersuperficies, una por cada valor de $s$:
+
+$$
+\Sigma_s \;=\; \{\,\mathbf{r} \;:\; \xi(\mathbf{r}) = s\,\}
+$$
+
+Cada rebanada $\Sigma_s$ contiene un número astronómico de configuraciones distintas. Y la regla es:
+
+> [!important] **El sesgo asigna un único valor a cada rebanada entera.**
+> Todo lo que vive en $\Sigma_s$ recibe **exactamente** $V(s)$. Sin excepciones, sin gradaciones dentro de la rebanada.
+
+> [!tip] Analogía: la altitud
+> Sea $\xi$ = **altitud** sobre una cordillera, y $V$ un sesgo que depende solo de la altitud.
+> Entonces **todos los puntos a 2000 m reciben el mismo valor**: la cara norte, la cara sur, el fondo del valle contiguo. $V$ no sabe *dónde* estás; solo sabe *a qué altura*.
+> Un sesgo general $V(\mathbf{r})$ sí podría dar valores distintos a dos puntos ambos a 2000 m. Ese es justo el poder que renunciamos.
+
+### Ángulo 3 · El más concreto: ¿sobre qué átomos empuja?
+
+Esta es la versión que lo vuelve tangible. La fuerza que el sesgo ejerce sobre el átomo $i$ es menos el gradiente, y por **regla de la cadena**:
+
+$$
+\mathbf{f}_i^{\,\text{sesgo}}
+\;=\; -\nabla_{\mathbf{r}_i} V\big(\xi(\mathbf{r})\big)
+\;=\; \underbrace{-\frac{dV}{ds}\bigg|_{s=\xi(\mathbf{r})}}_{\text{escalar: pendiente del sesgo}} \;\cdot\; \underbrace{\nabla_{\mathbf{r}_i}\,\xi(\mathbf{r})}_{\text{vector: cuánto cambia la CV si muevo el átomo } i}
+$$
+
+Ahora mira el segundo factor y hazte la pregunta clave:
+
+> **¿Cuánto cambia $\psi_{\text{CDR3}}$ si muevo una molécula de agua? ¿O un átomo de HV2?**
+>
+> **Nada. Exactamente nada.** $\nabla_{\mathbf{r}_i}\xi = \mathbf{0}$.
+
+En el paper la CV se construye con torsiones $\psi$, y cada $\psi$ queda determinada por **4 átomos** (N, CA, C del residuo y N del siguiente). Para **cualquier otro átomo del sistema** — las ~29 000 aguas, HV2, HV4, el framework entero — el gradiente es cero y por tanto:
+
+$$
+\boxed{\;\mathbf{f}_i^{\,\text{sesgo}} = \mathbf{0}\quad \text{para todo átomo que no defina la CV}\;}
+$$
+
+> [!success] Esto es literalmente lo que significa la frase
+> «El sesgo depende de $\mathbf{r}$ solo a través de la CV» $=$ **el sesgo solo empuja los átomos que definen la CV. Todos los demás no reciben ninguna fuerza extra.**
+> No es una sutileza formal. Es una afirmación mecánica sobre qué átomos sienten el algoritmo.
+
+### Por qué aceptamos esta restricción
+
+| Motivo | Explicación |
+|---|---|
+| **Matemático** | Solo así $V$ sale exacto de la integral (Paso 2) → $F_V = F+V$ es una **igualdad**, no una aproximación → el sesgo se puede quitar exactamente después |
+| **Práctico** | No puedes construir ni almacenar una función en 90 000 dimensiones. En 1–2 dimensiones, sí: una rejilla y unas gaussianas |
+| **Y aquí el precio** | ⬇ |
+
+> [!danger] La misma restricción es la vulnerabilidad — versión dura de A2
+> Si el sesgo es **constante sobre cada rebanada** $\Sigma_s$, entonces **no empuja en ninguna dirección contenida dentro de la rebanada**.
+>
+> Cualquier grado de libertad lento que varíe **dentro** de $\Sigma_s$ recibe **ayuda cero**. La metadinámica es ciega a él por construcción — no «poco eficaz»: **ciega**.
+>
+> **Y HV2 es exactamente eso.** Las CVs del paper son $\psi$ de CDR1 y CDR3. La conformación de HV2 varía libremente dentro de cada rebanada. Luego:
+>
+> $$\mathbf{f}^{\,\text{sesgo}}_{\text{átomos de HV2}} = \mathbf{0}$$
+>
+> Y ahora puedes formular A2 en su forma más fuerte, que ya no es estadística sino mecánica:
+>
+> > *«Los átomos de HV2 no recibieron ni una sola fuerza de sesgo en todo el microsegundo de metadinámica. Su muestreo es, exactamente, el de MD clásica — que en la Clase 1 vimos que compra barreras de hasta 22 kJ/mol. ¿Sobre qué se apoya que HV2 esté convergido?»*
+
+> [!note] Sé justo: el contraargumento existe
+> Los átomos de HV2 no sienten fuerza de sesgo **directa**, pero sí están **acoplados mecánicamente**: si CDR1 y CDR3 se reorganizan violentamente, HV2 se ve arrastrado por contactos estéricos y por la cadena principal. Así que recibe *algo* de muestreo extra, indirecto.
+> Esa es la defensa honesta del paper, y hay que reconocerla. Pero la carga de la prueba sigue de su lado: **el acoplamiento indirecto no es un argumento, es una hipótesis** — y es comprobable (correr una metadinámica de control incluyendo $\psi_{\text{HV2}}$ y ver si aparecen estados nuevos). El paper no lo hace.
+
+---
+
+> [!question] **Q4 · 3 bis** — En la metadinámica del paper, ¿qué fuerza de sesgo siente un átomo del lazo HV2?
+>
+> **a)** Exactamente cero
+> **b)** Una fuerza pequeña pero no nula, decreciente con la distancia a las CDR
+> **c)** La misma que un átomo de CDR1, porque el sesgo actúa sobre todo el sistema
+> **d)** Una fuerza proporcional al sesgo acumulado $V(s)$ en ese instante
