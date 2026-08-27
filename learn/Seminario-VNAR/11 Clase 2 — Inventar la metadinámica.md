@@ -255,7 +255,7 @@ V(\xi(\mathbf{r})) \;=\; V(s)
 $$
 
 No es una aproximación: es sustituir $\xi(\mathbf{r})$ por su valor, que el filtro ya fijó. Y $V(s)$ **no contiene $\mathbf{r}$** — es el mismo número en todos los términos de la suma. Un factor común sale fuera:
-
+t
 $$
 \sum_{\mathbf{r}:\;\xi(\mathbf{r})=s} e^{-\beta U(\mathbf{r})}\,e^{-\beta V(s)}
 \;=\;
@@ -299,3 +299,107 @@ $V$ depende de $\mathbf{r}$ **solo a través de $\xi$**. Si hubiéramos permitid
 > **b)** Porque $V$ no depende de las coordenadas atómicas, sino solo del tiempo de simulación
 > **c)** Porque $V$ es un potencial externo, y los potenciales externos son constantes en cualquier integral
 > **d)** Porque el valor medio de $V$ sobre el dominio de integración es igual a $V(s)$
+
+---
+
+## 3 · Resolver el huevo y la gallina
+
+### 3.1 · El callejón
+
+Queremos $V = -F$. Para construirlo necesitamos $F$. Pero $F$ es lo que queremos medir.
+
+**Salida:** no construir $V$ de golpe. **Construirlo poco a poco, usando lo único que sí tenemos: por dónde ha pasado el sistema.**
+
+### 3.2 · La receta
+
+Cada $\tau_G$ pasos, deposita una gaussiana centrada en **donde está el sistema ahora**:
+
+$$
+V(s,t) \;=\; \sum_{\substack{t' = \tau_G,\,2\tau_G,\,\dots \\ t' < t}} W \,\exp\!\left[-\frac{\big(s - \xi(\mathbf{r}(t'))\big)^2}{2\sigma^2}\right]
+$$
+
+Léelo literalmente: **el sistema va dejando arena donde pisa.** Los tres parámetros son los del paper:
+
+| Símbolo | Qué es | Valor en el paper |
+|---|---|---|
+| $W$ | altura de cada gaussiana | 10 kJ/mol |
+| $\sigma$ | anchura | 0.3 rad |
+| $\tau_G$ | cada cuánto se deposita | 1000 pasos $\times$ 2 fs $=$ **2 ps** |
+
+### 3.3 · ¿Por qué converge a $-F$? El bucle de realimentación
+
+Aquí está el argumento, y es puramente auto-consistente.
+
+La arena se deposita **donde está el sistema**. Y la probabilidad de que el sistema esté en $s$ es $p_V(s)$ — la distribución **sesgada**, porque el sesgo ya construido influye en dónde está ahora. Luego la tasa de deposición en cada punto es:
+
+$$
+\frac{\partial V(s,t)}{\partial t} \;\propto\; p_V(s,t) \;\propto\; p_{\text{eq}}(s)\,e^{-\beta V(s,t)}
+$$
+
+y usando $p_{\text{eq}} \propto e^{-\beta F}$:
+
+$$
+\boxed{\;\frac{\partial V(s,t)}{\partial t} \;\propto\; e^{-\beta\left[\,F(s) \,+\, V(s,t)\,\right]}\;}
+$$
+
+Esta ecuación **es** la metadinámica. Y contiene su propia solución:
+
+- Donde $F$ es **bajo** (pozo profundo) → el sistema pasa **mucho** tiempo → se deposita **rápido** → $V$ sube deprisa ahí.
+- Donde $F$ es **alto** (cima) → el sistema pasa **poco** tiempo → se deposita **despacio**.
+- Conforme $V$ crece en el pozo, la suma $F+V$ sube ahí, y la tasa de deposición **cae**.
+
+**El bucle se autorregula.** Y se detiene exactamente cuando la tasa es la misma en todas partes:
+
+$$
+\frac{\partial V}{\partial t}\ \text{independiente de } s
+\iff
+F(s)+V(s) = \text{const}
+\iff
+V(s) = -F(s) + \text{const}
+$$
+
+> [!success] Nodo `N3` — el molde negativo
+> El método converge **al sesgo que buscábamos**, y lo hace sin conocer $F$ de antemano. La realimentación hace el trabajo.
+> Y como $V \to -F$, el sesgo acumulado **es la medida** de la energía libre.
+
+### 3.4 · Pero hay un problema serio: la deposición nunca para
+
+Mira otra vez la ecuación. Cuando el paisaje ya está plano, $\partial V/\partial t$ es **la misma en todas partes** — pero **no es cero**. La arena sigue cayendo, al ritmo constante $W/\tau_G$.
+
+¿Qué pasa entonces? $V$ sigue creciendo de forma aproximadamente uniforme. En principio un desplazamiento uniforme es inofensivo (no cambia las fuerzas). En la práctica **no lo es**, y por dos motivos:
+
+1. **El sistema se escapa.** Con el paisaje relevante ya relleno, el sistema empieza a subir a regiones de $F$ altísimo — conformaciones absurdas, lazos estirados, contactos rotos. Y una vez allí, deposita arena **también allí**, lo que lo empuja aún más lejos.
+2. **El sesgo nunca se estabiliza.** $V(s,t)$ oscila alrededor de $-F(s) + c(t)$, y esas oscilaciones **no se amortiguan**. No hay un instante en el que puedas decir «ya convergió, leo $F = -V$».
+
+### 3.5 · La magnitud del desastre, con los números del paper
+
+$$
+\text{Tasa de deposición} = \frac{W}{\tau_G} = \frac{10\ \text{kJ/mol}}{2\ \text{ps}}
+$$
+
+En la simulación de $1\ \mu\text{s} = 10^{6}$ ps que corre el paper, el número de gaussianas es
+
+$$
+\frac{10^{6}\ \text{ps}}{2\ \text{ps}} = 500\,000\ \text{gaussianas}
+$$
+
+Si **todas** cayeran a altura completa, el sesgo total acumulado sería
+
+$$
+500\,000 \times 10\ \tfrac{\text{kJ}}{\text{mol}} = 5\times10^{6}\ \tfrac{\text{kJ}}{\text{mol}}
+$$
+
+> [!danger] Compara con la barrera que querías cruzar: **40 kJ/mol**
+> $$\frac{5\times10^{6}}{40} \approx 125\,000$$
+> Depositarías **ciento veinticinco mil veces** la altura de la barrera. Eso no es rellenar un pozo: es sepultar la proteína bajo una montaña de sesgo y mandarla a explorar geometrías que no existen.
+>
+> **Por eso la metadinámica estándar no se usa así, y por eso hace falta well-tempered.** No es un refinamiento cosmético: sin él, estos parámetros son inservibles.
+
+---
+
+> [!question] **Q3 · N3** — ¿Cuál es el problema de la metadinámica **estándar** (gaussianas de altura fija)?
+>
+> **a)** El sesgo nunca deja de crecer, así que el sistema acaba explorando regiones irrelevantes de alta energía
+> **b)** El sesgo converge, pero a un múltiplo incorrecto de $F$
+> **c)** El sesgo deja de depositarse al alcanzar la altura de la barrera más alta
+> **d)** El sesgo empuja al sistema hacia el mínimo global y lo deja atrapado ahí
