@@ -386,3 +386,190 @@ $$
 > **b)** $\approx 50\ \%$ A, $50\ \%$ B
 > **c)** $\approx 100\ \%$ B, $0\ \%$ A
 > **d)** Depende del campo de fuerza, no se puede saber
+
+> [!success]- Respuesta Q3 → **a) $\approx 100\ \%$ A** ✓
+> Las poblaciones **verdaderas** son 50/50 ($\Delta G = 0$), pero tu simulación dirá 100/0.
+> $$\beta\Delta G^\ddagger = \tfrac{60000}{2494} = 24.1,\quad e^{-24.1} = 3.4\times10^{-11},\quad k = 213\ \text{s}^{-1},\quad \langle n\rangle = 2.1\times10^{-5}$$
+> Dos cruces por cada cien mil trayectorias.
+>
+> **Y la simulación no te avisa.** Ni error, ni warning, ni señal. Obtienes una trayectoria válida, un histograma limpio, y un resultado 100 % equivocado.
+>
+> Sobre (d): mantén separados los **dos ejes de error**, porque determinan qué ataque estás lanzando.
+>
+> | Eje | Qué falla | Ataque |
+> |---|---|---|
+> | **Modelo** | el campo de fuerza da un $\Delta G$ equivocado | **A11** |
+> | **Muestreo** | aunque $\Delta G$ fuese exacto, no lo mides | **A1**, **A2** |
+>
+> Este ejercicio aislaba el segundo poniendo el primero a cero por construcción.
+
+**Nodo `N1` instalado.**
+
+---
+
+## 3 · EL PIVOTE — cuándo un histograma *no* es una energía libre
+
+### Motivación
+
+Acabas de ver que el histograma de **una** trayectoria puede mentir. La reacción natural es: *«vale, entonces uso muchas trayectorias, sembradas por todo el paisaje».* Que es exactamente lo que hace el paper.
+
+La pregunta es si eso arregla el problema. Vamos a derivarlo, porque la respuesta es **no**, y de forma muy precisa.
+
+### 3.1 · Montaje
+
+Particionamos el espacio de la CV en $M$ cuencas metaestables $B_1,\dots,B_M$. Hay dos escalas de tiempo:
+
+$$
+\tau_{\text{loc}} \;\ll\; T \;\ll\; \tau_{\text{esc}}
+$$
+
+- $\tau_{\text{loc}}$: relajarse **dentro** de una cuenca — rápido (ps–ns)
+- $T = 100$ ns: la longitud de cada trayectoria sembrada
+- $\tau_{\text{esc}}$: escapar de la cuenca — lento (µs–ms), como calculaste en Q2
+
+Este régimen **es** el de la MD sembrada del paper.
+
+### 3.2 · Descomponer el equilibrio verdadero
+
+Por la ley de probabilidad total, la densidad de equilibrio se descompone **exactamente** en contribuciones por cuenca:
+
+$$
+p_{\text{eq}}(s) \;=\; \sum_{i=1}^{M} \pi_i\,\rho_i(s)
+$$
+
+donde cada pieza tiene un significado limpio:
+
+$$
+\pi_i \;\equiv\; \int_{B_i} p_{\text{eq}}(s)\,ds \;=\; \frac{Z_i}{Z}
+\qquad\text{(peso de Boltzmann verdadero de la cuenca }i)
+$$
+
+$$
+\rho_i(s) \;\equiv\; \frac{p_{\text{eq}}(s)\,\mathbb{1}[s\in B_i]}{\pi_i}
+\qquad\text{(forma de la cuenca }i\text{, normalizada: }\textstyle\int\rho_i = 1)
+$$
+
+Léelo así: **$\rho_i$ es la *forma* del pozo, $\pi_i$ es su *peso*.** El equilibrio es la suma de las formas, cada una pesada por su $\pi_i$.
+
+### 3.3 · Qué produce en realidad la MD sembrada
+
+Lanzas $N_i$ trayectorias en la cuenca $i$, con $N = \sum_i N_i$ en total. Por el régimen de §3.1:
+
+- Como $T \gg \tau_{\text{loc}}$, cada trayectoria **sí** se equilibra dentro de su cuenca → muestrea $\rho_i$ **correctamente** ✅
+- Como $T \ll \tau_{\text{esc}}$, **ninguna** trayectoria escapa → la asignación a cuencas queda **congelada** ❌
+
+Juntando todos los frames con **igual peso** —que es lo que hace un histograma— la densidad empírica converge a
+
+$$
+\hat p(s) \;=\; \sum_{i=1}^{M} w_i\,\rho_i(s),
+\qquad
+w_i \;\equiv\; \frac{N_i}{N}
+$$
+
+### 3.4 · La comparación
+
+$$
+p_{\text{eq}}(s) = \sum_i \pi_i\,\rho_i(s)
+\qquad\text{vs.}\qquad
+\hat p(s) = \sum_i w_i\,\rho_i(s)
+$$
+
+**Las formas $\rho_i$ son idénticas. Solo cambian los pesos.** Y por tanto:
+
+$$
+\hat p = p_{\text{eq}} \iff w_i = \pi_i \quad \forall i
+$$
+
+O sea: el histograma es correcto **si y solo si sembraste exactamente en las proporciones de Boltzmann** — que son justo las que estabas intentando medir. Circular.
+
+### 3.5 · El error, explícito
+
+Tomemos $s$ dentro de la cuenca $i$. La «energía libre» que sale del histograma es
+
+$$
+\hat F(s) \;=\; -RT\ln\hat p(s) \;=\; -RT\ln\big[\,w_i\,\rho_i(s)\,\big]
+$$
+
+Usando $\ln(ab) = \ln a + \ln b$:
+
+$$
+\hat F(s) \;=\; -RT\ln \rho_i(s) \;-\; RT\ln w_i
+$$
+
+La verdadera, por el mismo camino:
+
+$$
+F(s) \;=\; -RT\ln\big[\,\pi_i\,\rho_i(s)\,\big] \;=\; -RT\ln\rho_i(s) \;-\; RT\ln \pi_i
+$$
+
+Resta las dos. El término $-RT\ln\rho_i(s)$ **se cancela**:
+
+$$
+\hat F(s) - F(s) \;=\; -RT\ln w_i + RT\ln\pi_i \;=\; -RT\ln\frac{w_i}{\pi_i}
+$$
+
+$$
+\boxed{\;\hat F(s) \;=\; F(s) \;-\; RT\ln\frac{w_i}{\pi_i}\,,\qquad s \in B_i\;}
+$$
+
+### 3.6 · Leer el resultado — tres propiedades
+
+> [!important] 1 · El error es **constante dentro de cada cuenca**
+> No depende de $s$, solo de $i$. Por tanto **la forma de cada pozo es correcta**: curvatura, anchura, subestructura, todo bien. Si solo te interesa un mínimo aislado, el histograma sirve.
+
+> [!important] 2 · El error **cambia de una cuenca a otra**
+> Y las profundidades *relativas* entre pozos son exactamente lo que significa «la población del estado X». **Justo lo que el paper reporta es lo que está mal.**
+
+> [!danger] 3 · El error **NO decrece con más muestreo**
+> Si $N\to\infty$ manteniendo las proporciones $w_i$, el sesgo $-RT\ln(w_i/\pi_i)$ **se queda igual**. No es ruido estadístico: es **sesgo sistemático**.
+> Simular más hace la respuesta equivocada **más nítida**, no más correcta. Las barras de error se encogen alrededor del número incorrecto.
+
+### 3.7 · Cuánto vale esto en el caso del paper
+
+Supón que la verdad es $\pi_A = 0.92$, $\pi_B = 0.08$ (el resultado de E06), pero sembraste mitad y mitad: $w_A = w_B = 0.5$.
+
+$$
+\text{Error en } A: \; -RT\ln\frac{0.5}{0.92} = -2.494\ln(0.543) = -2.494\times(-0.610) = +1.52\ \text{kJ/mol}
+$$
+$$
+\text{Error en } B: \; -RT\ln\frac{0.5}{0.08} = -2.494\ln(6.25) = -2.494\times(1.833) = -4.57\ \text{kJ/mol}
+$$
+$$
+\text{Error en }\Delta G_{AB} = (-4.57) - (+1.52) = -6.09\ \text{kJ/mol}
+$$
+
+Comprobación: tu histograma diría 50/50, es decir $\Delta G = 0$, cuando la verdad es $-6.09$ kJ/mol. El error es **exactamente** el efecto completo. ✅ Cuadra.
+
+> [!danger] Y ahora la magnitud
+> Ese error de **6 kJ/mol** es del mismo tamaño que **toda la señal que el paper reporta** ($\Delta\Delta G \approx 10$ kJ/mol, Q1).
+> No es una corrección de segundo orden. Es **la señal entera**.
+
+### 3.8 · ¿Y cómo se sembró aquí?
+
+En el paper, $w_i$ lo fija esta cadena:
+
+$$
+\text{trayectoria de metadinámica (sesgada)} \;\to\; \text{clustering jerárquico a 1.3 Å} \;\to\; \text{1 semilla por cluster}
+$$
+
+Un corte de clustering fijo devuelve **aproximadamente una semilla por conformación distinta**, independientemente de lo poblada que esté. Es decir, $w_i$ está mucho más cerca de ser **uniforme sobre confórmeros distintos** que de ser $\pi_i$.
+
+En cualquier caso: $w \ne \pi$, **por construcción y deliberadamente** — la metadinámica se usó precisamente para *aplanar* el paisaje.
+
+> [!success] El pivote, en una frase
+> $$F(s) = -RT\ln p(s) \quad\text{exige que } p \text{ sea } p_{\text{eq}}.$$
+> La MD sembrada produce $\hat p \ne p_{\text{eq}}$ **por diseño**. Luego $-RT\ln\hat p$ **no es una energía libre**: es el paisaje verdadero con cada pozo desplazado verticalmente según cuánto sembraste en él.
+>
+> **Y de aquí sale, ya derivado, todo lo demás del curso:**
+> - **Por qué el MSM no es opcional** → estima $\pi_i$ de las *tasas* de transición (dinámica local sin sesgo) y reponderá $w_i \to \pi_i$. Es literalmente el único paso que arregla esto.
+> - **El ataque A6** → si la Fig. 3A es histograma crudo, sus profundidades relativas codifican dónde cayeron los clusters.
+> - **El ataque A1** → si además $w_i$ depende del sistema (11.9 µs vs 43.1 µs), el sesgo es **distinto para cada variante**, y estás comparando peras con manzanas.
+
+---
+
+> [!question] **Q4 · demolición de M3** — Según $\hat F(s) = F(s) - RT\ln(w_i/\pi_i)$, ¿qué parte del histograma crudo es correcta y cuál no?
+>
+> **a)** La forma de cada mínimo es correcta; las profundidades relativas entre mínimos son incorrectas
+> **b)** Las profundidades relativas son correctas; la forma de cada mínimo está distorsionada
+> **c)** Todo es incorrecto por un factor que decrece al aumentar el número de frames
+> **d)** Todo es correcto salvo una constante aditiva global
