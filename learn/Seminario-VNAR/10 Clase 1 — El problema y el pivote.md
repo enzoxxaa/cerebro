@@ -194,3 +194,195 @@ Y el tiempo de espera medio es $\tau = 1/k$.
 > **b)** $\approx 7$
 > **c)** $\approx 7\times10^{2}$
 > **d)** $\approx 7\times10^{-5}$
+
+> [!success]- Respuesta Q2 → **a) $\approx 7\times10^{-2}$** ✓
+> $$k_{\text{TST}} = 6.25\times10^{12} \times 1.08\times10^{-7} = 6.75\times10^{5}\ \text{s}^{-1}$$
+> $$\tau_{\text{TST}} = 1/k = 1.48\ \mu\text{s}, \qquad \langle n\rangle = k\,t = 6.75\times10^{5}\times10^{-7} = 0.0675$$
+>
+> Y eso es la **cota superior**. Con $\kappa \sim 10^{-2}$ realista para lazos en agua: $\langle n\rangle \approx 7\times10^{-4}$ y $\tau \approx 150\ \mu$s.
+>
+> **Comprobación de consistencia:** ese rango µs–ms coincide con el título de otro paper del propio grupo, *«Transitions of CDR-L3 Loop Canonical Cluster Conformations on the Micro-to-Millisecond Timescale»*. TST y la literatura del grupo concuerdan.
+>
+> **La frontera de la MD.** ¿Qué barrera da $\langle n\rangle \approx 1$ en 100 ns? Necesitas $k \approx 10^7\ \text{s}^{-1}$, y con $\kappa = 10^{-2}$:
+> $$e^{-\beta\Delta G^\ddagger} = \frac{10^{9}}{6.25\times10^{12}} = 1.6\times10^{-4} \;\Rightarrow\; \beta\Delta G^\ddagger = 8.74 \;\Rightarrow\; \Delta G^\ddagger \approx 22\ \text{kJ/mol}$$
+> **100 ns de MD te compran barreras de hasta ~22 kJ/mol y nada más.** Las transiciones de lazos CDR viven entre ~25 y ~45. No falta «un poco» de tiempo: faltan órdenes de magnitud.
+
+---
+
+## 2 bis · Dos preguntas de Enzo
+
+### 🅰 ¿Todo esto asume NVT? El paper corre NpT
+
+Buena captura: escribí $p(\mathbf{r}) \propto e^{-\beta U}$, que es **canónico (NVT)**, y el paper simula en **NpT**. Hay que hacerlo bien.
+
+#### El ensemble correcto
+
+En NpT el volumen fluctúa, así que es una variable más sobre la que integrar. La función de partición isotérmica-isobárica es
+
+$$
+\Delta(N,p,T) \;=\; \int_0^{\infty} \!dV\; e^{-\beta pV} \, Z(N,V,T),
+\qquad
+Z(N,V,T) = \int_{V} e^{-\beta U(\mathbf{r})}\, d\mathbf{r}
+$$
+
+Sustituyendo $Z$ dentro, el peso estadístico de una configuración concreta $(\mathbf{r}, V)$ es
+
+$$
+p(\mathbf{r}, V) \;\propto\; e^{-\beta\left[\,U(\mathbf{r}) \;+\; pV\,\right]}
+$$
+
+Es decir: **la única modificación es $U \to U + pV$.** El potencial termodinámico deja de ser Helmholtz $A = -RT\ln Z$ y pasa a ser Gibbs $G = -RT\ln\Delta$.
+
+Rehaciendo §1.3 con este peso, el cociente de poblaciones queda
+
+$$
+\frac{P_A}{P_B} \;=\; e^{-\beta\left[\,\Delta U_{AB} \;+\; p\,\Delta V_{AB}\,\right]}
+$$
+
+donde $\Delta V_{AB} = \langle V\rangle_A - \langle V\rangle_B$ es la diferencia de **volumen medio** entre los dos estados.
+
+#### ¿Cuánto vale ese término nuevo?
+
+Ojo con el error de bulto: **no** importa $pV$ de la caja entera, sino $p\,\Delta V$ **entre confórmeros**. Vamos con números.
+
+Sea $\Delta V = 20\ \text{cm}^3/\text{mol}$ — una cota **muy** generosa para un reordenamiento de lazos (para referencia, el volumen molar del agua es $18\ \text{cm}^3/\text{mol}$, así que esto es como desplazar ~1 molécula de agua por proteína).
+
+Paso a unidades SI:
+$$
+\Delta V = 20\ \tfrac{\text{cm}^3}{\text{mol}} = 20 \times 10^{-6}\ \tfrac{\text{m}^3}{\text{mol}}
+$$
+
+Y $p = 1\ \text{atm} = 101325\ \text{Pa}$. Como $1\ \text{Pa}\cdot\text{m}^3 = 1\ \text{J}$:
+
+$$
+p\,\Delta V \;=\; 101325 \times 20\times10^{-6} \;=\; 2.03\ \tfrac{\text{J}}{\text{mol}} \;=\; 0.002\ \tfrac{\text{kJ}}{\text{mol}}
+$$
+
+Comparado con la escala térmica:
+
+$$
+\frac{p\,\Delta V}{RT} \;=\; \frac{2.03}{2494} \;\approx\; 8\times10^{-4}
+$$
+
+> [!success] Conclusión rigurosa
+> $$p\,\Delta V \;\sim\; 10^{-3}\,RT \quad\Longrightarrow\quad \text{NVT y NpT dan las mismas poblaciones}$$
+> A presión ambiente el término $p\Delta V$ es **cuatro órdenes de magnitud menor** que las diferencias de energía libre que discutimos ($\approx 6$ kJ/mol). La derivación canónica vale tal cual, y la distinción $G$ vs $A$ es irrelevante aquí.
+
+**¿Cuándo dejaría de valer?** Despejando $p$ para que $p\Delta V \approx RT$:
+$$
+p \;\approx\; \frac{RT}{\Delta V} \;=\; \frac{2494}{20\times10^{-6}} \;=\; 1.25\times10^{8}\ \text{Pa} \;\approx\; \mathbf{1200\ atm}
+$$
+Por eso la biofísica de alta presión trabaja en kbar: es la presión a la que $p\Delta V$ empieza a competir con $RT$. A 1 atm, no.
+
+> [!warning] Dónde el ensemble **sí** importa, y no hay que confundirlo
+> Lo anterior dice que **NVT y NpT dan las mismas poblaciones medias**. No dice que dé igual cómo implementes el barostato.
+> El barostato de **Berendsen** —el que usa el paper en producción— reproduce la presión media pero **suprime las fluctuaciones de volumen**, así que no muestrea el NpT correcto. Eso afecta a $\langle\delta V^2\rangle$ y por tanto a la compresibilidad, no a $P_A/P_B$.
+> **Termodinámica conformacional: intacta. Rigor formal del ensemble: comprometido.** Son dos afirmaciones distintas y conviene no mezclarlas al criticar.
+
+---
+
+### 🅱 «Dijimos $\Delta G = -6$ kJ/mol, pero luego barreras de 20–40». ¿No se contradice?
+
+**No, y esta es probablemente la distinción más importante de toda la clase.** Son dos cantidades **diferentes**, medidas entre puntos distintos del mismo perfil.
+
+#### El perfil, con los dos números marcados
+
+```
+   F(s)
+     ▲
+     │                    ╭───────╮   ← cima:  F(s‡)
+     │                  ╱           ╲
+     │                ╱               ╲
+     │  ΔG‡ ≈ 25–45 ╱                   ╲
+     │   ↕        ╱                       ╲
+     │          ╱                           ╲
+     │ ╲______╱                               ╲______╱
+     │    A                                       B     ↕  ΔG ≈ 6
+     │  F(s_A)                                  F(s_B)
+     └──────────────────────────────────────────────────▶ s
+```
+
+$$
+\underbrace{\Delta G \;=\; F(s_B) - F(s_A)}_{\text{entre los dos FONDOS}}
+\qquad\qquad
+\underbrace{\Delta G^{\ddagger} \;=\; F(s^{\ddagger}) - F(s_A)}_{\text{del fondo a la CIMA}}
+$$
+
+| | $\Delta G$ | $\Delta G^{\ddagger}$ |
+|---|---|---|
+| Se mide entre | mínimo ↔ mínimo | mínimo ↔ cima |
+| Controla | **poblaciones** | **velocidades** |
+| Es | **termodinámica** | **cinética** |
+| Aquí vale | $\approx 6$ kJ/mol | $\approx 25\text{–}45$ kJ/mol |
+| Aparece en | $P_A/P_B = e^{-\beta\Delta G}$ | $k = \kappa\frac{k_BT}{h}e^{-\beta\Delta G^{\ddagger}}$ |
+
+#### Son lógicamente independientes
+
+Basta ver que puedes construir cualquier combinación:
+
+- $\Delta G = 0$ y $\Delta G^{\ddagger} = 100$ kJ/mol → dos estados **igual de poblados** que **jamás** interconvierten.
+- $\Delta G = 20$ y $\Delta G^{\ddagger} = 21$ kJ/mol → poblaciones muy desiguales que se **equilibran rapidísimo**.
+
+La única restricción geométrica es $\Delta G^{\ddagger} \ge \max(0, \Delta G)$: la cima no puede estar por debajo de ninguno de los dos fondos. Nada más. **Saber la profundidad relativa de dos pozos no te dice nada sobre la altura del muro entre ellos.**
+
+#### La relación que sí existe: balance detallado
+
+Aunque sean independientes, están ligadas por una identidad exacta. Escribe las dos tasas desde el **mismo** estado de transición:
+
+$$
+k_{A\to B} = \kappa\,\frac{k_BT}{h}\,e^{-\beta\left[F(s^{\ddagger}) - F(s_A)\right]}
+\qquad
+k_{B\to A} = \kappa\,\frac{k_BT}{h}\,e^{-\beta\left[F(s^{\ddagger}) - F(s_B)\right]}
+$$
+
+Divide. El prefactor $\kappa\,k_BT/h$ se cancela, y usando $e^{x}/e^{y} = e^{x-y}$:
+
+$$
+\frac{k_{A\to B}}{k_{B\to A}}
+= \exp\!\Big(\!-\beta\big[F(s^{\ddagger}) - F(s_A)\big] + \beta\big[F(s^{\ddagger}) - F(s_B)\big]\Big)
+$$
+
+Dentro del exponente, $-\beta F(s^{\ddagger})$ y $+\beta F(s^{\ddagger})$ **se cancelan**:
+
+$$
+= \exp\!\Big(\beta F(s_A) - \beta F(s_B)\Big)
+= e^{-\beta\left[F(s_B) - F(s_A)\right]}
+$$
+
+$$
+\boxed{\;\frac{k_{A\to B}}{k_{B\to A}} \;=\; e^{-\beta \Delta G} \;=\; \frac{P_B}{P_A}\;}
+$$
+
+> [!important] Lee lo que acaba de pasar
+> **$F(s^{\ddagger})$ desapareció.** La altura de la barrera **no aparece** en el cociente.
+> Traducido: la barrera controla **cuánto tardas** en llegar al equilibrio, pero **no dónde está** el equilibrio. Puedes subir el muro todo lo que quieras: las poblaciones finales no cambian, solo tardas más en alcanzarlas.
+
+#### Y ahora, por qué este sistema es el caso difícil
+
+Junta los dos números del paper:
+
+$$
+\Delta G \approx 6\ \text{kJ/mol} \;=\; 2.4\,RT
+\qquad\text{(pozos POCO PROFUNDOS)}
+$$
+$$
+\Delta G^{\ddagger} \approx 25\text{–}45\ \text{kJ/mol} \;=\; 10\text{–}18\,RT
+\qquad\text{(muros MUY ALTOS)}
+$$
+
+> [!danger] La combinación es lo peor de ambos mundos
+> **Termodinámica somera** ⇒ las poblaciones están finamente balanceadas, así que un error de 2–3 kJ/mol del campo de fuerza **cambia la respuesta**. → ataque **A11**
+> **Cinética lenta** ⇒ el sistema no se equilibra solo en tiempos accesibles, así que **no puedes medir esas poblaciones con MD directa**. → nodo `N1`
+>
+> Necesitas **alta precisión sobre un número pequeño**, obtenida de un sistema que **se niega a equilibrarse**.
+>
+> Ahí está la justificación de todo el pipeline — y también toda su superficie de ataque. No era una contradicción: **era el planteamiento del problema.**
+
+---
+
+> [!question] **Q3** — Un sistema tiene dos confórmeros con $\Delta G = 0$ exactamente, separados por una barrera de $\Delta G^{\ddagger} = 60$ kJ/mol. Corres 100 ns de MD partiendo del confórmero $A$. ¿Qué poblaciones mides?
+>
+> **a)** $\approx 100\ \%$ A, $0\ \%$ B
+> **b)** $\approx 50\ \%$ A, $50\ \%$ B
+> **c)** $\approx 100\ \%$ B, $0\ \%$ A
+> **d)** Depende del campo de fuerza, no se puede saber
