@@ -183,3 +183,119 @@ $$
 > **d)** $V(s) = e^{-\beta F(s)}$
 EOF
 echo OK
+> [!success]- Respuesta Q1 → **a) $V(s) = -F(s)$** ✓
+> $$F_V(s) = F(s) + V(s) = F(s) - F(s) = 0$$
+> Paisaje efectivo **plano**. Sin mínimos ni barreras: el sistema difunde libremente por la CV.
+>
+> **El sesgo es un molde negativo del paisaje.** Donde $F$ tiene un pozo, $V$ pone un montículo que lo rellena; donde $F$ tiene una cima, $V$ pone un hueco.
+>
+> Y ahora fíjate en lo que apareció **solo**, sin que nadie lo introdujera. La misma ecuación leída al revés:
+> $$V(s) = -F(s) \qquad\Longleftrightarrow\qquad F(s) = -V(s)$$
+>
+> > [!success] El sesgo óptimo no es solo una herramienta de aceleración: **es una medida de $F$**
+> > Si logras construir el sesgo que aplana el paisaje, entonces **ya conoces el paisaje**: está en el sesgo, cambiado de signo.
+> > **Acelerar y medir resultan ser la misma operación.** Eso no hay que memorizarlo — es una línea de álgebra.
+>
+> **Pero** para construir $V=-F$ necesitas conocer $F$… que es justo lo que no sabes. **Huevo y gallina.** Resolver eso es la metadinámica.
+>
+> Sobre **(b)**: $V=+F$ duplicaría el paisaje, los pozos serían el doble de profundos y quedarías **más** atrapado. El signo importa.
+
+---
+
+## 2.2 bis · Desmontando el «truco» de la delta
+
+*Duda de Enzo, y es la duda correcta: el Paso 2 es donde está toda la sustancia.*
+
+### El nudo real: $\mathbf{r}$ contra $s$
+
+Antes del álgebra, hay que tener clarísimo que **son objetos de naturaleza distinta**:
+
+| | $\mathbf{r}$ | $s$ |
+|---|---|---|
+| Qué es | la configuración **completa** del sistema | el valor de **una** variable colectiva |
+| Tamaño | $3N \approx 90\,000$ números | **1** número |
+| Contiene | posición de cada átomo: proteína, aguas, todo | p. ej. «$\psi_{27} = -1.2$ rad» |
+
+Y están unidos por la **función** $\xi$:
+
+$$
+\xi:\;\mathbb{R}^{3N}\;\longrightarrow\;\mathbb{R},
+\qquad
+\mathbf{r}\;\longmapsto\;s=\xi(\mathbf{r})
+$$
+
+> [!important] $\xi$ es masivamente **muchos-a-uno**
+> Un número astronómico de configuraciones $\mathbf{r}$ distintas dan **el mismo** $s$: todas las posiciones posibles de las aguas, todas las vibraciones, todo el resto de la proteína — con tal de que ese ángulo valga $-1.2$ rad.
+> **$\mathbf{r}$ es el mundo entero. $s$ es lo único que decidiste mirar.**
+
+### Qué hace realmente $\delta(\xi(\mathbf{r}) - s)$
+
+Es un **filtro**, y nada más. La forma más honesta de leerlo es en versión discreta:
+
+$$
+\int f(\mathbf{r})\;\delta\big(\xi(\mathbf{r})-s\big)\,d\mathbf{r}
+\qquad\Longleftrightarrow\qquad
+\sum_{\substack{\mathbf{r}\ \text{tales que}\\ \xi(\mathbf{r})=s}} f(\mathbf{r})
+$$
+
+O sea: **«suma $f$ solo sobre las configuraciones cuyo valor de CV es exactamente $s$»**. La delta es notación para restringir el dominio.
+
+### Y ahora el paso, en versión discreta
+
+Queremos ver por qué $V$ sale de la integral. Escribimos la suma **solo** sobre el conjunto que sobrevive al filtro:
+
+$$
+\sum_{\substack{\mathbf{r}:\;\xi(\mathbf{r})=s}} e^{-\beta U(\mathbf{r})}\; e^{-\beta V(\xi(\mathbf{r}))}
+$$
+
+Mira el segundo factor. Estamos sumando **solo** sobre $\mathbf{r}$ con $\xi(\mathbf{r})=s$. Luego, **para cada uno de esos términos**:
+
+$$
+V(\xi(\mathbf{r})) \;=\; V(s)
+$$
+
+No es una aproximación: es sustituir $\xi(\mathbf{r})$ por su valor, que el filtro ya fijó. Y $V(s)$ **no contiene $\mathbf{r}$** — es el mismo número en todos los términos de la suma. Un factor común sale fuera:
+
+$$
+\sum_{\mathbf{r}:\;\xi(\mathbf{r})=s} e^{-\beta U(\mathbf{r})}\,e^{-\beta V(s)}
+\;=\;
+e^{-\beta V(s)}\sum_{\mathbf{r}:\;\xi(\mathbf{r})=s} e^{-\beta U(\mathbf{r})}
+$$
+
+Es exactamente $\sum_i a_i c = c\sum_i a_i$. Nada más profundo que eso.
+
+### La analogía que lo fija
+
+> [!tip] Estudiantes y matrícula
+> - $\mathbf{r}$ = **un estudiante concreto** (con su nombre, edad, notas… muchísima información)
+> - $\xi$ = la función **«¿en qué curso estás?»** — aplasta todo un estudiante a un número
+> - $s = 3$ → **tercer curso**
+> - $\delta(\xi(\mathbf{r}) - 3)$ = **filtra: quédate solo con los de tercero**
+> - $U(\mathbf{r})$ = **la nota media** de ese estudiante → distinta para cada uno ❌ no sale de la suma
+> - $V(\xi(\mathbf{r}))$ = **la matrícula de su curso** → ¡todos los de tercero pagan **lo mismo**! ✅ sale de la suma
+>
+> «Suma la matrícula de todos los de tercero» $=$ «matrícula de tercero» $\times$ «cuántos de tercero hay».
+>
+> **Eso es el Paso 2.** $V$ sale porque es constante **dentro del grupo seleccionado**, aunque varíe entre grupos.
+
+### Por qué esto es la condición de diseño de todo el método
+
+Recuerda cómo definimos el sesgo:
+
+$$U_V(\mathbf{r}) = U(\mathbf{r}) + V\big(\xi(\mathbf{r})\big)$$
+
+$V$ depende de $\mathbf{r}$ **solo a través de $\xi$**. Si hubiéramos permitido un sesgo general $V(\mathbf{r})$ —distinto para cada configuración— el Paso 2 **sería imposible**, no habría factor común, y no existiría la relación limpia $F_V = F + V$.
+
+> [!success] En una frase
+> **La razón de que la metadinámica funcione es que el sesgo se define sobre la CV y no sobre las coordenadas.** Esa restricción es lo que hace que el sesgo se pueda separar exactamente, y por tanto quitar exactamente después.
+
+→ Notación completa en [[30 Glosario de símbolos]].
+
+---
+
+> [!question] **Q2 · comprensión del Paso 2** — ¿Por qué $V(\xi(\mathbf{r}))$ puede salir de la integral y $e^{-\beta U(\mathbf{r})}$ no?
+>
+> **a)** Porque la delta fuerza $\xi(\mathbf{r})=s$, y entonces $V(\xi(\mathbf{r}))$ vale $V(s)$ en todo el dominio que sobrevive
+> **b)** Porque $V$ no depende de las coordenadas atómicas, sino solo del tiempo de simulación
+> **c)** Porque $V$ es un potencial externo, y los potenciales externos son constantes en cualquier integral
+> **d)** Porque el valor medio de $V$ sobre el dominio de integración es igual a $V(s)$
