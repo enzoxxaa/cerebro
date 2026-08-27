@@ -1,11 +1,16 @@
 ---
-tipo: referencia
-proyecto: seminario
-fecha: 2026-08-26
+tipo: intake
+proyecto: general
+fecha: 2026-08-27
 resumen: "Glosario de toda la notación del seminario: qué es cada símbolo, de qué tipo es, y dónde apareció"
 tags:
   - seminario
   - glosario
+origen: personal
+estado: sin-procesar
+prioridad: media
+etiquetas-sugeridas: []
+resumen-breve: ""
 ---
 
 # 30 · Glosario de símbolos
