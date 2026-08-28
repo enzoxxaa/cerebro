@@ -38,7 +38,7 @@ obsidian://open?vault=SegundoCerebro&file=learn%2FSeminario-VNAR%2F20%20Paper%20
 |---|---|---|
 | [[05 Clase 0 — El VNAR]] | `R4` | ✅ **cerrada — 4/4** |
 | [[10 Clase 1 — El problema y el pivote]] | `R1` `R2` `N1` + **M3 demolida** | ✅ **cerrada — 4/4** |
-| *Clase 2 — Inventar la metadinámica* | demoler **M1**, `N3` `N4` | ⚪ |
+| [[11 Clase 2 — Inventar la metadinámica]] | **M1 demolida**, `N3` `N4` | ✅ **cerrada — 4/5** |
 | *Clase 3 — El precio: CVs y cinética* | `N5` `N6` `N7` | ⚪ |
 | *Clase 4 — tICA* | `N8` `N9` | ⚪ |
 | *Clase 5 — El MSM* | demoler **M2**, `N10` `N11` `N12` | ⚪ |
@@ -52,6 +52,8 @@ obsidian://open?vault=SegundoCerebro&file=learn%2FSeminario-VNAR%2F20%20Paper%20
 | [[99 Pendientes de verificación]] | Qué falta comprobar antes de la charla | 🟠 **8 abiertos** |
 | *21 Defensa del pipeline* | Munición para (a) | ⚪ por escribir |
 | *22 Superficie de ataque* | Munición para (b) — 11 críticas | ⚪ por escribir |
+| [[30 Glosario de símbolos]] | Toda la notación: qué es cada símbolo y de qué **tipo** | ✅ |
+| `assets/` | **Figuras del paper** extraídas del PDF y embebidas en las clases | ✅ 7 imágenes |
 | *24 Referencias verificadas* | Refs confirmadas vs OpenAlex / Europe PMC | ⚪ por escribir |
 
 > [!note] Sobre las notas 21, 22 y 24

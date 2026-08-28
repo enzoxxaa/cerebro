@@ -681,3 +681,78 @@ $$
 > **d)** La distribución de equilibrio **acentuada**, $p_{\text{eq}}^{\gamma}$
 >
 > *(ésta es la pregunta que cancelaste al empezar el sondeo. Ahora la puedes **derivar**.)*
+
+> [!success]- Respuesta Q5 → **a) $p_{\text{eq}}^{1/\gamma}$** ✓
+> Sale de dos líneas que derivaste tú:
+> $$F_V = \frac{F}{\gamma} \quad\Longrightarrow\quad p_V \propto e^{-\beta F/\gamma} = \left(e^{-\beta F}\right)^{1/\gamma} \propto p_{\text{eq}}^{1/\gamma}$$
+>
+> Elevar a $1/10$ **comprime**: un pozo 1000 veces más poblado que otro pasa a serlo solo $1000^{0.1}\approx 2$ veces.
+>
+> La opción **(b), uniforme**, es el comportamiento de la metadinámica **estándar** — y es justo lo que se renuncia. Aplanar del todo es lo que impide converger (§3.4). Well-tempered aplana $9/10$, y ese décimo residual es lo que retiene al sistema.
+>
+> **Los dos límites, que fijan el significado de $\gamma$:**
+>
+> | $\gamma$ | $\frac{\gamma-1}{\gamma}$ | $V\to$ | Resultado |
+> |---|---|---|---|
+> | $\to 1$ | $\to 0$ | $0$ | **MD normal** — sin sesgo |
+> | $=10$ | $0.9$ | $-0.9\,F$ | el paper |
+> | $\to\infty$ | $\to 1$ | $-F$ | **metaD estándar** — aplana todo, no converge |
+>
+> $\gamma$ **interpola entre MD y metadinámica estándar**, y $10$ está cómodamente en medio.
+
+---
+
+## Resumen — Clase 2
+
+### La cadena de razonamiento
+
+$$
+\underbrace{U_V = U + V(\xi(\mathbf{r}))}_{\text{el sesgo vive sobre la CV}}
+\;\Rightarrow\;
+\underbrace{F_V = F + V}_{\text{exacto, por el Paso 2}}
+\;\Rightarrow\;
+\underbrace{V^{\text{ideal}} = -F}_{\text{molde negativo}}
+\;\Rightarrow\;
+\underbrace{\frac{\partial V}{\partial t}\propto e^{-\beta(F+V)}}_{\text{realimentación}}
+\;\Rightarrow\;
+\underbrace{V\to-\tfrac{\gamma-1}{\gamma}F}_{\text{well-tempered}}
+$$
+
+### Resultados
+
+| | Fórmula |
+|---|---|
+| Efecto de un sesgo | $p_V(s)\propto p_{\text{eq}}(s)\,e^{-\beta V(s)}$ |
+| Fuerza del sesgo | $\mathbf{f}_i = -\frac{dV}{ds}\nabla_{\mathbf{r}_i}\xi$ — **cero** si $i\notin\xi$ |
+| Convergencia WT | $V\to-\frac{\gamma-1}{\gamma}F$ |
+| Barrera residual | $F_V = F/\gamma$ |
+| Muestreo | $p_V\propto p_{\text{eq}}^{1/\gamma}$ |
+| Recuperar $F$ | $F=-\frac{\gamma}{\gamma-1}V$ |
+
+### Números del paper
+
+| Cantidad | Valor |
+|---|---|
+| $\gamma$ | 10 |
+| $\Delta T=(\gamma-1)T$ | **2700 K** → CV a 3000 K |
+| Barrera 40 kJ/mol → efectiva | **4 kJ/mol** |
+| Aceleración | $\approx 1.9\times10^{6}$ |
+| Gaussianas depositadas en 1 µs | 500 000 |
+| Sesgo total si no decayera | $5\times10^{6}$ kJ/mol (= 125 000 barreras) |
+| **Átomos que sienten el sesgo** | $\approx 100$ de 30 000 $=$ **0.3 %** |
+
+### Nodos
+
+| Nodo | Contenido | ✓ |
+|---|---|---|
+| **M1** | **demolida** — no es temperatura, es sesgo adaptativo; «subir T» es REMD | Q3, Q5 |
+| `N3` | el sesgo se suma al paisaje; el óptimo es el molde negativo | Q1, Q2 |
+| — | el sesgo solo empuja los átomos de la CV → **A2 en versión mecánica** | Q4 ✗→reparado |
+| `N4` | well-tempered: $\gamma$, barrera $F/\gamma$, muestreo $p_{\text{eq}}^{1/\gamma}$ | Q5 |
+
+> [!abstract] Adónde va esto — Clase 3
+> Tenemos el paisaje aplanado y las barreras cruzadas. Pero quedan **dos facturas pendientes**, y las dos son ataques:
+> 1. **Elegimos CVs.** Todo lo ortogonal quedó sin muestrear → ya lo viste en §3 bis con HV2.
+> 2. **La cinética está destruida.** Los tiempos en una trayectoria sesgada no son físicos — el sistema cruza en 0.8 ps algo que tarda 150 µs.
+>
+> La Clase 3 cuantifica la factura 2 y prepara la reparación: **tirar la termodinámica de la metadinámica y quedarse solo con las estructuras.**

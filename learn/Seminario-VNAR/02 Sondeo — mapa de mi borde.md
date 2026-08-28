@@ -50,7 +50,7 @@ Un hueco se rellena; una creencia equivocada hay que **demolerla primero**, o el
 
 | # | Creencia actual | Qué bloquea |
 |---|---|---|
-| **M1** | «metadinámica = subir la temperatura» | Sin *sesgo adaptativo* no se entiende por qué el sesgo **mide** $F$, ni por qué existe *well-tempered*, ni por qué hay que **elegir CVs** — y ahí vive el ataque A2 |
+| ~~**M1**~~ | ~~«metadinámica = subir la temperatura»~~ | ✅ **DEMOLIDA** en [[11 Clase 2 — Inventar la metadinámica]] Q3/Q5. Ahora deriva $V\to-\frac{\gamma-1}{\gamma}F$ y sabe que «subir T» es **REMD**, otro método. |
 | **M2** | «$\tau$ es el tiempo de residencia del sistema» | Si $\tau$ fuese físico **no habría nada que validar**: adiós al test de Chapman–Kolmogorov y al ataque A4 |
 | ~~**M3**~~ | ~~«$-k_BT\ln P$ es la energía libre»~~ | ✅ **DEMOLIDA** en [[10 Clase 1 — El problema y el pivote]] Q4. Ahora deriva $\hat F = F - RT\ln(w_i/\pi_i)$ y de ahí que el MSM es obligatorio. |
 
