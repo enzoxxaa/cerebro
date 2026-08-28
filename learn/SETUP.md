@@ -97,3 +97,27 @@ sería `"credit balance is too low"`. Cuota real, no configuración.
 - Spawn real del `researcher` en panel tmux — **llegó a la API**, y ahí murió con
   `400 invalid_request_error: You're out of extra usage`. Es cuota de la cuenta, no configuración.
   Si reaparece: esperar la recarga de cuota.
+
+## `pdf-reader` (skill global) — probado y en uso
+
+`~/.pi/agent/skills/pdf-reader/` con venv propio (`pymupdf`). **Funciona.**
+
+```bash
+S=~/.pi/agent/skills/pdf-reader
+$S/.venv/bin/python $S/scripts/pdf_info.py paper.pdf     # triaje: páginas, TOC, nº de imágenes
+$S/.venv/bin/python $S/scripts/pdf_render.py paper.pdf --pages 5 --dpi 200
+```
+
+**Lo que los scripts NO hacen y hubo que scriptear a mano:** extraer las **figuras embebidas** (los scripts solo renderizan páginas enteras). Con `fitz` directamente:
+
+```python
+page.get_images(full=True)      # xrefs de las imágenes
+page.get_image_rects(xref)      # su bbox → para casar figura ↔ caption
+fitz.Pixmap(doc, xref).save(f)  # extraer a resolución nativa
+page.get_pixmap(clip=rect, dpi=440)  # recortar región (tablas)
+```
+
+Truco útil: `page.search_for("FIGURE 3")` da el bbox del caption, y comparándolo con
+`get_image_rects` se asigna cada imagen a su figura sin adivinar.
+
+Figuras del paper VNAR extraídas a `learn/Seminario-VNAR/assets/` y embebidas en las clases.

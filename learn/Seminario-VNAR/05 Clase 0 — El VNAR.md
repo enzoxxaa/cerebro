@@ -53,7 +53,10 @@ El dominio variable aislado —la parte que reconoce al antígeno— es el **VNA
 > | **VHH** («nanobody») | camélidos, solo cadena pesada | VH sola | 3 |
 > | **VNAR** | tiburón, solo cadena pesada | VNAR solo | **2** |
 
-Fíjate en la última columna, porque ahí está toda la historia.
+![[assets/fig1-vnar-estructura.png]]
+> **Figura 1 del paper.** *Izquierda:* el **IgNAR** completo — homodímero, cada cadena con **un** dominio variable ($V_{NAR}$) y **cinco** constantes ($C_{NAR}1$–$5$). Sin cadena ligera por ningún lado. *Centro:* el dominio **VNAR** aislado, con las cuatro regiones etiquetadas — **CDR1** y **CDR3** (las únicas dos CDR), y **HV2** y **HV4**. Fíjate en que HV2 (verde) recorre el **lateral** del dominio: ése es el «cinturón» del que hablaremos en §2. *Derecha:* el VNAR unido a la **HSA** (superficie gris) — mira el tamaño relativo. Ese bicho diminuto es todo el aparato de reconocimiento.
+
+Fíjate en la última columna de la tabla, porque ahí está toda la historia.
 
 Un Fv convencional construye su paratopo con **seis** loops repartidos entre dos dominios. Un nanobody prescinde de la cadena ligera y se queda con **tres**. Y el VNAR se queda con **dos** — es el **dominio de unión a antígeno más pequeño que existe de forma natural**.
 
@@ -230,6 +233,10 @@ Un VNAR es una proteína **de tiburón**. Inyectada en un paciente humano, el si
 
 La regla básica: **se toca el framework, no las CDRs** — porque las CDRs son las que unen al antígeno. Suena seguro. Este paper existe para demostrar que **no lo es**.
 
+![[assets/fig2-alineamiento-hidrofobicidad.png]]
+> **Figura 2 del paper.** *Abajo:* el alineamiento de secuencias. Las cajas marcan **CDR1, HV2, HV4 y CDR3**. En **azul**, los residuos ya idénticos a la germinal humana DPK9; en **verde/amarillo/morado**, las mutaciones que añade cada variante; y en **naranja**, el motivo **`RKN`** que v1.10 **revierte** — se ve nítidamente cómo v1.1–v1.4 lo cambian a `QQK` y v1.10 lo devuelve.
+> *Arriba a la derecha:* la comparación clave de superficie — **E06** frente a **DPK9 (Vκ1)**, coloreadas por hidrofobicidad (naranja = hidrofóbico). El parche naranja central de DPK9 es su cara de apareamiento con el VH. El VNAR **no lo tiene**: vive solo.
+
 ### La cadena de variantes
 
 | Variante                     | Qué es                                                                 |
@@ -267,6 +274,13 @@ graph TD
     E --> F["ATAQUE A2"]
     style F fill:#7a1f1f,color:#fff
 ```
+
+![[assets/fig5-contactos-hsa.png]]
+> **Figura 5 del paper — la evidencia sobre la que se apoya el claim de HV2.** Compara la red de contactos **E06–HSA** (izquierda) con **huE06 v1.1–HSA** (derecha).
+> *Arriba izquierda:* mapa de frecuencias de contacto — la columna de E06 tiene valores de 0.7–0.99, y la de v1.1 se desploma a 0–0.21. *Centro:* los residuos implicados, coloreados por frecuencia; se ve cómo v1.1 pierde contactos enteros. *Abajo derecha:* la distribución de número de contactos se desplaza a la baja en v1.1.
+>
+> **Y aquí está el punto:** a partir de esta figura el paper concluye que la pérdida de afinidad viene de *«missing interactions with the **HV2** loop and the framework»*.
+> O sea que **HV2 sostiene la conclusión biológica del paper** — el mismo lazo que nunca recibió sesgo.
 
 > [!danger] Tu ataque A2, ya defendible línea por línea
 > *«No aplicaron muestreo mejorado al lazo que hace las veces de CDR2, en el dominio de unión a antígeno más pequeño que existe — y aun así lo incluyeron en el modelo cinético y basaron en él su conclusión biológica. ¿En qué se apoya que el espacio conformacional de HV2 esté convergido?»*

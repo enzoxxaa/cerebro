@@ -86,6 +86,10 @@ graph TD
 
 ## Tabla 1 del paper + reconstrucción de semillas
 
+![[assets/tabla1-tiempos.png]]
+> **Tabla 1, tal cual sale del PDF.** Confirma un punto importante: **solo tiene tres columnas.** El texto dice *«resulting in a large number of clusters (Table 1)»*, pero **el número de clusters no aparece por ninguna parte.** La referencia cruzada del paper apunta a un dato que no publicó.
+> También se ve de un vistazo la asimetría de [[22 Superficie de ataque#🔴 A1\|A1]]: **11.9** µs para E06 frente a **43.1** µs para v1.4.
+
 | Variante | Estructura inicial | Tiempo agregado / µs | Semillas implícitas\* |
 |---|---|---|---|
 | **E06** (parent) | X-ray `4HGK` | **11.9** ← mínimo | ~99 |

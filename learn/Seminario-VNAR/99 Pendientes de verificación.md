@@ -33,8 +33,34 @@ Según cuentes la hebra A partida como **una** o como **dos** (A y A′), el dom
 ### 2. Número de clusters/semillas por variante
 La Tabla 1 solo publica tiempo agregado; el texto remite a la tabla para el nº de clusters, que **no está**. La reconstrucción en [[20 Paper — parámetros exactos]] es aritmética propia. → mirar la SI.
 
-### 3. ¿La Fig. 3A está reponderada por el MSM?
-Si son histogramas crudos del pool sembrado, no son energías libres (ataque **A6**). El paper no lo dice. → SI, o los papers de 2019–2020 del grupo que reutilizan la figura.
+### 3. ¿La Fig. 3A está reponderada por el MSM? — **evidencia nueva, ahora se inclina a que NO**
+Si son histogramas crudos del pool sembrado, no son energías libres (ataque **A6**). El paper no lo dice explícitamente, pero al extraer las figuras del PDF aparecieron **dos indicios visuales**:
+
+1. **Moteado gris** de puntos aislados alrededor de cada isla, en Fig. 3A **y** en Fig. 4. Son frames individuales en regiones poco muestreadas. Una superficie reponderada por un MSM sería **suave**; el moteado es la firma de un **histograma crudo**.
+2. **Las barras de color de Fig. 3A (paratopo) y Fig. 4 son idénticas**: ambas $0.00 \to 6.48\,k_BT$ con los mismos pasos de $0.72$. Sugiere que **es el mismo objeto graficado dos veces**, con los macroestados del MSM superpuestos en la Fig. 4.
+
+**Hipótesis de trabajo:** el paisaje es un histograma crudo y **solo los porcentajes y los tiempos vienen del MSM**. Es un diseño defendible, pero invita a conflacionar las dos cosas.
+→ **Para cerrar:** mirar la SI, o los papers de 2019–2020 del grupo que reutilizan la misma figura.
+
+### 3 bis. 🔴 ¿Cuál es el estado competente en la Fig. 4D (v1.4)? — **posible inconsistencia texto/figura**
+Al leer la Fig. 4 en alta resolución:
+
+| Panel | Macroestados |
+|---|---|
+| **A / C** · E06 | **92.6 %** (círculo morado oscuro) y **7.4 %** (azul claro) |
+| **B** · huE06 v1.1 | **16.3 %** (verde oscuro), **48.4 %** (verde claro), **35.3 %** (verde) |
+| **D** · huE06 v1.4 | **83.7 %** (morado oscuro) y **16.3 %** (morado claro) |
+
+El texto afirma: *«we observe … a substantially reduced probability for the binding competent state of the huE06 v1.4 (**16 %**)»*.
+
+**El problema:** en los paneles A y C, el estado dominante de E06 (92.6 %) se dibuja en **morado oscuro**. En el panel D, el **morado oscuro es el 83.7 %**. Si el código de color indica correspondencia estructural entre paneles, el análogo del estado competente en v1.4 sería el **83.7 %**, no el 16.3 %.
+
+Además, que v1.1 **y** v1.4 den ambos exactamente **16.3 %** es una coincidencia llamativa.
+
+> [!warning] No afirmarlo como error — preguntarlo
+> No sé si el color codifica identidad estructural entre paneles o es solo estética por panel. Y v1.4 **no tiene cristal** (solo hay rombo blanco en el panel C), así que la asignación del estado competente tuvo que hacerse por solapamiento en el sistema de coordenadas común.
+> **Formulación para la charla:** *«En la Fig. 4D, ¿cuál de los dos macroestados es el competente, y cómo se asignó sin cristal de v1.4? El código de color sugiere que el análogo del dominante de E06 es el 83.7 %.»*
+> Si la respuesta es floja, es un golpe fuerte: afecta al número titular.
 
 ### 4. Factor de viscosidad de TIP3P
 Para el ataque **A7** hace falta el número exacto y su fuente. Sé el signo (TIP3P es **menos** viscoso → dinámica **acelerada** → tiempos del MSM demasiado rápidos), pero **no citar un factor concreto sin fuente**.

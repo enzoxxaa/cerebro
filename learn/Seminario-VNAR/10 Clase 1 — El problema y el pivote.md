@@ -12,7 +12,7 @@ tags:
   - seminario
   - clase
 ---
-
+K
 # 10 · Clase 1 — El problema y el pivote
 
 ← [[00 MOC — Seminario VNAR]] · anterior: [[05 Clase 0 — El VNAR]] · [[01 Plan de aprendizaje]]
@@ -96,6 +96,16 @@ $$
 Regla práctica: **un factor $e$ en población cuesta $2.5$ kJ/mol; un factor 10 cuesta $RT\ln 10 \approx 5.7$ kJ/mol.**
 
 ---
+
+![[assets/fig4-msm-poblaciones.png]]
+> **Figura 4 del paper — de aquí salen los números de esta clase.** Cada panel: a la izquierda el paisaje proyectado en tICs; a la derecha los **macroestados** con su **probabilidad** (el grosor del círculo) y los **tiempos de transición** sobre las flechas.
+> **(A) E06:** dos estados, **92.6 %** y **7.4 %**, con transiciones de **17.56 µs** y **1.39 µs**. El rombo blanco es la estructura cristalográfica, y cae en el mínimo dominante.
+> **(B) huE06 v1.1:** ya son **tres** estados — 16.3 %, 48.4 %, 35.3 % — y todos los tiempos bajan al rango de **0.3–0.9 µs**.
+> **(D) huE06 v1.4:** dos estados, **83.7 %** y **16.3 %**.
+>
+> Dos cosas para tener en el radar desde ya:
+> 1. **Ni una barra de error** en ninguna probabilidad ni en ningún tiempo → ataque **A3**.
+> 2. Los tiempos de **17.56 µs** salen de un MSM construido con trayectorias de **100 ns**. Volveremos a eso en la Clase 5 → ataque **A4**.
 
 > [!question] **Q1 · R2** — Aplicación directa
 > El paper reporta que en el parent **E06** el estado competente tiene una probabilidad $P = 0.92$.
@@ -543,6 +553,20 @@ Comprobación: tu histograma diría 50/50, es decir $\Delta G = 0$, cuando la ve
 > [!danger] Y ahora la magnitud
 > Ese error de **6 kJ/mol** es del mismo tamaño que **toda la señal que el paper reporta** ($\Delta\Delta G \approx 10$ kJ/mol, Q1).
 > No es una corrección de segundo orden. Es **la señal entera**.
+
+### 3.7 bis · Míralo en la figura del paper
+
+![[assets/fig3-paisajes-tica.png]]
+> **Figura 3A del paper** — las «*free energy surfaces*» sobre tICs, para CDR3, CDR1 y el paratopo, en las cinco variantes.
+>
+> **Dos observaciones que puedes hacer a simple vista y que sostienen el ataque [[22 Superficie de ataque#🟠 A6\|A6]]:**
+>
+> 1. **El moteado gris.** Esos puntos dispersos alrededor de cada isla son **frames individuales** en regiones apenas muestreadas. Una superficie reponderada por un MSM saldría **suave**; el moteado es la firma inconfundible de un **histograma crudo con pocas cuentas**.
+> 2. **La barra de color coincide con la de la Fig. 4.** Ambas van de $0.00$ a $6.48\,k_BT$ con los mismos pasos ($0.72$, $1.44$, $2.16$…). Eso sugiere fuertemente que **son el mismo objeto**: la Fig. 4 sería este mismo histograma, con los macroestados del MSM dibujados **encima**.
+>
+> Si es así —y hay que confirmarlo, ver [[99 Pendientes de verificación]]— entonces: **el paisaje que ves es un histograma sesgado por la siembra; solo los porcentajes vienen del MSM.** El diseño es defendible, pero el lector conflaciona las dos cosas.
+>
+> Nota también que la barra llega a $6.48\,k_BT = 16.2$ kJ/mol. Todo lo que esté por encima aparece **gris**, sin resolver.
 
 ### 3.8 · ¿Y cómo se sembró aquí?
 

@@ -510,3 +510,174 @@ $$
 > **b)** Una fuerza pequeña pero no nula, decreciente con la distancia a las CDR
 > **c)** La misma que un átomo de CDR1, porque el sesgo actúa sobre todo el sistema
 > **d)** Una fuerza proporcional al sesgo acumulado $V(s)$ en ese instante
+
+> [!failure]- Respuesta Q4 → era **a) exactamente cero**. Elegiste (b), *«pequeña pero no nula»* ✗
+> **Este fallo hay que repararlo antes de seguir**, porque el nodo sostiene el ataque A2.
+>
+> **La intuición que falló** es la «de campo»: imaginar el sesgo como una nube que emana de las CDR y se difumina con la distancia. Es una intuición razonable —así se comportan el potencial de Coulomb o el de van der Waals— pero **aquí no aplica**, y la razón está en la fórmula:
+>
+> $$\mathbf{f}_i^{\,\text{sesgo}} \;=\; \underbrace{-\frac{dV}{ds}}_{\text{escalar, igual para todos}} \;\cdot\; \underbrace{\nabla_{\mathbf{r}_i}\xi(\mathbf{r})}_{\textbf{aquí se decide todo}}$$
+>
+> **La distancia no aparece por ninguna parte.** Lo único que importa es si el átomo $i$ **entra o no en la definición de $\xi$**. Es binario:
+>
+> | Átomo | $\nabla_{\mathbf{r}_i}\xi$ | Fuerza de sesgo |
+> |---|---|---|
+> | Uno de los 4 que definen un $\psi$ de CDR1 o CDR3 | $\ne \mathbf{0}$ | sí |
+> | Un átomo de HV2, a 5 Å | $\mathbf{0}$ | **cero** |
+> | Un agua del borde de la caja, a 40 Å | $\mathbf{0}$ | **cero** |
+>
+> **Un átomo de HV2 a 5 Å y un agua a 40 Å reciben exactamente lo mismo: nada.** No hay decaimiento porque no hay campo — hay una **regla de pertenencia**.
+>
+> **Contraste con $U$, que sí es «de campo»:** el potencial de Lennard-Jones sobre el átomo $i$ depende de todos sus vecinos y decae con $r^{-6}$. Por eso $U$ **no** sale de la integral en el Paso 2 y $V$ **sí**. Es la misma propiedad vista dos veces.
+>
+> **Y ahora la magnitud.** CDR1 ($\approx$7 residuos) y CDR3 ($\approx$20) suman ~27 torsiones $\psi$, cada una definida por 4 átomos con solapamiento entre consecutivas:
+> $$\sim\!100\ \text{átomos sesgados de} \sim\!30\,000\ \text{totales} \;\approx\; \mathbf{0.3\,\%}$$
+> El otro **99.7 %** del sistema —HV2, HV4, el framework, las 29 000 aguas— corrió MD clásica pura durante todo el microsegundo.
+
+---
+
+## 4 · Well-tempered: hacer que la arena caiga cada vez más fina
+
+### 4.1 · La modificación mínima
+
+El problema de §3.4 era que la deposición nunca para. La corrección más simple imaginable: **que la altura de cada gaussiana decaiga allí donde ya hay mucho sesgo acumulado**.
+
+$$
+W(s,t) \;=\; W_0\; e^{-V(s,t)/k_B\Delta T}
+$$
+
+$\Delta T$ es un parámetro nuevo con unidades de temperatura, que fija **cuánto sesgo hace falta** para que la deposición se apague. Eso es todo el cambio.
+
+### 4.2 · Qué hace eso a la ecuación de realimentación
+
+Recuerda la de §3.3, y añádele el nuevo factor de altura:
+
+$$
+\frac{\partial V(s,t)}{\partial t} \;\propto\;
+\underbrace{e^{-V(s,t)/k_B\Delta T}}_{\text{la altura decae}}
+\;\times\;
+\underbrace{e^{-\beta\left[F(s)+V(s,t)\right]}}_{\text{prob. de estar en } s}
+$$
+
+Juntando ambas exponenciales ($e^a\,e^b = e^{a+b}$) y recordando $\beta = 1/k_BT$:
+
+$$
+\frac{\partial V(s,t)}{\partial t} \;\propto\; \exp\left\{-\left[\;\frac{V(s,t)}{k_B\Delta T} \;+\; \frac{F(s)+V(s,t)}{k_BT}\;\right]\right\}
+$$
+
+### 4.3 · Imponer que converja
+
+Que la **forma** de $V$ se estabilice significa que la deposición sea **igual de rápida en todas partes** — es decir, que el corchete no dependa de $s$:
+
+$$
+\frac{V(s)}{k_B\Delta T} \;+\; \frac{F(s)+V(s)}{k_BT} \;=\; \text{const}
+$$
+
+**Paso 1** — multiplica todo por $k_BT$ para limpiar denominadores:
+
+$$
+\frac{T}{\Delta T}\,V(s) \;+\; F(s) \;+\; V(s) \;=\; \text{const}
+$$
+
+**Paso 2** — agrupa los términos en $V$ y pasa $F$ al otro lado:
+
+$$
+V(s)\left(\frac{T}{\Delta T} + 1\right) \;=\; -F(s) + \text{const}
+$$
+
+**Paso 3** — suma la fracción: $\dfrac{T}{\Delta T} + 1 = \dfrac{T + \Delta T}{\Delta T}$
+
+$$
+V(s)\cdot\frac{T+\Delta T}{\Delta T} \;=\; -F(s) + \text{const}
+$$
+
+**Paso 4** — despeja $V$:
+
+$$
+V(s) \;=\; -\,\frac{\Delta T}{T+\Delta T}\;F(s) \;+\; \text{const}
+$$
+
+### 4.4 · Entra $\gamma$
+
+Se define el **biasfactor** como
+
+$$
+\gamma \;\equiv\; \frac{T+\Delta T}{T}
+\qquad\Longrightarrow\qquad
+\Delta T = (\gamma-1)\,T, \qquad T+\Delta T = \gamma\,T
+$$
+
+Sustituyendo en el prefactor, la $T$ se cancela:
+
+$$
+\frac{\Delta T}{T+\Delta T} \;=\; \frac{(\gamma-1)\,T}{\gamma\,T} \;=\; \frac{\gamma-1}{\gamma}
+$$
+
+$$
+\boxed{\;V(s) \;\xrightarrow[t\to\infty]{}\; -\,\frac{\gamma-1}{\gamma}\,F(s) \;+\; \text{const}\;}
+$$
+
+> [!success] Nodo `N4` — el compromiso central de well-tempered
+> El sesgo **ya no converge a $-F$, sino a una fracción $\frac{\gamma-1}{\gamma}$ de $-F$.** Rellena el pozo **al $\left(1-\frac{1}{\gamma}\right)\times 100\ \%$** y deja el resto sin rellenar a propósito.
+> Con $\gamma=10$: rellena el **90 %**, deja el **10 %**. Ese 10 % residual es lo que impide que el sistema se escape — sigue habiendo un paisaje que lo retiene en la zona interesante.
+> **Se sacrifica el aplanamiento total a cambio de convergencia.** Y como el factor es **conocido**, se corrige exactamente.
+
+### 4.5 · Las tres consecuencias, en tres líneas
+
+**① La barrera residual.** El paisaje que el sistema siente es $F_V = F + V$:
+
+$$
+F_V(s) = F(s) - \frac{\gamma-1}{\gamma}F(s) = F(s)\left(1 - \frac{\gamma-1}{\gamma}\right) = \boxed{\frac{F(s)}{\gamma}}
+$$
+
+**② La distribución muestreada.** Como $p_V \propto e^{-\beta F_V}$:
+
+$$
+p_V(s) \propto e^{-\beta F(s)/\gamma} = \left(e^{-\beta F(s)}\right)^{1/\gamma} \;\propto\; \boxed{\,p_{\text{eq}}(s)^{1/\gamma}\,}
+$$
+
+**③ Cómo se recupera $F$.** Invirtiendo la caja de §4.4:
+
+$$
+\boxed{\;F(s) = -\frac{\gamma}{\gamma-1}\,V(s)\;}
+$$
+
+### 4.6 · Los números del paper: $\gamma = 10$, $T = 300$ K
+
+$$
+\Delta T = (\gamma-1)T = 9\times300 = \mathbf{2700\ K}
+\qquad
+T+\Delta T = \mathbf{3000\ K}
+$$
+
+La CV se muestrea como si estuviera a **3000 K**, mientras el resto del sistema sigue a 300 K. *(Compara con §1: eso es lo que la temperatura global **no** podía hacer — calentar selectivamente.)*
+
+Y la barrera de 40 kJ/mol de la Clase 1:
+
+$$
+\Delta G^{\ddagger}_{\text{efectiva}} = \frac{40}{10} = \mathbf{4\ kJ/mol} = 1.6\,RT
+$$
+
+$$
+k = 6.25\times10^{12}\,e^{-4/2.494} = 6.25\times10^{12}\times 0.201 = 1.26\times10^{12}\ \text{s}^{-1}
+\;\Longrightarrow\;
+\tau \approx \mathbf{0.8\ ps}
+$$
+
+$$
+\text{Aceleración} = \frac{1.48\ \mu\text{s}}{0.8\ \text{ps}} \approx \mathbf{1.9\times10^{6}}
+$$
+
+> [!success] De 1.5 µs por cruce a 0.8 ps. **Casi dos millones de veces.**
+> En el 1 µs de metadinámica que corre el paper, esa barrera se cruza **millones de veces** en lugar de ninguna. Eso es lo que compra $\gamma=10$ — y por eso la etapa de metadinámica existe.
+
+---
+
+> [!question] **Q5 · N4** — De $p_V(s) \propto p_{\text{eq}}(s)^{1/\gamma}$: en metadinámica *well-tempered* convergida, ¿qué distribución muestrea la CV?
+>
+> **a)** La distribución de equilibrio **aplanada**, $p_{\text{eq}}^{1/\gamma}$
+> **b)** Una distribución **uniforme** sobre el rango explorado de la CV
+> **c)** La distribución de equilibrio **sin alterar**, $p_{\text{eq}}$
+> **d)** La distribución de equilibrio **acentuada**, $p_{\text{eq}}^{\gamma}$
+>
+> *(ésta es la pregunta que cancelaste al empezar el sondeo. Ahora la puedes **derivar**.)*
