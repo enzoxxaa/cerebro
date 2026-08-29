@@ -44,6 +44,14 @@ obsidian://open?vault=SegundoCerebro&file=learn%2FSeminario-VNAR%2F20%20Paper%20
 | *Clase 5 — El MSM* | demoler **M2**, `N10` `N11` `N12` | ⚪ |
 | *Clase 6 — Munición* | META a, b | ⚪ |
 
+### Presentación
+
+| Nota | Qué es | Estado |
+|---|---|---|
+| [[40 Presentación — plan]] | Plan de la charla «Inventando la metadinámica», mapeada a Clases 0-3 | ✅ |
+| `presentacion/slides.tex` | Beamer, 19 slides, tema sobrio | ✅ compila |
+| `presentacion/handout.tex` | Article, derivaciones completas, 5 pág. | ✅ compila |
+
 ### Referencia
 
 | Nota | Qué es | Estado |

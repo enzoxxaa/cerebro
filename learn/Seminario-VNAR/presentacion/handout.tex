@@ -1,0 +1,143 @@
+\documentclass[11pt]{article}
+\usepackage[margin=2.6cm]{geometry}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\input{macros.tex}
+\graphicspath{{../assets/}{figs/}}
+\input{figs/molde-negativo.tex}
+\usepackage{graphicx}
+\usepackage[colorlinks=true,linkcolor=miazul,citecolor=miazul,urlcolor=miazul]{hyperref}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{resultado}[1][]{colback=miazul!5,colframe=miazul,fonttitle=\bfseries,title={#1},breakable}
+\newtcolorbox{aviso}[1][]{colback=minaranja!6,colframe=minaranja,fonttitle=\bfseries,title={#1},breakable}
+
+\title{\textbf{Inventando la metadinámica}\\[0.3em]\large Derivaciones completas de respaldo}
+\author{Metodología de Fernández-Quintero \emph{et al.} (2022) — Front. Immunol. \textbf{13}:953917}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-1em}
+\begin{center}
+\small\color{migris}
+Documento de respaldo para la charla \textit{Inventando la metadinámica}. Cubre las derivaciones completas hasta donde llega la presentación —problema, metadinámica \textit{well-tempered}, y su precio— sin entrar en tICA/MSM (fuera de alcance de este material).
+\end{center}
+\vspace{1em}
+
+\tableofcontents
+
+% ===================================================================
+\section{El sistema}
+
+Un VNAR de mielga (\textit{Squalus acanthias}), \textbf{E06}, une albúmina sérica humana (HSA) con alta afinidad. A diferencia de un Fv convencional (6 CDRs, VH+VL) o un VHH de camélido (3 CDRs), un VNAR construye su paratopo con \textbf{solo 2 CDRs}: CDR1 y CDR3. La CDR2 está ausente —el dominio carece de las hebras $\beta$ C$'$ y C$''$ que la sostienen en un plegamiento IgV típico— y esa pérdida se compensa con dos regiones hipervariables adicionales, \textbf{HV2} y \textbf{HV4}, que en un anticuerpo convencional no participan en la unión.
+
+Humanizar consiste en sustituir residuos del \emph{framework} por sus equivalentes humanos, preservando las CDRs. La referencia humana usada es \textbf{DPK9}, una germinal V$\kappa$1 de cadena \emph{ligera} —relevante porque en un Fab tiene una cara hidrofóbica de apareamiento con VH que, en el VNAR (que vive solo, sin pareja), queda expuesta al solvente. La cadena de variantes es E06 $\to$ huE06 v1.1 $\to$ v1.2 $\to$ v1.4, con \textbf{v1.10} revirtiendo el motivo \texttt{RKN} como control interno de reversión.
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{fig1-vnar-estructura.png}
+\end{center}
+
+% ===================================================================
+\section{El problema: poblaciones, barreras, y por qué la MD sola no basta}
+
+\subsection{Poblaciones de equilibrio}
+
+En el ensemble canónico, $p(\mathbf{r}) = e^{-\beta U(\mathbf{r})}/Z$ con $\beta \equiv 1/RT$. Proyectando sobre una variable colectiva (CV) $s=\xi(\mathbf{r})$ vía marginalización,
+$$p(s) = \big\langle \delta(\xi(\mathbf{r})-s) \big\rangle,$$
+se define el \emph{potential of mean force} $F(s) \equiv -RT\ln p(s) + C$. Para dos macroestados $A,B$, con $G_A \equiv -RT\ln Z_A$,
+$$\frac{P_A}{P_B} = e^{-(G_A-G_B)/RT} \qquad\Longleftrightarrow\qquad \DG_{AB} = -RT\ln\frac{P_A}{P_B}.$$
+A 300 K, $RT = 8.314\times300 = \SI{2494}{\joule\per\mole}\approx \SI{2.5}{\kilo\joule\per\mole}$: un factor $e$ en población cuesta 2.5 kJ/mol; un factor 10 cuesta $RT\ln10\approx\SI{5.7}{\kilo\joule\per\mole}$.
+
+\textbf{Aplicación:} con $P=0.92$ (estado competente de E06), $\DG = -RT\ln(0.92/0.08) = -6.1$ kJ/mol. Con $P=0.16$ (huE06 v1.1), $\DG' = +4.1$ kJ/mol. El efecto completo:
+$$\DG_{AB} = 4.1-(-6.1) \approx \mathbf{10.2\ kJ/mol} \approx 2.4\ \text{kcal/mol}.$$
+Esa cifra —modesta en unidades de $RT$ (4$RT$)— es comparable a la incertidumbre típica de un campo de fuerza en energías conformacionales de lazos acumuladas sobre 10--15 residuos.
+
+\subsection{Por qué las barreras importan}
+
+Por teoría del estado de transición, con coeficiente de transmisión $\kappa\le1$,
+$$k = \kappa\,\frac{\kB T}{h}\,e^{-\DGd/RT}, \qquad \tau = 1/k, \qquad \frac{\kB T}{h}\Big|_{300\text{K}} = 6.25\times10^{12}\ \text{s}^{-1}.$$
+Para $\DGd=40$ kJ/mol: $\beta\DGd=16.04$, $k_{\text{TST}}=6.75\times10^5\ \text{s}^{-1}$, $\tau\approx1.5\ \mu$s (cota superior con $\kappa=1$; con $\kappa\sim10^{-2}$ realista, $\tau\sim150\ \mu$s). El número esperado de cruces en 100 ns es $\langle n\rangle = k\,t \approx 7\times10^{-2}$ (cota superior): \textbf{no ocurre}.
+
+Invirtiendo para $\langle n\rangle\approx1$ en 100 ns con $\kappa=10^{-2}$: $\DGd\approx22$ kJ/mol. \textbf{100 ns de MD compran barreras de hasta $\sim$22 kJ/mol}, y las transiciones de lazos CDR viven en 25--45 kJ/mol.
+
+\begin{aviso}[Distinción crítica: $\DG$ frente a $\DGd$]
+Son cantidades \emph{independientes} —$\DG$ entre mínimos (controla poblaciones), $\DGd$ entre mínimo y cima (controla velocidad). Por balance detallado, escribiendo las tasas desde el mismo estado de transición y dividiendo (el término $F(s^\ddagger)$ se cancela):
+$$\frac{k_{A\to B}}{k_{B\to A}} = e^{-\DG/RT} = \frac{P_B}{P_A}.$$
+\textbf{La barrera no aparece en el cociente.} Controla cuánto tardas en equilibrar, no dónde está el equilibrio. Este sistema combina pozos someros ($\DG\approx6$ kJ/mol, $2.4RT$) con muros altos ($\DGd\approx25$--45 kJ/mol, $10$--$18RT$): alta precisión sobre un número pequeño, en un sistema que se niega a equilibrarse solo.
+\end{aviso}
+
+% ===================================================================
+\section{Inventar la metadinámica}
+
+\subsection{Por qué no basta con subir la temperatura}
+Duplicar $T$ (300$\to$600 K) acelera $\sim$6000$\times$ una barrera de 40 kJ/mol —funciona. Pero: (i) acelera \emph{todo} el sistema indiscriminadamente, no solo el grado de libertad de interés; (ii) reponderar de vuelta a 300 K requiere pesos $e^{-\Delta\beta\,U(\mathbf{r})}$ con $U$ extensiva ($\sim10^5$ kJ/mol, fluctuaciones $\sim\sqrt{N}$) —varianza inmanejable; (iii) no se puede apuntar a una CV concreta. Ésta es la base de REMD, un método legítimo pero distinto, y con la ventaja de no requerir elegir CVs de antemano.
+
+\subsection{Un sesgo sobre la CV se suma exactamente al paisaje}
+Sea $U_V(\mathbf{r}) = U(\mathbf{r}) + V(\xi(\mathbf{r}))$. Marginalizando y usando que, bajo el filtro $\delta(\xi(\mathbf{r})-s)$, $V(\xi(\mathbf{r}))=V(s)$ es constante y sale de la integral (mientras $U(\mathbf{r})$ varía dentro del mismo conjunto de nivel y no sale):
+$$p_V(s) \propto \peq(s)\,e^{-\beta V(s)} \qquad\Longrightarrow\qquad \boxed{F_V(s) = F(s) + V(s)}.$$
+El sesgo que aplana el paisaje por completo es $V^{\text{ideal}}=-F$ —pero calcularlo requiere conocer $F$: el huevo y la gallina que la metadinámica resuelve.
+
+\subsection{Sesgo adaptativo y el problema de la convergencia}
+Depositando gaussianas de altura $W$ y ancho $\sigma$ cada $\tau_G$ pasos, centradas en la posición actual del sistema:
+$$V(s,t) = \sum_{t'<t} W\,e^{-(s-\xi(\mathbf{r}(t')))^2/2\sigma^2}.$$
+La tasa de deposición sigue $\partial_tV(s,t) \propto p_V(s,t) \propto e^{-\beta[F(s)+V(s,t)]}$: donde $F$ es bajo, el sistema visita más, deposita más rápido, y el paisaje se autorregula hacia $V\to-F+\text{const}$. \textbf{Pero la deposición nunca cesa} —con el paisaje plano, $\partial_tV$ es uniforme pero no cero, y el sistema escapa hacia regiones de energía absurdamente alta (\emph{overfilling}). Con los parámetros del paper (10 kJ/mol cada 2 ps, 1 $\mu$s), el sesgo total sin freno sería $5\times10^6$ kJ/mol —$125\,000$ veces la barrera de interés.
+
+\subsection{Well-tempered: el freno}
+La altura decae con el sesgo ya acumulado: $W(s,t)=W_0\,e^{-V(s,t)/\kB\Delta T}$. Imponiendo que la \emph{tasa} de deposición sea uniforme en $s$ (condición de convergencia de forma), y usando $\gamma\equiv(T+\Delta T)/T$:
+$$\frac{T}{\Delta T}V(s) + F(s) + V(s) = \text{const} \quad\Longrightarrow\quad V(s)\cdot\frac{T+\Delta T}{\Delta T}=-F(s)+\text{const}$$
+$$\Longrightarrow\quad \boxed{V(s)\xrightarrow[t\to\infty]{} -\frac{\gamma-1}{\gamma}F(s)}.$$
+De aquí, sustituyendo en $F_V=F+V$ y en $p_V\propto e^{-\beta F_V}$:
+$$F_V(s) = \frac{F(s)}{\gamma}, \qquad p_V(s) \propto \peq(s)^{1/\gamma}, \qquad F(s) = -\frac{\gamma}{\gamma-1}V(s).$$
+Límites: $\gamma\to1 \Rightarrow V\to0$ (MD normal); $\gamma\to\infty \Rightarrow V\to-F$ (metadinámica estándar, no converge). $\gamma$ interpola entre ambos.
+
+\begin{center}
+\resizebox{\textwidth}{!}{\MoldeNegativoFigure[1]}
+\end{center}
+
+\begin{resultado}[Números del paper]
+CVs: $\sin\psi,\cos\psi$ de CDR1 y CDR3 (torsiones de \emph{backbone}, vía \texttt{MATHEVAL}+\texttt{COMBINE} en PLUMED 2). $\gamma=10 \Rightarrow \Delta T=2700$ K (CV a 3000 K). Altura 10 kJ/mol, ancho 0.3 rad, cada 1000 pasos ($=$2 ps), 1 $\mu$s por sistema. Barrera efectiva: $40/\gamma=4$ kJ/mol $\Rightarrow$ $\tau\approx0.8$ ps, aceleración $\approx1.9\times10^6$ frente al valor sin sesgo.
+\end{resultado}
+
+% ===================================================================
+\section{El precio}
+
+\subsection{La cinética se comprime de forma no uniforme}
+El factor de aceleración de una transición concreta es $\alpha = e^{\beta\DGd(\gamma-1)/\gamma}$ —\textbf{depende de la barrera}. Para dos transiciones $A,B$:
+$$\frac{\tau_A^V}{\tau_B^V} = \left(\frac{\tau_A}{\tau_B}\right)^{1/\gamma}.$$
+Ejemplo: una separación real de $23\,000\times$ queda, bajo $\gamma=10$, en $23\,000^{0.1}\approx2.7\times$ —cuatro órdenes de magnitud aplastados a un factor 3. \textbf{No es un efecto secundario: es el mecanismo.} (Existe un método para recuperar cinética real, \emph{infrequent metadynamics} de Tiwary \& Parrinello, PRL \textbf{111}:230602, 2013 —pero exige depositar sesgo muy espaciadamente, régimen opuesto al usado aquí, que persigue exploración, no cinética.)
+
+\subsection{Las CVs son una elección mecánica, no solo estadística}
+La fuerza de sesgo sobre el átomo $i$, por regla de la cadena:
+$$\mathbf{f}_i^{\text{sesgo}} = -\frac{dV}{ds}\,\nabla_{\mathbf{r}_i}\xi(\mathbf{r}).$$
+Si el átomo $i$ no participa en la definición de $\xi$ (p. ej., cualquier átomo de HV2, o cualquiera de las $\sim$29\,000 aguas), $\nabla_{\mathbf{r}_i}\xi=\mathbf{0}$ y la fuerza es \textbf{exactamente cero} —no decreciente con la distancia, sino nula por pertenencia. Con las CVs del paper ($\sim$27 torsiones $\psi$, $\sim$100 átomos), \textbf{$\sim$0.3\% del sistema recibe empuje}; el 99.7\% restante —incluida HV2— corre MD clásica pura durante todo el microsegundo.
+
+\subsection{La jugada: tirar $F$ y la cinética, quedarse con las estructuras}
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+Producto & Estado & ¿Se usa? \\
+\midrule
+Energía libre $F(s)$ & sin convergencia verificada & no \\
+Cinética & comprimida, no física & no \\
+\textbf{Conjunto de estructuras} & diverso y útil & \textbf{sí} \\
+\bottomrule
+\end{tabular}
+\end{center}
+\begin{quote}
+\small\itshape ``Being only used to generate initial conformations, the implementation of metadynamics can be simple and fast.''\\
+\upshape --- Biswas, Lickert \& Stock, \textit{J. Phys. Chem. B} \textbf{122}:5508 (2018)
+\end{quote}
+Al usar la metadinámica \emph{solo} como generador de conformaciones, \textbf{la convergencia deja de ser un requisito} —no hace falta que converja, solo que haya recorrido sitios variados. Esto desactiva ambas facturas (energía libre mal proyectada, cinética destruida) simultáneamente. Lo que se hereda es el peso de siembra $w_i$ de cada cluster, que en general $w_i\ne\pi_i$ (el peso de Boltzmann verdadero) —el problema que la etapa siguiente del pipeline (MD sembrada + Markov State Model) está diseñada para reparar, y que queda fuera del alcance de este documento.
+
+\vspace{1em}
+\begin{aviso}[Lo que sobrevive de la factura de las CVs]
+Tirar $F$ elimina la factura \emph{termodinámica} de elegir CVs, pero no la \emph{estructural}: un modelo posterior solo puede reponderar los estados que alguien visitó. Si un grado de libertad lento nunca se sesgó y nunca se pobló, ningún análisis posterior lo rescata.
+\end{aviso}
+
+\end{document}
