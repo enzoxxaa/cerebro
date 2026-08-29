@@ -48,50 +48,139 @@
   \end{center}
 \end{frame}
 
+\begin{frame}{Agenda}
+  \begin{enumerate}
+    \setlength{\itemsep}{0.7em}
+    \item \textbf{El sistema} — qué es un VNAR, y por qué humanizarlo es delicado
+    \item \textbf{El problema} — poblaciones, barreras, por qué la MD directa no basta
+    \item \textbf{Inventar la metadinámica} — el núcleo metodológico
+    \item \textbf{El precio} — qué se rompe, y cómo el pipeline lo paga
+  \end{enumerate}
+  \vspace{1em}
+  \Fuente{Alcance: hasta donde el pipeline genera estructuras. tICA/MSM y la munición de defensa/ataque quedan para otra sesión.}
+\end{frame}
+
 % ===================================================================
 \section{El sistema}
 
+\begin{frame}{Un sistema modelo minimalista}
+  \begin{itemize}
+    \item Los peces cartilaginosos son los organismos vivos \textbf{filogenéticamente más antiguos} con sistema inmune adaptativo basado en inmunoglobulinas
+    \item Su anticuerpo: \textbf{IgNAR} — de cadena pesada únicamente, origen evolutivo \emph{independiente} de los VHH de camélidos
+    \item Los dominios de unión de cadena única (sdAbs) en general: pequeños ($\sim$12--15 kDa), muy estables, acceden a epítopos ``crípticos'' inaccesibles a IgG convencionales
+  \end{itemize}
+  \vspace{0.8em}
+  \centering \alert{El VNAR lleva esa lógica al extremo.}
+\end{frame}
+
+\begin{frame}{Anatomía del IgNAR / VNAR}
+  \centering
+  \includegraphics[width=0.78\textwidth]{fig1-vnar-estructura.png}
+  \Pie{Fig. 1 del paper: (A) esquema del IgNAR — homodímero, 5 dominios constantes + 1 variable por cadena. (B) dominio VNAR aislado con CDR1/CDR3/HV2/HV4. (C) VNAR en complejo con HSA.}
+\end{frame}
+
 \begin{frame}{El dominio de unión más pequeño que existe}
+  \begin{center}
+  \begin{tabular}{lccc}
+    \toprule
+     & Fv convencional & VHH (nanobody) & VNAR \\
+    \midrule
+    Cadenas en el paratopo & VH + VL & VH sola & VNAR sola \\
+    Nº de CDRs & 6 & 3 & \alert{\textbf{2}} \\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+  \vspace{0.6em}
+  \begin{itemize}
+    \item La CDR2 \textbf{no existe}: faltan las hebras $\beta$ C$'$/C$''$ que la sostienen
+    \item Compensación: \textbf{HV2} (cinturón lateral) y \textbf{HV4} (superior), normalmente no-paratópicas
+    \item Consecuencia mecánica (se retoma más adelante): cualquier método que solo sesgue CDR1/CDR3 deja a HV2/HV4 fuera
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{E06: el anticuerpo parental}
+  \begin{itemize}
+    \item Aislado de mielga inmunizada (\textit{Squalus acanthias})
+    \item Une HSA —también suero humano, de ratón y de rata— con \textbf{alta afinidad}
+    \item Cristales: \textbf{4HGK} (E06+HSA, 3.04 \r{A}) y \textbf{4HGM} (huE06 v1.1+HSA, 2.3 \r{A})
+  \end{itemize}
+  \begin{quote}
+    \small\itshape ``E06 interacts with HSA in an atypical mode that utilizes extensive \textbf{framework} contacts in addition to complementarity-determining regions.''
+  \end{quote}
+  \Fuente{Kovalenko, Olland, Piche-Nicholas \textit{et al.}, \textit{J. Biol. Chem.} \textbf{288}:17408 (2013) — Pfizer, la referencia experimental que este paper reexamina computacionalmente.}
+\end{frame}
+
+\begin{frame}{Humanizar: tocar el framework, no las CDRs}
   \begin{columns}[T]
-    \begin{column}{0.55\textwidth}
-      \includegraphics[width=\textwidth]{fig1-vnar-estructura.png}
+    \begin{column}{0.52\textwidth}
+      \includegraphics[width=\textwidth]{fig2-alineamiento-hidrofobicidad.png}
+      \Pie{Fig. 2 del paper: (A) azul = idéntico a DPK9; verde/amarillo/morado = mutaciones de v1.1/v1.2/v1.4; naranja = motivo \texttt{RKN} revertido en v1.10. (B) hidrofobicidad de superficie (escala Wimley--White).}
     \end{column}
-    \begin{column}{0.45\textwidth}
+    \begin{column}{0.46\textwidth}
       \begin{itemize}
-        \item \textbf{IgNAR}: anticuerpo de tiburón, homodímero, \alert{solo cadena pesada}
-        \item El dominio variable aislado: \textbf{VNAR}
-        \item Un Fv convencional tiene \textbf{6} CDRs (VH+VL). Un VHH (nanobody), \textbf{3}.
-        \item Un VNAR: \alert{solo 2} — CDR1 y CDR3
-        \item La CDR2 falta (sin hebras C$'$/C$''$) — compensada por \textbf{HV2} y \textbf{HV4}
+        \item \textbf{$>$60\%} de los residuos \emph{no}-CDR convertidos a la germinal humana \textbf{DPK9} (V$\kappa$1)
+        \item Cadena: E06 $\to$ v1.1 $\to$ v1.2 $\to$ v1.4
+        \item \textbf{v1.10} revierte \texttt{RKN} — control interno de reversión
+        \item DPK9 es cadena \emph{ligera}: su cara hidrofóbica de apareamiento con VH queda expuesta en un VNAR, que vive solo
       \end{itemize}
     \end{column}
   \end{columns}
 \end{frame}
 
-\begin{frame}{Humanizar: tocar el framework, no las CDRs}
+\begin{frame}{La paradoja que motiva el estudio}
+  \begin{center}
+  \begin{quote}
+    \itshape ``The huE06 v1.1 molecule retained \textbf{all but one} amino acid residue involved in the binding site for HSA.''
+  \end{quote}
+  \Fuente{Kovalenko \textit{et al.} (2013)}
+  \end{center}
+  \vspace{0.8em}
+  \begin{center}
+    \Large
+    Casi el mismo sitio de unión, átomo por átomo.\\[0.3em]
+    \alert{Y sin embargo, la afinidad y especificidad cambiaron.}\\[0.6em]
+    \normalsize\color{migris}
+    Si la estructura estática apenas cambió... ¿qué cambió?
+  \end{center}
+\end{frame}
+
+\begin{frame}{Selección conformacional}
   \begin{columns}[T]
-    \begin{column}{0.55\textwidth}
-      \includegraphics[width=\textwidth]{fig2-alineamiento-hidrofobicidad.png}
-    \end{column}
-    \begin{column}{0.45\textwidth}
+    \begin{column}{0.48\textwidth}
+      \textbf{Selección conformacional}
       \begin{itemize}
-        \item \textbf{E06} (mielga) $\to$ variantes humanizadas v1.1 $\to$ v1.2 $\to$ v1.4
-        \item Referencia humana: \textbf{DPK9}, germinal V$\kappa$1
-        \item \textbf{v1.10} revierte el motivo \texttt{RKN} — control interno de reversión
-        \item DPK9 es cadena \emph{ligera}: en un Fab tiene cara hidrofóbica de apareamiento con VH
-        \item El VNAR vive \textbf{solo} — esa cara queda expuesta
+        \item El ligando captura un confórmero \textbf{ya poblado}
+        \item Lo que importa: la \emph{población} del estado competente \textbf{antes} de que llegue el ligando
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Ajuste inducido}
+      \begin{itemize}
+        \item El ligando \textbf{moldea} la conformación al unirse
+        \item El estado apo no predice directamente la afinidad
       \end{itemize}
     \end{column}
   \end{columns}
+  \vspace{1em}
+  \begin{alertblock}{Bajo selección conformacional}
+    ``¿Cambió la humanización?'' se traduce en una pregunta precisa: \textbf{¿cambió la población del estado competente en ausencia de antígeno?}
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{El presupuesto computacional}
+  \centering
+  \includegraphics[width=0.7\textwidth]{tabla1-tiempos.png}
+  \Pie{Tabla 1 del paper. E06 y huE06 v1.1: estructuras de rayos X. El resto: modelos AlphaFold2.}
+  \vspace{0.5em}
+
+  Tiempo agregado por sistema: \textbf{11.9 -- 43.1 $\mu$s}
 \end{frame}
 
 \begin{frame}{La pregunta}
   \begin{center}
     \Large
-    Humanizar cambia la afinidad.\\[0.6em]
-    \alert{¿Cambia también el \emph{ensemble} conformacional?}\\[1.2em]
-    \normalsize
-    \color{migris}
+    \alert{¿Cambió humanizar la población del estado competente?}\\[1.2em]
+    \normalsize\color{migris}
     ¿Cómo se comprueba eso computacionalmente?
   \end{center}
 \end{frame}
@@ -134,11 +223,25 @@
 
 \begin{frame}{El resultado que hay que poder explicar}
   \centering
-  \includegraphics[width=0.92\textwidth]{fig4-msm-poblaciones.png}\\[0.3em]
-  {\scriptsize E06: \textbf{92.6\%} / 7.4\% \quad$\to$\quad huE06 v1.1: 16.3\% / 48.4\% / 35.3\%}
-  \vspace{0.4em}
+  \includegraphics[width=0.85\textwidth]{fig4-msm-poblaciones.png}
+  \Pie{Fig. 4 del paper: paisajes con probabilidades de macroestado y tiempos de transición, parent E06 vs. huE06 v1.1 (izq.) y vs. huE06 v1.4 (der.). Rombo blanco = estructura cristalográfica.}
+  \vspace{0.3em}
 
-  \alert{$\Delta\Delta G \approx 10$ kJ/mol} — comparable al error típico de un campo de fuerza en energías conformacionales de lazos
+  {\scriptsize E06: \textbf{92.6\%} / 7.4\% \quad$\to$\quad huE06 v1.1: 16.3\% / 48.4\% / 35.3\%}
+
+  \alert{$\Delta\Delta G \approx 10$ kJ/mol} — comparable al error típico de un campo de fuerza
+\end{frame}
+
+\begin{frame}{¿Y si el muestreo está mal repartido?}
+  Si se agrupan trayectorias con pesos $w_i$ distintos de los pesos de Boltzmann verdaderos $\pi_i$:
+  $$\hat F(s) = F(s) - RT\ln\frac{w_i}{\pi_i}, \qquad s\in \text{cuenca } i$$
+  \begin{itemize}
+    \item La \textbf{forma} de cada pozo sale correcta (el error no depende de $s$ dentro de la cuenca)
+    \item Las \textbf{profundidades relativas} —es decir, las poblaciones— salen mal
+    \item Y el error \textbf{no decrece} con más muestreo: es sesgo sistemático, no ruido
+  \end{itemize}
+  \vspace{0.5em}
+  \Fuente{Se retoma al final: de aquí sale por qué ninguna etapa del pipeline puede saltarse la reponderación.}
 \end{frame}
 
 \begin{frame}{Conclusión del Bloque 1}
@@ -250,6 +353,16 @@
   Aceleración $\approx \mathbf{1.9\times10^{6}}$
 \end{frame}
 
+\begin{frame}{En una frase}
+  \begin{center}
+    \Large
+    Sin sesgo: \alert{$\sim$150 $\mu$s} de espera por cruce\\[0.5em]
+    Con well-tempered ($\gamma=10$): \alert{$\sim$0.8 ps}\\[1.2em]
+    \normalsize\color{migris}
+    1 $\mu$s de metadinámica $\approx$ más de un millón de cruces potenciales
+  \end{center}
+\end{frame}
+
 % ===================================================================
 \section{El precio}
 
@@ -264,11 +377,23 @@
   \textbf{Cuatro órdenes de magnitud, aplastados a un factor 3.} No es un efecto secundario — es el mecanismo.
 \end{frame}
 
+\begin{frame}{¿Se puede recuperar la cinética real?}
+  Sí — \textbf{metadinámica infrecuente} (Tiwary \& Parrinello, \textit{PRL} \textbf{111}:230602, 2013; 353 citas)
+  \begin{itemize}
+    \item Depositar sesgo \textbf{muy espaciado}: casi no contamina el estado de transición
+    \item El factor de aceleración se \textbf{mide}, $\alpha=\langle e^{\beta V(s,t)}\rangle$, no se asume
+  \end{itemize}
+  \begin{alertblock}{Régimen opuesto al del paper}
+    Aquí: cada 2 ps, 500\,000 gaussianas en 1 $\mu$s — diseñado para \textbf{explorar}, no para medir tasas.
+  \end{alertblock}
+  \centering \alert{El paper no necesita recuperar cinética: necesita estructuras.}
+\end{frame}
+
 \begin{frame}{Las CVs son una elección}
   La fuerza de sesgo sobre el átomo $i$: $\mathbf{f}_i = -\dfrac{dV}{ds}\,\nabla_{\mathbf{r}_i}\xi(\mathbf{r})$
   \begin{itemize}
     \item Si el átomo $i$ no define la CV: $\nabla_{\mathbf{r}_i}\xi = \mathbf{0}$
-    \item El sesgo empuja \textbf{literalmente} solo los átomos de CDR1/CDR3
+    \item El sesgo empuja \textbf{literalmente} solo los átomos de CDR1/CDR3 ($\sim$0.3\% del sistema)
     \item Todo grado de libertad ortogonal (p. ej. HV2) recibe \alert{ayuda cero}
   \end{itemize}
   \vspace{0.5em}
@@ -302,7 +427,247 @@
     Tenemos \textbf{estructuras diversas}.\\[0.4em]
     No tenemos, todavía, \alert{los pesos correctos}.\\[1.2em]
     \normalsize\color{migris}
-    Siguiente pieza: MD clásica sembrada $\to$ Markov State Model
+    Siguiente pieza: MD clásica sembrada $\to$ tICA $\to$ Markov State Model
+  \end{center}
+\end{frame}
+
+% ===================================================================
+\section{MD sembrada}
+
+\begin{frame}{De estructuras a dinámica sin sesgo}
+  \begin{itemize}
+    \item Las trayectorias de metadinámica se agrupan: \textbf{clustering jerárquico} (\textit{average linkage}, cpptraj), corte \textbf{1.3 \r{A}}
+    \item Cada representante de cluster $\to$ \textbf{100 ns de MD sin sesgo} (AMBER 20, \texttt{pmemd.cuda})
+    \item El paper reporta ``\textit{a large number of clusters}'' — el número exacto \alert{no se publica}
+  \end{itemize}
+  \vspace{0.6em}
+  \begin{alertblock}{Lo que esto fija, sin que nadie lo controle explícitamente}
+    El número de clusters por variante determina $w_i$ — y con él, cuántas semillas hay por región del paisaje.
+  \end{alertblock}
+\end{frame}
+
+% ===================================================================
+\section{tICA}
+
+\begin{frame}{Reducir dimensión: ¿pero cuál?}
+  Cientos de trayectorias de 100 ns, en un espacio de muchas torsiones. Hace falta proyectar a 2D para poder mirar el paisaje.
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{PCA}
+      \begin{itemize}
+        \item Maximiza \textbf{varianza}
+        \item[\textcolor{minaranja}{$-$}] un lazo puede bambolearse mucho sin ser el modo \emph{lento}
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{tICA}
+      \begin{itemize}
+        \item Maximiza \textbf{autocorrelación} a un lag $\tau$
+        \item[\textcolor{teal}{$+$}] encuentra lo \textbf{lento}, no lo amplio
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{tICA: el problema de autovalores}
+  $$C(\tau)\,v = \lambda\, C(0)\,v$$
+  \begin{itemize}
+    \item $C(\tau)$: covarianza \textbf{desfasada} en el tiempo. $C(0)$: covarianza instantánea
+    \item PCA solo usa $C(0)$ — tICA usa \textbf{ambas}
+    \item Los autovectores de mayor autovalor son las direcciones que \textbf{menos se decorrelacionan} al esperar $\tau$: las lentas
+  \end{itemize}
+  \vspace{0.6em}
+  \Fuente{Pérez-Hernández \& Noé, \textit{J. Chem. Theory Comput.} \textbf{12}:6118 (2016) — tICA jerárquico, usado por PyEMMA 2.}
+\end{frame}
+
+\begin{frame}{Las features del paper}
+  \begin{itemize}
+    \item Torsiones de \emph{backbone} de \textbf{CDR1, CDR3 y HV2}
+    \item Lag de tICA: \textbf{10 ns} (distinto del lag del MSM, 15 ns)
+    \item Software: PyEMMA 2
+  \end{itemize}
+  \vspace{0.6em}
+  \begin{alertblock}{La asimetría que ya viste en el Bloque 3}
+    HV2 \textbf{nunca fue una CV de metadinámica} — pero sí es una \textbf{feature de tICA}. Se mide, aunque no se muestreó con sesgo.
+  \end{alertblock}
+\end{frame}
+
+% ===================================================================
+\section{El Markov State Model}
+
+\begin{frame}{Lo que un MSM estima}
+  \begin{itemize}
+    \item Partición en \textbf{100 microestados} (k-means sobre las coordenadas tICA)
+    \item Se cuentan transiciones $i\to j$ a un \textbf{lag} $\tau=15$ ns $\to$ matriz de conteos $C_{ij}(\tau)$
+    \item Normalizando: la \textbf{matriz de transición} $T(\tau)$
+  \end{itemize}
+  \vspace{0.6em}
+  \centering \alert{\large Todo lo demás sale de $T(\tau)$ por álgebra lineal.}
+\end{frame}
+
+\begin{frame}{De $T(\tau)$ sale todo}
+  \begin{block}{Población de equilibrio}
+    $$\pi^\top T(\tau) = \pi^\top \qquad \text{(autovector izquierdo, autovalor 1)}$$
+  \end{block}
+  \begin{block}{Tiempos característicos}
+    $$t_i = -\frac{\tau}{\ln\lambda_i} \qquad \text{(autovalores subdominantes)}$$
+  \end{block}
+  \textbf{PCCA+} (Röblitz \& Weber, 2013): agrupa los 100 microestados en \textbf{macroestados}, usando el signo de los autovectores lentos de $T$.
+\end{frame}
+
+\begin{frame}{El nodo que legitima todo el pipeline}
+  \begin{center}
+    \Large
+    \alert{$\pi$ es independiente de dónde sembraste.}
+  \end{center}
+  \vspace{0.8em}
+  \begin{itemize}
+    \item $\pi$ sale de las \textbf{tasas locales} $T_{ij}$, no de cuántas veces visitaste cada microestado
+    \item Sembrar más en una región mejora la \textbf{precisión} de $T_{ij}$ ahí — no cambia su valor esperado
+    \item \textbf{Esto resuelve} el problema de la Clase 1: $\hat F = F - RT\ln(w_i/\pi_i)$ — el MSM reponde $w_i\to\pi_i$
+  \end{itemize}
+  \vspace{0.5em}
+  \Fuente{Es la respuesta formal a ``pero sembraste con un sesgo''.}
+\end{frame}
+
+\begin{frame}{Validación: ¿es válido el modelo?}
+  \begin{itemize}
+    \item \textbf{Test de Chapman--Kolmogorov}: $T(n\tau) \approx [T(\tau)]^n$ — si falla, el lag es demasiado corto (no markoviano)
+    \item \textbf{VAMP} (Wu \& Noé, 2017): score variacional para elegir lag y features óptimos
+    \item Fracción de estados \textbf{conectados} — necesaria para que $\pi$ tenga sentido
+  \end{itemize}
+  \vspace{0.6em}
+  \Fuente{Prinz \textit{et al.}, \textit{J. Chem. Phys.} \textbf{134}:174105 (2011) — la referencia canónica del test CK aplicado a MSMs.}
+\end{frame}
+
+% ===================================================================
+\section{Resultados}
+
+\begin{frame}{El resultado completo}
+  \centering
+  \includegraphics[width=0.85\textwidth]{fig4-msm-poblaciones.png}
+  \Pie{Fig. 4 del paper — ahora sabes exactamente cómo se construyó: metadinámica $\to$ clustering $\to$ MD sembrada $\to$ tICA $\to$ MSM.}
+  \vspace{0.3em}
+  E06: \textbf{92.6\%}/7.4\% \quad huE06 v1.1: 16.3\%/48.4\%/35.3\% \quad huE06 v1.4: 83.7\%/16.3\%
+\end{frame}
+
+\begin{frame}{La evidencia de contactos}
+  \centering
+  \includegraphics[width=0.62\textwidth]{fig5-contactos-hsa.png}
+  \Pie{Fig. 5 del paper: mapas de contacto E06--HSA vs. huE06 v1.1--HSA. La frecuencia de contacto cae de 0.7--0.99 a 0--0.21.}
+  \vspace{0.4em}
+  El paper atribuye la pérdida de afinidad a ``\textit{missing interactions with the \textbf{HV2} loop and the framework}''
+\end{frame}
+
+% ===================================================================
+\section{Munición: defensa}
+
+\begin{frame}{No es un protocolo \textit{ad hoc}}
+  El mismo pipeline lleva \textbf{$\sim$5 años} rodando en el grupo Liedl:
+  \begin{center}
+  \small
+  \begin{tabular}{lcc}
+    \toprule
+    Año & Trabajo & Citas \\
+    \midrule
+    2019 & CDR-H3 loop ensembles & 96 \\
+    2019 & CDR-H3 — conformational selection & 72 \\
+    2020 & CDR loops: ensembles vs. clusters de rayos X & 34 \\
+    2021 & Ensembles como paradigma de diseño & 30 \\
+    \textbf{2022} & \textbf{Nanobody ensembles vs. RMN experimental} & 19 \\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+  \vspace{0.5em}
+  \centering \alert{El de 2022 valida el método contra RMN en un sistema hermano.}
+\end{frame}
+
+% ===================================================================
+\section{Munición: ataque}
+
+\begin{frame}{Las críticas más fuertes}
+  \small
+  \begin{center}
+  \begin{tabular}{clc}
+    \toprule
+    & Crítica & Severidad \\
+    \midrule
+    A1 & Muestreo confundido con el observable (11.9 vs 43.1 $\mu$s) & \textcolor{red!70!black}{\textbf{alta}} \\
+    A2 & HV2 nunca sesgada, pero sostiene la conclusión & \textcolor{red!70!black}{\textbf{alta}} \\
+    A3 & Ni una barra de error (\texttt{BayesianMSM} gratis en PyEMMA) & \textcolor{red!70!black}{\textbf{alta}} \\
+    A4 & Lag 15 ns vs. trayectorias de 100 ns & media \\
+    A6 & ¿Fig. 3A reponderada o histograma crudo? & media \\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+\end{frame}
+
+\begin{frame}{A1 — el muestreo es función de la flexibilidad}
+  Corte de clustering \textbf{fijo} (1.3 \r{A}) $\Rightarrow$ sistema más flexible $\to$ más clusters $\to$ más semillas $\to$ más tiempo agregado
+  \begin{center}
+  \small
+  \begin{tabular}{lc}
+    \toprule
+    Variante & Tiempo agregado \\
+    \midrule
+    E06 (``rígido'') & 11.9 $\mu$s \\
+    huE06 v1.4 (``flexible'') & 43.1 $\mu$s \quad ($3.6\times$) \\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+  \vspace{0.4em}
+  \alert{La entropía dihedral (KDE) y el área del espacio tICA crecen con el número de frames.} ¿Sobreviven las diferencias a submuestrear todos los sistemas por igual?
+\end{frame}
+
+\begin{frame}{A2 — la versión mecánica}
+  \begin{center}
+    \Large
+    Los átomos de HV2 no recibieron\\
+    \alert{ni una sola fuerza de sesgo}\\
+    en todo el microsegundo de metadinámica.
+  \end{center}
+  \vspace{0.8em}
+  \small\color{migris}
+  \centering Su muestreo es exactamente el de MD clásica — que compra $\sim$22 kJ/mol. Y aun así entra en el MSM, y sostiene la conclusión biológica.
+\end{frame}
+
+\begin{frame}{Un hallazgo propio: ¿cuadra la Fig. 4D?}
+  \begin{itemize}
+    \item En los paneles A/C, el estado \textbf{dominante} de E06 (92.6\%) es \textbf{morado oscuro}
+    \item En el panel D (huE06 v1.4), el \textbf{morado oscuro} es el \textbf{83.7\%}
+    \item El texto dice que el estado competente de v1.4 tiene \textbf{16\%} de probabilidad
+  \end{itemize}
+  \begin{alertblock}{La pregunta a hacer}
+    Si el color indica correspondencia estructural entre paneles, ¿no sería el análogo del dominante el \textbf{83.7\%}? ¿Cómo se asignó el estado competente sin cristal de v1.4?
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{Alternativas no discutidas}
+  \small
+  \begin{center}
+  \begin{tabular}{lp{5.5cm}}
+    \toprule
+    Método & Lo que ofrece \\
+    \midrule
+    REMD / REST2 & Sin elegir CVs — inmune a A2 \\
+    aMD / GaMD & Sin CVs; reponderación de alta varianza \\
+    PT-metaD & Sesga varias CVs a la vez — resolvería A2 \\
+    Rosetta / kinematic closure & Barato; sin dinámica ni cinética real \\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+  \vspace{0.5em}
+  \centering \alert{REMD es el punto más limpio: la vulnerabilidad de A2 existe \emph{porque} hay que elegir CVs de antemano.}
+\end{frame}
+
+% ===================================================================
+\begin{frame}{Síntesis}
+  \begin{center}
+    \Large
+    Cada etapa del pipeline responde una única pregunta:\\[0.5em]
+    \alert{¿qué me autoriza a leer este número\\como cantidad física?}\\[1em]
+    \normalsize\color{migris}
+    Las críticas no son una lista que memorizar: son los sitios donde esa pregunta no se respondió.
   \end{center}
 \end{frame}
 
@@ -310,6 +675,22 @@
   \centering
   \Large\textit{Gracias.}\\[1em]
   \small\color{migris} Preguntas
+\end{frame}
+
+\begin{frame}{Fuentes citadas}
+  \scriptsize
+  \begin{itemize}
+    \item Fernández-Quintero \textit{et al.} \textit{Front. Immunol.} \textbf{13}:953917 (2022) — el paper
+    \item Kovalenko \textit{et al.} \textit{J. Biol. Chem.} \textbf{288}:17408 (2013) — E06, estructuras 4HGK/4HGM
+    \item Barducci, Bussi \& Parrinello. \textit{PRL} \textbf{100}:020603 (2008) — well-tempered metadynamics
+    \item Biswas, Lickert \& Stock. \textit{JPC B} \textbf{122}:5508 (2018) — metaD como generador de semillas
+    \item Tiwary \& Parrinello. \textit{PRL} \textbf{111}:230602 (2013) — metadinámica infrecuente
+    \item Pérez-Hernández \& Noé. \textit{JCTC} \textbf{12}:6118 (2016) — tICA jerárquico
+    \item Scherer \textit{et al.} \textit{JCTC} \textbf{11} (2015) — PyEMMA 2
+    \item Röblitz \& Weber. \textit{Adv. Data Anal. Classif.} \textbf{7}:147 (2013) — PCCA+
+    \item Wu \& Noé. \textit{J. Nonlinear Sci.} \textbf{30}:23 (2017) — VAMP
+    \item Prinz \textit{et al.} \textit{J. Chem. Phys.} \textbf{134}:174105 (2011) — validación de MSMs, test CK
+  \end{itemize}
 \end{frame}
 
 \end{document}

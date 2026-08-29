@@ -48,9 +48,9 @@ obsidian://open?vault=SegundoCerebro&file=learn%2FSeminario-VNAR%2F20%20Paper%20
 
 | Nota | Qué es | Estado |
 |---|---|---|
-| [[40 Presentación — plan]] | Plan de la charla «Inventando la metadinámica», mapeada a Clases 0-3 | ✅ |
-| `presentacion/slides.tex` | Beamer, 19 slides, tema sobrio | ✅ compila |
-| `presentacion/handout.tex` | Article, derivaciones completas, 5 pág. | ✅ compila |
+| [[40 Presentación — plan]] | Plan de la charla «Inventando la metadinámica» — **cobertura completa del paper** | ✅ `v3` |
+| `presentacion/slides.tex` | Beamer, **47 slides**, tema sobrio, pies de figura del paper | ✅ compila |
+| `presentacion/handout.tex` | Article, derivaciones completas, **12 pág.** | ✅ compila |
 
 ### Referencia
 

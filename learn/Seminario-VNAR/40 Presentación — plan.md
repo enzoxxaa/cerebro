@@ -117,16 +117,41 @@ Figuras del paper: referenciadas directo desde `../assets/` (sin duplicar).
 - ❌ **`svg-maker` falló** — mismo `400 out of extra usage` que Scout. Cupo de suscripción agotado también para subagentes en este momento.
 - ✅ **TikZ a mano en `figs/molde-negativo.tex`** — 3 paneles (paisaje real → sesgo acumulándose con forma invertida → efecto neto plano), compilado y **verificado visualmente** antes de incrustarlo, mismo estándar de «nunca publicar sin mirar» que sigue `svg-maker`. Reutilizado en ambos documentos viá `\input`.
 
-## ✅ Estado final — ambos documentos compilan limpio
+## ✅ Estado final `v3` — cobertura COMPLETA del paper (ya no se detiene en Clase 3)
 
 | Archivo | Qué es | Páginas | Estado |
 |---|---|---|---|
-| `presentacion/slides.tex` | Beamer 16:9, tema sobrio propio (sin símbolos de navegación, paleta azul/naranja) | **19** | ✅ compila sin errores |
-| `presentacion/handout.tex` | Article, derivaciones completas con índice, cajas de resultado/aviso | **5** | ✅ compila sin errores, 0 overfull hbox |
+| `presentacion/slides.tex` | Beamer 16:9, tema sobrio propio | **47** | ✅ compila sin errores ni overfull |
+| `presentacion/handout.tex` | Article, derivaciones completas con índice, 10 secciones | **12** | ✅ compila sin errores ni overfull |
+
+> [!important] `v3` — ya no se corta en «estructuras diversas»
+> El usuario pidió cobertura completa del pipeline, no solo hasta donde llegaban las clases con Opus. Se añadieron **17 slides nuevas** (30→47) y **4 páginas nuevas** de handout (8→12), cubriendo:
+> - **MD sembrada** — clustering (cpptraj, corte 1.3 Å), 100 ns por representante
+> - **tICA** — $C(\tau)v=\lambda C(0)v$, contraste con PCA, features del paper (CDR1/CDR3/**HV2**)
+> - **MSM** — $T(\tau)$, $\pi$ como autovector independiente de la siembra (el nodo que legitima todo el pipeline, cierra el arco abierto en la Clase 1), validación CK+VAMP
+> - **Resultados finales** — Fig. 4 completa, Fig. 5 (contactos, evidencia de HV2)
+> - **Munición: defensa** — genealogía de 7 papers, validación NMR de 2022
+> - **Munición: ataque** — A1, A2, A3, A4, A6 con severidad, **el hallazgo propio de la Fig. 4D** (posible inconsistencia color/texto en huE06 v1.4), alternativas no discutidas (REMD/aMD/PT-metaD/Rosetta)
+> - **Síntesis final** — la pregunta única que recorre todo el pipeline
+>
+> Duración realista ahora: **probablemente 60+ minutos** a este nivel de detalle. Si el slot real es de 45 min, hay margen para saltarse alguna de las slides de «ataque» secundarias (A4, A6, alternativas) sin perder el argumento central.
 | `presentacion/figs/molde-negativo.tex` | Diagrama TikZ de 3 paneles, reutilizado en ambos | — | ✅ verificado visualmente |
+| `presentacion/macros.tex` | Ahora incluye `\Pie{}`, el pie de figura compacto compartido | — | ✅ |
 | `presentacion/build.sh` | Compila los dos con 2 pasadas + limpia auxiliares | — | ✅ probado |
 
-**Cobertura exacta:** Bloque 0 (VNAR) · Bloque 1 (el problema, Boltzmann + TST) · Bloque 2 (inventar la metadinámica — el núcleo, con el diagrama del molde negativo) · Bloque 3 (el precio — cinética comprimida, CVs como elección, la jugada de tirar $F$). **Cierra en gancho**, sin entrar a tICA/MSM — tal como se pidió.
+### Cambios respecto a `v1` (19 slides → 30 slides, ~20 min → ~45 min)
+
+1. **Bloque 0 casi triplicado** (3 → 9 slides): contexto filogenético de los peces cartilaginosos, anatomía IgNAR/VNAR, tabla comparativa de CDRs, **E06 en detalle** (PDB 4HGK/4HGM, resoluciones, cita de Kovalenko \textit{et al.} 2013 sobre el «modo atípico» de reconocimiento vía framework), humanización con grado exacto (>60% de residuos no-CDR), **la paradoja** (huE06 v1.1 retuvo todo el sitio de unión menos un residuo, y aun así cambió la afinidad — el gancho narrativo), **selección conformacional** explícita como marco, y la Tabla 1 (presupuesto computacional).
+2. **Pies de figura extraídos del paper** en las 5 figuras usadas (Fig. 1, 2, 4, Tabla 1) — no la leyenda completa, solo lo necesario para el mensaje de cada slide. Macro `\Pie{}` compartida en `macros.tex`.
+3. **Bloque 1**: +1 slide con el pivote $\hat F = F - RT\ln(w_i/\pi_i)$, antes solo en el handout.
+4. **Bloque 2**: +1 slide «En una frase» (150 µs → 0.8 ps) como remate de alto impacto.
+5. **Bloque 3**: +1 slide sobre metadinámica infrecuente (Tiwary \& Parrinello 2013) — muestra conciencia del campo más allá de este paper.
+6. **Slide de fuentes citadas** al final (5 referencias, para preguntas).
+7. `handout.tex` expandido en paralelo: 7 subsecciones nuevas en «El sistema», Fig. 4 incrustada en «El problema» (antes faltaba), y sección de Referencias al final.
+
+### Bug encontrado y corregido durante la expansión
+> [!bug] `enumitem` + Beamer = `TeX capacity exceeded [grouping levels=255]`
+> Cargar `enumitem` y usar `\begin{enumerate}[itemsep=...]` dentro de un `frame` de Beamer choca con la sintaxis de overlays de Beamer (`[<...>]`) y hace explotar el conteo de grupos de TeX. Diagnosticado por bisección binaria del archivo (aislando hasta la Agenda, luego hasta el `\begin{enumerate}` exacto). **Solución:** no cargar `enumitem` en `slides.tex`; usar `\setlength{\itemsep}{...}` dentro del entorno en su lugar. `handout.tex` (article, sin Beamer) sí puede usar `enumitem` sin problema.
 
 > [!warning] Pendiente de pulido menor
 > El slide «El resultado que hay que poder explicar» usa `fig4-msm-poblaciones.png` completa (4 paneles A-D), pero el texto solo discute E06 y v1.1. Se ve un poco denso a tamaño de proyección. Mejora fácil pendiente: recortar la figura a solo los paneles A y B antes de la charla.

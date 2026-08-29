@@ -15,3 +15,13 @@
 \definecolor{miazul}{RGB}{31,79,121}
 \definecolor{minaranja}{RGB}{204,102,0}
 \definecolor{migris}{RGB}{90,90,90}
+
+% pie de figura compacto -- reutilizado en slides.tex y handout.tex
+\newcommand{\Pie}[1]{%
+  \vspace{0.4em}
+  \begin{center}
+  \begin{minipage}{0.82\textwidth}
+    \centering{\scriptsize\color{migris}\itshape #1}
+  \end{minipage}
+  \end{center}%
+}
