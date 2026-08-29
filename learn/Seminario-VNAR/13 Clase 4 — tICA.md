@@ -160,3 +160,105 @@ $$
 > **b)** Porque $C(\tau)$ siempre da valores más grandes que $C(0)$, así que el cociente es más fácil de maximizar
 > **c)** Porque $C(0)$ no es invertible cuando hay muchas features correlacionadas
 > **d)** Porque maximizar solo $C(0)$ requiere más datos que maximizar el cociente
+
+> [!success]- Respuesta Q2 → **a) Premia la persistencia, no la amplitud** ✓
+> $C(\tau)$ mide cuánto covaría la señal *ahora* con la señal *dentro de $\tau$*. Una coordenada que se agita rápido tendrá $C(\tau)$ chico (ya se decorrelacionó) aunque $C(0)$ sea enorme. Una coordenada lenta mantiene $C(\tau)$ casi tan grande como $C(0)$. El cociente **es** la definición operativa de "lento".
+> (b) es falsa en general — la autocorrelación decae con el tiempo, no crece. (c)/(d) son preocupaciones reales pero no la razón de diseño del método.
+
+---
+
+## 2.4 bis · El álgebra lineal, desde cero
+
+*Pediste más detalle aquí — vamos despacio. Dos piezas: qué es una forma cuadrática y de dónde sale su gradiente, y qué significa que un problema de autovalores sea "generalizado".*
+
+### Pieza 1 · ¿Qué es $\mathbf{v}^\top A\mathbf{v}$?
+
+Para $\mathbf{v}\in\mathbb{R}^d$ y $A$ una matriz $d\times d$, la expresión $\mathbf{v}^\top A\mathbf{v}$ es un **número** (una matriz $1\times1$), y se calcula sumando sobre todos los pares de índices:
+
+$$
+\mathbf{v}^\top A \mathbf{v} \;=\; \sum_{i=1}^d\sum_{j=1}^d v_i\, A_{ij}\, v_j
+$$
+
+**Ejemplo concreto en 2D.** Sea $\mathbf{v}=(v_1,v_2)^\top$ y $A=\begin{pmatrix}a&b\\c&d\end{pmatrix}$. Multiplicando término a término:
+
+$$
+\mathbf{v}^\top A\mathbf{v} = a\,v_1^2 + (b+c)\,v_1v_2 + d\,v_2^2
+$$
+
+Si $A$ es simétrica ($b=c$), esto es $a v_1^2 + 2b\,v_1v_2 + d v_2^2$ — la misma **forma cuadrática** de precálculo, $ax^2+bxy+cy^2$, escrita con matrices.
+
+> [!important] El significado que vas a usar sin parar
+> Si $A=C(0)$ es una matriz de covarianza y $\mathbf{v}$ es un vector unitario, $\mathbf{v}^\top C(0)\mathbf{v}$ es literalmente **la varianza de los datos proyectados sobre la dirección $\mathbf{v}$**. Maximizar eso sobre todas las direcciones $\mathbf{v}$ es, por definición, **encontrar la primera componente principal — PCA**.
+> Es la misma construcción algebraica; lo único que cambia entre PCA y tICA es *qué* matriz va en el numerador.
+
+### Pieza 2 · De dónde sale $\nabla(\mathbf{v}^\top A\mathbf{v}) = 2A\mathbf{v}$
+
+No lo tomes prestado — derívalo. Sea $h(\mathbf{v}) = \mathbf{v}^\top A \mathbf{v} = \sum_i\sum_j v_iA_{ij}v_j$. Quieres $\dfrac{\partial h}{\partial v_k}$, para cada coordenada $k$.
+
+**Paso 1** — en la suma doble, $v_k$ aparece en **dos** lugares distintos: una vez como el factor $v_i$ (cuando $i=k$), y otra vez como el factor $v_j$ (cuando $j=k$). Deriva cada aparición por separado (regla del producto), tratando las demás $v$ como constantes:
+
+$$
+\frac{\partial h}{\partial v_k} = \underbrace{\sum_j A_{kj}v_j}_{\text{de la aparición } i=k} \;+\; \underbrace{\sum_i v_i A_{ik}}_{\text{de la aparición } j=k}
+$$
+
+**Paso 2** — reconoce cada suma. La primera es la componente $k$ del vector $A\mathbf{v}$. La segunda es la componente $k$ de $A^\top\mathbf{v}$ (porque suma $v_i$ contra la columna $k$ de $A$, que es la fila $k$ de $A^\top$):
+
+$$
+\frac{\partial h}{\partial v_k} = (A\mathbf{v})_k + (A^\top\mathbf{v})_k
+$$
+
+**Paso 3** — junta las $d$ componentes en un vector:
+
+$$
+\nabla h(\mathbf{v}) = A\mathbf{v} + A^\top\mathbf{v} = (A+A^\top)\mathbf{v}
+$$
+
+**Y aquí aparece, derivada y no asumida, la razón de simetrizar:** si $A=A^\top$ (simétrica), entonces $A+A^\top=2A$, y
+
+$$
+\boxed{\nabla(\mathbf{v}^\top A\mathbf{v}) = 2A\mathbf{v} \qquad \text{(solo si } A \text{ es simétrica)}}
+$$
+
+Si $A$ **no** fuera simétrica, el gradiente sería $(A+A^\top)\mathbf{v}$ — una fórmula más fea, y el problema de optimización ya no se reduciría limpiamente a un problema de autovalores. **Ésa** es la razón real de simetrizar $C(\tau)\to\frac12[C(\tau)+C(\tau)^\top]$: no es cosmético, es lo que hace que el Paso siguiente funcione.
+
+### Pieza 3 · Ordinario vs. generalizado — qué significa la segunda matriz
+
+Un problema de autovalores **ordinario** es $A\mathbf{v}=\lambda\mathbf{v}$: buscas direcciones que $A$ no rota, solo estira por un factor $\lambda$.
+
+El de tICA es **generalizado**: $C(\tau)\mathbf{v} = \lambda\, C(0)\mathbf{v}$. Dice algo ligeramente distinto: *aplicar $C(\tau)$ a $\mathbf{v}$ da la misma dirección que aplicar $C(0)$ a $\mathbf{v}$*, solo reescalada por $\lambda$.
+
+**¿Por qué no es simplemente un problema ordinario?** Porque hay una matriz de fondo, $C(0)$, que primero hay que "deshacer". Imagina un cambio de variable que **blanquea** los datos — que hace que la covarianza instantánea sea la identidad:
+
+$$
+\mathbf{w} \equiv C(0)^{-1/2}\,\mathbf{x}
+\qquad\Longrightarrow\qquad
+\langle \mathbf{w}\mathbf{w}^\top\rangle = C(0)^{-1/2}\,C(0)\,C(0)^{-1/2} = I
+$$
+
+*(Aquí $C(0)^{-1/2}$ es la raíz cuadrada de la matriz — existe y es simétrica porque $C(0)$ es una covarianza, sim\'etrica y positiva.)*
+
+En las coordenadas blanqueadas $\mathbf{w}$, la covarianza desfasada se transforma igual:
+
+$$
+\tilde C(\tau) \equiv \langle\mathbf{w}(t)\mathbf{w}(t+\tau)^\top\rangle = C(0)^{-1/2}\,C(\tau)\,C(0)^{-1/2}
+$$
+
+y **sigue siendo simétrica** (conjugar una matriz simétrica por otra simétrica preserva la simetría). Ahora, en el espacio blanqueado, buscar la dirección de mayor autocorrelación es un problema **ordinario**:
+
+$$
+\tilde C(\tau)\,\mathbf{u} = \lambda\,\mathbf{u}
+$$
+
+> [!success] La imagen completa, en una frase
+> **tICA = blanquear con $C(0)$ (borrar el sesgo de PCA hacia "mucha amplitud") y luego diagonalizar $C(\tau)$ (encontrar lo que persiste).** El problema generalizado $C(\tau)\mathbf{v}=\lambda C(0)\mathbf{v}$ es exactamente esos dos pasos comprimidos en una sola ecuación — se resuelve así en la práctica por estabilidad numérica, sin blanquear explícitamente, pero la intuición es esa.
+
+Por el teorema espectral (matrices simétricas tienen autovalores reales y autovectores ortogonales), $\tilde C(\tau)$ tiene $\lambda$ reales garantizados — y por tanto también el problema generalizado original.
+
+---
+
+> [!question] **Q3 · álgebra lineal** — Si $A$ **no** fuera simétrica, ¿qué le pasaría a la derivación de la Clase 2 (Paso 2, donde $V(\xi(\mathbf{r}))$ salía de la integral) y a esta de tICA (el gradiente $=2A\mathbf{v}$)?
+>
+> **a)** Son problemas distintos: la de Clase 2 no depende de simetría; la de tICA sí, y sin ella el gradiente sería $(A+A^\top)\mathbf{v}$, más complicado
+> **b)** Ambas dejarían de funcionar exactamente igual, porque las dos dependen de la misma propiedad de simetría
+> **c)** Ninguna de las dos depende de la simetría de ninguna matriz
+> **d)** La de Clase 2 fallaría; la de tICA seguiría dando $2A\mathbf{v}$ sin cambios
