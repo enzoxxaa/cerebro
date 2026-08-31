@@ -143,7 +143,7 @@ $$p_V(s) \propto \peq(s)\,e^{-\beta V(s)} \qquad\Longrightarrow\qquad \boxed{F_V
 El sesgo que aplana el paisaje por completo es $V^{\text{ideal}}=-F$ —pero calcularlo requiere conocer $F$: el huevo y la gallina que la metadinámica resuelve.
 
 \subsection{Sesgo adaptativo y el problema de la convergencia}
-Depositando gaussianas de altura $W$ y ancho $\sigma$ cada $\tau_G$ pasos, centradas en la posición actual del sistema:
+Esto ocurre \textbf{en tiempo real, dentro de la propia corrida} --- no es un post-proceso sobre una trayectoria ya generada. PLUMED está acoplado a GROMACS: en \emph{cada} paso de integración (2 fs), se calcula la fuerza a partir de $U(\mathbf r)+V(\xi(\mathbf r),t)$ con el $V$ acumulado \emph{hasta ese instante}, y esa fuerza mueve los átomos igual que cualquier otra fuerza física. Cada $\tau_G$ pasos, además, se agrega una gaussiana nueva al registro de $V$, centrada en la posición actual del sistema:
 $$V(s,t) = \sum_{t'<t} W\,e^{-(s-\xi(\mathbf{r}(t')))^2/2\sigma^2}.$$
 La tasa de deposición sigue $\partial_tV(s,t) \propto p_V(s,t) \propto e^{-\beta[F(s)+V(s,t)]}$: donde $F$ es bajo, el sistema visita más, deposita más rápido, y el paisaje se autorregula hacia $V\to-F+\text{const}$. \textbf{Pero la deposición nunca cesa} —con el paisaje plano, $\partial_tV$ es uniforme pero no cero, y el sistema escapa hacia regiones de energía absurdamente alta (\emph{overfilling}). Con los parámetros del paper (10 kJ/mol cada 2 ps, 1 $\mu$s), el sesgo total sin freno sería $5\times10^6$ kJ/mol —$125\,000$ veces la barrera de interés.
 

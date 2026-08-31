@@ -314,9 +314,9 @@
   {\scriptsize\color{migris} Una gaussiana por cada instante de depósito ya pasado — la suma \textbf{crece}, nunca se borra.}
   \vspace{0.3em}
   \begin{itemize}
+    \item \alert{En tiempo real}: PLUMED acoplado a GROMACS calcula la fuerza de $U+V$ en \textbf{cada paso} (2 fs), no solo al depositar — el sistema \textbf{siente} el sesgo acumulado hasta ese instante
     \item El sistema \textbf{va dejando arena donde pisa}
-    \item Bucle de realimentación: $\dfrac{\partial V}{\partial t} \propto e^{-\beta[F(s)+V(s,t)]}$ — \alert{no} depende de la energía directamente, sino de cuánto tiempo se \emph{queda} el sistema ahí
-    \item Pozo profundo $\to$ más tiempo ahí $\to$ deposita rápido $\to$ se autolimita
+    \item Bucle de realimentación: $\dfrac{\partial V}{\partial t} \propto e^{-\beta[F(s)+V(s,t)]}$ — pozo profundo $\to$ más tiempo ahí $\to$ deposita rápido $\to$ $F+V$ sube ahí $\to$ atrae menos $\to$ se autolimita
   \end{itemize}
   \begin{alertblock}{Pero...}
     La deposición \textbf{nunca para}. El sistema acaba explorando regiones absurdas (\emph{overfilling}).

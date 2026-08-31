@@ -28,4 +28,4 @@ necesito:
 5. que tambien trate de dejar un anexo con inputs y scripts cortos modelo para correr el protocolo de metadinamica del paper, con especial enfasis en la elección y calculo de la CV con los modulos de plumed que mencionan en metodos.
 6. que diga agosto 31, en español
 7. darle el peso que merece y las implicancias al hecho de que no se sesgo HV2 pero si se ocupo en tica y msm para sostener la conclusion mecanistica de la humanizacion.
-![[Pasted image 20260831083258.png]]
+![[Pasted image 20260831083258.png]]![[Pasted image 20260831085124.png]]

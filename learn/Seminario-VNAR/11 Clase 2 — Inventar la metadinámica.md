@@ -765,3 +765,35 @@ $$
 > 2. **La cinética está destruida.** Los tiempos en una trayectoria sesgada no son físicos — el sistema cruza en 0.8 ps algo que tarda 150 µs.
 >
 > La Clase 3 cuantifica la factura 2 y prepara la reparación: **tirar la termodinámica de la metadinámica y quedarse solo con las estructuras.**
+
+---
+
+## Refuerzo posterior (post-presentación) — dos huecos encontrados y reparados
+
+Al preparar la defensa de la charla, dos preguntas mostraron que el mecanismo de depósito no había quedado completamente instalado, pese a Q1–Q5 correctas en su momento.
+
+### Hueco 1 — "V(s,t) es un registro pasivo" (misconcepción encontrada en vivo)
+
+**Síntoma:** al preguntar si la frecuencia de visita a un pozo cambia a medida que se acumula sesgo ahí, la respuesta fue "no cambia — la frecuencia depende solo de $F(s)$, nunca del sesgo acumulado". Es decir: $V$ se entendía como una tabla que se llena para consultar después, no como energía potencial real que actúa en cada paso.
+
+**Reparación:** el sistema se mueve, en **todo instante** de la integración (cada 2 fs, no solo en los pasos de depósito cada $\tau_G$), según la fuerza de $U(\mathbf{r})+V(\xi(\mathbf{r}),t)$ — el $V$ acumulado hasta ese instante empuja de verdad. La cadena causal completa:
+
+$$
+\text{visita} \to \text{deposita} \to F+V \text{ sube ahí} \to \text{atrae menos} \to \text{visita menos} \to \text{se muda}
+$$
+
+es exactamente $\partial V/\partial t \propto e^{-\beta[F(s)+V(s,t)]}$ escrita como historia, no como fórmula abstracta. Y de aquí sale limpia la distinción estándar/well-tempered: **ambas comparten este freno de frecuencia**; well-tempered añade un **segundo freno independiente** sobre la altura, $W(s,t)=W_0e^{-V(s,t)/k_B\Delta T}$ — evaluado con el $V$ **local** en la posición actual, no un contador global de sesgo total. Con dos frenos, $V$ converge; con uno solo (estándar), nunca para (*overfilling*).
+
+### Hueco 2 — ¿el depósito es en tiempo real, o post-proceso?
+
+**Síntoma:** duda genuina y razonable sobre si PLUMED calcula todo esto durante la corrida de GROMACS o después, sobre la trayectoria ya guardada.
+
+**Repuesta, con el porqué:** es **en tiempo real, acoplado dentro del propio paso de integración** — PLUMED y GROMACS están enlazados; en cada paso, PLUMED lee $\mathbf{r}(t)$, calcula la fuerza de sesgo con el $V$ acumulado *hasta ese instante* (nunca con gaussianas futuras, porque no existen todavía), esa fuerza se suma a la física real antes de integrar el siguiente paso, y cada $\tau_G$ pasos además se agrega una gaussiana nueva al registro de $V$.
+
+**Por qué tiene que ser así, no una opción de diseño:** si el sesgo se calculara post-hoc sobre una trayectoria ya generada sin él, esa trayectoria jamás habría cruzado las barreras altas en primer lugar — se habría quedado atrapada en el mismo pozo que la MD directa sin sesgo (Clase 1: 100 ns compran ~22 kJ/mol; las barreras CDR son 25–45 kJ/mol). El "empujón" que hace útil a la metadinámica es una propiedad de que $V$ actúa **causal y secuencialmente**, no una propiedad de la fórmula $V(s,t)$ en sí misma.
+
+### Nodo actualizado
+
+| Nodo | Contenido | ✓ |
+|---|---|---|
+| **N3 bis** | $V$ es potencial real (no registro); acoplamiento online PLUMED↔GROMACS; freno de frecuencia (ambas variantes) + freno de altura (solo WT) | 5/5 en la ronda de reparación |
