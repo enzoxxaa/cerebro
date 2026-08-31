@@ -155,7 +155,7 @@ Esta tabla convierte el mapa en munición. Cada ataque **no es un dato suelto: e
 | **1** | **El problema y el pivote** — por qué la MD sola no basta, y por qué un histograma no es una energía libre | R1, R2, N1, **demoler M3** | Socrático | ●●○ |
 | **2** | **Inventar la metadinámica** — sesgo adaptativo, molde negativo, well-tempered, $\gamma$ | **demoler M1**, N3, N4 | Socrático | ●●● |
 | **3** | **El precio** — las CVs son una elección, y la cinética muere | N5, N6, N7 | Expositivo | ●●○ |
-| **4** | **tICA** — encontrar lo lento, no lo amplio | N8, N9 | Expositivo | ●○○ |
+| **4** | ~~**tICA**~~ — encontrar lo lento, no lo amplio | N8, N9 | Expositivo | ✅ **cerrada — 5/5**, ver [[13 Clase 4 — tICA]] |
 | **5** | **El MSM** — $T(\tau)$, y todo lo que sale de ahí | **demoler M2**, N10, N11, N12 | Expositivo → Socrático | ●●● |
 | **6** | **Munición** — defensa y ataque, derivados del mapa | META a, b | Socrático | ●●● |
 

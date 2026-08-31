@@ -40,7 +40,7 @@ obsidian://open?vault=SegundoCerebro&file=learn%2FSeminario-VNAR%2F20%20Paper%20
 | [[10 Clase 1 — El problema y el pivote]] | `R1` `R2` `N1` + **M3 demolida** | ✅ **cerrada — 4/4** |
 | [[11 Clase 2 — Inventar la metadinámica]] | **M1 demolida**, `N3` `N4` | ✅ **cerrada — 4/5** |
 | *Clase 3 — El precio: CVs y cinética* | `N5` `N6` `N7` | ⚪ |
-| *Clase 4 — tICA* | `N8` `N9` | ⚪ |
+| [[13 Clase 4 — tICA]] | `N8` `N9` | ✅ **cerrada — 5/5** |
 | *Clase 5 — El MSM* | demoler **M2**, `N10` `N11` `N12` | ⚪ |
 | *Clase 6 — Munición* | META a, b | ⚪ |
 

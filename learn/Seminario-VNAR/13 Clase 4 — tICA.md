@@ -262,3 +262,148 @@ Por el teorema espectral (matrices simétricas tienen autovalores reales y autov
 > **b)** Ambas dejarían de funcionar exactamente igual, porque las dos dependen de la misma propiedad de simetría
 > **c)** Ninguna de las dos depende de la simetría de ninguna matriz
 > **d)** La de Clase 2 fallaría; la de tICA seguiría dando $2A\mathbf{v}$ sin cambios
+
+> [!success]- Respuesta Q3 → **a) Son problemas distintos** ✓
+> La derivación de la Clase 2 es **combinatoria**: depende solo de que $V$ sea constante en el dominio filtrado por la delta. $V$ ni siquiera es una matriz — esa derivación no sabe qué es simetría.
+> La de tICA sí depende de simetría, de forma concreta: dedujiste que $\nabla(\mathbf{v}^\top A\mathbf{v}) = (A+A^\top)\mathbf{v}$ en general, y colapsa a $2A\mathbf{v}$ solo si $A=A^\top$.
+> **La trampa útil de esta pregunta:** dos derivaciones pueden *parecerse* (ambas "simplifican una expresión") corriendo sobre maquinaria completamente distinta. Vale la pena parar a mirar *qué* está haciendo cada paso, no solo que "algo se simplificó".
+
+---
+
+## 2.5 · Cerrando la maximización
+
+Con las tres piezas del §2.4 bis ya en mano, el argumento del §2.3 queda completo y sólido: maximizar $\rho(\mathbf{v},\tau)=\dfrac{\mathbf{v}^\top C(\tau)\mathbf{v}}{\mathbf{v}^\top C(0)\mathbf{v}}$ por cálculo directo da
+
+$$
+\nabla\rho=0 \;\;\Longrightarrow\;\; C(\tau)\mathbf{v} = \frac{\mathbf{v}^\top C(\tau)\mathbf{v}}{\mathbf{v}^\top C(0)\mathbf{v}}\,C(0)\mathbf{v} = \lambda\,C(0)\mathbf{v}
+$$
+
+con $\lambda=\rho(\mathbf{v},\tau)$ el valor de la autocorrelación en el óptimo. El autovector de mayor $\lambda$ es la **primera componente independiente en el tiempo**; el segundo mayor, la segunda; etc.
+
+---
+
+## 3 · La conexión que se retomará en la Clase 5
+
+### Motivación
+
+Ya sabes construir $\lambda$. Pregunta: ¿qué **significa** $\lambda$ físicamente, más allá de "la autocorrelación óptima"?
+
+### Establecer
+
+Si un modo se relaja exponencialmente con tiempo característico $t_{\text{relax}}$ — es decir $y(t)\sim y(0)\,e^{-t/t_{\text{relax}}}$ — entonces su autocorrelación a lag $\tau$ es, tomando el promedio estacionario,
+
+$$
+\rho(\tau) = \frac{\langle y(t)y(t+\tau)\rangle}{\langle y(t)^2\rangle} = e^{-\tau/t_{\text{relax}}}
+$$
+
+*(Es la misma forma que ya usaste en la Clase 1 para tiempos de espera exponenciales — no es una coincidencia notacional, es el mismo tipo de relajación.)*
+
+Como $\lambda$ **es** $\rho(\tau)$ en el óptimo:
+
+$$
+\lambda = e^{-\tau/t_{\text{relax}}} \;\;\Longrightarrow\;\; \ln\lambda = -\frac{\tau}{t_{\text{relax}}} \;\;\Longrightarrow\;\; \boxed{t_{\text{relax}} = -\frac{\tau}{\ln\lambda}}
+$$
+
+### Conectar
+
+> [!important] La misma fórmula reaparece
+> $t=-\tau/\ln\lambda$ es exactamente la fórmula de **tiempos implícitos** que vuelve a aparecer, sin cambiar ni un símbolo, cuando construyas el MSM en la Clase 5. No es casualidad notacional — hay una razón matemática profunda, y vale la pena verla ahora.
+
+Verificado en la literatura: tICA (bajo el nombre **VAC**, *variational approach to conformational dynamics*, Noé \& Nüske) y el MSM son **dos aproximaciones del mismo objeto**: el **operador de transferencia** de la dinámica subyacente — el operador que propaga una distribución de probabilidad un tiempo $\tau$ hacia adelante. tICA lo aproxima con una base de funciones **lineales** (las combinaciones $\mathbf{v}^\top\mathbf{x}$); el MSM lo aproxima con una base de funciones **indicador** (una por microestado). Distinta base, mismo operador — por eso ambos autovalores se traducen a tiempos con la misma fórmula.
+
+> [!success] Por qué esto no es trivia
+> Es la razón estructural de que el pipeline tenga sentido encadenar tICA $\to$ MSM: no son dos técnicas pegadas con cinta — son **dos aproximaciones sucesivas y cada vez más finas del mismo objeto matemático**.
+
+\Fuente{Nüske, tesis doctoral FU Berlin (2017); Pérez-Hernández \& Noé, \textit{JCTC} \textbf{12}:6118 (2016) — verificado.}
+
+---
+
+> [!question] **Q4 · N9** — Con $\lambda=0.7$ y un lag $\tau=10$ ns, ¿cuál es el tiempo característico del modo?
+>
+> **a)** $\approx 28$ ns
+> **b)** $\approx 7$ ns
+> **c)** $\approx 10$ ns
+> **d)** $\approx 3.5$ ns
+
+> [!success]- Respuesta Q4 → **a) $\approx 28$ ns** ✓
+> $$\ln(0.7)=-0.357 \;\;\Longrightarrow\;\; t = \frac{-10}{-0.357} = 28.0\ \text{ns}$$
+> **Dirección del efecto, contraintuitiva la primera vez:** $\lambda$ cerca de 1 (poco decaimiento en un lag) $\Rightarrow$ tiempo **largo** — memoria persistente. $\lambda$ cerca de 0 $\Rightarrow$ tiempo **corto** — memoria que se pierde rápido dentro de la ventana de observación.
+> Vas a reusar esta lectura sin cambiar nada cuando el MSM reporte sus propios autovalores en la Clase 5.
+
+---
+
+## 4 · Las features del paper, y la asimetría que ya conocías
+
+Con la maquinaria completa, los detalles concretos del paper se leen directo:
+
+|                 |                                                       |
+| --------------- | ----------------------------------------------------- |
+| **Features**    | torsiones de *backbone* de **CDR1, CDR3 y HV2**       |
+| **Lag de tICA** | **10 ns** — distinto del lag del MSM (15 ns, Clase 5) |
+| Software        | PyEMMA 2                                              |
+
+> [!danger] La asimetría, ahora vista desde tICA
+> En la Clase 2 estableciste, mecánicamente, que el sesgo de metadinámica **solo empujó** átomos de CDR1 y CDR3 ($\nabla_{\mathbf{r}_i}\xi=\mathbf{0}$ para todo lo demás). HV2 corrió MD clásica pura.
+>
+> Ahora ves la otra mitad: **HV2 sí es una *feature* de tICA.** Entra en $\mathbf{x}(t)$, contribuye a $C(\tau)$ y $C(0)$, y por tanto a qué dirección $\mathbf{v}$ resulta "la más lenta". Si el movimiento verdaderamente lento de HV2 nunca se visitó — porque nadie lo sesgó — **tICA no puede encontrarlo**: solo puede ordenar por lentitud lo que efectivamente está en los datos.
+>
+> Es la misma vulnerabilidad de siempre (`N5`, elegir CVs), vista ahora en la etapa de análisis en vez de en la de muestreo.
+
+---
+
+> [!question] **Q5 · cierre de Clase 4** — Si el movimiento lento de HV2 nunca se muestreó porque nunca se sesgó, ¿qué le pasa a la proyección tICA?
+>
+> **a)** tICA no puede encontrar ese modo — solo puede ordenar por lentitud los movimientos que sí están en los datos
+> **b)** tICA lo reconstruye igual, porque no depende de qué se sesgó en la metadinámica
+> **c)** tICA falla catastróficamente y no converge en absoluto
+> **d)** tICA lo detecta como el modo más lento de todos, precisamente por estar submuestreado
+
+> [!success]- Respuesta Q5 → **a) No puede encontrar ese modo** ✓
+> tICA es puramente **estadístico** sobre los datos que existen: construye $C(\tau)$ y $C(0)$ de los frames simulados. Si un movimiento de HV2 nunca ocurrió, no hay variación de ese tipo para que $C(\tau)$ la capture. tICA no inventa modos — solo **ordena por lentitud** lo que sí está presente.
+>
+> Conecta con la Clase 3: un modelo posterior "solo puede reponderar los estados que alguien visitó". Aquí la versión es: **solo puede ordenar lo que alguien visitó.**
+>
+> El error es más peligroso que un fallo obvio: **todo converge, todo compila** — y aun así falta información. Nada en el output de tICA te avisa.
+
+---
+
+## Resumen — Clase 4
+
+### La cadena de razonamiento
+
+$$
+\text{PCA maximiza } \mathbf{v}^\top C(0)\mathbf{v}
+\;\xrightarrow{\text{no distingue lento de amplio}}\;
+\text{tICA maximiza } \frac{\mathbf{v}^\top C(\tau)\mathbf{v}}{\mathbf{v}^\top C(0)\mathbf{v}}
+\;\xrightarrow{\nabla\rho=0}\;
+C(\tau)\mathbf{v}=\lambda C(0)\mathbf{v}
+\;\xrightarrow{\lambda=e^{-\tau/t}}\;
+t=-\frac{\tau}{\ln\lambda}
+$$
+
+### Resultados
+
+| | Fórmula |
+|---|---|
+| Autocorrelación a maximizar | $\rho(\mathbf{v},\tau) = \mathbf{v}^\top C(\tau)\mathbf{v} \,/\, \mathbf{v}^\top C(0)\mathbf{v}$ |
+| Problema de autovalores | $C(\tau)\mathbf{v}=\lambda C(0)\mathbf{v}$ |
+| Gradiente de una forma cuadrática | $\nabla(\mathbf{v}^\top A\mathbf{v}) = (A+A^\top)\mathbf{v}$, $=2A\mathbf{v}$ si $A$ simétrica |
+| Blanqueo | $\mathbf{w}=C(0)^{-1/2}\mathbf{x} \Rightarrow \tilde C(\tau)\mathbf{u}=\lambda\mathbf{u}$ (ordinario) |
+| Tiempo característico | $t=-\tau/\ln\lambda$ — misma fórmula que reaparecerá en el MSM |
+
+### Nodos
+
+| Nodo | Contenido | ✓ |
+|---|---|---|
+| `N8` | MD sembrada sin sesgo; hereda $w_i\ne\pi_i$ | Q1 |
+| `N9` | tICA: autocorrelación, no varianza; problema generalizado; conexión VAC↔MSM | Q2, Q3, Q4, Q5 |
+
+### Álgebra y cálculo reforzados a pedido
+
+- Forma cuadrática $\mathbf{v}^\top A\mathbf{v}$ desde cero, con el caso 2D explícito
+- Gradiente de una forma cuadrática, derivado componente a componente
+- Por qué "generalizado" — el blanqueo con $C(0)^{-1/2}$ como ordinario disfrazado
+- Derivación de $t=-\tau/\ln\lambda$ desde la relajación exponencial (Clase 1 revisitada)
+
+> [!abstract] Adónde va esto — Clase 5
+> Ya sabes proyectar el paisaje sobre lo lento. Falta convertir esa proyección en **poblaciones y tiempos de verdad**: el Markov State Model. Ahí se demuele **M2** («$\tau$ es una propiedad del sistema» — no, es una perilla que eliges tú), se construye $T(\tau)$, y se cierra el nodo más importante del curso: por qué $\pi$ **no depende de dónde sembraste**.
