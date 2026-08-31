@@ -1,17 +1,26 @@
 ---
-tipo: clase
-proyecto: seminario
-fecha: 2026-08-26
+tipo: intake
+proyecto: general
+fecha: 2026-08-30
 clase: 2
-nodos: [M1, N3, N4]
-hebras: [metadinámica, termodinámica estadística]
+nodos:
+  - M1
+  - N3
+  - N4
+hebras:
+  - metadinámica
+  - termodinámica estadística
 modo: socrático
-estado: en curso
+estado: sin-procesar
 resumen: "Clase 2: derivar la metadinámica desde cero — qué hace un sesgo, el problema del huevo y la gallina, el sesgo adaptativo, y por qué hace falta well-tempered"
 tags:
   - seminario
   - clase
   - metadinamica
+origen: personal
+prioridad: media
+etiquetas-sugeridas: []
+resumen-breve: ""
 ---
 
 # 11 · Clase 2 — Inventar la metadinámica
