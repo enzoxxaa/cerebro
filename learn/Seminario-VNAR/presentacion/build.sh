@@ -3,7 +3,7 @@
 set -e
 cd "$(dirname "$0")"
 
-for doc in slides handout; do
+for doc in slides handout formulario; do
   echo "=== $doc ==="
   pdflatex -interaction=nonstopmode "$doc.tex" > "/tmp/${doc}_build.log" 2>&1
   pdflatex -interaction=nonstopmode "$doc.tex" > "/tmp/${doc}_build.log" 2>&1
@@ -19,4 +19,4 @@ done
 find . -maxdepth 1 -type f \( -name "*.aux" -o -name "*.log" -o -name "*.nav" \
   -o -name "*.out" -o -name "*.snm" -o -name "*.toc" -o -name "*.vrb" \) -delete
 
-echo "Listo: slides.pdf, handout.pdf"
+echo "Listo: slides.pdf, handout.pdf, formulario.pdf"

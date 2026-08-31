@@ -22,9 +22,9 @@ Imaginar esto en porina -> posible eje
 ---------------------------------------------------------------
 necesito:
 1. entender el concepto de depositar gaussianas, entender a fondo la retroalimentación tanto estandar como en well-tempered. Se sesga es decir se aplica más fuerza a los atomos de la CV en aquellas configuraciones menos visitadas/mayor energia? 
-2. revisar formula de gaussiana, no se de donde sale![[Pasted image 20260830214743.png]]
+2. revisar formula de gaussiana que aparece en las slides, no se de donde sale![[Pasted image 20260830214743.png]]
 3. que es t1 < t2 < t3??![[Pasted image 20260830213401.png]]
-4. que le quite protagonismo a msm matematico y amplié termo estadistica, ademas que genere un handoff de puras formulas que aparecen en las slides, con alguna variacion de ser necesaria para blindar preguntas.
+4. que le quites protagonismo a msm matematico y ampliés termo estadistica, ademas que genere un handoff de puras formulas que aparecen en las slides, con alguna variacion de ser necesaria para blindar preguntas.
 5. que tambien trate de dejar un anexo con inputs y scripts cortos modelo para correr el protocolo de metadinamica del paper, con especial enfasis en la elección y calculo de la CV con los modulos de plumed que mencionan en metodos.
 6. que diga agosto 31, en español
 7. darle el peso que merece y las implicancias al hecho de que no se sesgo HV2 pero si se ocupo en tica y msm para sostener la conclusion mecanistica de la humanizacion.

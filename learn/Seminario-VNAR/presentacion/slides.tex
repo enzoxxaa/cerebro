@@ -33,7 +33,7 @@
 \title{Inventando la metadinámica}
 \subtitle{Metodología de Fernández-Quintero \emph{et al.} (2022) — humanización de VNARs de tiburón}
 \author{}
-\date{\today}
+\date{31 de agosto de 2026}
 
 \begin{document}
 
@@ -50,14 +50,16 @@
 
 \begin{frame}{Agenda}
   \begin{enumerate}
-    \setlength{\itemsep}{0.7em}
+    \setlength{\itemsep}{0.55em}
     \item \textbf{El sistema} — qué es un VNAR, y por qué humanizarlo es delicado
     \item \textbf{El problema} — poblaciones, barreras, por qué la MD directa no basta
     \item \textbf{Inventar la metadinámica} — el núcleo metodológico
     \item \textbf{El precio} — qué se rompe, y cómo el pipeline lo paga
+    \item \textbf{MD sembrada, tICA, MSM} — de estructuras a poblaciones y tiempos
+    \item \textbf{Resultados, defensa y ataque} — qué sostiene el pipeline, y dónde es vulnerable
   \end{enumerate}
-  \vspace{1em}
-  \Fuente{Alcance: hasta donde el pipeline genera estructuras. tICA/MSM y la munición de defensa/ataque quedan para otra sesión.}
+  \vspace{0.6em}
+  \Fuente{Alcance: el pipeline completo, de la pregunta biológica a la crítica metodológica.}
 \end{frame}
 
 % ===================================================================
@@ -221,6 +223,18 @@
   \textbf{100 ns de MD compran barreras de hasta $\sim$22 kJ/mol.} Las transiciones de lazos CDR viven en 25–45 kJ/mol.
 \end{frame}
 
+\begin{frame}{$\Delta G$ y $\Delta G^{\ddagger}$ son independientes — la distinción que sostiene todo}
+  Por balance detallado (tasas escritas desde el mismo estado de transición, dividiendo — $F(s^\ddagger)$ se cancela):
+  $$\frac{k_{A\to B}}{k_{B\to A}} = e^{-\Delta G_{AB}/RT} = \frac{P_B}{P_A}$$
+  \begin{itemize}
+    \item \alert{La barrera no aparece en el cociente.} Controla \textbf{cuánto tarda el sistema} en equilibrar, no \textbf{dónde} está el equilibrio
+    \item Este sistema: pozos someros ($\Delta G\approx6$ kJ/mol, $2.4RT$) + muros altos ($\Delta G^{\ddagger}\approx25$--45 kJ/mol, $10$--$18RT$)
+    \item Consecuencia directa: alta precisión exigida sobre un número pequeño, en un sistema que \textbf{se niega a equilibrarse solo}
+  \end{itemize}
+  \vspace{0.4em}
+  \Fuente{El balance detallado reaparece dos veces más en esta charla — al simetrizar $C(\tau)$ en tICA, y al exigir reversibilidad en el MSM. Es la misma condición física, no una coincidencia notacional.}
+\end{frame}
+
 \begin{frame}{El resultado que hay que poder explicar}
   \centering
   \includegraphics[width=0.85\textwidth]{fig4-msm-poblaciones.png}
@@ -247,7 +261,7 @@
 \begin{frame}{Conclusión del Bloque 1}
   \begin{center}
     \Large
-    Necesitamos cruzar barreras de $\sim$40 kJ/mol\\
+    Hace falta cruzar barreras de $\sim$40 kJ/mol\\
     sin esperar $\sim$100 $\mu$s por cruce\\[0.6em]
     \alert{sin destruir las poblaciones al hacerlo.}
   \end{center}
@@ -295,11 +309,13 @@
 
 \begin{frame}{La solución: sesgo adaptativo}
   Depositar, cada $\tau_G$ pasos, una gaussiana donde está el sistema \emph{ahora}:
-  $$V(s,t) = \sum_{t' < t} W\, e^{-(s-\xi(\mathbf{r}(t')))^2/2\sigma^2}$$
+  $$V(s,t) = \sum_{\substack{t'=\tau_G,2\tau_G,\dots \\ t' < t}} W\, e^{-(s-\xi(\mathbf{r}(t')))^2/2\sigma^2}$$
+  \vspace{0.2em}
+  {\scriptsize\color{migris} Una gaussiana por cada instante de depósito ya pasado — la suma \textbf{crece}, nunca se borra.}
   \vspace{0.3em}
   \begin{itemize}
     \item El sistema \textbf{va dejando arena donde pisa}
-    \item Bucle de realimentación: $\dfrac{\partial V}{\partial t} \propto e^{-\beta[F(s)+V(s,t)]}$
+    \item Bucle de realimentación: $\dfrac{\partial V}{\partial t} \propto e^{-\beta[F(s)+V(s,t)]}$ — \alert{no} depende de la energía directamente, sino de cuánto tiempo se \emph{queda} el sistema ahí
     \item Pozo profundo $\to$ más tiempo ahí $\to$ deposita rápido $\to$ se autolimita
   \end{itemize}
   \begin{alertblock}{Pero...}
@@ -310,10 +326,12 @@
 \begin{frame}{El sesgo como molde negativo del paisaje}
   \centering
   \resizebox{\textwidth}{!}{\MoldeNegativoFigure[1]}
+  \vspace{0.4em}
+  \small\color{migris} $t_1<t_2<t_3$: \textbf{tres instantes de la misma corrida} — no tres simulaciones distintas. En $A$ y $B$ se siguen apilando gaussianas porque el sistema los sigue visitando; para $t_3$ ya casi igualan $-F(s)$ (curva gris de fondo, panel 2).
 \end{frame}
 
 \begin{frame}{Well-tempered: frenar la deposición}
-  La altura decae donde ya hay sesgo: $W(s,t) = W_0\, e^{-V(s,t)/k_B\Delta T}$
+  La altura decae donde ya hay sesgo \alert{acumulado} — no donde hay más energía: $W(s,t) = W_0\, e^{-V(s,t)/k_B\Delta T}$
   \vspace{0.3em}
   \begin{block}{Convergencia}
     $$V(s) \xrightarrow[t\to\infty]{} -\frac{\gamma-1}{\gamma}F(s), \qquad \gamma \equiv \frac{T+\Delta T}{T}$$
@@ -487,7 +505,7 @@
     \item Software: PyEMMA 2
   \end{itemize}
   \vspace{0.6em}
-  \begin{alertblock}{La asimetría que ya viste en el Bloque 3}
+  \begin{alertblock}{La asimetría ya establecida en el Bloque 3}
     HV2 \textbf{nunca fue una CV de metadinámica} — pero sí es una \textbf{feature de tICA}. Se mide, aunque no se muestreó con sesgo.
   \end{alertblock}
 \end{frame}
@@ -495,39 +513,29 @@
 % ===================================================================
 \section{El Markov State Model}
 
-\begin{frame}{Lo que un MSM estima}
+\begin{frame}{Lo que un MSM estima, sin álgebra de más}
   \begin{itemize}
     \item Partición en \textbf{100 microestados} (k-means sobre las coordenadas tICA)
-    \item Se cuentan transiciones $i\to j$ a un \textbf{lag} $\tau=15$ ns $\to$ matriz de conteos $C_{ij}(\tau)$
-    \item Normalizando: la \textbf{matriz de transición} $T(\tau)$
+    \item Se cuentan transiciones $i\to j$ a un \textbf{lag} $\tau=15$ ns; normalizando, la \textbf{matriz de transición} $T(\tau)$ — es el estimador de \textbf{máxima verosimilitud} bajo la hipótesis de Markov, no una receta ad hoc
+    \item De $T(\tau)$, por álgebra lineal, salen \textbf{tres} cosas: poblaciones de equilibrio $\pi$, tiempos característicos $t_i=-\tau/\ln\lambda_i$, y — vía \textbf{PCCA+} (Röblitz \& Weber, 2013) — macroestados agrupando los 100 microestados
   \end{itemize}
   \vspace{0.6em}
-  \centering \alert{\large Todo lo demás sale de $T(\tau)$ por álgebra lineal.}
-\end{frame}
-
-\begin{frame}{De $T(\tau)$ sale todo}
-  \begin{block}{Población de equilibrio}
-    $$\pi^\top T(\tau) = \pi^\top \qquad \text{(autovector izquierdo, autovalor 1)}$$
-  \end{block}
-  \begin{block}{Tiempos característicos}
-    $$t_i = -\frac{\tau}{\ln\lambda_i} \qquad \text{(autovalores subdominantes)}$$
-  \end{block}
-  \textbf{PCCA+} (Röblitz \& Weber, 2013): agrupa los 100 microestados en \textbf{macroestados}, usando el signo de los autovectores lentos de $T$.
+  \centering \alert{\large Un solo objeto, $T(\tau)$. Todo lo demás es consecuencia, no un ajuste aparte.}
 \end{frame}
 
 \begin{frame}{El nodo que legitima todo el pipeline}
   \begin{center}
     \Large
-    \alert{$\pi$ es independiente de dónde sembraste.}
+    \alert{$\pi$ es independiente de dónde se sembró.}
   \end{center}
   \vspace{0.8em}
   \begin{itemize}
-    \item $\pi$ sale de las \textbf{tasas locales} $T_{ij}$, no de cuántas veces visitaste cada microestado
+    \item $\pi$ sale de las \textbf{tasas locales} $T_{ij}$, no de cuántas veces se visitó cada microestado
     \item Sembrar más en una región mejora la \textbf{precisión} de $T_{ij}$ ahí — no cambia su valor esperado
-    \item \textbf{Esto resuelve} el problema de la Clase 1: $\hat F = F - RT\ln(w_i/\pi_i)$ — el MSM reponde $w_i\to\pi_i$
+    \item \textbf{Esto resuelve} el problema planteado en el Bloque 1: $\hat F = F - RT\ln(w_i/\pi_i)$ — el MSM reponde $w_i\to\pi_i$
   \end{itemize}
   \vspace{0.5em}
-  \Fuente{Es la respuesta formal a ``pero sembraste con un sesgo''.}
+  \Fuente{Es la respuesta formal a ``pero la siembra estaba sesgada''.}
 \end{frame}
 
 \begin{frame}{Validación: ¿es válido el modelo?}
@@ -546,7 +554,7 @@
 \begin{frame}{El resultado completo}
   \centering
   \includegraphics[width=0.85\textwidth]{fig4-msm-poblaciones.png}
-  \Pie{Fig. 4 del paper — ahora sabes exactamente cómo se construyó: metadinámica $\to$ clustering $\to$ MD sembrada $\to$ tICA $\to$ MSM.}
+  \Pie{Fig. 4 del paper — con el pipeline completo ya expuesto, queda claro exactamente cómo se construyó: metadinámica $\to$ clustering $\to$ MD sembrada $\to$ tICA $\to$ MSM.}
   \vspace{0.3em}
   E06: \textbf{92.6\%}/7.4\% \quad huE06 v1.1: 16.3\%/48.4\%/35.3\% \quad huE06 v1.4: 83.7\%/16.3\%
 \end{frame}
@@ -629,6 +637,22 @@
   \vspace{0.8em}
   \small\color{migris}
   \centering Su muestreo es exactamente el de MD clásica — que compra $\sim$22 kJ/mol. Y aun así entra en el MSM, y sostiene la conclusión biológica.
+\end{frame}
+
+\begin{frame}{A2 — las implicancias, con nombre y apellido}
+  \textbf{La estructura lógica exacta del problema:}
+  \begin{enumerate}
+    \setlength{\itemsep}{0.5em}
+    \item HV2 \textbf{nunca} fue CV $\Rightarrow$ fuerza de sesgo cero sobre sus átomos (Bloque 3)
+    \item HV2 \textbf{sí} es \textit{feature} de tICA y \textbf{sí} entra al MSM (Bloque \textit{tICA})
+    \item El paper atribuye la pérdida de afinidad a \alert{``\textit{missing interactions with the HV2 loop}''} (Fig. 5, Discusión)
+  \end{enumerate}
+  \vspace{0.5em}
+  \begin{alertblock}{Las dos lecturas que el paper no distingue}
+    \textbf{(a)} el movimiento de HV2 es una \emph{respuesta correlacionada}, real, transmitida por física clásica al reacomodarse CDR1/CDR3 — legítimo \emph{si} está bien muestreado\\
+    \textbf{(b)} es un \emph{artefacto de submuestreo}: ningún método, en ninguna etapa posterior del análisis (ni tICA ni el MSM), puede rescatar un cruce de barrera de HV2 que jamás se sesgó
+  \end{alertblock}
+  \centering \alert{El paper no ofrece ninguna forma de distinguir (a) de (b) — y la conclusión mecanicista depende de que sea (a).}
 \end{frame}
 
 \begin{frame}{Un hallazgo propio: ¿cuadra la Fig. 4D?}

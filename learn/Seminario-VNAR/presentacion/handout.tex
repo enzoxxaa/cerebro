@@ -19,14 +19,14 @@
 
 \title{\textbf{Inventando la metadinámica}\\[0.3em]\large Derivaciones completas de respaldo}
 \author{Metodología de Fernández-Quintero \emph{et al.} (2022) — Front. Immunol. \textbf{13}:953917}
-\date{}
+\date{31 de agosto de 2026}
 
 \begin{document}
 \maketitle
 \vspace{-1em}
 \begin{center}
 \small\color{migris}
-Documento de respaldo para la charla \textit{Inventando la metadinámica}. Cubre las derivaciones completas hasta donde llega la presentación —problema, metadinámica \textit{well-tempered}, y su precio— sin entrar en tICA/MSM (fuera de alcance de este material).
+Documento de respaldo para la charla \textit{Inventando la metadinámica}. Cubre las derivaciones completas del pipeline entero —problema, metadinámica \textit{well-tempered} y su precio, MD sembrada, tICA, MSM—, la munición de defensa/ataque, y un anexo reproducible del protocolo en PLUMED2/GROMACS/AMBER. El formulario de una página para la sesión de preguntas es un documento aparte (\texttt{formulario.pdf}).
 \end{center}
 \vspace{1em}
 
@@ -128,7 +128,7 @@ El error \textbf{no depende de $s$} dentro de una cuenca (la \emph{forma} de cad
 \begin{aviso}[Distinción crítica: $\DG$ frente a $\DGd$]
 Son cantidades \emph{independientes} —$\DG$ entre mínimos (controla poblaciones), $\DGd$ entre mínimo y cima (controla velocidad). Por balance detallado, escribiendo las tasas desde el mismo estado de transición y dividiendo (el término $F(s^\ddagger)$ se cancela):
 $$\frac{k_{A\to B}}{k_{B\to A}} = e^{-\DG/RT} = \frac{P_B}{P_A}.$$
-\textbf{La barrera no aparece en el cociente.} Controla cuánto tardas en equilibrar, no dónde está el equilibrio. Este sistema combina pozos someros ($\DG\approx6$ kJ/mol, $2.4RT$) con muros altos ($\DGd\approx25$--45 kJ/mol, $10$--$18RT$): alta precisión sobre un número pequeño, en un sistema que se niega a equilibrarse solo.
+\textbf{La barrera no aparece en el cociente.} Controla cuánto tarda el sistema en equilibrar, no dónde está el equilibrio. Este sistema combina pozos someros ($\DG\approx6$ kJ/mol, $2.4RT$) con muros altos ($\DGd\approx25$--45 kJ/mol, $10$--$18RT$): alta precisión sobre un número pequeño, en un sistema que se niega a equilibrarse solo.
 \end{aviso}
 
 % ===================================================================
@@ -225,7 +225,7 @@ $$t_i = -\frac{\tau}{\ln\lambda_i} \quad\text{(tiempos característicos, de los 
 
 \subsection{Por qué $\pi$ no depende de la siembra}
 \begin{resultado}[El nodo que legitima todo el pipeline]
-$\pi$ sale de las \textbf{tasas locales} $T_{ij}$, no de cuántas veces se visitó cada microestado. Sembrar más en una región mejora la \emph{precisión} con la que se estima $T_{ij}$ ahí --- no cambia su valor esperado, siempre que haya suficientes transiciones observadas para estimarlo. Esto es, formalmente, lo que resuelve el problema de la \S\ref{sec:precio}\slash{}Clase 1: $\hat F(s) = F(s) - RT\ln(w_i/\pi_i)$ --- el MSM reponde $w_i \to \pi_i$. Es la respuesta formal a la objeción ``pero sembraste con un sesgo''.
+$\pi$ sale de las \textbf{tasas locales} $T_{ij}$, no de cuántas veces se visitó cada microestado. Sembrar más en una región mejora la \emph{precisión} con la que se estima $T_{ij}$ ahí --- no cambia su valor esperado, siempre que haya suficientes transiciones observadas para estimarlo. Esto es, formalmente, lo que resuelve el problema planteado en \S\ref{sec:precio}: $\hat F(s) = F(s) - RT\ln(w_i/\pi_i)$ --- el MSM reponde $w_i \to \pi_i$. Es la respuesta formal a la objeción ``pero la siembra estaba sesgada''.
 \end{resultado}
 
 \subsection{Validación}
@@ -274,6 +274,8 @@ A6 & ¿Fig.\ 3A reponderada por el MSM, o histograma crudo? & media \\
 
 \textbf{A2 (versión mecánica).} Los átomos de HV2 no recibieron ni una sola fuerza de sesgo en todo el microsegundo de metadinámica (\S\ref{sec:precio}). Su muestreo es exactamente el de MD clásica sin sesgo --- que compra barreras de hasta $\sim$22 kJ/mol (\S2.2) --- y sin embargo entra en tICA y en el MSM, sosteniendo la conclusión de que la pérdida de afinidad se debe a HV2.
 
+\textbf{A2 (las implicancias).} La estructura lógica exacta: (1) HV2 nunca fue CV, fuerza de sesgo cero sobre sus átomos; (2) HV2 sí es \textit{feature} de tICA y sí entra al MSM; (3) el paper atribuye la pérdida de afinidad a \textit{``missing interactions with the HV2 loop''} (Fig.\ 5, Discusión). Esto deja \textbf{dos lecturas indistinguibles con los datos publicados}: \textbf{(a)} el movimiento de HV2 es una respuesta correlacionada real, transmitida por física clásica cuando CDR1/CDR3 se reacomodan bajo sesgo --- legítima \emph{si} está bien muestreada; \textbf{(b)} es un artefacto de submuestreo --- ningún análisis posterior (tICA, MSM) puede reconstruir un cruce de barrera de HV2 que jamás se sesgó, por buena que sea la estadística sobre los datos que sí existen. El paper no ofrece ninguna forma de distinguir (a) de (b), y la conclusión mecanicista sobre por qué la humanización reduce la afinidad depende de que sea (a).
+
 \begin{aviso}[Hallazgo propio: ¿cuadra la Fig.\ 4D?]
 En los paneles A/C de la Fig.\ 4, el estado \textbf{dominante} de E06 (92.6\%) se dibuja en \textbf{morado oscuro}. En el panel D (huE06 v1.4), el morado oscuro corresponde al \textbf{83.7\%}, mientras que el texto identifica el estado competente de v1.4 con el \textbf{16\%}. Si el color codifica correspondencia estructural entre paneles --- y v1.4 no tiene cristal propio para anclar la asignación --- el análogo del estado dominante de E06 parecería ser el 83.7\%, no el 16.3\%. No se afirma como error confirmado: es una pregunta legítima para la sesión de preguntas.
 \end{aviso}
@@ -313,5 +315,112 @@ Cada etapa del pipeline responde, implícita o explícitamente, la misma pregunt
   \item Wu \& Noé. \textit{J. Nonlinear Sci.} \textbf{30}:23 (2017) --- VAMP
   \item Prinz \textit{et al.} \textit{J. Chem. Phys.} \textbf{134}:174105 (2011) --- validación de MSMs, test de Chapman--Kolmogorov
 \end{itemize}
+
+% ===================================================================
+\newpage
+\appendix
+\section*{Anexo: reproduciendo el protocolo (PLUMED2 / GROMACS / AMBER)}
+
+\begin{aviso}[Advertencia honesta]
+El paper no publica sus archivos de \textit{input} (ni en el manuscrito ni en material suplementario disponible). Lo que sigue es una \textbf{reconstrucción fiel} a partir del texto de Métodos, usando los parámetros \textbf{exactos} donde el paper los reporta (alturas, anchuras, \textit{biasfactor}, \textit{pace}, temperatura, corte de \textit{clustering}) y marcando explícitamente cualquier valor \textbf{ilustrativo} (numeración de residuos, coeficientes de \texttt{COMBINE}, nombres de \textit{grupos}) que el paper no especifica. No es un \textit{input} listo para correr --- es suficiente para defender, con detalle técnico real, cómo se construiría.
+\end{aviso}
+
+\subsection*{A.1 --- La CV en PLUMED2: TORSION $\to$ MATHEVAL $\to$ COMBINE}
+Texto del paper (\S Métodos): \textit{``collective variables: a linear combination of sine and cosine of the $\psi$ torsion angles of the CDR1 and CDR3 loops, calculated with functions MATHEVAL and COMBINE implemented in PLUMED 2.''} Reconstrucción:
+
+{\footnotesize\begin{verbatim}
+# plumed.dat -- CV de metadinamica (ilustrativo; numeracion de residuos ficticia)
+MOLINFO STRUCTURE=e06.pdb
+
+# --- psi de cada residuo de CDR1 (ilustrativo: residuos 26-31) y CDR3 (95-102) ---
+psi_26: TORSION ATOMS=@psi-26
+psi_27: TORSION ATOMS=@psi-27
+psi_28: TORSION ATOMS=@psi-28
+# ... un TORSION por cada residuo de CDR1 y CDR3 que el paper incluyo ...
+psi_95: TORSION ATOMS=@psi-95
+psi_96: TORSION ATOMS=@psi-96
+# ...
+
+# --- sin/cos de cada psi (MATHEVAL: sintaxis de PLUMED2 de la epoca del paper;
+#     en versiones actuales el modulo equivalente es CUSTOM) ---
+sin_26: MATHEVAL ARG=psi_26 FUNC=sin(x) PERIODIC=NO
+cos_26: MATHEVAL ARG=psi_26 FUNC=cos(x) PERIODIC=NO
+sin_27: MATHEVAL ARG=psi_27 FUNC=sin(x) PERIODIC=NO
+cos_27: MATHEVAL ARG=psi_27 FUNC=cos(x) PERIODIC=NO
+# ... repetir para cada psi ...
+
+# --- combinacion lineal (COMBINE): el paper no publica los coeficientes;
+#     la eleccion mas simple y defendible es peso igual (suma) ---
+cv_sin: COMBINE ARG=sin_26,sin_27,sin_28,...,sin_95,sin_96,... PERIODIC=NO
+cv_cos: COMBINE ARG=cos_26,cos_27,cos_28,...,cos_95,cos_96,... PERIODIC=NO
+\end{verbatim}}
+
+\textbf{Punto para la defensa:} \texttt{MATHEVAL} exige que $\xi(\mathbf{r})$ dependa \emph{explícitamente} de esos átomos --- es la confirmación textual, a nivel de código, de que $\nabla_{\mathbf{r}_i}\xi=\mathbf{0}$ para todo átomo fuera de CDR1/CDR3 (\S\ref{sec:precio}): HV2 simplemente no aparece en ningún \texttt{ARG}.
+
+\subsection*{A.2 --- El bloque METAD (well-tempered), con los números exactos del paper}
+{\footnotesize\begin{verbatim}
+METAD ...
+  ARG=cv_sin,cv_cos
+  SIGMA=0.3,0.3          # rad -- valor exacto del paper
+  HEIGHT=10.0             # kJ/mol -- valor exacto del paper
+  PACE=1000               # pasos entre depositos -- valor exacto del paper
+  BIASFACTOR=10           # gamma -- valor exacto del paper
+  TEMP=300                # K -- valor exacto del paper
+  FILE=HILLS
+  GRID_MIN=-1.2,-1.2
+  GRID_MAX=1.2,1.2
+  GRID_BIN=200,200
+... METAD
+
+PRINT ARG=cv_sin,cv_cos,metad.bias STRIDE=500 FILE=COLVAR
+\end{verbatim}}
+Con $\Delta t = 2$ fs (estándar en GROMACS con SHAKE en hidrógenos), \texttt{PACE=1000} pasos $=2$ ps entre gaussianas --- cuadra exactamente con el número citado en \S3.4 (500\,000 gaussianas en 1 $\mu$s).
+
+\subsection*{A.3 --- \texttt{.mdp} de GROMACS: NpT a 300 K}
+{\footnotesize\begin{verbatim}
+; grompp.mdp -- produccion NpT con metadinamica via PLUMED (--plumed plumed.dat)
+integrator      = md
+dt              = 0.002        ; 2 fs (tipico con LINCS/SHAKE;
+                                ; no confirmado para GROMACS en el paper)
+nsteps          = 500000000    ; 1 microsegundo
+tcoupl          = v-rescale    ; velocity rescaling -- confirmado en el paper
+tc-grps         = Protein Water_and_ions
+tau_t           = 0.1 0.1
+ref_t           = 300 300      ; K -- confirmado en el paper
+pcoupl          = Parrinello-Rahman   ; confirmado en el paper
+pcoupltype      = isotropic
+tau_p           = 2.0
+ref_p           = 1.0
+compressibility = 4.5e-5
+constraints     = h-bonds
+\end{verbatim}}
+
+\subsection*{A.4 --- \textit{Clustering} en \texttt{cpptraj}: \textit{average-linkage}, corte 1.3 \r{A}}
+{\footnotesize\begin{verbatim}
+# cpptraj.in
+trajin metad_traj.xtc
+rms first :CDR1,CDR3@CA         ; alineado sobre CAs del paratopo (ilustrativo)
+cluster hieragglo averagelinkage \
+        rms :CDR1,CDR3@CA \
+        epsilon 1.3 \           ; corte exacto reportado por el paper (Angstrom)
+        out cluster_vs_time.dat \
+        summary cluster_summary.dat \
+        repout cluster_rep repfmt pdb
+\end{verbatim}}
+
+\subsection*{A.5 --- Reequilibración y producción por \textit{cluster}: \texttt{pmemd.cuda}, 100 ns}
+{\footnotesize\begin{verbatim}
+&cntrl
+  imin=0, irest=0, ntx=1,
+  nstlim=50000000, dt=0.002,        ! 100 ns, 2 fs -- confirmado en el paper
+  ntc=2, ntf=2,                      ! SHAKE en enlaces con H -- confirmado
+  ntt=3, gamma_ln=2.0, temp0=300.0,  ! Langevin -- confirmado
+  ntp=1, barostat=1, taup=2.0,       ! Berendsen -- confirmado
+  ntb=2, cut=9.0,
+  ntpr=5000, ntwx=5000,
+&end
+\end{verbatim}}
+
+\centering\small\color{migris} ff14SB + TIP3P + carga de fondo uniforme (\textit{uniform background charge}) --- confirmados en el paper para neutralizar sin iones explícitos.
 
 \end{document}

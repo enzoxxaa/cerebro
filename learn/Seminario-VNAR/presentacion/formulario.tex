@@ -1,0 +1,223 @@
+\documentclass[9pt]{extarticle}
+\usepackage[margin=1.3cm]{geometry}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{xcolor}
+\usepackage{multicol}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\input{macros.tex}
+\pagestyle{empty}
+
+\newcommand{\F}[2]{%
+  \par\noindent\textbf{\color{miazul}#1}\\[-0.15em]
+  #2\\[0.35em]
+}
+
+\begin{document}
+\begin{center}
+{\Large\bfseries Formulario — Inventando la metadinámica}\\[0.15em]
+{\small\color{migris} Todas las fórmulas de las slides, una línea de contexto cada una. 31 de agosto de 2026.}
+\end{center}
+\vspace{0.3em}
+\begin{multicols}{3}
+
+\subsection*{\small 0 · Glosario de símbolos}
+
+\noindent\textit{\scriptsize Termodinámica y cinética}\\[0.1em]
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{@{}ll@{}}
+\toprule
+Símbolo & Significado \\
+\midrule
+$s$ & valor de la variable colectiva (CV) \\
+$\xi(\mathbf r)$ & la CV, como función de las coordenadas \\
+$F(s)$ & energía libre (PMF) en función de $s$ \\
+$\hat F(s)$ & energía libre \textbf{estimada}, posiblemente sesgada \\
+$\Delta G$ & energía libre entre dos mínimos $\to$ poblaciones \\
+$\Delta G^{\ddagger}$ & barrera al estado de transición $\to$ velocidad \\
+$P_A,P_B$ & población (probabilidad) del estado $A$, $B$ \\
+$R$, $T$ & constante de los gases; temperatura \\
+$k$ & constante de tasa (\textit{rate constant}) \\
+$\kappa$ & coeficiente de transmisión (TST, $\le1$) \\
+$k_B$, $h$ & Boltzmann; Planck \\
+$w_i$ & peso de \textbf{siembra} de la cuenca $i$ (cuánto se muestreó) \\
+$\pi_i$ & peso de Boltzmann \textbf{verdadero} de la cuenca $i$ \\
+\bottomrule
+\end{tabular}%
+}
+
+\vspace{0.3em}
+\noindent\textit{\scriptsize Metadinámica}\\[0.1em]
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{@{}ll@{}}
+\toprule
+Símbolo & Significado \\
+\midrule
+$V(s,t)$ & potencial de \textbf{sesgo} acumulado, en $s$ y tiempo $t$ \\
+$W$, $W_0$ & altura de una gaussiana (well-temp.: altura inicial) \\
+$\sigma$ & anchura de cada gaussiana depositada \\
+$\tau_G$ & intervalo entre depósitos (\textit{pace}) \\
+$\gamma$ & \textit{biasfactor} — cuánto se aplana el paisaje \\
+$\Delta T$ & ``temperatura ficticia'' añadida a la CV \\
+$\alpha$ & factor de aceleración cinética \\
+$\mathbf f_i$ & fuerza de sesgo sobre el átomo $i$ \\
+$\nabla_{\mathbf r_i}\xi$ & gradiente de la CV resp. a la posición del átomo $i$ \\
+\bottomrule
+\end{tabular}%
+}
+
+\vspace{0.3em}
+\noindent\textit{\scriptsize tICA y MSM}\\[0.1em]
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{@{}ll@{}}
+\toprule
+Símbolo & Significado \\
+\midrule
+$v$ & autovector — dirección encontrada por tICA \\
+$C(\tau)$, $C(0)$ & covarianza desfasada / instantánea \\
+$\lambda$ & autovalor (de tICA o del MSM) \\
+$t_i$ & tiempo característico asociado a $\lambda_i$ \\
+$T_{ij}(\tau)$ & matriz de transición del MSM, $i\to j$ \\
+$C_{ij}(\tau)$ & conteos observados de transiciones $i\to j$ \\
+$\theta_{ij}$ & probabilidad de transición \textbf{verdadera} (lo que $T_{ij}$ estima) \\
+$C_i$ & total de transiciones contadas saliendo de $i$ \\
+$\pi$ & población de equilibrio del MSM (autovector de $T$) \\
+\bottomrule
+\end{tabular}%
+}
+
+\vspace{0.3em}
+{\scriptsize\color{minaranja}\textbf{Cuidado:} $\tau$ se reusa con \textbf{tres} significados distintos según la sección — en TST es el tiempo de vida $1/k$; en metadinámica el intervalo de depósito es $\tau_G$ (no $\tau$); en tICA/MSM, $\tau$ es el \textbf{lag time} elegido para construir $C(\tau)$ o contar transiciones. Son tres objetos distintos que comparten letra por convención de la literatura, no por ser la misma cantidad.}
+
+\subsection*{\small 1 · Termodinámica estadística}
+
+\F{Poblaciones $\leftrightarrow$ $\Delta G$}{
+$\dfrac{P_A}{P_B}=e^{-\Delta G_{AB}/RT} \Leftrightarrow \Delta G_{AB}=-RT\ln\dfrac{P_A}{P_B}$\\
+{\scriptsize Definición del ensemble canónico. $RT\approx2.5$ kJ/mol a 300 K. \emph{Variación:} con $F(s)=-RT\ln p(s)$, es el mismo objeto proyectado sobre una CV.}}
+
+\F{Teoría del estado de transición}{
+$k=\kappa\,\dfrac{k_BT}{h}\,e^{-\Delta G^{\ddagger}/RT}, \quad \tau=1/k$\\
+{\scriptsize $k_BT/h\approx6.25\times10^{12}\,\text{s}^{-1}$ a 300K. $\kappa\le1$ (coef. de transmisión); $\kappa\sim10^{-2}$ realista para lazos.}}
+
+\F{Balance detallado}{
+$\dfrac{k_{A\to B}}{k_{B\to A}}=e^{-\Delta G_{AB}/RT}=\dfrac{P_B}{P_A}$\\
+{\scriptsize $\Delta G^{\ddagger}$ se cancela — no aparece. Barrera = velocidad; $\Delta G$ = dónde está el equilibrio. Son independientes.}}
+
+\F{Sesgo de reponderación (muestreo desigual)}{
+$\hat F(s)=F(s)-RT\ln\dfrac{w_i}{\pi_i}, \; s\in\text{cuenca }i$\\
+{\scriptsize Sesgo \textbf{sistemático}, no decae con más datos. $w_i$=peso de siembra, $\pi_i$=peso de Boltzmann verdadero. Motiva todo el resto del pipeline.}}
+
+\subsection*{\small 2 · Metadinámica}
+
+\F{El sesgo se suma exacto al paisaje}{
+$F_V(s)=F(s)+V(s)$\\
+{\scriptsize Cierto \emph{solo} porque $V$ depende de $\mathbf{r}$ únicamente vía $s=\xi(\mathbf{r})$. Aplanar: $V=-F$ — pero $F$ es lo que no se conoce (huevo y gallina).}}
+
+\F{Suma de gaussianas depositadas}{
+$V(s,t)=\displaystyle\sum_{t'=\tau_G,2\tau_G,\dots<t} W\,e^{-(s-\xi(\mathbf{r}(t')))^2/2\sigma^2}$\\
+{\scriptsize Una gaussiana por cada instante de depósito pasado. Crece, nunca se borra. Paper: $W$=10 kJ/mol, $\sigma$=0.3 rad, $\tau_G$=1000 pasos (2 ps).}}
+
+\F{Bucle de realimentación (estándar)}{
+$\dfrac{\partial V}{\partial t}\propto e^{-\beta[F(s)+V(s,t)]}$\\
+{\scriptsize No depende de la energía directo: depende del tiempo de residencia. Pozo profundo $\to$ más tiempo ahí $\to$ deposita rápido.}}
+
+\F{Well-tempered: altura decreciente}{
+$W(s,t)=W_0\,e^{-V(s,t)/k_B\Delta T}$\\
+{\scriptsize Decae donde ya hay sesgo \textbf{acumulado} (no donde hay más energía cruda). $\Delta T$ = "temperatura ficticia" de la CV.}}
+
+\F{Convergencia well-tempered}{
+$V(s)\xrightarrow{t\to\infty}-\dfrac{\gamma-1}{\gamma}F(s), \quad \gamma\equiv\dfrac{T+\Delta T}{T}$\\
+{\scriptsize Recuperar $F$: $F=-\dfrac{\gamma}{\gamma-1}V$. $\gamma\to1$: MD normal. $\gamma\to\infty$: metaD estándar. Paper: $\gamma=10$.}}
+
+\F{Fuerza de sesgo sobre un átomo}{
+$\mathbf{f}_i=-\dfrac{dV}{ds}\,\nabla_{\mathbf{r}_i}\xi(\mathbf{r})$\\
+{\scriptsize Si $i\notin$ CDR1/CDR3: $\nabla_{\mathbf{r}_i}\xi=\mathbf{0}$, fuerza \textbf{exactamente cero}. Restricción mecánica, no estadística. Clave de A2 (HV2).}}
+
+\subsection*{\small 3 · El precio}
+
+\F{Barrera residual bajo sesgo}{
+$F_V=F/\gamma$, \quad muestreo $p_V\propto p_{\text{eq}}^{1/\gamma}$\\
+{\scriptsize Paper: barrera 40 kJ/mol $\to$ 4 kJ/mol efectivos con $\gamma=10$. Aceleración $\approx1.9\times10^6\times$.}}
+
+\F{Factor de aceleración por transición}{
+$\alpha=e^{\beta\Delta G^{\ddagger}(\gamma-1)/\gamma}$\\
+{\scriptsize Depende de \textbf{la barrera de cada transición} — no es un factor único global.}}
+
+\F{Compresión cinética (no uniforme)}{
+$\dfrac{\tau_A^V}{\tau_B^V}=\left(\dfrac{\tau_A}{\tau_B}\right)^{1/\gamma}$\\
+{\scriptsize Ej.: separación real $23\,000\times$ $\to$ aparente $23\,000^{1/10}\approx2.7\times$. Cuatro órdenes de magnitud aplastados a un factor 3.}}
+
+\F{Metadinámica infrecuente (alternativa)}{
+$\alpha=\langle e^{\beta V(s,t)}\rangle$ (\textbf{medido}, no asumido)\\
+{\scriptsize Tiwary \& Parrinello 2013. Régimen opuesto al del paper: depósito espaciado para no contaminar el TS.}}
+
+\subsection*{\small 4 · tICA}
+
+\F{Autocorrelación a maximizar}{
+$\rho(v,\tau)=\dfrac{v^\top C(\tau) v}{v^\top C(0) v}$\\
+{\scriptsize $C(\tau)$: covarianza desfasada. $C(0)$: instantánea. PCA solo usa $C(0)$ — confunde amplitud con lentitud.}}
+
+\F{Problema de autovalores generalizado}{
+$C(\tau)\,v=\lambda\,C(0)\,v$\\
+{\scriptsize Sale de $\nabla\rho=0$. \emph{Variación:} blanqueando $w=C(0)^{-1/2}x$, es un problema \textbf{ordinario} $\tilde C(\tau)u=\lambda u$ disfrazado.}}
+
+\F{Gradiente de una forma cuadrática}{
+$\nabla(v^\top Av)=(A+A^\top)v \;\to\; 2Av$ si $A=A^\top$\\
+{\scriptsize Por eso se simetriza $C(\tau)$: no es cosmético, es lo que hace $\nabla\rho=0$ resoluble.}}
+
+\F{Autovalor $\to$ tiempo característico}{
+$t_i=-\dfrac{\tau}{\ln\lambda_i}$\\
+{\scriptsize $\lambda\to1$: modo lento (memoria larga). $\lambda\to0$: modo rápido. Misma fórmula reaparece en el MSM (mismo operador de transferencia, VAC).}}
+
+\subsection*{\small 5 · Markov State Model}
+
+\F{Estimador de $T(\tau)$ (máxima verosimilitud)}{
+$T_{ij}(\tau)=\dfrac{C_{ij}(\tau)}{\sum_k C_{ik}(\tau)}$\\
+{\scriptsize Sale de maximizar $\ln\mathcal L=\sum C_{ij}\ln T_{ij}$ sujeto a $\sum_j T_{ij}=1$ (Lagrange). No es un atajo — es \emph{la} solución.}}
+
+\F{Test de Chapman--Kolmogorov}{
+$T(n\tau)\approx[T(\tau)]^n$\\
+{\scriptsize Consecuencia \textbf{necesaria} de Markov (prob. total). Si falla al comparar estimaciones independientes: hay memoria, $\tau$ muy corto.}}
+
+\F{Población de equilibrio}{
+$\pi^\top T(\tau)=\pi^\top$ (autovector izq., autovalor 1)\\
+{\scriptsize Perron--Frobenius: única si $T$ irreducible/aperiódica. $\mathbb E[T_{ij}]=\theta_{ij}$ sin importar cuántas visitas — $\pi$ no depende de la siembra.}}
+
+\F{Varianza del estimador}{
+$\mathrm{Var}(T_{ij})\approx\theta_{ij}(1-\theta_{ij})/C_i$\\
+{\scriptsize Más siembra $\to$ menos varianza, \textbf{no} desplaza el valor esperado. Distingue sesgo (no hay) de ruido (sí, y depende de $C_i$).}}
+
+\subsection*{\small 6 · Números clave para defender}
+
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{@{}ll@{}}
+\toprule
+Cantidad & Valor \\
+\midrule
+$RT$ (300K) & 2.494 kJ/mol \\
+$k_BT/h$ & $6.25\times10^{12}\,\text{s}^{-1}$ \\
+100ns MD compra hasta & $\sim$22 kJ/mol \\
+Barreras CDR & 25--45 kJ/mol \\
+$\gamma$ (biasfactor) & 10 \\
+Gaussiana & 10 kJ/mol / 0.3 rad \\
+Depósito & cada 2 ps \\
+Gaussianas en 1$\mu$s & 500\,000 \\
+Lag tICA / MSM & 10 ns / 15 ns \\
+Microestados & 100 (k-means) \\
+Clustering cutoff & 1.3 \r{A} \\
+$\Delta\Delta G$ efecto total & $\approx10.2$ kJ/mol ($4RT$) \\
+Muestreo E06 / v1.4 & 11.9 / 43.1 $\mu$s ($3.6\times$) \\
+\bottomrule
+\end{tabular}%
+}
+
+\vspace{0.4em}
+{\scriptsize\color{migris}\textbf{Preguntas trampa comunes:}\\
+\emph{``¿Por qué no subir la temperatura?''} $\to$ eso es REMD, no metaD; sube \textbf{todo} el espectro de fluctuaciones, no algo dirigido.\\
+\emph{``¿$\tau$ es una propiedad del sistema?''} $\to$ No — parámetro elegido, validado por CK.\\
+\emph{``¿Más muestreo arregla el sesgo $\hat F$?''} $\to$ No en histograma crudo; sí en MSM (vía $T_{ij}$, no vía frames).}
+
+\end{multicols}
+\end{document}

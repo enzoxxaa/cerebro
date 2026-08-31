@@ -155,3 +155,17 @@ Figuras del paper: referenciadas directo desde `../assets/` (sin duplicar).
 
 > [!warning] Pendiente de pulido menor
 > El slide «El resultado que hay que poder explicar» usa `fig4-msm-poblaciones.png` completa (4 paneles A-D), pero el texto solo discute E06 y v1.1. Se ve un poco denso a tamaño de proyección. Mejora fácil pendiente: recortar la figura a solo los paneles A y B antes de la charla.
+
+## Revisión post-v3 (31 agosto 2026)
+
+A pedido del usuario, ronda de correcciones y ampliaciones sobre `presentacion/`:
+
+1. **Depósito de gaussianas / well-tempered** — aclarado en chat: no se "apunta" a lo menos visitado/mayor energía; en metaD estándar la acumulación es efecto del *tiempo de residencia* ($\partial V/\partial t \propto e^{-\beta[F+V]}$); en well-tempered la altura decae por **sesgo ya acumulado** ($W_0e^{-V/k_B\Delta T}$), no por energía cruda.
+2. Fórmula $V(s,t)=\sum W e^{-(\cdot)^2/2\sigma^2}$ — anotada en la slide como la misma suma de Clase 2 §3.4, con nota explícita del rango de $t'$.
+3. Panel "$t_1<t_2<t_3$" (molde negativo) — añadida leyenda: tres instantes de la **misma corrida**, no corridas distintas.
+4. **MSM matemático reducido** (4→3 slides, fusionadas "Lo que estima"+"De T(τ) sale todo"); **termo estadística ampliada** con nueva slide "ΔG y ΔG‡ son independientes" (balance detallado, con callback explícito a tICA/MSM). Nuevo `formulario.tex` (1 página, 3 columnas, todas las fórmulas de las slides + números clave + preguntas trampa) — documento aparte para la sesión de preguntas.
+5. Nuevo **Anexo** al final de `handout.tex`: reconstrucción honesta del protocolo (PLUMED2 TORSION→MATHEVAL→COMBINE, bloque METAD, `.mdp` GROMACS, clustering `cpptraj`, input `pmemd.cuda`) — marcando explícitamente qué es valor exacto del paper vs. ilustrativo.
+6. Fecha fijada a **31 de agosto de 2026** en slides y handout.
+7. **A2 elevada**: nueva slide "A2 — las implicancias, con nombre y apellido" + párrafo espejo en el handout — estructura lógica de 3 pasos + las dos lecturas (respuesta correlacionada real vs. artefacto de submuestreo) que el paper no distingue.
+
+`slides.pdf`: 48 páginas. `handout.pdf`: 14 páginas. `formulario.pdf`: 1 página. Compilan sin errores (`./build.sh`).
