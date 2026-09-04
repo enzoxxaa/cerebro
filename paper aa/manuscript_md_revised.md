@@ -41,6 +41,7 @@ una, y se gastan en las tres nuevas. Los RDF **se quedan en el texto principal**
 | Tabla S2 | Splittings de los AA — unidades en Hz (D7) | — |
 | Tabla S3 | τ resuelto por carbono, los cinco sistemas | `results/csv/tau_stats.csv` |
 | Tabla S4 | Δν_Q calculado con y sin AA, contra el experimento | `results/csv/dnuq_md_vs_exp.csv` |
+| Tabla S5 | Escalas de hidrofobicidad publicadas vs observables de MD, con las correlaciones de rango | `results/csv/hydrophobicity.csv` |
 
 **Tablas 1 y 2 salen del texto principal**: R1 pidió quitarlas y Amatista ya
 respondió que las composiciones se integran a la prosa de 2.2.
@@ -244,17 +245,32 @@ zwitterionic backbone. Their side chains then behave very differently. **Figure 
 displays the partial density profiles of the four systems** and **Figure 5 the
 corresponding radial distribution functions**; Table 1 collects the quantities
 extracted from them together with the orientational and dynamical measures of the
-following sections. The depth ordering **LEU < MET < ALA < GLU** that emerges is
-reproduced by four observables that share neither definition nor error source.
+following sections. What emerges is a single ordering of association with the
+aggregate, **LEU > MET > ALA > GLU**, reproduced by four observables that share
+neither definition nor error source: the contact fraction, the immersion depth,
+the hydrogen bonding and the lateral diffusion coefficient.
+
+Leucine and methionine bury their side chains within the chain region, 1.14 and
+1.02 nm from the bilayer centre, while alanine and glutamic acid keep theirs at or
+beyond the sulfate plane, at 1.74 and 1.98 nm. Between the two inserted residues
+the ordering is not resolved and the two measures disagree in the third digit: the
+leucine backbone sits deeper (Cα at 0.93 against 1.03 half-thicknesses) whereas
+the longer methionine side chain reaches marginally further in, and the two
+side-chain termini are indistinguishable in the clustering, at 0.66
+half-thicknesses for both. What is robust is the separation between the pair that
+inserts and the pair that does not.
 
 **Tabla 1 (reemplaza la Tabla 3).** Fuente: `results/csv/table_main.csv`.
+Versión lista para pegar en el Drive: **`manuscript/Table1.docx`**
+(`python3 src/table_docx.py`). Ahí el pie va arriba, como en PCCP, y
+los valores extremos de cada fila van en negrita.
 
 | | ALA | GLU | LEU | MET |
 |---|---|---|---|---|
 | Contact fraction *f*_b | 0.93 ± 0.03 | **0.65 ± 0.12** | 1.00 ± 0.00 | 0.97 ± 0.01 |
 | Side-chain density maximum / nm | 1.74 | 1.98 | 1.14 | **1.02** |
 | ⟨θ⟩ / degrees | 73 | 62 | 152 | 106 |
-| Populated states (populations) | 2 (75/25 %) | 3 (44/41/15 %) | 3 (45/42/13 %) | **2 (57/43 %)** |
+| States (populations / %) | 2 (75/25) | 3 (44/41/15) | 3 (45/42/13) | **2 (57/43)** |
 | H-bonds with the aggregate | 1.11 ± 0.10 | **0.83 ± 0.24** | 1.22 ± 0.04 | 1.27 ± 0.05 |
 | H-bonds with water | 3.96 ± 0.12 | **9.42 ± 0.57** | 2.92 ± 0.20 | 3.41 ± 0.24 |
 | *D*_lat / 10⁻⁷ cm² s⁻¹ | 19.2 | **58.7** | 4.1 | 7.9 |
@@ -315,6 +331,28 @@ water, diffuses laterally 34 times faster than the surfactant that hosts it
 > inserta) es correcta; el mecanismo es el contrario. La cadena lateral cargada
 > **prefiere el agua**, y esa preferencia es lo que la mantiene afuera. Ver
 > **D9** y **D11**.
+
+**Comparison with published hydrophobicity scales** *(párrafo nuevo, responde
+R1-6; ver Tabla S5)*
+
+The ordering just described can be tested against experimental scales determined
+on a different membrane system by a different technique. The Wimley–White
+interfacial scale is the appropriate reference, since it measures transfer to an
+interface rather than to a hydrocarbon core, and it ranks the four side chains
+LEU (−0.56 ± 0.04 kcal mol⁻¹) > MET (−0.23 ± 0.06) > ALA (+0.17 ± 0.06) >
+GLU⁻ (+2.02 ± 0.11); the octanol scale and the octanol–water π values of Fauchère
+and Pliška give the same ranking. Against those values the Spearman rank
+correlation of our contact fraction is −1.00, of the hydrogen bonds to water
++1.00, of the lateral diffusion coefficient +1.00 and of the residual
+orientational order of the Cα→side-chain axis −1.00; the depth of the side-chain
+density maximum gives +0.80, the single inversion being the LEU/MET pair that our
+own data do not resolve either. These five quantities are not independent tests
+of one hypothesis, but they are computed from different observables with
+different error sources and they agree with an independent experimental scale.
+The correspondence is what one expects if the common zwitterionic backbone fixes
+the anchoring point and the side chain alone sets the projection from it — which
+is what the published scales measure, having been determined with the peptide
+backbone held constant.
 
 ### 3.2.3 Orientation and populated states
 
@@ -455,6 +493,28 @@ as well**: its measured effect, −0.7 % over C1–C11, also lies within the noi
 band of Figure 3b, so for ALA the simulation and the measurement agree that
 nothing happens. The disagreement concerns GLU, LEU and MET.
 
+**Association and perturbation are not the same ordering.** The scales and the
+simulations agree on how strongly each residue associates with the interface,
+LEU > MET > ALA > GLU⁻. The measured perturbation of the chain order follows a
+different sequence, LEU (−1548 Hz) > MET (−1534) > GLU (−1256) ≫ ALA (−93)
+averaged over C1–C11, and normalising by the molality of each sample, which
+ranges from 0.070 to 0.093 mol kg⁻¹, does not change it. ALA and GLU exchange
+places between the two orderings, and we read this as two distinct mechanisms.
+Leucine and methionine perturb the chains because they insert into them, and
+there the perturbation does follow hydrophobicity. Alanine associates well but
+its side chain is a single methyl group occupying essentially no volume in the
+chain region, so it binds without perturbing. Glutamate is the converse: it is
+the least associated of the four and does not insert, but it is the only charged
+species in the set, and the Wimley–White values localise its distinctiveness in
+that charge — the neutral side chain gives ΔG_wif = −0.01 ± 0.15 kcal mol⁻¹,
+close to alanine, against +2.02 for the anion. At the experimental molality an
+anionic solute and its counter-ions at an already anionic sulfate interface will
+modify the ionic environment of the head-group region, and hence the head-group
+area and the chain order, without requiring insertion. A single solute per 274
+surfactants cannot reproduce a collective electrostatic effect of that kind, and
+we offer this as a hypothesis consistent with the data rather than as a
+demonstrated mechanism.
+
 **What the simulations do constrain is location and orientation** — the contact
 fractions, immersion depths, angular distributions and state populations of
 Table 1 and Figures 4 to 7 — none of which depends on the amino-acid
@@ -537,6 +597,7 @@ line marks bulk density. Reference atoms: ALA Cβ, GLU Oε1, LEU Cγ, MET Sδ.
 5. **¿C7/C8 rompe degeneración de verdad o es solapamiento?** Hoy C7 es donde
    está el máximo de la caída (D3).
 
-**Sin hacer, del lado MD:** la discusión de polaridad contra escalas de
-hidrofobicidad o logP que pide el Referee 1 (Wimley–White, PMID 8836100). Es el
-único comentario asignado a vos que sigue en cero. No bloquea este rearmado.
+**Hecho desde entonces:** la discusión de polaridad contra escalas de
+hidrofobicidad que pide el Referee 1 (Wimley–White, PMID 8836100) está en el
+párrafo nuevo al final de 3.2.2, en el bloque nuevo de 3.2.5 y en la Tabla S5.
+Ya no queda ningún comentario asignado a vos sin responder.
